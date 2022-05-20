@@ -67,6 +67,15 @@ dependencies {
     kapt(Libs.Hilt.HILT_COMPILER)
     kapt(Libs.Hilt.ANDROIDX_HILT_COMPILER)
 
+    // okHttp
+    implementation(Libs.OkHttp.OKHTTP3)
+    implementation(Libs.OkHttp.LOGGING_INTERCEPTOR)
+
+    // retrofit
+    implementation(Libs.Retrofit.RETROFIT2)
+    implementation(Libs.Retrofit.GSON_CONVERTER)
+    implementation(Libs.Retrofit.GSON)
+
     // glide
     implementation(Libs.Glide.GLIDE)
     kapt(Libs.Glide.COMPILER)
