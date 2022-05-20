@@ -14,7 +14,7 @@ interface ProductRemoteDataSource {
     suspend fun getProductsList(
         page: Int,
         pageSize: Int?,
-        filter: Map<String, String>?
+        filters: Map<String, String>?
     ): Response<List<NetworkProduct>>
 
     suspend fun getProductCategories(
