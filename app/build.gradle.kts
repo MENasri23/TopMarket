@@ -3,6 +3,8 @@ import Libs.Androidx.implementAppLibraries
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    kotlin("kapt")
 }
 
 android {
@@ -39,6 +41,38 @@ android {
 dependencies {
 
     implementAppLibraries()
+
+    // legacy
+    implementation(Libs.Androidx.LEGACY_SUPPORT)
+
+    // ktx
+    implementation(Libs.Androidx.ACTIVITY_KTX)
+    implementation(Libs.Androidx.FRAGMENT_KTX)
+
+    // lifecycle
+    implementation(Libs.Androidx.Lifecycle.RUNTIME)
+    implementation(Libs.Androidx.Lifecycle.VIEW_MODEL_KTX)
+
+    // navigation
+    implementation(Libs.Androidx.Navigation.FRAGMENT_KTX)
+    implementation(Libs.Androidx.Navigation.RUNTIME_KTX)
+    implementation(Libs.Androidx.Navigation.UI_KTX)
+
+    // coroutine
+    implementation(Libs.Kotlinx.COROUTINES_ANDROID)
+
+
+    // hilt
+    implementation(Libs.Hilt.HILT)
+    kapt(Libs.Hilt.HILT_COMPILER)
+    kapt(Libs.Hilt.ANDROIDX_HILT_COMPILER)
+
+    // glide
+    implementation(Libs.Glide.GLIDE)
+    kapt(Libs.Glide.COMPILER)
+
+    // timber
+    implementation(Libs.Debug.TIMBER)
 
     testImplementation(Libs.Test.JUNIT)
     androidTestImplementation(Libs.Androidx.Test.JUNIT_EXT)
