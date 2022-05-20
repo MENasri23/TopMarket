@@ -1,4 +1,6 @@
 import Libs.Androidx.implementAppLibraries
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -10,6 +12,8 @@ plugins {
 android {
     compileSdk = App.COMPILE_SDK
 
+    val apiProperties = getProperties("${rootDir}/api.properties")
+
     defaultConfig {
         applicationId = App.APPLICATION_ID
         minSdk = App.MIN_SDK
@@ -18,6 +22,10 @@ android {
         versionName = App.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", apiProperties["base_url"] as String)
+        buildConfigField("String", "CONSUMER_KEY", apiProperties["consumer_key"] as String)
+        buildConfigField("String", "CONSUMER_SECRET", apiProperties["consumer_secret"] as String)
     }
 
     buildTypes {
@@ -36,6 +44,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+fun getProperties(file: String = "local.properties"): Properties {
+    val properties = Properties()
+    val propertiesFile = File(file)
+    if (propertiesFile.isFile) {
+        properties.load(FileInputStream(propertiesFile))
+    } else error("File from not found")
+
+    return properties
 }
 
 dependencies {
