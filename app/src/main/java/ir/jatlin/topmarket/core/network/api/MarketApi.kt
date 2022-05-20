@@ -24,7 +24,7 @@ interface MarketApi {
         @QueryMap filters: Map<String, String>?
     ): Response<List<NetworkProduct>>
 
-    @GET(Route.PRODUCTS)
+    @GET(Route.PRODUCTS_CATEGORIES)
     suspend fun getProductCategories(
         @Query(PARAMS.PAGE) page: Int,
         @Query(PARAMS.PER_PAGE) pageSize: Int?,
