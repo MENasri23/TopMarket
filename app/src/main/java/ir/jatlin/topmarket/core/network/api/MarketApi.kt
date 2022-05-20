@@ -2,7 +2,6 @@ package ir.jatlin.topmarket.core.network.api
 
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import retrofit2.Response
 import retrofit2.http.GET
