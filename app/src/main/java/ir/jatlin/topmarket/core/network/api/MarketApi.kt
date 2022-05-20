@@ -2,6 +2,8 @@ package ir.jatlin.topmarket.core.network.api
 
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
+import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
+import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -22,10 +24,19 @@ interface MarketApi {
         @QueryMap filters: Map<String, String>?
     ): Response<List<NetworkProduct>>
 
+    @GET(Route.PRODUCTS)
+    suspend fun getProductCategories(
+        @Query(PARAMS.PAGE) page: Int,
+        @Query(PARAMS.PER_PAGE) pageSize: Int?,
+        @QueryMap filters: Map<String, String>?
+    ): Response<List<NetworkCategoryDetails>>
+
 
     private object Route {
-        const val PRODUCT_DETAILS = "/wp-json/wc/v3/products/{id}"
-        const val PRODUCTS = "/wp-json/wc/v3/products"
+        private const val PREFIX = "/wp-json/wc/v3"
+        const val PRODUCT_DETAILS = "$PREFIX/products/{id}"
+        const val PRODUCTS = "$PREFIX/products"
+        const val PRODUCTS_CATEGORIES = "$PREFIX/products/categories"
     }
 
     private object PARAMS {
