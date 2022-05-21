@@ -9,18 +9,18 @@ interface ProductRemoteDataSource {
 
     suspend fun findMovieDetailsById(
         id: Int
-    ): Response<NetworkProductDetails>
+    ): NetworkProductDetails
 
     suspend fun getProductsList(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): Response<List<NetworkProduct>>
+    ): List<NetworkProduct>
 
     suspend fun getProductCategories(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): Response<List<NetworkCategoryDetails>>
+    ): List<NetworkCategoryDetails>
 
 }
