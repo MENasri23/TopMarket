@@ -12,7 +12,7 @@ class ProductRetrofitDataSource @Inject constructor(
     private val convertResponse: ResponseConverter
 ) : ProductRemoteDataSource {
 
-    override suspend fun findMovieDetailsById(id: Int): NetworkProductDetails {
+    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails {
         return convertResponse(marketApi.getProductDetails(id))
     }
 
