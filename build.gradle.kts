@@ -9,3 +9,9 @@ plugins {
 tasks.register("clean").configure {
     delete(rootProject.buildDir)
 }
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+    }
+}

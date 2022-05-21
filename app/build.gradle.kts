@@ -102,6 +102,8 @@ dependencies {
     implementation(Libs.Debug.TIMBER)
 
     testImplementation(Libs.Test.JUNIT)
+    testImplementation(Libs.Kotlinx.COROUTINES_TEST)
+    testImplementation(Libs.Test.TRUTH)
     androidTestImplementation(Libs.Androidx.Test.JUNIT_EXT)
     androidTestImplementation(Libs.Androidx.Test.ESPRESSO)
 }
