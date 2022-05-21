@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
  * Launches a new coroutine and repeats `block` every time the Fragment's viewLifecycleOwner
  * is in and out of `minActiveState` lifecycle state.
  */
-inline fun Fragment.repeatOnViewLifecycle(
+inline fun Fragment.repeatOnViewLifecycleOwner(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend CoroutineScope.() -> Unit
 ) {

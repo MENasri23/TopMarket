@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
 import ir.jatlin.topmarket.ui.util.dataBindings
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycle
+import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -21,14 +21,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.viewModel = viewModel
 
+        initViews()
 
-        repeatOnViewLifecycle {
-            viewModel.homeUiState.collect {
-                it?.categorizedProducts.let { result ->
-                    binding.tvShow.text = result?.get(0).toString()
-                }
-            }
-        }
+    }
+
+    private fun initViews() = binding.apply {
+
+    }
+
+
+    private fun collectStates() = repeatOnViewLifecycleOwner {
 
     }
 

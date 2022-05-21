@@ -10,10 +10,6 @@
 
     </data>
 
-    <TextView
-        android:id="@+id/tvShow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
 </layout>
