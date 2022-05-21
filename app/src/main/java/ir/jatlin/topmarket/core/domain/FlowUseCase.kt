@@ -3,15 +3,12 @@ package ir.jatlin.topmarket.core.domain
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 
 
 abstract class FlowUseCase<P, R>(
     private val errorHandler: ErrorHandler,
-    private val coroutineDispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher
 ) {
 
     operator fun invoke(params: P): Flow<Resource<R>> = execute(params)
@@ -24,7 +21,7 @@ abstract class FlowUseCase<P, R>(
         .catch { cause ->
             val errorCause = errorHandler.handle(cause)
             emit(Resource.error(errorCause))
-        }
+        }.flowOn(dispatcher)
 
 
     protected abstract fun execute(params: P): Flow<R>
