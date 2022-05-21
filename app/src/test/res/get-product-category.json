@@ -1,0 +1,32 @@
+{
+  "id": 62,
+  "name": "\u0645\u062f \u0648 \u067e\u0648\u0634\u0627\u06a9",
+  "slug": "%d9%85%d8%af-%d9%88-%d9%be%d9%88%d8%b4%d8%a7%da%a9",
+  "parent": 0,
+  "description": "",
+  "display": "default",
+  "image": {
+    "id": 518,
+    "date_created": "2019-12-30T01:00:05",
+    "date_created_gmt": "2019-12-29T21:30:05",
+    "date_modified": "2019-12-30T01:00:05",
+    "date_modified_gmt": "2019-12-29T21:30:05",
+    "src": "https:\/\/woocommerce.maktabsharif.ir\/wp-content\/uploads\/2019\/12\/shirt.png",
+    "name": "shirt",
+    "alt": ""
+  },
+  "menu_order": 0,
+  "count": 15,
+  "_links": {
+    "self": [
+      {
+        "href": "https:\/\/woocommerce.maktabsharif.ir\/wp-json\/wc\/v3\/products\/categories\/62"
+      }
+    ],
+    "collection": [
+      {
+        "href": "https:\/\/woocommerce.maktabsharif.ir\/wp-json\/wc\/v3\/products\/categories"
+      }
+    ]
+  }
+}

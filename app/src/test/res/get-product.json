@@ -1,0 +1,138 @@
+{
+  "id": 677,
+  "name": "\u062a\u0644\u0648\u06cc\u0632\u06cc\u0648\u0646 \u0627\u0644 \u0627\u06cc \u062f\u06cc \u0627\u06cc\u06a9\u0633 \u0648\u06cc\u0698\u0646 \u0645\u062f\u0644 24XS450 \u0633\u0627\u06cc\u0632 24 \u0627\u06cc\u0646\u0686",
+  "slug": "%d8%aa%d9%84%d9%88%db%8c%d8%b2%db%8c%d9%88%d9%86-%d8%a7%d9%84-%d8%a7%db%8c-%d8%af%db%8c-%d8%a7%db%8c%da%a9%d8%b3-%d9%88%db%8c%da%98%d9%86-%d9%85%d8%af%d9%84-24xs450-%d8%b3%d8%a7%db%8c%d8%b2-24-%d8%a7",
+  "permalink": "https:\/\/woocommerce.maktabsharif.ir\/product\/%d8%aa%d9%84%d9%88%db%8c%d8%b2%db%8c%d9%88%d9%86-%d8%a7%d9%84-%d8%a7%db%8c-%d8%af%db%8c-%d8%a7%db%8c%da%a9%d8%b3-%d9%88%db%8c%da%98%d9%86-%d9%85%d8%af%d9%84-24xs450-%d8%b3%d8%a7%db%8c%d8%b2-24-%d8%a7",
+  "date_created": "2020-01-03T05:38:56",
+  "date_created_gmt": "2020-01-03T02:08:56",
+  "date_modified": "2022-04-25T00:48:30",
+  "date_modified_gmt": "2022-04-24T20:18:30",
+  "type": "simple",
+  "status": "publish",
+  "featured": false,
+  "catalog_visibility": "visible",
+  "description": "<p>\u0631\u0627\u0628\u0637 \u0647\u0648\u0634\u0645\u0646\u062f: \u0646\u062f\u0627\u0631\u062f<br \/>\n\u06a9\u06cc\u0641\u06cc\u062a \u062a\u0635\u0648\u06cc\u0631: HD<br \/>\n\u062a\u06a9\u0646\u0648\u0644\u0648\u0698\u06cc \u0635\u0641\u062d\u0647: LED<br \/>\n\u0646\u0648\u0639 \u0635\u0641\u062d\u0647: \u062a\u062e\u062a<br \/>\nHDR: \u0646\u062f\u0627\u0631\u062f<br \/>\n\u0642\u0627\u0628\u0644\u06cc\u062a \u0627\u062a\u0635\u0627\u0644 \u0628\u0647 \u062f\u06cc\u0648\u0627\u0631: \u062f\u0627\u0631\u062f<br \/>\n3D: \u0646\u062f\u0627\u0631\u062f<\/p>\n",
+  "short_description": "",
+  "sku": "",
+  "price": "2060000",
+  "regular_price": "2060000",
+  "sale_price": "",
+  "date_on_sale_from": null,
+  "date_on_sale_from_gmt": null,
+  "date_on_sale_to": null,
+  "date_on_sale_to_gmt": null,
+  "on_sale": false,
+  "purchasable": true,
+  "total_sales": 3,
+  "virtual": false,
+  "downloadable": false,
+  "downloads": [],
+  "download_limit": -1,
+  "download_expiry": -1,
+  "external_url": "",
+  "button_text": "",
+  "tax_status": "taxable",
+  "tax_class": "",
+  "manage_stock": false,
+  "stock_quantity": null,
+  "backorders": "no",
+  "backorders_allowed": false,
+  "backordered": false,
+  "low_stock_amount": null,
+  "sold_individually": false,
+  "weight": "",
+  "dimensions": {
+    "length": "",
+    "width": "",
+    "height": ""
+  },
+  "shipping_required": true,
+  "shipping_taxable": true,
+  "shipping_class": "",
+  "shipping_class_id": 0,
+  "reviews_allowed": true,
+  "average_rating": "3.45",
+  "rating_count": 11,
+  "upsell_ids": [],
+  "cross_sell_ids": [],
+  "parent_id": 0,
+  "purchase_note": "",
+  "categories": [
+    {
+      "id": 52,
+      "name": "\u062f\u06cc\u062c\u06cc\u062a\u0627\u0644",
+      "slug": "%da%a9%d8%a7%d9%84%d8%a7%db%8c-%d8%af%db%8c%d8%ac%db%8c%d8%aa%d8%a7%d9%84"
+    },
+    {
+      "id": 129,
+      "name": "\u0644\u0648\u0627\u0632\u0645 \u0645\u0646\u0632\u0644",
+      "slug": "%d9%84%d9%88%d8%a7%d8%b2%d9%85-%d9%85%d9%86%d8%b2%d9%84"
+    }
+  ],
+  "tags": [
+    {
+      "id": 130,
+      "name": "\u062a\u0644\u0648\u06cc\u0632\u06cc\u0648\u0646",
+      "slug": "%d8%aa%d9%84%d9%88%db%8c%d8%b2%db%8c%d9%88%d9%86"
+    }
+  ],
+  "images": [
+    {
+      "id": 680,
+      "date_created": "2020-01-03T09:08:35",
+      "date_created_gmt": "2020-01-03T02:08:35",
+      "date_modified": "2020-01-03T09:08:35",
+      "date_modified_gmt": "2020-01-03T02:08:35",
+      "src": "https:\/\/woocommerce.s3.ir-thr-at1.arvanstorage.com\/301185.jpg",
+      "name": "301185",
+      "alt": ""
+    },
+    {
+      "id": 678,
+      "date_created": "2020-01-03T09:08:33",
+      "date_created_gmt": "2020-01-03T02:08:33",
+      "date_modified": "2020-01-03T09:08:33",
+      "date_modified_gmt": "2020-01-03T02:08:33",
+      "src": "https:\/\/woocommerce.s3.ir-thr-at1.arvanstorage.com\/301416.jpg",
+      "name": "301416",
+      "alt": ""
+    },
+    {
+      "id": 679,
+      "date_created": "2020-01-03T09:08:34",
+      "date_created_gmt": "2020-01-03T02:08:34",
+      "date_modified": "2020-01-03T09:08:34",
+      "date_modified_gmt": "2020-01-03T02:08:34",
+      "src": "https:\/\/woocommerce.s3.ir-thr-at1.arvanstorage.com\/301302.jpg",
+      "name": "301302",
+      "alt": ""
+    }
+  ],
+  "attributes": [],
+  "default_attributes": [],
+  "variations": [],
+  "grouped_products": [],
+  "menu_order": 0,
+  "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#x062A;&#x0648;&#x0645;&#x0627;&#x0646;<\/span>&nbsp;2,060,000<\/bdi><\/span>",
+  "related_ids": [
+    540,
+    621,
+    587,
+    593,
+    585
+  ],
+  "meta_data": [],
+  "stock_status": "instock",
+  "_links": {
+    "self": [
+      {
+        "href": "https:\/\/woocommerce.maktabsharif.ir\/wp-json\/wc\/v3\/products\/677"
+      }
+    ],
+    "collection": [
+      {
+        "href": "https:\/\/woocommerce.maktabsharif.ir\/wp-json\/wc\/v3\/products"
+      }
+    ]
+  }
+}
