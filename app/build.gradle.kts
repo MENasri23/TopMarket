@@ -74,6 +74,7 @@ dependencies {
 
     // lifecycle
     implementation(Libs.Androidx.Lifecycle.RUNTIME)
+    implementation(Libs.Androidx.Lifecycle.LIVEDATA_KTX)
     implementation(Libs.Androidx.Lifecycle.VIEW_MODEL_KTX)
 
     // navigation
