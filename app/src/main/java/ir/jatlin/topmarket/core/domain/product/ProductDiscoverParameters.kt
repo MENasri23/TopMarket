@@ -26,4 +26,9 @@ class ProductDiscoverParameters : DefaultDiscoverParameters() {
 
     var stockStatus: StockStatus? = null
 
+
+    companion object {
+        const val PAGE_SIZE_INFINITE = 100
+    }
+
 }

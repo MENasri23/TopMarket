@@ -34,7 +34,7 @@ class FetchProductsListUseCase @Inject constructor(
 }
 
 inline fun makeProductParams(
-    build: ProductDiscoverParameters.() -> Unit
+    build: ProductDiscoverParameters.() -> Unit = {}
 ): FetchProductsListUseCase.Parameters {
     return ProductDiscoverParameters().apply(build).run {
         val filters = HashMap<String, String>().apply {
