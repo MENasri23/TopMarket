@@ -18,7 +18,7 @@ class DefaultProductRepository @Inject constructor(
         }
     }
 
-    override suspend fun getProductsList(
+    override fun getProductsList(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
@@ -28,7 +28,7 @@ class DefaultProductRepository @Inject constructor(
         }
     }
 
-    override suspend fun getProductCategories(
+    override fun getProductCategories(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?

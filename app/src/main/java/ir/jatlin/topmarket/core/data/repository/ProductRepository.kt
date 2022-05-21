@@ -11,13 +11,13 @@ interface ProductRepository {
         id: Int
     ): Flow<NetworkProductDetails>
 
-    suspend fun getProductsList(
+    fun getProductsList(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
     ): Flow<List<NetworkProduct>>
 
-    suspend fun getProductCategories(
+    fun getProductCategories(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
