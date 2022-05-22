@@ -130,4 +130,10 @@ object Libs {
         const val COMPILER = "com.github.bumptech.glide:compiler:${glideVersion}"
     }
 
+    object Intuit {
+        private const val version = "1.0.6"
+        const val SDP = "com.intuit.sdp:sdp-android:$version"
+        const val SSP = "com.intuit.ssp:ssp-android:$version"
+    }
+
 }

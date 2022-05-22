@@ -104,6 +104,10 @@ dependencies {
     implementation(Libs.Glide.GLIDE)
     kapt(Libs.Glide.COMPILER)
 
+    // intuit for text and unit sizes
+    implementation(Libs.Intuit.SDP)
+    implementation(Libs.Intuit.SSP)
+
     // timber
     implementation(Libs.Debug.TIMBER)
 
