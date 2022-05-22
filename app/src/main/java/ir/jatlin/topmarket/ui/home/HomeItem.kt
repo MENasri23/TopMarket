@@ -5,9 +5,9 @@ import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 sealed interface HomeItem {
     val id: Int
 
-    class ProductItem(val item: NetworkProduct) : HomeItem {
+    class ProductItem(val data: NetworkProduct) : HomeItem {
         override val id: Int
-            get() = item.id
+            get() = data.id
     }
 
 
