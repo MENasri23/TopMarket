@@ -16,7 +16,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_category_label"
-            style="@style/Theme.MarketApp.categoryTitle"
+            style="@style/Theme.MarketApp.MediumTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_medium"
@@ -27,7 +27,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_show_all_products"
-            style="@style/Theme.MarketApp.categoryTitle"
+            style="@style/Theme.MarketApp.MediumTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_medium"
@@ -40,7 +40,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_categories"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/space_small"
             android:clipToPadding="false"
             android:orientation="horizontal"

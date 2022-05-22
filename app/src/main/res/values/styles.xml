@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MarketApp" parent="Theme.Material3.DayNight">
-        <item name="textAppearanceBody1">@style/Theme.MarketApp.inListPrimary</item>
-        <item name="textAppearanceBody2">@style/Theme.MarketApp.inListSecondary</item>
-    </style>
-
-    <style name="Theme.MarketApp.inListPrimary" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textSize">@dimen/_14sdp</item>
-        <item name="fontFamily">@font/BRoya</item>
-        <item name="android:fontFamily">@font/BRoya</item>
+    <style name="Theme.MarketApp.MediumTitle" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="fontFamily">@font/samim_bold_fd</item>
+        <item name="android:fontFamily">@font/samim_bold_fd</item>
         <item name="lineSpacing">0sp</item>
     </style>
 
-    <style name="Theme.MarketApp.inListSecondary" parent="Theme.MarketApp.inListPrimary">
-        <item name="android:textSize">@dimen/_12sdp</item>
+    <style name="Theme.MarketApp.SmallTitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="fontFamily">@font/samim_bold_fd</item>
+        <item name="android:fontFamily">@font/samim_bold_fd</item>
+        <item name="lineSpacing">0sp</item>
     </style>
 
-    <style name="Theme.MarketApp.categoryTitle" parent="TextAppearance.Material3.LabelLarge">
-        <item name="fontFamily">@font/BRoya</item>
-        <item name="android:fontFamily">@font/BRoya</item>
+    <style name="Theme.MarketApp.SmallBody" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
     </style>
+
 
 </resources>
