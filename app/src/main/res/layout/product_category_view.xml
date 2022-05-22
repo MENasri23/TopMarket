@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_small"
+    android:elevation="@dimen/space_small"
     app:cardCornerRadius="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="@dimen/_200sdp"
         android:paddingVertical="@dimen/space_small">
 
         <com.google.android.material.textview.MaterialTextView
@@ -37,11 +40,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_categories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginVertical="@dimen/space_small"
             android:clipToPadding="false"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/space_medium"
             android:paddingStart="@dimen/space_medium"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
