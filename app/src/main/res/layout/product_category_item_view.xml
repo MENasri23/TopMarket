@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/product_container"
     android:layout_width="@dimen/_150sdp"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/space_medium">
+    android:layout_margin="@dimen/space_medium">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -51,12 +52,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:text="@string/remaining_stocks"
+        android:drawablePadding="@dimen/space_very_small"
         android:textAppearance="@style/Theme.MarketApp.SmallBody"
-        android:textColor="?attr/colorError"
+        app:drawableEndCompat="@drawable/ic_instock_24"
         app:layout_constraintEnd_toStartOf="@id/glv_end"
         app:layout_constraintStart_toEndOf="@id/glv_start"
-        app:layout_constraintTop_toBottomOf="@id/product_name" />
+        app:layout_constraintTop_toBottomOf="@id/product_name"
+        tools:text="@string/product_avaialble"
+        tools:textColor="?attr/colorError" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -64,7 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:drawablePadding="@dimen/space_very_small"
         android:textAppearance="@style/Theme.MarketApp.SmallBody"
+        app:drawableStartCompat="@drawable/ic_toman_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/product_discount"
         app:layout_constraintHorizontal_bias="0.8"
@@ -79,7 +84,7 @@
         android:id="@+id/product_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/product_discount_background"
+        android:background="?attr/colorError"
         android:paddingHorizontal="@dimen/_8sdp"
         android:paddingVertical="@dimen/_4sdp"
         android:textAppearance="@style/Theme.MarketApp.SmallBody"
