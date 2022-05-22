@@ -1,9 +1,7 @@
-package ir.jatlin.topmarket.ui.home
+package ir.jatlin.topmarket.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
-import ir.jatlin.topmarket.databinding.ProductCategoryViewBinding
 
 abstract class BaseViewHolder<T>(
     binding: ViewBinding

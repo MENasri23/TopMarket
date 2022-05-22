@@ -2,13 +2,12 @@ package ir.jatlin.topmarket.ui.home
 
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 
-sealed interface HomeItem {
+sealed interface ProductCategoryItem {
     val id: Int
 
-    class ProductItem(val data: NetworkProduct) : HomeItem {
+    class ProductItem(val data: NetworkProduct) : ProductCategoryItem {
         override val id: Int
             get() = data.id
     }
-
 
 }
