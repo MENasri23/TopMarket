@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TopMarket</string>
+    <string name="remaining_stocks">تنها %d عدد در انبار باقیست</string>
 </resources>

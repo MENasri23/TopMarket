@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- common dimens  -->
+    <dimen name="space_very_small">@dimen/_4sdp</dimen>
+    <dimen name="space_small">@dimen/_8sdp</dimen>
+    <dimen name="space_medium">@dimen/_16sdp</dimen>
+    <dimen name="space_large">@dimen/_32sdp</dimen>
+    <dimen name="space_very_large">@dimen/_48sdp</dimen>
+
+
+</resources>
