@@ -26,5 +26,5 @@ fun <T> allSuccess(vararg resources: Resource<T>): Boolean =
 fun <T> findAnyFailed(vararg resources: Resource<T>): Resource.Error? =
     resources.firstOrNull { it is Resource.Error } as? Resource.Error
 
-fun <T> anyOnLoading(vararg resources: Resource<T>): Boolean =
+fun <T> anyLoading(vararg resources: Resource<T>): Boolean =
     resources.any { it is Resource.Loading }

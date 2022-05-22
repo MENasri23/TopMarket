@@ -10,6 +10,7 @@ import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.util.allSuccess
+import ir.jatlin.topmarket.ui.util.anyLoading
 import ir.jatlin.topmarket.ui.util.findAnyFailed
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.Flow
@@ -24,8 +25,8 @@ class HomeViewModel @Inject constructor(
     private val fetchProductList: FetchProductsListUseCase
 ) : ViewModel() {
 
-    private val _error = MutableStateFlow<ErrorCause?>(null)
-    val error = _error.asStateFlow()
+    /* private val _error = MutableStateFlow<ErrorCause?>(null)
+     val error = _error.asStateFlow()*/
 
     private val latestProducts = stateFlow {
         fetchProducts {
@@ -46,25 +47,23 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    val homeUiState: Flow<HomeUiState?> = combine(
+    val homeUiState: Flow<Resource<HomeUiState>> = combine(
         latestProducts,
         popularProducts,
         topRatedProducts
     ) { latest, popular, topRated ->
 
-        if (allSuccess(latest, popular, topRated)) {
-            val result = listOf(
-                latest.data!!, popular.data!!, topRated.data!!
+        when {
+            anyLoading(latest, popular, topRated) -> Resource.loading()
+            allSuccess(latest, popular, topRated) -> Resource.success(
+                data = HomeUiState(
+                    listOf(latest.data!!, popular.data!!)
+                )
             )
-            return@combine HomeUiState(
-                categorizedProducts = result
-            )
+            else -> findAnyFailed(latest, popular, topRated).let { error ->
+                Resource.error(error?.cause ?: ErrorCause.Unknown())
+            }
         }
-        val error = findAnyFailed(latest, popular, topRated)
-        _error.emit(error?.cause)
-
-        null
-
     }
 
 
