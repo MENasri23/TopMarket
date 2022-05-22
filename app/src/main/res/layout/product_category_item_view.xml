@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="@dimen/space_medium">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glh_half_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="0dp" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/product_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/glh_half_screen"
+        app:layout_constraintEnd_toStartOf="@id/glv_end"
+        app:layout_constraintStart_toEndOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="?attr/textAppearanceBody1"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/glh_half_screen"
+        tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_stock_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:text="@string/remaining_stocks"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        android:textColor="?attr/colorError"
+        app:layout_constraintEnd_toStartOf="@id/glv_end"
+        app:layout_constraintStart_toEndOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/product_name" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?attr/textAppearanceBody2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/product_discount"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@id/glv_start"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/product_stock_status"
+        app:layout_constraintVertical_bias="0.4"
+        tools:text="4,000,000 تومان" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/product_discount_background"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="?attr/colorOnError"
+        app:layout_constraintBottom_toBottomOf="@+id/product_price"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintEnd_toStartOf="@+id/glv_end"
+        app:layout_constraintStart_toEndOf="@+id/product_price"
+        app:layout_constraintTop_toTopOf="@+id/product_price"
+        tools:text="25%" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
