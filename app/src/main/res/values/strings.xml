@@ -4,4 +4,7 @@
     <string name="price_discount">%1$d%%</string>
     <string name="product_avaialble">موجود در انبار</string>
     <string name="product_unavailable">ناموجود</string>
+    <string name="products_latest">جدید ترین کالا</string>
+    <string name="products_popular">محبوب ترین کالاها</string>
+    <string name="products_top_rated">پرطرفدارترین کالاها</string>
 </resources>

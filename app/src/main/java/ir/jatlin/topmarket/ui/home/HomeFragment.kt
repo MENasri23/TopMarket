@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
+import ir.jatlin.topmarket.ui.home.category.ProductCategoryItem
+import ir.jatlin.topmarket.ui.home.category.asProductItem
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import kotlinx.coroutines.launch
@@ -47,7 +50,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     is Resource.Error -> {}
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        // TODO: Show result 
+                        val productCategories = stateResult.data!!.categorizedProducts
+                        productCategoriesAdapter.submitList(
+                            productCategories.map { categoryState ->
+                                ProductCategoriesItem.CategoryItem(
+                                    label = getString(categoryState.label),
+                                    data = categoryState.products.map(NetworkProduct::asProductItem)
+                                )
+                            }
+                        )
                     }
                 }
             }

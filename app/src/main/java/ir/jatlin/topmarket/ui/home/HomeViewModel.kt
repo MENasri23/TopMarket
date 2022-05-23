@@ -1,7 +1,9 @@
 package ir.jatlin.topmarket.ui.home
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
@@ -14,8 +16,6 @@ import ir.jatlin.topmarket.ui.util.anyLoading
 import ir.jatlin.topmarket.ui.util.findAnyFailed
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
@@ -57,7 +57,20 @@ class HomeViewModel @Inject constructor(
             anyLoading(latest, popular, topRated) -> Resource.loading()
             allSuccess(latest, popular, topRated) -> Resource.success(
                 data = HomeUiState(
-                    listOf(latest.data!!, popular.data!!)
+                    listOf(
+                        ProductCategoryUiState(
+                            products = latest.data!!,
+                            label = R.string.products_latest
+                        ),
+                        ProductCategoryUiState(
+                            products = popular.data!!,
+                            label = R.string.products_popular
+                        ),
+                        ProductCategoryUiState(
+                            products = topRated.data!!,
+                            label = R.string.products_top_rated
+                        )
+                    )
                 )
             )
             else -> findAnyFailed(latest, popular, topRated).let { error ->
@@ -78,5 +91,10 @@ class HomeViewModel @Inject constructor(
 }
 
 data class HomeUiState(
-    val categorizedProducts: List<List<NetworkProduct>>,
+    val categorizedProducts: List<ProductCategoryUiState>,
+)
+
+data class ProductCategoryUiState(
+    val products: List<NetworkProduct>,
+    @StringRes val label: Int
 )

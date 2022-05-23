@@ -11,3 +11,6 @@ sealed interface ProductCategoryItem {
     }
 
 }
+
+fun NetworkProduct.asProductItem() =
+    ProductCategoryItem.ProductItem(this)
