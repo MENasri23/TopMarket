@@ -8,4 +8,13 @@
     <string name="products_popular">محبوب ترین کالاها</string>
     <string name="products_top_rated">پرطرفدارترین کالاها</string>
     <string name="show_all">مشاهده همه</string>
+
+
+    <!-- content descriptions -->
+    <string name="actions_more">بیشتر</string>
+    <string name="content_actions_more">More actions</string>
+    <string name="action_like">افزودن به علاقه مندی ها</string>
+    <string name="content_action_like">Like</string>
+    <string name="action_cart">لیست خرید</string>
+    <string name="content_cart">Cart</string>
 </resources>

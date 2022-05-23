@@ -29,6 +29,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
+                app:menu="@menu/product_details_menu"
                 app:navigationIcon="@drawable/ic_close_24">
 
 
