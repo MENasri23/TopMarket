@@ -12,7 +12,7 @@ class DefaultProductRepository @Inject constructor(
     private val remoteDataSource: ProductRemoteDataSource
 ) : ProductRepository {
 
-    override suspend fun findProductDetailsById(id: Int): Flow<NetworkProductDetails> {
+    override fun findProductDetailsById(id: Int): Flow<NetworkProductDetails> {
         return flow {
             emit(remoteDataSource.findProductDetailsById(id))
         }

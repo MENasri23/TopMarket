@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
     // TODO: Change return types of its method to external model
-    suspend fun findProductDetailsById(
+    fun findProductDetailsById(
         id: Int
     ): Flow<NetworkProductDetails>
 
