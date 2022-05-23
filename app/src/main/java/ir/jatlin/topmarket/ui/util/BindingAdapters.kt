@@ -4,18 +4,19 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import ir.jatlin.topmarket.R
 import timber.log.Timber
-import java.lang.NumberFormatException
 
 
 fun ImageView.loadFromUrl(
     url: String?,
-    @DrawableRes placeholder: Int = R.drawable.loading_animation
-) {
+    @DrawableRes placeholder: Int = R.drawable.loading_animation,
+
+    ) {
     Glide.with(context)
         .load(url)
         .apply(
@@ -32,21 +33,30 @@ fun View.clipToRoundRect(clip: Boolean) {
     outlineProvider = if (clip) RoundedOutlineProvided else null
 }
 
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.visible() {
+    isVisible = true
+}
+
+fun View.gone() {
+    isVisible = false
+}
+
 
 fun TextView.setDiscount(
     beforeDiscount: String,
     afterDiscount: String
 ) {
     val discount = percentDiscount(beforeDiscount, afterDiscount)
-    Timber.d("*****************************$discount")
-    val isVisible = if (discount != null) {
+    if (discount != null) {
         text = context.getString(
             R.string.price_discount, discount
         )
-        View.VISIBLE
-    } else View.INVISIBLE
-
-    visibility = isVisible
+        visible()
+    } else invisible()
 
 }
 
@@ -78,9 +88,11 @@ private fun percentDiscount(
         else ((before - after) * 100) / before
 
     } catch (e: NumberFormatException) {
-        Timber.d(
-            "Unresolved number format for values: $beforeDiscount, $afterDiscount"
-        )
+        when {
+            beforeDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
+            afterDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
+            else -> Timber.d("Unresolved number format for values: $beforeDiscount, $afterDiscount")
+        }
         null
     }
 }

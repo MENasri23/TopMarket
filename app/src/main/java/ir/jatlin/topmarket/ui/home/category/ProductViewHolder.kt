@@ -5,9 +5,7 @@ import androidx.core.view.isVisible
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
-import ir.jatlin.topmarket.ui.util.clipToRoundRect
-import ir.jatlin.topmarket.ui.util.loadFromUrl
-import ir.jatlin.topmarket.ui.util.setDiscount
+import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 
@@ -23,7 +21,6 @@ class ProductViewHolder(
         with(binding) {
             showPrice(product.regularPrice, product.price)
             productName.text = product.name
-            productPrice.text = product.price
             productStockStatus.text = if (product.stockStatus == IN_STOCK) {
                 context.resources.getString(R.string.product_avaialble)
             } else {
@@ -36,6 +33,7 @@ class ProductViewHolder(
     }
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
+        productPrice.text = withSeparator(price)
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,
             afterDiscount = price
@@ -43,11 +41,12 @@ class ProductViewHolder(
         if (productDiscount.isVisible) {
             productDiscount.clipToRoundRect(true)
 
-            productRegularPrice.isVisible = true
+            productRegularPrice.text = withSeparator(regularPrice)
+            productRegularPrice.visible()
             productRegularPrice.paintFlags =
                 productRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
-            productRegularPrice.isVisible = false
+            productRegularPrice.invisible()
         }
 
     }
