@@ -1,6 +1,6 @@
-package ir.jatlin.topmarket.ui.home.categories
+package ir.jatlin.topmarket.ui.home
 
-import ir.jatlin.topmarket.ui.home.ProductCategoryItem
+import ir.jatlin.topmarket.ui.home.category.ProductCategoryItem
 import java.util.*
 
 sealed interface ProductCategoriesItem {
