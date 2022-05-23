@@ -14,5 +14,12 @@ data class NetworkProduct(
     @SerializedName("regular_price")
     val regularPrice: String,
     @SerializedName("stock_status")
-    val stockStatus: String, // instock  outofstock onbackorder
+    val stockStatus: String,
+    // TODO: These property maybe removed in future
+    @SerializedName("date_created_gmt")
+    val createdDate: String,
+    @SerializedName("rating_count")
+    val ratingCount: Int,
+    @SerializedName("total_sales")
+    val totalSales: Int
 )

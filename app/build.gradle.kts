@@ -35,8 +35,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+        }
+        create("staging") {
+            initWith(getByName("debug"))
+            matchingFallbacks.add("debug")
+        }
+        sourceSets {
+            getByName("staging") {
+                java.srcDir("src/release/java")
+            }
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

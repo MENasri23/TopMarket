@@ -9,11 +9,11 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
-import ir.jatlin.topmarket.ui.home.category.ProductCategoryItem
 import ir.jatlin.topmarket.ui.home.category.asProductItem
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -47,8 +47,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private suspend fun collectHomeUiState() = viewModel.homeUiState.collect { stateResult ->
         when (stateResult) {
-            is Resource.Error -> {}
-            is Resource.Loading -> {}
+            is Resource.Error -> {
+                Timber.e(stateResult.cause.toString())
+            }
+            is Resource.Loading -> { Timber.d("loading") }
             is Resource.Success -> {
                 val productCategories = stateResult.data!!.categorizedProducts
                 productCategoriesAdapter.submitList(
