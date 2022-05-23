@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.ui.home
 
+import androidx.recyclerview.widget.DividerItemDecoration
 import ir.jatlin.topmarket.databinding.ProductCategoryViewBinding
 import ir.jatlin.topmarket.ui.home.category.ProductCategoryAdapter
 import ir.jatlin.topmarket.ui.home.category.ProductCategoryItem
@@ -15,7 +16,9 @@ class ProductCategoriesViewHolder(
 
     init {
         binding.apply {
-            productCategories.adapter = adapter
+            products.adapter = adapter
+            val itemDecoration = DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL)
+            products.addItemDecoration(itemDecoration)
         }
     }
 
