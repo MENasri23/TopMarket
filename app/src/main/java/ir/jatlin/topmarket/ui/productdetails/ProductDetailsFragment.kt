@@ -13,12 +13,12 @@ import ir.jatlin.topmarket.ui.util.dataBindings
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
 
 
-    private val viewMode by viewModels<ProductDetailsViewModel>()
+    private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = viewMode
+        binding.viewModel = viewModel
 
 
     }
