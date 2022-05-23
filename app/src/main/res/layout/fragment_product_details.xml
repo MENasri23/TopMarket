@@ -15,28 +15,19 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            style="@style/Widget.Market.AppBar"
+        <include
+            android:id="@+id/include_app_bar"
+            layout="@layout/layout_product_details_app_bar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_image_slider"
             android:layout_width="match_parent"
-            app:liftOnScroll="true"
             android:layout_height="wrap_content"
-            android:divider="?android:dividerHorizontal"
             android:fitsSystemWindows="true"
-            android:showDividers="middle"
-            tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                app:menu="@menu/product_details_menu"
-                app:navigationIcon="@drawable/ic_close_24">
-
-
-            </com.google.android.material.appbar.MaterialToolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
