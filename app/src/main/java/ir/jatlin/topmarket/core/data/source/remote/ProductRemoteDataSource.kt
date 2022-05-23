@@ -8,7 +8,7 @@ interface ProductRemoteDataSource {
 
     suspend fun findProductDetailsById(
         id: Int
-    ): NetworkProductDetails
+    ): NetworkProductDetails?
 
     suspend fun getProductsList(
         page: Int,
