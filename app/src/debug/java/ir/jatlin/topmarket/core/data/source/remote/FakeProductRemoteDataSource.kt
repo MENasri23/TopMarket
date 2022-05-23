@@ -18,9 +18,10 @@ class FakeProductRemoteDataSource @Inject constructor(
     private val gson: Gson
 ) : ProductRemoteDataSource {
 
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss").apply {
-        timeZone = TimeZone.getTimeZone("GMT")
-    }
+    private val dateFormatter =
+        SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.getDefault()).apply {
+            timeZone = TimeZone.getTimeZone("GMT")
+        }
 
     private fun <T, R : Comparable<R>> List<T>.orderBy(
         order: String,
