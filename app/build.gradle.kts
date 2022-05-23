@@ -5,6 +5,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs")
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
