@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.ui.home
+package ir.jatlin.topmarket.ui.home.category
 
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 
