@@ -19,6 +19,7 @@
             android:id="@+id/appbar"
             style="@style/Widget.Market.AppBar"
             android:layout_width="match_parent"
+            app:liftOnScroll="true"
             android:layout_height="wrap_content"
             android:divider="?android:dividerHorizontal"
             android:fitsSystemWindows="true"

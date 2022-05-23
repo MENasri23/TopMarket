@@ -21,9 +21,10 @@
     </style>
 
     <style name="Widget.Market" parent="@android:style/Widget.Material" />
-    
+
     <style name="Widget.Market.AppBar" parent="@style/Widget.Material3.AppBarLayout">
         <item name="android:background">?attr/colorSurface</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
 
