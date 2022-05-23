@@ -41,26 +41,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-
     private fun collectStates() = repeatOnViewLifecycleOwner {
+        launch { collectHomeUiState() }
+    }
 
-        launch {
-            viewModel.homeUiState.collect { stateResult ->
-                when (stateResult) {
-                    is Resource.Error -> {}
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        val productCategories = stateResult.data!!.categorizedProducts
-                        productCategoriesAdapter.submitList(
-                            productCategories.map { categoryState ->
-                                ProductCategoriesItem.CategoryItem(
-                                    label = getString(categoryState.label),
-                                    data = categoryState.products.map(NetworkProduct::asProductItem)
-                                )
-                            }
+    private suspend fun collectHomeUiState() = viewModel.homeUiState.collect { stateResult ->
+        when (stateResult) {
+            is Resource.Error -> {}
+            is Resource.Loading -> {}
+            is Resource.Success -> {
+                val productCategories = stateResult.data!!.categorizedProducts
+                productCategoriesAdapter.submitList(
+                    productCategories.map { categoryState ->
+                        ProductCategoriesItem.CategoryItem(
+                            label = getString(categoryState.label),
+                            data = categoryState.products.map(NetworkProduct::asProductItem)
                         )
                     }
-                }
+                )
             }
         }
     }
