@@ -39,7 +39,7 @@ class ProductCategoryAdapter(
 
         val viewHolder: BaseViewHolder<*> = when (viewType) {
             ITEM_VIEW_TYPE_PRODUCT ->
-                ProductCategoryViewHolder(
+                ProductViewHolder(
                     ProductCategoryItemViewBinding.inflate(inflater, parent, false)
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")

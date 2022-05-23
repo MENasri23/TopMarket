@@ -3,4 +3,5 @@
     <string name="remaining_stocks">تنها %d عدد در انبار باقیست</string>
     <string name="price_discount">%1$d%%</string>
     <string name="product_avaialble">موجود در انبار</string>
+    <string name="product_unavailable">ناموجود</string>
 </resources>

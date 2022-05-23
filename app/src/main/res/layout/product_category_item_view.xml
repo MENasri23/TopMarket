@@ -70,7 +70,7 @@
         android:drawablePadding="@dimen/space_very_small"
         android:textAppearance="@style/Theme.MarketApp.SmallBody"
         app:drawableStartCompat="@drawable/ic_toman_16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/product_regular_price"
         app:layout_constraintEnd_toStartOf="@+id/product_discount"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -79,6 +79,20 @@
         app:layout_constraintTop_toBottomOf="@id/product_stock_status"
         app:layout_constraintVertical_bias="0.7"
         tools:text="4,000,000 تومان" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_regular_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:alpha="0.5"
+        android:textAppearance="@style/Theme.MarketApp.SmallBody"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/product_price"
+        app:layout_constraintTop_toBottomOf="@id/product_price"
+        tools:text="4,000,000 "
+        tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/product_discount"
