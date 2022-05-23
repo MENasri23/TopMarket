@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.data.source.remote.util
+package ir.jatlin.topmarket.util
 
 import java.lang.IllegalArgumentException
 
