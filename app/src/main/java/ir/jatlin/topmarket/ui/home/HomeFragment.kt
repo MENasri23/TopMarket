@@ -18,7 +18,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
 
-    private lateinit var productAdapter: ProductCategoryAdapter
+    private lateinit var productCategoriesAdapter: ProductCategoriesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,8 +33,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun initViews() = binding.apply {
         binding.viewModel = viewModel
 
-        productAdapter = ProductCategoryAdapter()
-        productCategories.adapter = productAdapter
+        productCategoriesAdapter = ProductCategoriesAdapter()
+        productCategories.adapter = productCategoriesAdapter
 
     }
 
@@ -47,8 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     is Resource.Error -> {}
                     is Resource.Loading -> {}
                     is Resource.Success -> {
-                        val firstRow = stateResult.data!!.categorizedProducts.first()
-                        productAdapter.submitList(firstRow.map { ProductCategoryItem.ProductItem(it) })
+                        // TODO: Show result 
                     }
                 }
             }

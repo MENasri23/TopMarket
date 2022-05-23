@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_medium"
             android:clipToPadding="false"
+            android:orientation="horizontal"
             android:fitsSystemWindows="true"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
