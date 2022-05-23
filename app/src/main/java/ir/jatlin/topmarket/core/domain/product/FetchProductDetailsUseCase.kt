@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.core.domain.product
 
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.ProductRepository
+import ir.jatlin.topmarket.core.domain.CoroutineUseCase
 import ir.jatlin.topmarket.core.domain.FlowUseCase
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
@@ -13,9 +14,9 @@ class FetchProductDetailsUseCase @Inject constructor(
     private val productRepository: ProductRepository,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
-) : FlowUseCase<Int, NetworkProductDetails>(errorHandler, dispatcher) {
+) : CoroutineUseCase<Int, NetworkProductDetails?>(errorHandler, dispatcher) {
 
-    override fun execute(params: Int): Flow<NetworkProductDetails> {
+    override suspend fun execute(params: Int): NetworkProductDetails? {
         return productRepository.findProductDetailsById(params)
     }
 }

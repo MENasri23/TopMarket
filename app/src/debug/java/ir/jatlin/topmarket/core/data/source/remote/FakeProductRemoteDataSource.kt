@@ -33,7 +33,7 @@ class FakeProductRemoteDataSource @Inject constructor(
     }
 
 
-    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails =
+    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails? =
         withContext(dispatcher) {
             gson.fromJson(
                 ResourceProvider.readFrom("get-product.json"),
