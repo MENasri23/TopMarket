@@ -4,16 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
+import ir.jatlin.topmarket.databinding.ProductCategoryViewBinding
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
-typealias ViewHolder = BaseViewHolder<ProductCategoryItem>
+typealias ViewHolder = BaseViewHolder<ProductCategoriesItem>
 
-class ProductCategoryAdapter(
-
-) : ListAdapter<ProductCategoryItem, ViewHolder>(ProductDiffCallback()),
-    ViewHolderCreator<ProductCategoryItem> {
+class ProductCategoriesAdapter :
+    ListAdapter<ProductCategoriesItem, ViewHolder>(ProductDiffCallback()),
+    ViewHolderCreator<ProductCategoriesItem> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +27,7 @@ class ProductCategoryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is ProductCategoryItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
+            is ProductCategoriesItem.CategoryItem -> ITEM_VIEW_TYPE_PRODUCT_CATEGORY
             else -> super.getItemViewType(position)
         }
     }
@@ -38,9 +37,9 @@ class ProductCategoryAdapter(
         val inflater = LayoutInflater.from(parent.context)
 
         val viewHolder: BaseViewHolder<*> = when (viewType) {
-            ITEM_VIEW_TYPE_PRODUCT ->
-                ProductViewHolder(
-                    ProductCategoryItemViewBinding.inflate(inflater, parent, false)
+            ITEM_VIEW_TYPE_PRODUCT_CATEGORY ->
+                ProductCategoriesViewHolder(
+                    ProductCategoryViewBinding.inflate(inflater, parent, false)
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
         }
@@ -50,23 +49,23 @@ class ProductCategoryAdapter(
     }
 
     companion object {
-        const val ITEM_VIEW_TYPE_PRODUCT = 0
+        const val ITEM_VIEW_TYPE_PRODUCT_CATEGORY = 0
     }
 
 }
 
-class ProductDiffCallback : DiffUtil.ItemCallback<ProductCategoryItem>() {
+class ProductDiffCallback : DiffUtil.ItemCallback<ProductCategoriesItem>() {
 
     override fun areItemsTheSame(
-        oldItem: ProductCategoryItem,
-        newItem: ProductCategoryItem
+        oldItem: ProductCategoriesItem,
+        newItem: ProductCategoriesItem
     ): Boolean {
         return newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ProductCategoryItem,
-        newItem: ProductCategoryItem
+        oldItem: ProductCategoriesItem,
+        newItem: ProductCategoriesItem
     ): Boolean {
         return newItem == oldItem
     }
