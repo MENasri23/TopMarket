@@ -40,8 +40,108 @@
                     tools:listitem="@layout/product_category_item_view" />
 
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/product_categories"
+                        style="@style/Theme.MarketApp.LabelMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="?attr/colorAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="کالای دیجیتال / تلویزیون" />
 
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/product_intro_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_categories">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/product_name"
+                            style="@style/Theme.MarketApp.MediumTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutDirection="rtl"
+                            tools:text="پیراهن زنانه کد 6" />
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_small"
+                            android:gravity="center_vertical"
+                            android:layoutDirection="rtl">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_star_rate_24" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_avg_rating"
+                                style="@style/Theme.MarketApp.SmallBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_very_small"
+                                tools:text="4.5" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_rating_count"
+                                style="@style/Theme.MarketApp.SmallBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_very_small"
+                                android:alpha="0.7"
+                                tools:text="(2)" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/user_comments"
+                                style="@style/Theme.MarketApp.SmallBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_small"
+                                android:drawablePadding="@dimen/space_small"
+                                android:textColor="?attr/colorAccent"
+                                app:drawableStartCompat="@drawable/ic_dot"
+                                tools:text="2 دیدگاه کاربران" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/questions"
+                                style="@style/Theme.MarketApp.SmallBody"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/space_small"
+                                android:drawablePadding="@dimen/space_small"
+                                android:textColor="?attr/colorAccent"
+                                app:drawableStartCompat="@drawable/ic_dot"
+                                tools:text="200 پرسش و پاسخ" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/space_small"
+                            android:alpha="0.5"
+                            android:background="?attr/colorOnSurface" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
