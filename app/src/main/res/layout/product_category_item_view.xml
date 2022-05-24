@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="@id/glv_start"
         app:layout_constraintTop_toBottomOf="@id/product_stock_status"
         app:layout_constraintVertical_bias="0.7"
-        tools:text="4,000,000 تومان" />
+        tools:text="4,000,000" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/product_regular_price"

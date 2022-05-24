@@ -19,14 +19,14 @@
             android:id="@+id/include_app_bar"
             layout="@layout/layout_product_details_app_bar" />
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <!-- Define new product image item view -->
@@ -42,111 +42,132 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/product_categories"
                         style="@style/Theme.MarketApp.LabelMedium"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:textColor="?attr/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="کالای دیجیتال / تلویزیون" />
+                        tools:text="کالای دیجیتال / تلویزیون " />
 
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/product_intro_container"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/product_name"
+                        style="@style/TextAppearance.MarketApp.TitleLarge"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_small"
-                        android:orientation="vertical"
+                        android:layout_marginVertical="@dimen/space_medium"
+                        app:layoutDirection="rtl"
+                        app:layout_constraintBottom_toTopOf="@id/product_rating_image"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/product_categories">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/product_name"
-                            style="@style/Theme.MarketApp.MediumTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layoutDirection="rtl"
-                            tools:text="پیراهن زنانه کد 6" />
+                        app:layout_constraintTop_toBottomOf="@id/product_categories"
+                        tools:text="پیراهن زنانه کد 6" />
 
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_small"
-                            android:gravity="center_vertical"
-                            android:layoutDirection="rtl">
+                    <ImageView
+                        android:id="@+id/product_rating_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_star_rate_24"
+                        app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_name" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:contentDescription="@null"
-                                android:src="@drawable/ic_star_rate_24" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/product_avg_rating"
+                        style="@style/Theme.MarketApp.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_very_small"
+                        app:layout_constraintBottom_toBottomOf="@id/product_rating_image"
+                        app:layout_constraintEnd_toEndOf="@id/product_rating_image"
+                        app:layout_constraintEnd_toStartOf="@id/product_rating_image"
+                        app:layout_constraintTop_toTopOf="@id/product_rating_image"
+                        tools:layout_editor_absoluteY="42dp"
+                        tools:text="4.5" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/product_avg_rating"
-                                style="@style/Theme.MarketApp.SmallBody"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/space_very_small"
-                                tools:text="4.5" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/product_rating_count"
-                                style="@style/Theme.MarketApp.SmallBody"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/space_very_small"
-                                android:alpha="0.7"
-                                tools:text="(2)" />
-
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/user_comments"
-                                style="@style/Theme.MarketApp.SmallBody"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/space_small"
-                                android:drawablePadding="@dimen/space_small"
-                                android:textColor="?attr/colorAccent"
-                                app:drawableStartCompat="@drawable/ic_dot"
-                                tools:text="2 دیدگاه کاربران" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/product_rating_count"
+                        style="@style/Theme.MarketApp.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_very_small"
+                        android:alpha="0.7"
+                        app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                        app:layout_constraintEnd_toStartOf="@id/product_avg_rating"
+                        app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                        tools:text="(2)" />
 
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/questions"
-                                style="@style/Theme.MarketApp.SmallBody"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/space_small"
-                                android:drawablePadding="@dimen/space_small"
-                                android:textColor="?attr/colorAccent"
-                                app:drawableStartCompat="@drawable/ic_dot"
-                                tools:text="200 پرسش و پاسخ" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/user_comments"
+                        style="@style/Theme.MarketApp.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_small"
+                        android:drawablePadding="@dimen/space_small"
+                        android:textColor="?attr/colorAccent"
+                        app:drawableEndCompat="@drawable/ic_dot"
+                        app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                        app:layout_constraintEnd_toStartOf="@id/product_rating_count"
+                        app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                        tools:text="2 دیدگاه کاربران" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/space_small"
-                            android:alpha="0.5"
-                            android:background="?attr/colorOnSurface" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/questions"
+                        style="@style/Theme.MarketApp.LabelSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/space_small"
+                        android:drawablePadding="@dimen/space_small"
+                        android:textColor="?attr/colorAccent"
+                        app:drawableEndCompat="@drawable/ic_dot"
+                        app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                        app:layout_constraintEnd_toStartOf="@id/br_end_edge_questions"
+                        app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                        tools:layout_editor_absoluteX="10dp"
+                        tools:text="200 پرسش و پاسخ" />
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/br_end_edge_questions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="start"
+                        app:constraint_referenced_ids="user_comments" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:background="?attr/colorOnSurface"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_rating_image" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/product_rating_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="product_rating_image,product_avg_rating,product_rating_count" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
