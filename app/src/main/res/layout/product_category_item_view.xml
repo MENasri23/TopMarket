@@ -69,7 +69,7 @@
         android:layout_marginTop="16dp"
         android:drawablePadding="@dimen/space_very_small"
         android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
-        app:drawableStartCompat="@drawable/ic_toman_16dp"
+        app:drawableStartCompat="@drawable/ic_toman"
         app:layout_constraintBottom_toTopOf="@id/product_regular_price"
         app:layout_constraintEnd_toStartOf="@+id/product_discount"
         app:layout_constraintHorizontal_bias="0.8"

@@ -71,7 +71,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/space_medium"
-                            app:layoutDirection="rtl"
                             app:layout_constraintBottom_toTopOf="@id/product_rating_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -218,22 +217,50 @@
                         </androidx.cardview.widget.CardView>
 
 
-
-
-
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-                <!--<include
+                <include
                     android:id="@+id/include_similar_products"
-                    layout="@layout/product_category_view" />-->
-
+                    layout="@layout/product_category_view" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
         </ScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:cardCornerRadius="0dp"
+            app:contentPaddingBottom="@dimen/space_small"
+            app:contentPaddingLeft="@dimen/space_medium"
+            app:contentPaddingRight="@dimen/space_medium"
+            app:contentPaddingTop="@dimen/space_small">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.MarketApp.TitleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:drawablePadding="@dimen/space_very_small"
+                app:drawableStartCompat="@drawable/ic_toman"
+                tools:text="20,000" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Market.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="@string/add_to_cart"
+                app:contentPadding="@dimen/space_small"
+                app:icon="@drawable/ic_add_shopping_cart_24" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

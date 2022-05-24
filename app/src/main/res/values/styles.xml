@@ -46,5 +46,9 @@
         <item name="android:elevation">0dp</item>
     </style>
 
+    <style name="Widget.Market.Button" parent="Widget.Material3.Button">
+        <item name="fontFamily">@font/samim_fd</item>
+    </style>
+
 
 </resources>
