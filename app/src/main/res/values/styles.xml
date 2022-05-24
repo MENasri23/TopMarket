@@ -2,39 +2,40 @@
 <resources>
 
     <style name="TextAppearance.MarketApp.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
-        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
         <item name="fontFamily">@font/samim_bold_fd</item>
         <item name="android:fontFamily">@font/samim_bold_fd</item>
         <item name="lineSpacing">0sp</item>
     </style>
 
-    <style name="Theme.MarketApp.MediumTitle" parent="TextAppearance.Material3.TitleSmall">
-        <item name="android:textSize">@dimen/_12sdp</item>
+    <style name="TextAppearance.MarketApp.TitleMedium" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="fontFamily">@font/samim_bold_fd</item>
         <item name="android:fontFamily">@font/samim_bold_fd</item>
         <item name="lineSpacing">0sp</item>
     </style>
 
-    <style name="Theme.MarketApp.SmallTitle" parent="TextAppearance.Material3.BodyMedium">
+    <style name="TextAppearance.MarketApp.TitleSmall" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textSize">@dimen/_10sdp</item>
         <item name="fontFamily">@font/samim_bold_fd</item>
         <item name="android:fontFamily">@font/samim_bold_fd</item>
         <item name="lineSpacing">0sp</item>
     </style>
 
-    <style name="Theme.MarketApp.SmallBody" parent="TextAppearance.Material3.BodySmall">
+    <style name="TextAppearance.MarketApp.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/samim_fd</item>
-        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
     </style>
 
-    <style name="Theme.MarketApp.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+    <style name="TextAppearance.MarketApp.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
         <item name="fontFamily">@font/samim_fd</item>
-        <!--<item name="android:textSize">@dimen/_8sdp</item>-->
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:lineSpacingExtra">@dimen/_1ssp</item>
     </style>
 
-    <style name="Theme.MarketApp.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+    <style name="TextAppearance.MarketApp.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
         <item name="fontFamily">@font/samim_fd</item>
-        <!--<item name="android:textSize">@dimen/_6sdp</item>-->
+        <item name="android:textSize">@dimen/_8ssp</item>
     </style>
 
 

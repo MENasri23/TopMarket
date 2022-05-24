@@ -15,7 +15,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_category_label"
-            style="@style/Theme.MarketApp.MediumTitle"
+            style="@style/TextAppearance.MarketApp.TitleMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_medium"
@@ -26,7 +26,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_show_all_products"
-            style="@style/Theme.MarketApp.MediumTitle"
+            style="@style/TextAppearance.MarketApp.TitleMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_medium"
