@@ -121,6 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/space_small"
                             android:drawablePadding="@dimen/space_small"
+                            android:gravity="center_vertical"
                             android:textColor="?attr/colorAccent"
                             app:drawableEndCompat="@drawable/ic_dot"
                             app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
@@ -136,6 +137,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/space_small"
                             android:drawablePadding="@dimen/space_small"
+                            android:gravity="center_vertical"
                             android:textColor="?attr/colorAccent"
                             app:drawableEndCompat="@drawable/ic_dot"
                             app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
@@ -190,21 +192,18 @@
                             tools:text="@string/product_overview" />
 
 
-                        <androidx.cardview.widget.CardView
+                        <FrameLayout
                             android:id="@+id/product_description_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
                             android:layout_marginTop="@dimen/space_small"
-                            android:minHeight="@dimen/space_very_large"
-                            app:contentPaddingLeft="@dimen/space_medium"
-                            app:contentPaddingRight="@dimen/space_medium">
+                            android:minHeight="@dimen/space_large">
 
                             <com.google.android.material.textview.MaterialTextView
                                 style="@style/TextAppearance.MarketApp.LabelMedium"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLines="4"
+                                android:maxLines="3"
                                 android:text="@string/lorem_small" />
 
                             <View
@@ -214,7 +213,21 @@
                                 android:layout_gravity="bottom"
                                 android:background="@drawable/vertical_background_gradient" />
 
-                        </androidx.cardview.widget.CardView>
+
+                        </FrameLayout>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/show_more_description"
+                            style="@style/TextAppearance.MarketApp.LabelMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:drawableStart="@drawable/ic_chevron_left"
+                            app:drawableTint="?attr/colorAccent"
+                            android:gravity="center_vertical"
+                            android:text="@string/show_more"
+                            android:textColor="?attr/colorAccent" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -247,6 +260,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
                 android:drawablePadding="@dimen/space_very_small"
+                android:gravity="center_vertical"
                 app:drawableStartCompat="@drawable/ic_toman"
                 tools:text="20,000" />
 
