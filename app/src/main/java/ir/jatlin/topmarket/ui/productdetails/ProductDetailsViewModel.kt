@@ -21,7 +21,7 @@ class ProductDetailsViewModel @Inject constructor(
 
 
     fun updateUiStatesWith(productDetails: NetworkProductDetails) {
-        // TODO: set states with current product
+
     }
 }
 

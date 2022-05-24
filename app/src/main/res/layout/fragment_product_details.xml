@@ -44,6 +44,7 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/space_medium"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/space_medium">
 
@@ -224,10 +225,10 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:drawableStart="@drawable/ic_chevron_left"
-                            app:drawableTint="?attr/colorAccent"
                             android:gravity="center_vertical"
                             android:text="@string/show_more"
-                            android:textColor="?attr/colorAccent" />
+                            android:textColor="?attr/colorAccent"
+                            app:drawableTint="?attr/colorAccent" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
