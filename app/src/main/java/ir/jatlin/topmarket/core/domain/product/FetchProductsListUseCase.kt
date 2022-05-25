@@ -49,6 +49,9 @@ inline fun makeProductParams(
 
             val stockStatus = stockStatus
             if (stockStatus != null) put("category", stockStatus.name.lowercase())
+
+            val productIds = includeIds
+            if (productIds != null) put("include", productIds.joinToString())
         }
 
         FetchProductsListUseCase.Parameters(

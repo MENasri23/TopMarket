@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
+import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.product.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
+import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
-    private val fetchProductDetails: FetchProductDetailsUseCase,
+    private val fetchProductDetailsUseCase: FetchProductDetailsUseCase,
+    private val fetchProductsListUseCase: FetchProductsListUseCase,
     state: SavedStateHandle
 ) : ViewModel() {
     private val productId = state.getLiveData<Int>("productId").asFlow()
@@ -27,7 +31,15 @@ class ProductDetailsViewModel @Inject constructor(
     val addToCartCount = _addToCartCount.asStateFlow()
 
     val productDetailsState = stateFlow {
-        productId.map { fetchProductDetails(it) }
+        productId.map { fetchProductDetailsUseCase(it) }
+    }
+
+    val similarProducts = productDetailsState.map {
+        if (it.isSuccess) {
+            val relatedProductIds = it.data!!.relatedIds
+            val params = makeProductParams { includeIds = relatedProductIds }
+            fetchProductsListUseCase(params)
+        }
     }
 
 
