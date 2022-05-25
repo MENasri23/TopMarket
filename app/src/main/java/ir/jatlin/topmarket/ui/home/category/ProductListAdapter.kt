@@ -8,12 +8,12 @@ import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
-typealias ViewHolder = BaseViewHolder<ProductCategoryItem>
+typealias ViewHolder = BaseViewHolder<CategoryItem>
 
 class ProductCategoryAdapter(
 
-) : ListAdapter<ProductCategoryItem, ViewHolder>(ProductDiffCallback()),
-    ViewHolderCreator<ProductCategoryItem> {
+) : ListAdapter<CategoryItem, ViewHolder>(ProductDiffCallback()),
+    ViewHolderCreator<CategoryItem> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +28,7 @@ class ProductCategoryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is ProductCategoryItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
+            is CategoryItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
             else -> super.getItemViewType(position)
         }
     }
@@ -55,18 +55,18 @@ class ProductCategoryAdapter(
 
 }
 
-class ProductDiffCallback : DiffUtil.ItemCallback<ProductCategoryItem>() {
+class ProductDiffCallback : DiffUtil.ItemCallback<CategoryItem>() {
 
     override fun areItemsTheSame(
-        oldItem: ProductCategoryItem,
-        newItem: ProductCategoryItem
+        oldItem: CategoryItem,
+        newItem: CategoryItem
     ): Boolean {
         return newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ProductCategoryItem,
-        newItem: ProductCategoryItem
+        oldItem: CategoryItem,
+        newItem: CategoryItem
     ): Boolean {
         return newItem == oldItem
     }

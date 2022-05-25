@@ -13,7 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
-            app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment

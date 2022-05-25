@@ -3,13 +3,14 @@ package ir.jatlin.topmarket.ui.home
 import androidx.recyclerview.widget.DividerItemDecoration
 import ir.jatlin.topmarket.databinding.ProductCategoryViewBinding
 import ir.jatlin.topmarket.ui.home.category.ProductCategoryAdapter
-import ir.jatlin.topmarket.ui.home.category.ProductCategoryItem
+import ir.jatlin.topmarket.ui.listener.ProductCategoryEventListener
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 
-class ProductCategoriesViewHolder(
-    private val binding: ProductCategoryViewBinding
-) : BaseViewHolder<ProductCategoriesItem.CategoryItem>(binding) {
+class ProductCategoryViewHolder(
+    private val binding: ProductCategoryViewBinding,
+    eventListener: ProductCategoryEventListener
+) : BaseViewHolder<ProductHomeItem.CategoriesItem>(binding) {
 
     private val context = binding.root.context
     private val adapter = ProductCategoryAdapter()
@@ -22,7 +23,7 @@ class ProductCategoriesViewHolder(
         }
     }
 
-    override fun bind(item: ProductCategoriesItem.CategoryItem) {
+    override fun bind(item: ProductHomeItem.CategoriesItem) {
         binding.tvCategoryLabel.text = item.label
         val products = item.data
         adapter.submitList(products)

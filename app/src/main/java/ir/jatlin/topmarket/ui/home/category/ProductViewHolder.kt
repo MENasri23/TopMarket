@@ -11,12 +11,12 @@ import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 class ProductViewHolder(
     private val binding: ProductCategoryItemViewBinding
-) : BaseViewHolder<ProductCategoryItem.ProductItem>(binding) {
+) : BaseViewHolder<CategoryItem.ProductItem>(binding) {
 
     private var currentProduct: NetworkProduct? = null
     private val context = binding.root.context
 
-    override fun bind(item: ProductCategoryItem.ProductItem) {
+    override fun bind(item: CategoryItem.ProductItem) {
         val product = item.data.also { currentProduct = it }
         with(binding) {
             showPrice(product.regularPrice, product.price)

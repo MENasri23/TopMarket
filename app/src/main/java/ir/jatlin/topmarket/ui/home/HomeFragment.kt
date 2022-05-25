@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
@@ -39,7 +40,7 @@ class HomeFragment :
     private fun initViews() = binding.apply {
         binding.viewModel = viewModel
 
-        productCategoriesAdapter = ProductCategoriesAdapter()
+        productCategoriesAdapter = ProductCategoriesAdapter(this@HomeFragment)
         productCategories.adapter = productCategoriesAdapter
 
     }
@@ -60,7 +61,7 @@ class HomeFragment :
                 val productCategories = stateResult.data!!.categorizedProducts
                 productCategoriesAdapter.submitList(
                     productCategories.map { categoryState ->
-                        ProductCategoriesItem.CategoryItem(
+                        ProductHomeItem.CategoriesItem(
                             label = getString(categoryState.label),
                             data = categoryState.products.map(NetworkProduct::asProductItem)
                         )
@@ -71,7 +72,13 @@ class HomeFragment :
     }
 
     override fun onProductClick(productId: Int) {
+        val action = HomeFragmentDirections
+            .actionHomeFragmentToProductDetailsFragment(productId)
+        findNavController().navigate(action)
+    }
 
+    override fun onShowMoreClick() {
+        /* Show more products */
     }
 
 }

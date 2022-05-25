@@ -44,7 +44,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
                         /* navigate to checkout cart state */
                     }
                     R.id.action_like -> {
-                        viewModel.toggleFavorite()
+                        this@ProductDetailsFragment.viewModel.toggleFavorite()
                     }
                     else -> isHandled = false
                 }
