@@ -16,8 +16,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -36,12 +38,35 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
     }
 }
 
+suspend inline fun <T> Fragment.collectOnSuccess(
+    flow: Flow<Resource<T>>,
+    crossinline onSuccess: ((data: T) -> Unit) = {},
+) = flow.safeCollect(
+    onSuccess = onSuccess,
+    onFailure = { showErrorMessage(it) }
+)
+
+
+suspend inline fun <T> Flow<Resource<T>>.safeCollect(
+    crossinline onLoading: ((data: T?) -> Unit) = {},
+    crossinline onFailure: (cause: ErrorCause?) -> Unit = {},
+    crossinline onSuccess: ((data: T) -> Unit) = {}
+) {
+    collect { state ->
+        when (state) {
+            is Resource.Error -> onFailure(state.cause)
+            is Resource.Loading -> onLoading(state.data)
+            is Resource.Success -> onSuccess(state.data!!)
+        }
+    }
+}
+
 fun Fragment.showErrorMessage(
-    cause: ErrorCause,
+    cause: ErrorCause?,
     @StringRes actionLabel: Int? = null,
     onActionClick: () -> Unit = {}
 ) {
-    @StringRes val message = getErrorMessage(cause)
+    @StringRes val message = getErrorMessage(cause ?: return)
     Snackbar
         .make(requireView(), message, Snackbar.LENGTH_LONG).apply {
             if (actionLabel != null) {

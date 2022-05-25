@@ -5,20 +5,30 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
+import ir.jatlin.topmarket.ui.home.category.ProductCategoryAdapter
+import ir.jatlin.topmarket.ui.home.category.asProductItem
+import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
+import ir.jatlin.topmarket.ui.util.collectOnSuccess
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.showErrorMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
+class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
+    ProductItemEventListener {
 
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
+
+    private lateinit var similarProductsAdapter: ProductCategoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,6 +64,16 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
             }
         }
 
+        similarProducts.apply {
+            similarProductsAdapter = ProductCategoryAdapter(
+                this@ProductDetailsFragment
+            )
+            adapter = similarProductsAdapter
+            addItemDecoration(
+                DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
+            )
+        }
+
 
     }
 
@@ -64,9 +84,18 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         collectProductDependents()
     }
 
-    private fun CoroutineScope.collectProductDependents() = launch {
-        viewModel.addToCartCount.collect {
-            /* Update the badge in future */
+    private fun CoroutineScope.collectProductDependents() {
+        launch {
+            viewModel.addToCartCount.collect {
+                /* Update the badge in future */
+            }
+        }
+        launch {
+            collectOnSuccess(viewModel.similarProducts) { similarProducts ->
+                similarProductsAdapter.submitList(
+                    similarProducts.map(NetworkProduct::asProductItem)
+                )
+            }
         }
     }
 
@@ -74,7 +103,9 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
     private suspend fun collectProductDetails() {
         viewModel.productDetailsState.collect { state ->
             when (state) {
-                is Resource.Error -> {}
+                is Resource.Error -> {
+                    showErrorMessage(state.cause)
+                }
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     val productDetails = state.data!!
@@ -82,6 +113,10 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
                 }
             }
         }
+    }
+
+    override fun onProductClick(productId: Int) {
+        // todo: navigate to see details of the product with this id
     }
 
 

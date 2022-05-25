@@ -3,16 +3,19 @@ package ir.jatlin.topmarket.ui.productdetails
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.makeProductParams
+import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.shared.isSuccess
+import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,8 +27,12 @@ class ProductDetailsViewModel @Inject constructor(
 ) : ViewModel() {
     private val productId = state.getLiveData<Int>("productId").asFlow()
 
-    private val _productDetails = MutableStateFlow(emptyProduct)
+    private val _productDetails = MutableStateFlow<NetworkProductDetails?>(null)
     val productDetails = _productDetails.asStateFlow()
+
+    private val _similarProducts: MutableStateFlow<Resource<List<NetworkProduct>>> =
+        MutableStateFlow(Resource.success(emptyList()))
+    val similarProducts = _similarProducts.asStateFlow()
 
     private val _addToCartCount = MutableStateFlow(0)
     val addToCartCount = _addToCartCount.asStateFlow()
@@ -34,19 +41,24 @@ class ProductDetailsViewModel @Inject constructor(
         productId.map { fetchProductDetailsUseCase(it) }
     }
 
-    val similarProducts = productDetailsState.map {
-        if (it.isSuccess) {
-            val relatedProductIds = it.data!!.relatedIds
-            val params = makeProductParams { includeIds = relatedProductIds }
-            fetchProductsListUseCase(params)
+
+    suspend fun updateUiStatesWith(productDetails: NetworkProductDetails) {
+        Timber.d("\n\n\n\n$_productDetails\n\n\n\n")
+        _productDetails.emit(productDetails)
+        fetchSimilarProducts(productDetails.relatedIds)
+
+
+    }
+
+    private fun fetchSimilarProducts(relatedIds: List<Int>) = viewModelScope.launch {
+        if (relatedIds.isNotEmpty()) {
+            val params = makeProductParams { includeIds = relatedIds }
+            fetchProductsListUseCase(params).collect {
+                _similarProducts.emit(it)
+            }
         }
     }
 
-
-    fun updateUiStatesWith(productDetails: NetworkProductDetails) {
-        Timber.d("\n\n\n\n$_productDetails\n\n\n\n")
-        _productDetails.value = productDetails
-    }
 
     fun addToCart() {
         _addToCartCount.value++
@@ -57,36 +69,3 @@ class ProductDetailsViewModel @Inject constructor(
 
     }
 }
-
-val emptyProduct = NetworkProductDetails(
-    emptyList(),
-    "",
-    false,
-    "",
-    false,
-    emptyList(),
-    "",
-    "",
-    emptyList(),
-    "",
-    0,
-    emptyList(),
-    0,
-    "test product",
-    false,
-    1,
-    "",
-    "2.5",
-    false,
-    4,
-    "4",
-    emptyList(),
-    "",
-    emptyList(),
-    3,
-    1,
-    emptyList(),
-    ""
-)
-
-
