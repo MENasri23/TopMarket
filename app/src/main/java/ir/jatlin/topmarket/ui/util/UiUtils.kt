@@ -4,7 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +14,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -30,6 +34,37 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
             block()
         }
     }
+}
+
+fun Fragment.showErrorMessage(
+    cause: ErrorCause,
+    @StringRes actionLabel: Int? = null,
+    onActionClick: () -> Unit = {}
+) {
+    @StringRes val message = getErrorMessage(cause)
+    Snackbar
+        .make(requireView(), message, Snackbar.LENGTH_LONG).apply {
+            if (actionLabel != null) {
+                setAction(actionLabel) { onActionClick() }
+            }
+        }.show()
+}
+
+private fun getErrorMessage(cause: ErrorCause): Int {
+    return when (cause) {
+        ErrorCause.BadRequest -> R.string.error_bad_request
+        ErrorCause.Forbidden -> R.string.error_forbidden
+        ErrorCause.NoConnection -> R.string.error_no_connection
+        ErrorCause.NoContent -> R.string.error_empty_response
+        ErrorCause.NotFound -> R.string.error_not_found
+        ErrorCause.RequestTimeout -> R.string.error_timeout
+        else -> R.string.error_unknown
+    }
+}
+
+inline fun <T : ViewDataBinding> T.executePending(block: T.() -> Unit) {
+    block()
+    executePendingBindings()
 }
 
 
@@ -82,7 +117,7 @@ fun TextView.setDiscount(
 }
 
 
-fun withSeparator(origin: String, separator: Char = ',') = buildString {
+fun withSeparator(origin: String, separator: String = ",") = buildString {
     var i = origin.lastIndex
     while (i > 2) {
         append(origin[i--])

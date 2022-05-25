@@ -28,4 +28,14 @@
     <!-- product details -->
     <string name="add_to_cart">افزودن به سبد خرید</string>
     <string name="show_more">مشاهده بیشتر</string>
+    <string name="rating_format">(%d)</string>
+
+    <!-- Error messages -->
+    <string name="error_bad_request">درخواست مورد نظر یافت نشد</string>
+    <string name="error_forbidden" />
+    <string name="error_unknown">عملیات با خطا مواجه شد!</string>
+    <string name="error_no_connection">اینترنت در دسترس نیست</string>
+    <string name="error_empty_response">در دریافت اطلاعات خطایی رخ داده است!</string>
+    <string name="error_not_found">صفحه ی مورد نظر یافت نشد</string>
+    <string name="error_timeout">برقراری ارتباط با خطا مواجه شد</string>
 </resources>
