@@ -8,8 +8,7 @@ import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 
 
 @BindingAdapter(
-    value = ["categories", "delimiter"],
-    requireAll = false
+    value = ["categories", "delimiter"], requireAll = false
 )
 fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: String?) {
     if (categories.isNullOrEmpty()) return
@@ -24,8 +23,7 @@ fun TextView.setTextFromHtml(htmlText: String?) {
 }
 
 @BindingAdapter(
-    value = ["price", "separator"],
-    requireAll = false
+    value = ["price", "separator"], requireAll = false
 )
 fun TextView.setTextWithSeparator(price: String?, separator: String?) {
     text = withSeparator(price ?: return, separator = separator ?: ",")

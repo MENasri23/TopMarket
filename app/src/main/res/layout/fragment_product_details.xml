@@ -11,252 +11,301 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <include
-            android:id="@+id/include_app_bar"
-            layout="@layout/layout_product_details_app_bar" />
-
-        <ScrollView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_weight="1"
+            android:fitsSystemWindows="true">
 
+            <include
+                android:id="@+id/include_app_bar"
+                layout="@layout/layout_product_details_app_bar" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <!-- Define new product image item view -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/product_image_slider"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
-                    android:orientation="horizontal"
-                    android:paddingVertical="@dimen/space_medium"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    android:orientation="vertical">
 
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/space_medium"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/space_medium">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <!-- Define new product image item view -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/product_image_slider"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        android:orientation="horizontal"
+                        android:paddingVertical="@dimen/space_medium"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toTopOf="@id/product_properties_container"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/product_categories"
-                            style="@style/TextAppearance.MarketApp.LabelMedium"
-                            android:layout_width="0dp"
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/product_properties_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/space_medium"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="@dimen/space_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_image_slider">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_categories"
+                                style="@style/TextAppearance.MarketApp.LabelMedium"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:textColor="?attr/colorAccent"
+                                app:categories="@{viewModel.productDetails.categories}"
+                                app:delimiter="@{@string/categories_delimiter}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="کالای دیجیتال / تلویزیون " />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_name"
+                                style="@style/TextAppearance.MarketApp.TitleLarge"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/space_medium"
+                                android:text="@{viewModel.productDetails.name}"
+                                app:layout_constraintBottom_toTopOf="@id/product_rating_image"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/product_categories"
+                                tools:text="پیراهن زنانه کد 6" />
+
+
+                            <ImageView
+                                android:id="@+id/product_rating_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@null"
+                                android:src="@drawable/ic_star_rate_24"
+                                app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/product_name" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_avg_rating"
+                                style="@style/TextAppearance.MarketApp.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_very_small"
+                                android:text="@{viewModel.productDetails.averageRating}"
+                                app:layout_constraintBottom_toBottomOf="@id/product_rating_image"
+                                app:layout_constraintEnd_toEndOf="@id/product_rating_image"
+                                app:layout_constraintEnd_toStartOf="@id/product_rating_image"
+                                app:layout_constraintTop_toTopOf="@id/product_rating_image"
+                                tools:layout_editor_absoluteY="42dp"
+                                tools:text="4.5" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/product_rating_count"
+                                style="@style/TextAppearance.MarketApp.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_very_small"
+                                android:alpha="0.7"
+                                android:text="@{@string/rating_format(viewModel.productDetails.ratingCount)}"
+                                app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                                app:layout_constraintEnd_toStartOf="@id/product_avg_rating"
+                                app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                                tools:text="(2)" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/user_comments"
+                                style="@style/TextAppearance.MarketApp.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_small"
+                                android:drawablePadding="@dimen/space_small"
+                                android:gravity="center_vertical"
+                                android:text="@string/user_comments_count"
+                                android:textColor="?attr/colorAccent"
+                                app:drawableEndCompat="@drawable/ic_dot"
+                                app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                                app:layout_constraintEnd_toStartOf="@id/product_rating_count"
+                                app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                                tools:text="2 دیدگاه کاربران" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/questions"
+                                style="@style/TextAppearance.MarketApp.LabelSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_small"
+                                android:drawablePadding="@dimen/space_small"
+                                android:gravity="center_vertical"
+                                android:text="@string/question_answer_count"
+                                android:textColor="?attr/colorAccent"
+                                app:drawableEndCompat="@drawable/ic_dot"
+                                app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
+                                app:layout_constraintEnd_toStartOf="@id/br_end_edge_questions"
+                                app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                                tools:layout_editor_absoluteX="10dp"
+                                tools:text="200 پرسش و پاسخ" />
+
+                            <androidx.constraintlayout.widget.Barrier
+                                android:id="@+id/br_end_edge_questions"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:barrierDirection="start"
+                                app:constraint_referenced_ids="user_comments" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/space_small"
+                                android:alpha="0.2"
+                                android:background="?attr/colorOnSurface"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/product_rating_image" />
+
+                            <androidx.constraintlayout.widget.Group
+                                android:id="@+id/product_rating_group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:constraint_referenced_ids="product_rating_image,product_avg_rating,product_rating_count" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            app:delimiter=" / "
-                            android:textColor="?attr/colorAccent"
-                            app:categories="@{viewModel.productDetails.categories}"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="کالای دیجیتال / تلویزیون " />
+                            android:layout_marginTop="@dimen/space_medium"
+                            android:orientation="vertical">
 
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/product_name"
-                            style="@style/TextAppearance.MarketApp.TitleLarge"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/space_medium"
-                            android:text="@{viewModel.productDetails.name}"
-                            app:layout_constraintBottom_toTopOf="@id/product_rating_image"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/product_categories"
-                            tools:text="پیراهن زنانه کد 6" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/overview"
+                                style="@style/TextAppearance.MarketApp.TitleSmall"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/product_overview"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        <ImageView
-                            android:id="@+id/product_rating_image"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@null"
-                            android:src="@drawable/ic_star_rate_24"
-                            app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/product_name" />
+                            <FrameLayout
+                                android:id="@+id/product_description_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/space_small"
+                                android:minHeight="@dimen/space_large">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/product_avg_rating"
-                            style="@style/TextAppearance.MarketApp.LabelSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_very_small"
-                            android:text="@{viewModel.productDetails.averageRating}"
-                            app:layout_constraintBottom_toBottomOf="@id/product_rating_image"
-                            app:layout_constraintEnd_toEndOf="@id/product_rating_image"
-                            app:layout_constraintEnd_toStartOf="@id/product_rating_image"
-                            app:layout_constraintTop_toTopOf="@id/product_rating_image"
-                            tools:layout_editor_absoluteY="42dp"
-                            tools:text="4.5" />
+                                <com.google.android.material.textview.MaterialTextView
+                                    style="@style/TextAppearance.MarketApp.LabelMedium"
+                                    htmlText="@{viewModel.productDetails.description}"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="3"
+                                    android:text="@string/lorem_small" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/product_rating_count"
-                            style="@style/TextAppearance.MarketApp.LabelSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_very_small"
-                            android:alpha="0.7"
-                            android:text="@{@string/rating_format(viewModel.productDetails.ratingCount)}"
-                            app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
-                            app:layout_constraintEnd_toStartOf="@id/product_avg_rating"
-                            app:layout_constraintTop_toTopOf="@id/product_avg_rating"
-                            tools:text="(2)" />
+                                <View
+                                    android:id="@+id/show_more_shadow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/space_medium"
+                                    android:layout_gravity="bottom"
+                                    android:background="@drawable/vertical_background_gradient" />
 
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/user_comments"
-                            style="@style/TextAppearance.MarketApp.LabelSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_small"
-                            android:drawablePadding="@dimen/space_small"
-                            android:gravity="center_vertical"
-                            android:textColor="?attr/colorAccent"
-                            app:drawableEndCompat="@drawable/ic_dot"
-                            app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
-                            app:layout_constraintEnd_toStartOf="@id/product_rating_count"
-                            android:text="@string/user_comments_count"
-                            app:layout_constraintTop_toTopOf="@id/product_avg_rating"
-                            tools:text="2 دیدگاه کاربران" />
+                            </FrameLayout>
 
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/questions"
-                            style="@style/TextAppearance.MarketApp.LabelSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_small"
-                            android:drawablePadding="@dimen/space_small"
-                            android:gravity="center_vertical"
-                            android:textColor="?attr/colorAccent"
-                            app:drawableEndCompat="@drawable/ic_dot"
-                            app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
-                            app:layout_constraintEnd_toStartOf="@id/br_end_edge_questions"
-                            app:layout_constraintTop_toTopOf="@id/product_avg_rating"
-                            android:text="@string/question_answer_count"
-                            tools:layout_editor_absoluteX="10dp"
-                            tools:text="200 پرسش و پاسخ" />
-
-                        <androidx.constraintlayout.widget.Barrier
-                            android:id="@+id/br_end_edge_questions"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:barrierDirection="start"
-                            app:constraint_referenced_ids="user_comments" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/space_small"
-                            android:alpha="0.2"
-                            android:background="?attr/colorOnSurface"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/product_rating_image" />
-
-                        <androidx.constraintlayout.widget.Group
-                            android:id="@+id/product_rating_group"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:constraint_referenced_ids="product_rating_image,product_avg_rating,product_rating_count" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/show_more_description"
+                                style="@style/TextAppearance.MarketApp.LabelMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:drawableStart="@drawable/ic_chevron_left"
+                                android:gravity="center_vertical"
+                                android:text="@string/show_more"
+                                android:textColor="?attr/colorAccent"
+                                app:drawableTint="?attr/colorAccent" />
 
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_medium"
-                        android:orientation="vertical">
-
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/overview"
-                            style="@style/TextAppearance.MarketApp.TitleSmall"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:text="@string/product_overview" />
-
-
-                        <FrameLayout
-                            android:id="@+id/product_description_container"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/space_small"
-                            android:minHeight="@dimen/space_large">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextAppearance.MarketApp.LabelMedium"
-                                htmlText="@{viewModel.productDetails.description}"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:maxLines="3"
-                                android:text="@string/lorem_small" />
-
-                            <View
-                                android:id="@+id/show_more_shadow"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/space_medium"
-                                android:layout_gravity="bottom"
-                                android:background="@drawable/vertical_background_gradient" />
-
-
-                        </FrameLayout>
-
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="200dp"
+                        android:fitsSystemWindows="true"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_properties_container">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/show_more_description"
-                            style="@style/TextAppearance.MarketApp.LabelMedium"
+                            android:id="@+id/tv_category_label"
+                            style="@style/TextAppearance.MarketApp.TitleMedium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:drawableStart="@drawable/ic_chevron_left"
-                            android:gravity="center_vertical"
-                            android:text="@string/show_more"
-                            android:textColor="?attr/colorAccent"
-                            app:drawableTint="?attr/colorAccent" />
+                            android:layout_marginEnd="@dimen/space_medium"
+                            android:text="@string/similar_products"
+                            android:textStyle="bold" />
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/similar_products"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:reverseLayout="true"
+                            tools:listitem="@layout/product_category_item_view" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
 
 
-                <include
-                    android:id="@+id/include_similar_products"
-                    layout="@layout/product_category_view" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </ScrollView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sale_detail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_gravity="bottom"
+            android:fitsSystemWindows="true"
             app:cardCornerRadius="0dp"
             app:contentPaddingBottom="@dimen/space_small"
             app:contentPaddingLeft="@dimen/space_medium"
@@ -272,7 +321,7 @@
                 android:drawablePadding="@dimen/space_very_small"
                 android:gravity="center_vertical"
                 app:drawableStartCompat="@drawable/ic_toman"
-                app:price="@{viewModel.productDetails.price}"
+                app:price="@{String.valueOf(viewModel.productDetails.price)}"
                 tools:text="20,000" />
 
             <com.google.android.material.button.MaterialButton
@@ -287,6 +336,5 @@
 
 
         </com.google.android.material.card.MaterialCardView>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
