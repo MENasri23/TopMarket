@@ -7,7 +7,10 @@ import androidx.databinding.BindingAdapter
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 
 
-@BindingAdapter("categories", "delimiter", requireAll = false)
+@BindingAdapter(
+    value = ["categories", "delimiter"],
+    requireAll = false
+)
 fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: String?) {
     if (categories.isNullOrEmpty()) return
     val names = categories.map(NetworkCategory::name)
@@ -16,11 +19,30 @@ fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: S
 }
 
 @BindingAdapter("htmlText")
-fun TextView.setTextFromHtml(htmlText: String) {
-    text = HtmlCompat.fromHtml(htmlText, FROM_HTML_MODE_COMPACT)
+fun TextView.setTextFromHtml(htmlText: String?) {
+    text = HtmlCompat.fromHtml(htmlText ?: "", FROM_HTML_MODE_COMPACT)
 }
 
-@BindingAdapter("price", "separator", requireAll = false)
-fun TextView.setTextWithSeparator(price: String, separator: String = ",") {
-    text = withSeparator(price, separator = separator)
+@BindingAdapter(
+    value = ["price", "separator"],
+    requireAll = false
+)
+fun TextView.setTextWithSeparator(price: String?, separator: String?) {
+    text = withSeparator(price ?: return, separator = separator ?: ",")
+}
+
+fun withSeparator(
+    origin: String,
+    separator: String = ","
+) = buildString {
+    var i = origin.lastIndex
+    while (i > 2) {
+        append(origin[i--])
+        append(origin[i--])
+        append(origin[i--])
+        append(separator)
+    }
+    while (i >= 0) append(origin[i--])
+
+    reverse()
 }

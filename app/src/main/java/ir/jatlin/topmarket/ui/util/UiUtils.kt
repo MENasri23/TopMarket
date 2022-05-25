@@ -116,20 +116,6 @@ fun TextView.setDiscount(
 
 }
 
-
-fun withSeparator(origin: String, separator: String = ",") = buildString {
-    var i = origin.lastIndex
-    while (i > 2) {
-        append(origin[i--])
-        append(origin[i--])
-        append(origin[i--])
-        append(separator)
-    }
-    while (i >= 0) append(origin[i--])
-
-    reverse()
-}
-
 private fun percentDiscount(
     beforeDiscount: String, afterDiscount: String
 ): Int? {
