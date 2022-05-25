@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
+import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
 typealias ViewHolder = BaseViewHolder<CategoryItem>
 
 class ProductCategoryAdapter(
-
+    private val productItemEventListener: ProductItemEventListener
 ) : ListAdapter<CategoryItem, ViewHolder>(ProductDiffCallback()),
     ViewHolderCreator<CategoryItem> {
 
@@ -40,7 +41,8 @@ class ProductCategoryAdapter(
         val viewHolder: BaseViewHolder<*> = when (viewType) {
             ITEM_VIEW_TYPE_PRODUCT ->
                 ProductViewHolder(
-                    ProductCategoryItemViewBinding.inflate(inflater, parent, false)
+                    ProductCategoryItemViewBinding.inflate(inflater, parent, false),
+                    productItemEventListener
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
         }

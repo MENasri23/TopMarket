@@ -11,7 +11,8 @@ import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
 import ir.jatlin.topmarket.ui.home.category.asProductItem
-import ir.jatlin.topmarket.ui.listener.ProductCategoryEventListener
+import ir.jatlin.topmarket.ui.listener.CategoryItemEventListener
+import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import kotlinx.coroutines.launch
@@ -20,7 +21,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment :
     Fragment(R.layout.fragment_home),
-    ProductCategoryEventListener {
+    CategoryItemEventListener,
+    ProductItemEventListener {
 
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
@@ -40,7 +42,10 @@ class HomeFragment :
     private fun initViews() = binding.apply {
         binding.viewModel = viewModel
 
-        productCategoriesAdapter = ProductCategoriesAdapter(this@HomeFragment)
+        productCategoriesAdapter = ProductCategoriesAdapter(
+            this@HomeFragment,
+            this@HomeFragment
+        )
         productCategories.adapter = productCategoriesAdapter
 
     }
@@ -71,14 +76,17 @@ class HomeFragment :
         }
     }
 
-    override fun onProductClick(productId: Int) {
-        val action = HomeFragmentDirections
-            .actionHomeFragmentToProductDetailsFragment(productId)
-        findNavController().navigate(action)
-    }
-
     override fun onShowMoreClick() {
         /* Show more products */
+    }
+
+    override fun onProductClick(productId: Int) {
+        val action = HomeFragmentDirections
+            .actionHomeFragmentToProductDetailsFragment(productId).apply {
+//                arguments.putInt("productId", productId)
+            }
+
+        findNavController().navigate(action)
     }
 
 }

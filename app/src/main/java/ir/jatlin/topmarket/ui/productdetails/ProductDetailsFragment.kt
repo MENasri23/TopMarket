@@ -10,14 +10,12 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
 import ir.jatlin.topmarket.ui.util.dataBindings
-import ir.jatlin.topmarket.ui.util.executePending
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
-
 
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
@@ -74,16 +72,13 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
 
 
     private suspend fun collectProductDetails() {
-        viewModel.productDetails.collect { state ->
+        viewModel.productDetailsState.collect { state ->
             when (state) {
                 is Resource.Error -> {}
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     val productDetails = state.data!!
-                    viewModel.updateUiStatesWith(productDetails)
-                    binding.executePending {
-                        product = productDetails
-                    }
+//                    viewModel.updateUiStatesWith(productDetails)
                 }
             }
         }
