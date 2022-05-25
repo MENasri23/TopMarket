@@ -78,7 +78,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     val productDetails = state.data!!
-//                    viewModel.updateUiStatesWith(productDetails)
+                    viewModel.updateUiStatesWith(productDetails)
                 }
             }
         }

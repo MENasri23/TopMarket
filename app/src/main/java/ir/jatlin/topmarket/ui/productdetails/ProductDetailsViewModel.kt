@@ -6,11 +6,9 @@ import androidx.lifecycle.asFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,19 +18,16 @@ class ProductDetailsViewModel @Inject constructor(
     private val fetchProductDetails: FetchProductDetailsUseCase,
     state: SavedStateHandle
 ) : ViewModel() {
-//    private val productId = state.getLiveData<Int>("productId").asFlow()
+    private val productId = state.getLiveData<Int>("productId").asFlow()
 
-    private val _productDetails = MutableStateFlow<NetworkProductDetails>(empty)
+    private val _productDetails = MutableStateFlow(emptyProduct)
     val productDetails = _productDetails.asStateFlow()
 
     private val _addToCartCount = MutableStateFlow(0)
     val addToCartCount = _addToCartCount.asStateFlow()
 
     val productDetailsState = stateFlow {
-        flow {
-            kotlinx.coroutines.delay(1000)
-            emit(Resource.success(emptyList<String>()))
-        }
+        productId.map { fetchProductDetails(it) }
     }
 
 
@@ -51,7 +46,7 @@ class ProductDetailsViewModel @Inject constructor(
     }
 }
 
-val empty = NetworkProductDetails(
+val emptyProduct = NetworkProductDetails(
     emptyList(),
     "",
     false,

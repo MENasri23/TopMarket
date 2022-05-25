@@ -9,9 +9,6 @@
             name="viewModel"
             type="ir.jatlin.topmarket.ui.productdetails.ProductDetailsViewModel" />
 
-        <variable
-            name="product"
-            type="ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -41,8 +38,8 @@
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
                     android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/product_category_item_view" />
+                    android:paddingVertical="@dimen/space_medium"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -63,8 +60,9 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="1"
+                            app:delimiter=" / "
                             android:textColor="?attr/colorAccent"
-                            app:categories="@{product.categories}"
+                            app:categories="@{viewModel.productDetails.categories}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -77,7 +75,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/space_medium"
-                            android:text="@{product.name}"
+                            android:text="@{viewModel.productDetails.name}"
                             app:layout_constraintBottom_toTopOf="@id/product_rating_image"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/space_very_small"
-                            android:text="@{product.averageRating}"
+                            android:text="@{viewModel.productDetails.averageRating}"
                             app:layout_constraintBottom_toBottomOf="@id/product_rating_image"
                             app:layout_constraintEnd_toEndOf="@id/product_rating_image"
                             app:layout_constraintEnd_toStartOf="@id/product_rating_image"
@@ -116,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/space_very_small"
                             android:alpha="0.7"
-                            android:text="@{@string/rating_format(product.ratingCount)}"
+                            android:text="@{@string/rating_format(viewModel.productDetails.ratingCount)}"
                             app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
                             app:layout_constraintEnd_toStartOf="@id/product_avg_rating"
                             app:layout_constraintTop_toTopOf="@id/product_avg_rating"
@@ -135,6 +133,7 @@
                             app:drawableEndCompat="@drawable/ic_dot"
                             app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
                             app:layout_constraintEnd_toStartOf="@id/product_rating_count"
+                            android:text="@string/user_comments_count"
                             app:layout_constraintTop_toTopOf="@id/product_avg_rating"
                             tools:text="2 دیدگاه کاربران" />
 
@@ -152,6 +151,7 @@
                             app:layout_constraintBottom_toBottomOf="@id/product_avg_rating"
                             app:layout_constraintEnd_toStartOf="@id/br_end_edge_questions"
                             app:layout_constraintTop_toTopOf="@id/product_avg_rating"
+                            android:text="@string/question_answer_count"
                             tools:layout_editor_absoluteX="10dp"
                             tools:text="200 پرسش و پاسخ" />
 
@@ -198,7 +198,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="@string/product_overview" />
+                            android:text="@string/product_overview" />
 
 
                         <FrameLayout
@@ -210,7 +210,7 @@
 
                             <com.google.android.material.textview.MaterialTextView
                                 style="@style/TextAppearance.MarketApp.LabelMedium"
-                                htmlText="@{product.description}"
+                                htmlText="@{viewModel.productDetails.description}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="3"
@@ -272,7 +272,7 @@
                 android:drawablePadding="@dimen/space_very_small"
                 android:gravity="center_vertical"
                 app:drawableStartCompat="@drawable/ic_toman"
-                app:price="@{product.price}"
+                app:price="@{viewModel.productDetails.price}"
                 tools:text="20,000" />
 
             <com.google.android.material.button.MaterialButton

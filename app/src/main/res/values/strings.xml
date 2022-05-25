@@ -38,4 +38,6 @@
     <string name="error_empty_response">در دریافت اطلاعات خطایی رخ داده است!</string>
     <string name="error_not_found">صفحه ی مورد نظر یافت نشد</string>
     <string name="error_timeout">برقراری ارتباط با خطا مواجه شد</string>
+    <string name="user_comments_count">%d دیدگاه کاربران</string>
+    <string name="question_answer_count">%d  پرسش و پاسخ</string>
 </resources>
