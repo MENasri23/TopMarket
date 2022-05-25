@@ -66,6 +66,7 @@ object Libs {
             const val RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:${version}"
             const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${version}"
             const val VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${version}"
+            const val SAVED_STATE = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$version"
         }
 
         object Navigation {
