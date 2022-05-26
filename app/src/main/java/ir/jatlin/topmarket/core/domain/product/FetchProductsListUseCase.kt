@@ -29,7 +29,7 @@ class FetchProductsListUseCase @Inject constructor(
     data class Parameters(
         val page: Int,
         val pageSize: Int,
-        val filters: Map<String, String>
+        val filters: Map<String, String>?
     )
 }
 
