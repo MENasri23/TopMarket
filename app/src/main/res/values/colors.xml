@@ -10,4 +10,6 @@
 
     <color name="blue_sky">#19BFD3</color>
     <color name="blue_sky700">#0288D1</color>
+
+    <color name="transparent">#0fff</color>
 </resources>
