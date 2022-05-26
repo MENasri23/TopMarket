@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.databinding.ProductCategoryItemViewBinding
+import ir.jatlin.topmarket.databinding.ProductItemViewBinding
 import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
-typealias ViewHolder = BaseViewHolder<CategoryItem>
+typealias ViewHolder = BaseViewHolder<DisplayItem>
 
 class ProductCategoryAdapter(
     private val productItemEventListener: ProductItemEventListener
-) : ListAdapter<CategoryItem, ViewHolder>(ProductDiffCallback()),
-    ViewHolderCreator<CategoryItem> {
+) : ListAdapter<DisplayItem, ViewHolder>(ProductDiffCallback()),
+    ViewHolderCreator<DisplayItem> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,7 +29,7 @@ class ProductCategoryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is CategoryItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
+            is DisplayItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
             else -> super.getItemViewType(position)
         }
     }
@@ -41,7 +41,7 @@ class ProductCategoryAdapter(
         val viewHolder: BaseViewHolder<*> = when (viewType) {
             ITEM_VIEW_TYPE_PRODUCT ->
                 ProductViewHolder(
-                    ProductCategoryItemViewBinding.inflate(inflater, parent, false),
+                    ProductItemViewBinding.inflate(inflater, parent, false),
                     productItemEventListener
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
@@ -57,18 +57,18 @@ class ProductCategoryAdapter(
 
 }
 
-class ProductDiffCallback : DiffUtil.ItemCallback<CategoryItem>() {
+class ProductDiffCallback : DiffUtil.ItemCallback<DisplayItem>() {
 
     override fun areItemsTheSame(
-        oldItem: CategoryItem,
-        newItem: CategoryItem
+        oldItem: DisplayItem,
+        newItem: DisplayItem
     ): Boolean {
         return newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: CategoryItem,
-        newItem: CategoryItem
+        oldItem: DisplayItem,
+        newItem: DisplayItem
     ): Boolean {
         return newItem == oldItem
     }

@@ -292,7 +292,7 @@
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:reverseLayout="true"
-                            tools:listitem="@layout/product_category_item_view" />
+                            tools:listitem="@layout/product_item_view" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
