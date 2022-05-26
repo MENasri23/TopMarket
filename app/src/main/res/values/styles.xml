@@ -50,5 +50,10 @@
         <item name="fontFamily">@font/samim_fd</item>
     </style>
 
+    <style name="Widget.Market.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:fontFamily">@font/samim_fd</item>
+    </style>
+
 
 </resources>

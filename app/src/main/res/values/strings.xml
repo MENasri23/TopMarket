@@ -46,4 +46,6 @@
 
     <!-- product categories -->
     <string name="available_product_count">+%d کالا</string>
+    <string name="home">خانه</string>
+    <string name="categories">دسته بندی ها</string>
 </resources>

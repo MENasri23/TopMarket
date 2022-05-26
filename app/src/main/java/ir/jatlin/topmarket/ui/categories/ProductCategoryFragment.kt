@@ -5,16 +5,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import ir.jatlin.topmarket.databinding.FragmentProductCategoryBinding
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.safeCollect
-import ir.jatlin.topmarket.ui.util.showErrorMessage
-import ir.jatlin.topmarket.ui.util.viewBinding
+import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
-class ProductCategoryFragment : Fragment(),
+class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
     ProductCategoryDisplayItemEventListener,
     ProductCategoryDisplayGroupItemEventListener {
 
@@ -26,7 +25,7 @@ class ProductCategoryFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root
+        binding.root.invisible()
         viewModel
 
         initViews()
@@ -46,7 +45,7 @@ class ProductCategoryFragment : Fragment(),
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
         launch {
             viewModel.categories.safeCollect(
-                onLoading = {},
+                onLoading = { Timber.d("category loading") },
                 onFailure = { showErrorMessage(it) },
             ) { categoryDetails ->
                 val categoryGroupItem = categoryDetails.groupBy { it.parentId }
@@ -61,7 +60,9 @@ class ProductCategoryFragment : Fragment(),
                         )
                     }
 
-                categoryDisplayItemAdapter.submitList(categoryGroupItem)
+                categoryDisplayItemAdapter.submitList(categoryGroupItem) {
+                    binding.root.visible()
+                }
             }
         }
     }
