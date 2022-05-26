@@ -17,6 +17,10 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+        <include
+            android:id="@+id/include_search_bar"
+            layout="@layout/layout_search_app_bar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_categories"
             android:layout_width="match_parent"

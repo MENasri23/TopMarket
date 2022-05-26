@@ -25,7 +25,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.invisible()
+        binding.root
         viewModel
 
         initViews()
@@ -60,9 +60,6 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
                         )
                     }
 
-                categoryDisplayItemAdapter.submitList(categoryGroupItem) {
-                    binding.root.visible()
-                }
             }
         }
     }
