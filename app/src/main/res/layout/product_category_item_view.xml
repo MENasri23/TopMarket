@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_96sdp"
     android:layout_height="@dimen/_146sdp"
+    android:id="@+id/category_container"
+    android:layout_marginHorizontal="@dimen/space_small"
     app:cardCornerRadius="@dimen/space_small"
     app:cardElevation="@dimen/space_very_small"
     app:strokeWidth="0dp">
@@ -54,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/glv_end"
             app:layout_constraintStart_toStartOf="@id/glv_start"
-            tools:text="+67000 کالا" />
+            tools:text="@string/available_product_count" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/glv_start"

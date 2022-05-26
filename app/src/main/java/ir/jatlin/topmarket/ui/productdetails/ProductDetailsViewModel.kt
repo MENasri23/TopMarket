@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
-import ir.jatlin.topmarket.core.domain.product.makeProductParams
+import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails

@@ -42,4 +42,8 @@
     <string name="user_comments_count">%d دیدگاه کاربران</string>
     <string name="question_answer_count">%d  پرسش و پاسخ</string>
     <string name="similar_products">محصولات مشابه</string>
+
+
+    <!-- product categories -->
+    <string name="available_product_count">+%d کالا</string>
 </resources>

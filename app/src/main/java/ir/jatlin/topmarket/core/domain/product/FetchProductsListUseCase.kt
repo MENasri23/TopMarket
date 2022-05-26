@@ -33,31 +33,3 @@ class FetchProductsListUseCase @Inject constructor(
     )
 }
 
-inline fun makeProductParams(
-    build: ProductDiscoverParameters.() -> Unit = {}
-): FetchProductsListUseCase.Parameters {
-    return ProductDiscoverParameters().apply(build).run {
-        val filters = HashMap<String, String>().apply {
-            put("order", order.name.lowercase())
-            put("orderby", orderBy.name.lowercase())
-
-            val category = categoryId
-            if (category != null) put("category", category.toString())
-
-            val tag = tagId
-            if (tag != null) put("category", tag.toString())
-
-            val stockStatus = stockStatus
-            if (stockStatus != null) put("category", stockStatus.name.lowercase())
-
-            val productIds = includeIds
-            if (productIds != null) put("include", productIds.joinToString())
-        }
-
-        FetchProductsListUseCase.Parameters(
-            page = page,
-            pageSize = pageSize,
-            filters = filters
-        )
-    }
-}

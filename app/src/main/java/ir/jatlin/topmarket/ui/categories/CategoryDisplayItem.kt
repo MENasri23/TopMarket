@@ -7,12 +7,12 @@ import java.util.*
 /**
  * The data holder for category screen
  */
-interface CategoryDisplayItem {
+sealed interface CategoryDisplayItem {
 
     val id: String
 
     class ProductCategoryGroupItem(
-        @StringRes val label: Int,
+        val label: String,
         val categories: List<ProductCategoryDisplayItem>,
         override val id: String = UUID.randomUUID().toString()
     ) : CategoryDisplayItem

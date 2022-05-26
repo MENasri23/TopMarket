@@ -7,7 +7,7 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
-import ir.jatlin.topmarket.core.domain.product.makeProductParams
+import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause

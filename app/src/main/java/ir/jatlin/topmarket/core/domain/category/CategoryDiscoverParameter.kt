@@ -11,6 +11,8 @@ class CategoryDiscoverParameter : DefaultDiscoverParameters() {
         Id, Include, Name, Slug, Description, Count
     }
 
+    var orderBy: OrderBY = OrderBY.Name
+
     var parentId: Int? = null
 
     var productId: Int? = null

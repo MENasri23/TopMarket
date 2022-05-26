@@ -24,4 +24,9 @@
             android:name="productId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/productCategoryFragment"
+        android:name="ir.jatlin.topmarket.ui.categories.ProductCategoryFragment"
+        android:label="fragment_product_category"
+        tools:layout="@layout/fragment_product_category" />
 </navigation>
