@@ -18,7 +18,7 @@
     <string name="action_cart">لیست خرید</string>
     <string name="content_cart">Cart</string>
     <string name="dot">•</string>
-    <string name="product_overview">مرور اجمالی محصول</string>
+    <string name="product_description">ویژگی های محصول</string>
     <string name="categories_delimiter">&#160;/&#160;</string>
 
     <!-- mock for preview -->

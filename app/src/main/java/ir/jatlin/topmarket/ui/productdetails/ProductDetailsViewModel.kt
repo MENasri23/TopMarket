@@ -8,6 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.makeProductParams
+import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.shared.Resource
@@ -30,6 +31,9 @@ class ProductDetailsViewModel @Inject constructor(
     private val _productDetails = MutableStateFlow<NetworkProductDetails?>(null)
     val productDetails = _productDetails.asStateFlow()
 
+    private val _productImages = MutableStateFlow<List<NetworkImage>?>(null)
+    val productImages = _productImages.asStateFlow()
+
     private val _similarProducts: MutableStateFlow<Resource<List<NetworkProduct>>> =
         MutableStateFlow(Resource.success(emptyList()))
     val similarProducts = _similarProducts.asStateFlow()
@@ -38,13 +42,17 @@ class ProductDetailsViewModel @Inject constructor(
     val addToCartCount = _addToCartCount.asStateFlow()
 
     val productDetailsState = stateFlow {
-        productId.map { fetchProductDetailsUseCase(it) }
+        productId.map {
+            Timber.d("productId: $it")
+            fetchProductDetailsUseCase(it)
+        }
     }
 
 
     suspend fun updateUiStatesWith(productDetails: NetworkProductDetails) {
-        Timber.d("\n\n\n\n$_productDetails\n\n\n\n")
+        Timber.d("\n\n\n\n${productDetails.categories.joinToString()}\n\n\n\n")
         _productDetails.emit(productDetails)
+        _productImages.emit(productDetails.images)
         fetchSimilarProducts(productDetails.relatedIds)
 
 

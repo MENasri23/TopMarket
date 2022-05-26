@@ -5,7 +5,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
@@ -14,10 +17,9 @@ import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
 import ir.jatlin.topmarket.ui.home.category.ProductCategoryAdapter
 import ir.jatlin.topmarket.ui.home.category.asProductItem
 import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
-import ir.jatlin.topmarket.ui.util.collectOnSuccess
-import ir.jatlin.topmarket.ui.util.dataBindings
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.showErrorMessage
+import ir.jatlin.topmarket.ui.slider.SliderAdapter
+import ir.jatlin.topmarket.ui.slider.SliderItem
+import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -29,6 +31,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
 
     private lateinit var similarProductsAdapter: ProductCategoryAdapter
+    private lateinit var imageSliderAdapter: SliderAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,6 +77,18 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
             )
         }
 
+        productImageSlider.apply {
+            imageSliderAdapter = SliderAdapter()
+            adapter = imageSliderAdapter
+            addItemDecoration(
+                SpacerItemDecoration(
+                    resources.getDimensionPixelOffset(R.dimen.space_medium),
+                    SpacerItemDecoration.HORIZONTAL
+                )
+            )
+            PagerSnapHelper().attachToRecyclerView(this)
+        }
+
 
     }
 
@@ -95,6 +110,16 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
                 similarProductsAdapter.submitList(
                     similarProducts.map(NetworkProduct::asProductItem)
                 )
+            }
+        }
+
+        launch {
+            viewModel.productImages.collect { images ->
+                if (!images.isNullOrEmpty()) {
+                    imageSliderAdapter.submitList(
+                        images.map { SliderItem.ImageItem(it) }
+                    )
+                }
             }
         }
     }
