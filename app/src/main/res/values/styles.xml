@@ -42,8 +42,8 @@
     <style name="Widget.Market" parent="@android:style/Widget.Material" />
 
     <style name="Widget.Market.AppBar" parent="@style/Widget.Material3.AppBarLayout">
-        <item name="android:background">?attr/colorSurface</item>
-        <item name="android:elevation">4dp</item>
+        <item name="android:backgroundTint">?attr/colorSurface</item>
+        <item name="android:elevation">@dimen/space_small</item>
     </style>
 
     <style name="Widget.Market.Button" parent="Widget.Material3.Button">
