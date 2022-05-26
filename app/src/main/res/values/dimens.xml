@@ -7,5 +7,8 @@
     <dimen name="space_large">@dimen/_32sdp</dimen>
     <dimen name="space_very_large">@dimen/_48sdp</dimen>
 
+    <dimen name="category_container_width">@dimen/_64sdp</dimen>
+    <dimen name="category_image_height">@dimen/_100sdp</dimen>
+
 
 </resources>
