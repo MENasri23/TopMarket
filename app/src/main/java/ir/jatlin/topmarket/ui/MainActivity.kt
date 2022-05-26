@@ -32,13 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavMenu(navController: NavController) {
         binding.bottomNav.apply {
             setupWithNavController(navController)
-            setOnItemSelectedListener { item ->
-                NavigationUI.onNavDestinationSelected(
-                    item,
-                    navController
-                )
-                true
-            }
+
         }
     }
 
