@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.ui.home.category
+package ir.jatlin.topmarket.ui.product
 
 import android.graphics.Paint
 import android.view.View
@@ -6,15 +6,15 @@ import androidx.core.view.isVisible
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.databinding.ProductItemViewBinding
-import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
+typealias ProductItem = ProductDisplayItem.ProductItem
 
 class ProductViewHolder(
     private val binding: ProductItemViewBinding,
     private val eventListener: ProductItemEventListener
-) : BaseViewHolder<DisplayItem.ProductItem>(binding), View.OnClickListener {
+) : BaseViewHolder<ProductItem>(binding), View.OnClickListener {
 
     private var currentProduct: NetworkProduct? = null
     private val context = binding.root.context
@@ -23,7 +23,7 @@ class ProductViewHolder(
         binding.productContainer.setOnClickListener(this)
     }
 
-    override fun bind(item: DisplayItem.ProductItem) {
+    override fun bind(item: ProductItem) {
         val product = item.data.also { currentProduct = it }
         with(binding) {
             showPrice(product.regularPrice, product.price)

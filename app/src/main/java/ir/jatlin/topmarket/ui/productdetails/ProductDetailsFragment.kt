@@ -5,18 +5,16 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
-import ir.jatlin.topmarket.ui.home.category.ProductCategoryAdapter
-import ir.jatlin.topmarket.ui.home.category.asProductItem
-import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
+import ir.jatlin.topmarket.ui.product.ProductDisplayAdapter
+import ir.jatlin.topmarket.ui.product.ProductItemEventListener
+import ir.jatlin.topmarket.ui.product.asProductItem
 import ir.jatlin.topmarket.ui.slider.SliderAdapter
 import ir.jatlin.topmarket.ui.slider.SliderItem
 import ir.jatlin.topmarket.ui.util.*
@@ -30,7 +28,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
 
-    private lateinit var similarProductsAdapter: ProductCategoryAdapter
+    private lateinit var similarProductsAdapter: ProductDisplayAdapter
     private lateinit var imageSliderAdapter: SliderAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +66,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
         }
 
         similarProducts.apply {
-            similarProductsAdapter = ProductCategoryAdapter(
+            similarProductsAdapter = ProductDisplayAdapter(
                 this@ProductDetailsFragment
             )
             adapter = similarProductsAdapter

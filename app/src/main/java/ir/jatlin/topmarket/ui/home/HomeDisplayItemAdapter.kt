@@ -1,20 +1,25 @@
-package ir.jatlin.topmarket.ui.home.category
+package ir.jatlin.topmarket.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.databinding.ProductItemViewBinding
-import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
+import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.databinding.ProductDisplayGroupViewBinding
+import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
+import ir.jatlin.topmarket.ui.product.ProductDisplayGroupViewHolder
+import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
-typealias ViewHolder = BaseViewHolder<DisplayItem>
+typealias ViewHolder = BaseViewHolder<HomeDisplayItem>
 
-class ProductCategoryAdapter(
+class HomeDisplayItemAdapter(
+    private val displayItemEventListener: ProductDisplayGroupEventListener,
     private val productItemEventListener: ProductItemEventListener
-) : ListAdapter<DisplayItem, ViewHolder>(ProductDiffCallback()),
-    ViewHolderCreator<DisplayItem> {
+) :
+    ListAdapter<HomeDisplayItem, ViewHolder>(HomeDisplayItemDiffCallback()),
+    ViewHolderCreator<HomeDisplayItem> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,7 +34,7 @@ class ProductCategoryAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is DisplayItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
+            is HomeDisplayItem.ProductDisplayGroupItem -> R.layout.product_display_group_view
             else -> super.getItemViewType(position)
         }
     }
@@ -39,9 +44,10 @@ class ProductCategoryAdapter(
         val inflater = LayoutInflater.from(parent.context)
 
         val viewHolder: BaseViewHolder<*> = when (viewType) {
-            ITEM_VIEW_TYPE_PRODUCT ->
-                ProductViewHolder(
-                    ProductItemViewBinding.inflate(inflater, parent, false),
+            R.layout.product_display_group_view ->
+                ProductDisplayGroupViewHolder(
+                    ProductDisplayGroupViewBinding.inflate(inflater, parent, false),
+                    displayItemEventListener,
                     productItemEventListener
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
@@ -51,24 +57,20 @@ class ProductCategoryAdapter(
             ?: throw AssertionError("$viewHolder can't be cast to BaseViewHolder")
     }
 
-    companion object {
-        const val ITEM_VIEW_TYPE_PRODUCT = 0
-    }
-
 }
 
-class ProductDiffCallback : DiffUtil.ItemCallback<DisplayItem>() {
+class HomeDisplayItemDiffCallback : DiffUtil.ItemCallback<HomeDisplayItem>() {
 
     override fun areItemsTheSame(
-        oldItem: DisplayItem,
-        newItem: DisplayItem
+        oldItem: HomeDisplayItem,
+        newItem: HomeDisplayItem
     ): Boolean {
         return newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: DisplayItem,
-        newItem: DisplayItem
+        oldItem: HomeDisplayItem,
+        newItem: HomeDisplayItem
     ): Boolean {
         return newItem == oldItem
     }

@@ -1,78 +1,77 @@
-package ir.jatlin.topmarket.ui.home
+package ir.jatlin.topmarket.ui.product
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.databinding.ProductCategoryViewBinding
-import ir.jatlin.topmarket.ui.listener.CategoryItemEventListener
-import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
+import ir.jatlin.topmarket.databinding.ProductItemViewBinding
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 import ir.jatlin.topmarket.ui.viewholder.ViewHolderCreator
 
-typealias ViewHolder = BaseViewHolder<ProductHomeItem>
+/**
+ * The product adapter for adapting a list of products.
+ */
 
-class ProductCategoriesAdapter(
-    private val categoryItemEventListener: CategoryItemEventListener,
+class ProductDisplayAdapter(
     private val productItemEventListener: ProductItemEventListener
-) :
-    ListAdapter<ProductHomeItem, ViewHolder>(ProductDiffCallback()),
-    ViewHolderCreator<ProductHomeItem> {
+) : ListAdapter<ProductDisplayItem, BaseViewHolder<ProductDisplayItem>>(
+    ProductDisplayItemDiffCallback()
+),
+    ViewHolderCreator<ProductDisplayItem> {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder {
+    ): BaseViewHolder<ProductDisplayItem> {
         return createFrom(parent, viewType)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<ProductDisplayItem>, position: Int) {
         holder.bind(getItem(position))
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is ProductHomeItem.CategoriesItem -> ITEM_VIEW_TYPE_PRODUCT_CATEGORY
+            is ProductDisplayItem.ProductItem -> ITEM_VIEW_TYPE_PRODUCT
             else -> super.getItemViewType(position)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun createFrom(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun createFrom(parent: ViewGroup, viewType: Int): BaseViewHolder<ProductDisplayItem> {
         val inflater = LayoutInflater.from(parent.context)
 
         val viewHolder: BaseViewHolder<*> = when (viewType) {
-            ITEM_VIEW_TYPE_PRODUCT_CATEGORY ->
-                ProductCategoryViewHolder(
-                    ProductCategoryViewBinding.inflate(inflater, parent, false),
-                    categoryItemEventListener,
+            ITEM_VIEW_TYPE_PRODUCT ->
+                ProductViewHolder(
+                    ProductItemViewBinding.inflate(inflater, parent, false),
                     productItemEventListener
                 )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
         }
 
-        return (viewHolder as? ViewHolder)
+        return (viewHolder as? BaseViewHolder<ProductDisplayItem>)
             ?: throw AssertionError("$viewHolder can't be cast to BaseViewHolder")
     }
 
     companion object {
-        const val ITEM_VIEW_TYPE_PRODUCT_CATEGORY = 0
+        const val ITEM_VIEW_TYPE_PRODUCT = 0
     }
 
 }
 
-class ProductDiffCallback : DiffUtil.ItemCallback<ProductHomeItem>() {
+private class ProductDisplayItemDiffCallback : DiffUtil.ItemCallback<ProductDisplayItem>() {
 
     override fun areItemsTheSame(
-        oldItem: ProductHomeItem,
-        newItem: ProductHomeItem
+        oldItem: ProductDisplayItem,
+        newItem: ProductDisplayItem
     ): Boolean {
         return newItem.id == oldItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ProductHomeItem,
-        newItem: ProductHomeItem
+        oldItem: ProductDisplayItem,
+        newItem: ProductDisplayItem
     ): Boolean {
         return newItem == oldItem
     }

@@ -10,9 +10,9 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
-import ir.jatlin.topmarket.ui.home.category.asProductItem
-import ir.jatlin.topmarket.ui.listener.CategoryItemEventListener
-import ir.jatlin.topmarket.ui.listener.ProductItemEventListener
+import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
+import ir.jatlin.topmarket.ui.product.ProductItemEventListener
+import ir.jatlin.topmarket.ui.product.asProductItem
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import kotlinx.coroutines.launch
@@ -21,13 +21,13 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HomeFragment :
     Fragment(R.layout.fragment_home),
-    CategoryItemEventListener,
+    ProductDisplayGroupEventListener,
     ProductItemEventListener {
 
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
 
-    private lateinit var productCategoriesAdapter: ProductCategoriesAdapter
+    private lateinit var homeDisplayItemAdapter: HomeDisplayItemAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,11 +42,11 @@ class HomeFragment :
     private fun initViews() = binding.apply {
         binding.viewModel = viewModel
 
-        productCategoriesAdapter = ProductCategoriesAdapter(
+        homeDisplayItemAdapter = HomeDisplayItemAdapter(
             this@HomeFragment,
             this@HomeFragment
         )
-        productCategories.adapter = productCategoriesAdapter
+        productCategories.adapter = homeDisplayItemAdapter
 
     }
 
@@ -64,10 +64,10 @@ class HomeFragment :
             }
             is Resource.Success -> {
                 val productCategories = stateResult.data!!.categorizedProducts
-                productCategoriesAdapter.submitList(
+                homeDisplayItemAdapter.submitList(
                     productCategories.map { categoryState ->
-                        ProductHomeItem.CategoriesItem(
-                            label = getString(categoryState.label),
+                        HomeDisplayItem.ProductDisplayGroupItem(
+                            label = categoryState.label,
                             data = categoryState.products.map(NetworkProduct::asProductItem)
                         )
                     }
@@ -82,10 +82,7 @@ class HomeFragment :
 
     override fun onProductClick(productId: Int) {
         val action = HomeFragmentDirections
-            .actionHomeFragmentToProductDetailsFragment(productId).apply {
-//                arguments.putInt("productId", productId)
-            }
-
+            .actionHomeFragmentToProductDetailsFragment(productId)
         findNavController().navigate(action)
     }
 

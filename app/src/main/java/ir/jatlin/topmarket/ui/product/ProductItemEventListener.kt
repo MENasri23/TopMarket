@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.ui.listener
+package ir.jatlin.topmarket.ui.product
 
 interface ProductItemEventListener {
 
