@@ -20,6 +20,7 @@ import ir.jatlin.topmarket.ui.util.findAnyFailed
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -60,7 +61,7 @@ class HomeViewModel @Inject constructor(
         topRatedProducts,
         amazingSuggestions
     ) { latest, popular, topRated, amazing ->
-
+        Timber.d("latest: ${latest.javaClass.simpleName}, popular: ${popular.javaClass.simpleName}, topRated: ${topRated.javaClass.simpleName}, amazing: ${amazing.javaClass.simpleName}")
         when {
             anyLoading(latest, popular, topRated, amazing) -> Resource.loading()
             allSuccess(latest, popular, topRated, amazing) -> Resource.success(
@@ -121,9 +122,4 @@ class HomeViewModel @Inject constructor(
 
 data class HomeUiState(
     val homeDisplayItems: List<HomeDisplayItem>,
-)
-
-data class ProductCategoryUiState(
-    val products: List<NetworkProduct>,
-    @StringRes val label: Int = 0
 )

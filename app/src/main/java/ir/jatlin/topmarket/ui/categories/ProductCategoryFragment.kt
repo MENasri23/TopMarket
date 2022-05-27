@@ -60,6 +60,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
                         )
                     }
 
+                categoryDisplayItemAdapter.submitList(categoryGroupItem)
             }
         }
     }
