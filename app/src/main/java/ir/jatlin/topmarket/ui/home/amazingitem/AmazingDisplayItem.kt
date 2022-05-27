@@ -1,7 +1,10 @@
 package ir.jatlin.topmarket.ui.home.amazingitem
 
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 
 sealed interface AmazingDisplayItem {
@@ -12,8 +15,8 @@ sealed interface AmazingDisplayItem {
         // TODO: Change the type of this properties
         //  if the service provide the same functionality
         @StringRes val label: Int = 0,
-        @DrawableRes val titleIcon: Int = 0,
-        @DrawableRes val shapeIcon: Int = 0
+        @DrawableRes val shapeIcon: Int = 0,
+        @DrawableRes val titleIcon: Int = R.drawable.ic_amazing_suggestion
     ) : AmazingDisplayItem {
         override val id: Int = Int.MIN_VALUE + 1
     }
@@ -30,3 +33,5 @@ sealed interface AmazingDisplayItem {
     }
 
 }
+
+fun NetworkProduct.asAmazingItem() = AmazingDisplayItem.AmazingItem(this)

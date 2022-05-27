@@ -63,14 +63,8 @@ class HomeFragment :
                 Timber.d("loading")
             }
             is Resource.Success -> {
-                val productCategories = stateResult.data!!.categorizedProducts
                 homeDisplayItemAdapter.submitList(
-                    productCategories.map { categoryState ->
-                        HomeDisplayItem.ProductDisplayGroupItem(
-                            label = categoryState.label,
-                            data = categoryState.products.map(NetworkProduct::asProductItem)
-                        )
-                    }
+                    stateResult.data!!.homeDisplayItems
                 )
             }
         }

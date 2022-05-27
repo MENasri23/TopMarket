@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.ui.home.amazingitem
 
+import androidx.core.content.ContextCompat
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.AmazingSuggestionHeaderItemViewBinding
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
@@ -20,5 +21,9 @@ class AmazingSuggestionHeaderViewHolder(
         binding.amazingShowMore.text = if (item.label != 0) {
             context.getString(item.label)
         } else context.getString(R.string.show_all)
+
+        binding.amazingShapeIcon.setImageDrawable(
+            ContextCompat.getDrawable(context, item.shapeIcon)
+        )
     }
 }

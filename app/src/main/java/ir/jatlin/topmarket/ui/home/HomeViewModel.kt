@@ -11,6 +11,9 @@ import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
+import ir.jatlin.topmarket.ui.home.amazingitem.asAmazingItem
+import ir.jatlin.topmarket.ui.product.asProductItem
 import ir.jatlin.topmarket.ui.util.allSuccess
 import ir.jatlin.topmarket.ui.util.anyLoading
 import ir.jatlin.topmarket.ui.util.findAnyFailed
@@ -47,27 +50,53 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private val amazingSuggestions = stateFlow {
+        fetchProducts { searchQuery = "تخفیفات" }
+    }
+
     val homeUiState: Flow<Resource<HomeUiState>> = combine(
         latestProducts,
         popularProducts,
-        topRatedProducts
-    ) { latest, popular, topRated ->
+        topRatedProducts,
+        amazingSuggestions
+    ) { latest, popular, topRated, amazing ->
 
         when {
-            anyLoading(latest, popular, topRated) -> Resource.loading()
-            allSuccess(latest, popular, topRated) -> Resource.success(
+            anyLoading(latest, popular, topRated, amazing) -> Resource.loading()
+            allSuccess(latest, popular, topRated, amazing) -> Resource.success(
                 data = HomeUiState(
                     listOf(
-                        ProductCategoryUiState(
-                            products = latest.data!!,
-                            label = R.string.products_latest
+                        HomeDisplayItem.ProductDisplayGroupItem(
+                            label = R.string.products_latest,
+                            products = latest.data!!.map(NetworkProduct::asProductItem)
                         ),
-                        ProductCategoryUiState(
-                            products = popular.data!!,
-                            label = R.string.products_popular
+                        HomeDisplayItem.AmazingSuggestionGroupItem(
+                            suggestionItems = mutableListOf<AmazingDisplayItem>(
+                                AmazingDisplayItem.Header(
+                                    shapeIcon = R.drawable.amazing_suggestion
+                                )
+                            ).apply {
+                                addAll(amazing.data!!.map(NetworkProduct::asAmazingItem))
+                            }
+
                         ),
-                        ProductCategoryUiState(
-                            products = topRated.data!!,
+                        HomeDisplayItem.ProductDisplayGroupItem(
+                            label = R.string.products_popular,
+                            products = popular.data!!.map(NetworkProduct::asProductItem)
+                        ),
+                        HomeDisplayItem.AmazingSuggestionGroupItem(
+                            suggestionItems = mutableListOf<AmazingDisplayItem>(
+                                AmazingDisplayItem.Header(
+                                    shapeIcon = R.drawable.amazing_suggestion2
+                                )
+                            ).apply {
+                                addAll(amazing.data!!.map(NetworkProduct::asAmazingItem))
+                            },
+                            backgroundColor = 0x41b10b
+
+                        ),
+                        HomeDisplayItem.ProductDisplayGroupItem(
+                            products = topRated.data!!.map(NetworkProduct::asProductItem),
                             label = R.string.products_top_rated
                         )
                     )
@@ -91,10 +120,10 @@ class HomeViewModel @Inject constructor(
 }
 
 data class HomeUiState(
-    val categorizedProducts: List<ProductCategoryUiState>,
+    val homeDisplayItems: List<HomeDisplayItem>,
 )
 
 data class ProductCategoryUiState(
     val products: List<NetworkProduct>,
-    @StringRes val label: Int
+    @StringRes val label: Int = 0
 )
