@@ -23,10 +23,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
+import timber.log.Timber
 
 
 abstract class ViewBindingLazy<T : ViewBinding>(
-    private val lifecycleOwner: LifecycleOwner
+    private val fragment: Fragment
 ) : Lazy<T> {
     private var cached: T? = null
 
@@ -39,7 +40,7 @@ abstract class ViewBindingLazy<T : ViewBinding>(
     override val value: T
         get() = if (isInitialized()) cached!!
         else bindView().also {
-            lifecycleOwner.lifecycle.addObserver(observer)
+            fragment.viewLifecycleOwner.lifecycle.addObserver(observer)
             cached = it
         }
 

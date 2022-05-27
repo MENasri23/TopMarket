@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/product_container"
-    android:layout_width="@dimen/_150sdp"
+    android:layout_width="@dimen/_146sdp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/space_medium">
 
@@ -28,22 +28,23 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/glh_half_screen"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/glv_end"
         app:layout_constraintStart_toEndOf="@id/glv_start"
-        app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/black" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/product_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        app:layout_constraintBottom_toTopOf="@+id/product_stock_status"
         app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/glv_start"
-        app:layout_constraintTop_toBottomOf="@id/glh_half_screen"
+        app:layout_constraintTop_toBottomOf="@+id/product_image"
         tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
 
 
@@ -54,10 +55,14 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:drawablePadding="@dimen/space_very_small"
         android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+        android:textColor="#00796B"
         app:drawableEndCompat="@drawable/ic_instock_24"
+        app:layout_constraintBottom_toTopOf="@+id/product_discount"
         app:layout_constraintEnd_toStartOf="@id/glv_end"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@id/glv_start"
-        app:layout_constraintTop_toBottomOf="@id/product_name"
+        app:layout_constraintTop_toBottomOf="@+id/product_name"
+        tools:ignore="TextContrastCheck"
         tools:text="@string/product_avaialble"
         tools:textColor="?attr/colorError" />
 
@@ -71,13 +76,13 @@
         android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_toman"
-        app:layout_constraintBottom_toTopOf="@id/product_regular_price"
+        app:layout_constraintBottom_toTopOf="@+id/product_regular_price"
         app:layout_constraintEnd_toStartOf="@+id/product_discount"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toEndOf="@id/glv_start"
         app:layout_constraintStart_toStartOf="@id/glv_start"
-        app:layout_constraintTop_toBottomOf="@id/product_stock_status"
+        app:layout_constraintTop_toBottomOf="@+id/product_stock_status"
         app:layout_constraintVertical_bias="0.7"
         tools:text="4,000,000" />
 
@@ -91,7 +96,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/product_price"
-        app:layout_constraintTop_toBottomOf="@id/product_price"
+        app:layout_constraintTop_toBottomOf="@+id/product_price"
+        tools:ignore="TextContrastCheck"
         tools:text="4,000,000 "
         tools:visibility="visible" />
 
