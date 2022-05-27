@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_146sdp"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/space_small"
+    app:cardCornerRadius="@dimen/space_small"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/product_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_medium">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glh_half_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glv_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="0dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_suggestion"
+            style="@style/TextAppearance.MarketApp.LabelMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorError"
+            app:layout_constraintEnd_toEndOf="@id/glv_end"
+            app:layout_constraintStart_toStartOf="@id/glv_start"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="شگفت انگیز اختصاصی اپ" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_small"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/glh_half_screen"
+            app:layout_constraintDimensionRatio="9:16"
+            app:layout_constraintEnd_toStartOf="@id/glv_end"
+            app:layout_constraintStart_toEndOf="@id/glv_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_suggestion"
+            tools:background="@color/black" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+            app:layout_constraintEnd_toEndOf="@id/glv_end"
+            app:layout_constraintStart_toStartOf="@id/glv_start"
+            app:layout_constraintTop_toBottomOf="@id/glh_half_screen"
+            tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_stock_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:drawablePadding="@dimen/space_very_small"
+            android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+            app:drawableEndCompat="@drawable/ic_instock_24"
+            app:layout_constraintEnd_toStartOf="@id/glv_end"
+            app:layout_constraintStart_toEndOf="@id/glv_start"
+            app:layout_constraintTop_toBottomOf="@id/product_name"
+            tools:text="@string/product_avaialble"
+            tools:textColor="?attr/colorError" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawablePadding="@dimen/space_very_small"
+            android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_toman"
+            app:layout_constraintBottom_toTopOf="@id/product_regular_price"
+            app:layout_constraintEnd_toStartOf="@+id/product_discount"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/glv_start"
+            app:layout_constraintStart_toStartOf="@id/glv_start"
+            app:layout_constraintTop_toBottomOf="@id/product_stock_status"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="4,000,000" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_regular_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_small"
+            android:alpha="0.5"
+            android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/product_price"
+            app:layout_constraintTop_toBottomOf="@id/product_price"
+            tools:text="4,000,000 "
+            tools:visibility="visible" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/product_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorError"
+            android:paddingHorizontal="@dimen/_8sdp"
+            android:paddingVertical="@dimen/_4sdp"
+            android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+            android:textColor="?attr/colorOnError"
+            app:layout_constraintBottom_toBottomOf="@+id/product_price"
+            app:layout_constraintEnd_toEndOf="@id/glv_end"
+            app:layout_constraintEnd_toStartOf="@+id/glv_end"
+            app:layout_constraintStart_toEndOf="@+id/product_price"
+            app:layout_constraintTop_toTopOf="@+id/product_price"
+            tools:text="25%" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glv_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

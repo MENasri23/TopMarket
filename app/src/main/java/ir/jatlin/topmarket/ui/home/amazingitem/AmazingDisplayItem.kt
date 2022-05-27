@@ -1,6 +1,7 @@
-package ir.jatlin.topmarket.ui.home.amazing
+package ir.jatlin.topmarket.ui.home.amazingitem
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 
 sealed interface AmazingDisplayItem {
@@ -8,7 +9,11 @@ sealed interface AmazingDisplayItem {
     val id: Int
 
     class Header(
-        @DrawableRes val icon: Int
+        // TODO: Change the type of this properties
+        //  if the service provide the same functionality
+        @StringRes val label: Int = 0,
+        @DrawableRes val titleIcon: Int = 0,
+        @DrawableRes val shapeIcon: Int = 0
     ) : AmazingDisplayItem {
         override val id: Int = Int.MIN_VALUE + 1
     }
