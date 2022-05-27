@@ -27,7 +27,7 @@ class ProductDisplayGroupViewHolder(
 
     override fun bind(item: ProductDisplayGroupItem) {
         binding.tvCategoryLabel.text = context.getString(item.label)
-        val displayItem = item.data
+        val displayItem = item.products
         adapter.submitList(displayItem)
     }
 

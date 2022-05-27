@@ -14,6 +14,9 @@ class AmazingSuggestionGroupViewHolder(
     }
 
     override fun bind(item: HomeDisplayItem.AmazingSuggestionGroupItem) {
+        binding.amazingGroupContainer.setBackgroundColor(
+            (0xff000000 or item.backgroundColor).toInt()
+        )
         amazingDisplayItemAdapter.submitList(item.suggestionItems)
     }
 }

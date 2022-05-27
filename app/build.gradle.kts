@@ -121,6 +121,9 @@ dependencies {
     implementation(Libs.Intuit.SDP)
     implementation(Libs.Intuit.SSP)
 
+    // lottie
+    implementation(Libs.Lottie.LOTTIE)
+
     // timber
     implementation(Libs.Debug.TIMBER)
 

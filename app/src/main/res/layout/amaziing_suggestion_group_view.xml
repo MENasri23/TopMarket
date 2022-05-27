@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/_320sdp"
+    android:id="@+id/amazing_group_container"
     android:layout_marginVertical="@dimen/space_small"
-    app:cardBackgroundColor="@color/amazing_suggestion_background_color"
-    app:cardCornerRadius="0dp"
-    app:strokeWidth="0dp">
+    tools:cardBackgroundColor="@color/amazing_suggestion_background_color"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/amazingSuggestions"
@@ -16,7 +16,9 @@
         android:clipToPadding="false"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/space_small"
+        android:paddingVertical="@dimen/space_small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="true"
         tools:listitem="@layout/amazing_suggestion_item_view" />
 
-</com.google.android.material.card.MaterialCardView>
+</FrameLayout>

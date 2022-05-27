@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="@color/amazing_suggestion_background_color"
-    android:padding="@dimen/space_small">
+    android:background="@color/transparent"
+    android:padding="@dimen/space_small"
+    tools:background="@color/amazing_suggestion_background_color">
 
     <ImageView
         android:id="@+id/amazing_title_icon"
-        android:layout_width="@dimen/_146sdp"
-        android:layout_height="@dimen/_146sdp"
+        android:layout_width="@dimen/_128sdp"
+        android:layout_height="@dimen/_128sdp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@+id/amazing_shape_icon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +25,8 @@
 
     <ImageView
         android:id="@+id/amazing_shape_icon"
-        android:layout_width="@dimen/_146sdp"
-        android:layout_height="@dimen/_146sdp"
+        android:layout_width="@dimen/_128sdp"
+        android:layout_height="@dimen/_128sdp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toTopOf="@+id/amazing_show_more"
         app:layout_constraintEnd_toEndOf="parent"

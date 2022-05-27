@@ -15,6 +15,8 @@ import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.product.asProductItem
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.safeCollect
+import ir.jatlin.topmarket.ui.util.showErrorMessage
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -54,26 +56,10 @@ class HomeFragment :
         launch { collectHomeUiState() }
     }
 
-    private suspend fun collectHomeUiState() = viewModel.homeUiState.collect { stateResult ->
-        when (stateResult) {
-            is Resource.Error -> {
-                Timber.e(stateResult.cause.toString())
-            }
-            is Resource.Loading -> {
-                Timber.d("loading")
-            }
-            is Resource.Success -> {
-                val productCategories = stateResult.data!!.categorizedProducts
-                homeDisplayItemAdapter.submitList(
-                    productCategories.map { categoryState ->
-                        HomeDisplayItem.ProductDisplayGroupItem(
-                            label = categoryState.label,
-                            data = categoryState.products.map(NetworkProduct::asProductItem)
-                        )
-                    }
-                )
-            }
-        }
+    private suspend fun collectHomeUiState() = viewModel.homeUiState.safeCollect(
+        onFailure = { showErrorMessage(it) }
+    ) { items ->
+        homeDisplayItemAdapter.submitList(items.homeDisplayItems)
     }
 
     override fun onShowMoreClick() {

@@ -137,4 +137,9 @@ object Libs {
         const val SSP = "com.intuit.ssp:ssp-android:$version"
     }
 
+    object Lottie {
+        private const val lottieVersion = "3.4.0"
+        const val LOTTIE = "com.airbnb.android:lottie:$lottieVersion"
+    }
+
 }
