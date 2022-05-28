@@ -28,22 +28,25 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_search"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/space_small"
                     android:drawablePadding="@dimen/space_very_small"
                     android:gravity="center_vertical"
+                    android:stateListAnimator="@animator/smooth_fading"
                     android:text="@string/search_in"
                     android:textAppearance="@style/TextAppearance.MarketApp.TitleMedium"
                     app:drawableStartCompat="@drawable/ic_digi_placeholder"
-                    app:layout_constraintEnd_toStartOf="@id/search" />
+                    app:layout_constraintEnd_toStartOf="@id/iv_search" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/search"
+                    android:id="@+id/iv_search"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center_vertical"
+                    android:stateListAnimator="@animator/smooth_fading"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
