@@ -1,6 +1,8 @@
 package ir.jatlin.topmarket.ui.util
 
 import android.content.Context
+import android.graphics.Rect
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -75,6 +77,23 @@ fun Fragment.showErrorMessage(
                 setAction(actionLabel) { onActionClick() }
             }
         }.show()
+}
+
+
+fun View.clearFocusOnTouchEvent(target: View) {
+    setOnTouchListener { v, event ->
+        if (event.action == MotionEvent.ACTION_DOWN &&
+            target.isFocused
+        ) {
+            val rect = Rect()
+            target.getGlobalVisibleRect(rect)
+            if (!rect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                target.clearFocus()
+                target.hideKeyboard()
+            }
+        }
+        v.performClick()
+    }
 }
 
 private fun getErrorMessage(cause: ErrorCause): Int {

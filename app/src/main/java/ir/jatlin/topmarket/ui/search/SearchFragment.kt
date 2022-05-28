@@ -1,8 +1,15 @@
 package ir.jatlin.topmarket.ui.search
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.doOnLayout
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,23 +53,26 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initViews() = binding.apply {
+        val etSearch = includeSearchBar.searchEditText
 
-        includeSearchBar.searchView.apply {
-            setOnQueryTextFocusChangeListener { v, hasFocus ->
-                if (hasFocus) v.findFocus().showKeyboard()
+        root.clearFocusOnTouchEvent(etSearch)
+
+        etSearch.apply {
+            if (requestFocus()) {
+                showKeyboard()
+            }
+            setOnEditorActionListener { _, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    clearFocus()
+                    hideKeyboard()
+                    true
+                } else false
             }
 
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    hideKeyboard()
-                    return true
-                }
+            doOnTextChanged { text, _, _, _ ->
+                viewModel.onSearchTextChanged(text?.toString())
+            }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    viewModel.onSearchTextChanged(newText)
-                    return true
-                }
-            })
         }
 
     }
