@@ -16,20 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/include_search_appbar_height"
         android:layoutDirection="rtl"
-        app:contentInsetStart="0dp"
-        app:navigationIcon="@drawable/ic_arrow_forward_24">
+        app:contentInsetStart="0dp">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:iconifiedByDefault="false"
-            android:imeOptions="actionDone|flagNoExtractUi"
-            android:queryBackground="@color/transparent"
-            android:queryHint="@string/search_all_products"
-            app:searchIcon="@null">
+            android:hint="@string/search_all_products"
+            app:endIconDrawable="@drawable/ic_close"
+            app:endIconMode="clear_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:startIconDrawable="@drawable/ic_arrow_forward_24">
 
-        </androidx.appcompat.widget.SearchView>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit_text"
+                android:inputType="text"
+                style="@style/TextAppearance.MarketApp.BodySmall"
+                android:layout_width="match_parent"
+                android:imeOptions="actionSearch"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
 
