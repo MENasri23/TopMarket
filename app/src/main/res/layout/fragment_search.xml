@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
         <variable
             name="viewModel"
             type="ir.jatlin.topmarket.ui.search.SearchViewModel" />
@@ -16,20 +17,18 @@
         android:fitsSystemWindows="true"
         tools:context=".ui.search.SearchFragment">
 
+        <include
+            android:id="@+id/include_search_bar"
+            layout="@layout/search_appbar" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_suggestions"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:hint="@string/search_all_products">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/space_medium"
+            android:paddingVertical="@dimen/space_small"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_query"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_arrow_forward_24"
-                android:drawablePadding="@dimen/space_small" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
