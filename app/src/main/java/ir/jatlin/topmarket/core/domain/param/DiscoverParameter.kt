@@ -2,6 +2,11 @@ package ir.jatlin.topmarket.core.domain.param
 
 interface DiscoverParameters {
 
+    companion object {
+        const val PAGE_SIZE_INFINITE = 100
+    }
+
+
     enum class Order {
         Asc, Desc
     }

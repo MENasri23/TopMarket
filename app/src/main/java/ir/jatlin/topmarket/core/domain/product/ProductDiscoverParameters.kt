@@ -23,8 +23,5 @@ class ProductDiscoverParameters : DefaultDiscoverParameters() {
     var includeIds: List<Int>? = null
 
 
-    companion object {
-        const val PAGE_SIZE_INFINITE = 100
-    }
 
 }
