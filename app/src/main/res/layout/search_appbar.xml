@@ -27,7 +27,7 @@
             android:imeOptions="actionDone|flagNoExtractUi"
             android:queryBackground="@color/transparent"
             android:queryHint="@string/search_all_products"
-            android:searchIcon="@null">
+            app:searchIcon="@null">
 
         </androidx.appcompat.widget.SearchView>
 
