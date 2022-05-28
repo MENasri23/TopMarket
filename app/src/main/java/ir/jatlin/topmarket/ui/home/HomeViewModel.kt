@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.ui.home
 
-import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.R

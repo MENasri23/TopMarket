@@ -33,7 +33,6 @@ abstract class ViewBindingLazy<T : ViewBinding>(
 
     private val observer = LifecycleEventObserver { _, event ->
         if (event == Lifecycle.Event.ON_DESTROY) {
-            Timber.d("clear memory allocated by binding")
             cached = null
         }
     }

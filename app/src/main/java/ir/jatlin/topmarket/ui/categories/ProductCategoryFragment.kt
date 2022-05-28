@@ -48,6 +48,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
                 onLoading = { Timber.d("category loading") },
                 onFailure = { showErrorMessage(it) },
             ) { categoryDetails ->
+                Timber.d("triggered")
                 val categoryGroupItem = categoryDetails.groupBy { it.parentId }
                     .mapKeys { entry ->
                         categoryDetails.find { it.id == entry.key }

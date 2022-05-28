@@ -9,6 +9,7 @@
 
     <dimen name="category_container_width">@dimen/_64sdp</dimen>
     <dimen name="category_image_height">@dimen/_100sdp</dimen>
+    <dimen name="include_search_appbar_height">@dimen/_48sdp</dimen>
 
 
 </resources>

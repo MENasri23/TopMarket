@@ -12,12 +12,12 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="@dimen/include_search_appbar_height"
         app:contentInsetStart="0dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
+            android:layout_height="match_parent"
             app:contentPaddingLeft="@dimen/space_medium"
             app:contentPaddingRight="@dimen/space_medium"
             app:strokeWidth="0dp">
