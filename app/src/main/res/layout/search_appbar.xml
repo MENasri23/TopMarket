@@ -6,16 +6,30 @@
     style="@style/Widget.Market.AppBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:divider="?android:dividerHorizontal"
     android:fitsSystemWindows="true"
     android:padding="@dimen/space_small"
+    android:showDividers="middle"
     tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/include_search_appbar_height"
-        app:contentInsetStart="0dp">
+        android:layoutDirection="rtl"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@drawable/ic_arrow_forward_24">
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:iconifiedByDefault="false"
+            android:imeOptions="actionDone|flagNoExtractUi"
+            android:queryBackground="@color/transparent"
+            android:queryHint="@string/search_all_products"
+            android:searchIcon="@null">
 
+        </androidx.appcompat.widget.SearchView>
 
     </com.google.android.material.appbar.MaterialToolbar>
 
