@@ -8,10 +8,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchBinding
-import ir.jatlin.topmarket.ui.util.dataBindings
-import ir.jatlin.topmarket.ui.util.hideKeyboard
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.showKeyboard
+import ir.jatlin.topmarket.ui.util.*
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -26,11 +25,22 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        collectUiStates()
+    }
 
+    private fun collectUiStates() {
         repeatOnViewLifecycleOwner {
-            viewModel.searchResult.collect {
-                Timber.d(it.size.toString())
+            launch {
+                viewModel.searchResult.collect {
+                    Timber.d(it.size.toString())
 
+                }
+            }
+
+            launch {
+                viewModel.error.filterNotNull().collectLatest {
+                    showErrorMessage(it)
+                }
             }
         }
     }
@@ -38,7 +48,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun initViews() = binding.apply {
 
         includeSearchBar.searchView.apply {
-
             setOnQueryTextFocusChangeListener { v, hasFocus ->
                 if (hasFocus) v.findFocus().showKeyboard()
             }

@@ -8,10 +8,13 @@ import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.shared.isSuccess
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -24,6 +27,9 @@ class SearchViewModel @Inject constructor(
 
     private val _searchResult = MutableStateFlow<List<NetworkProduct>>(emptyList())
     val searchResult = _searchResult.asStateFlow()
+
+    private val _error = MutableSharedFlow<ErrorCause?>()
+    val error = _error.asSharedFlow()
 
     private var prevSearchResult: List<NetworkProduct>? = null
 
@@ -67,12 +73,15 @@ class SearchViewModel @Inject constructor(
 
     }
 
-    private fun processSearchResult(searchResult: Resource<List<NetworkProduct>>) {
+    private suspend fun processSearchResult(searchResult: Resource<List<NetworkProduct>>) {
         if (searchResult.isSuccess) {
             _searchResult.value = searchResult.data!!
             prevSearchResult = this.searchResult.value
         } else {
-            Timber.d("$searchResult")
+            if (searchResult is Resource.Error) {
+                _error.emit(searchResult.cause)
+            }
+            clearSearch()
         }
     }
 
