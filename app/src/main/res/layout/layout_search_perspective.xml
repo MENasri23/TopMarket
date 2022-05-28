@@ -37,10 +37,10 @@
                     android:text="@string/search_in"
                     android:textAppearance="@style/TextAppearance.MarketApp.TitleMedium"
                     app:drawableStartCompat="@drawable/ic_digi_placeholder"
-                    app:layout_constraintEnd_toStartOf="@id/navigate_back" />
+                    app:layout_constraintEnd_toStartOf="@id/search" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/navigate_back"
+                    android:id="@+id/search"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center_vertical"
