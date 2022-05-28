@@ -13,6 +13,7 @@ inline fun makeProductParams(
         val filters = HashMap<String, String>().apply {
             put("order", order.name.lowercase())
             put("orderby", orderBy.name.lowercase())
+            put("search", searchQuery)
 
             val category = categoryId
             if (category != null) put("category", category.toString())
