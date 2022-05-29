@@ -23,7 +23,7 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_item_view.xml" value="0.20521590423257802" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_appbar.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_body_item_view.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_header_item_view.xml" value="0.20436083796494228" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_header_item_view.xml" value="0.4" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19925857275254866" />
       </map>
     </option>
@@ -37,7 +37,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.264" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
