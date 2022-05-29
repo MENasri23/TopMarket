@@ -9,8 +9,18 @@ class HeaderItemViewHolder(
     private val eventListener: EventListener
 ) : BaseViewHolder<SearchProductItem>(binding) {
 
+    private var searchProductItem: SearchProductItem? = null
+
+    init {
+        binding.root.setOnClickListener {
+            searchProductItem?.let {
+                eventListener.onClick(it.id)
+            }
+        }
+    }
 
     override fun bind(item: SearchProductItem) {
+        searchProductItem = item
         with(binding) {
             productName.text = item.name
             productImage.loadFromUrl(item.imageUrl)

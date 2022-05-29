@@ -8,7 +8,7 @@ import ir.jatlin.topmarket.databinding.SearchSuggestProductItemViewBinding
 
 
 class HeaderItemAdapter(
-    private val onProductItemClick: (productId: Int) -> Unit
+    private val onProductItemClicked: (productId: Int) -> Unit
 ) : ListAdapter<SearchProductItem, HeaderItemViewHolder>(DiffCallback()),
     HeaderItemViewHolder.EventListener {
 
@@ -42,6 +42,6 @@ class HeaderItemAdapter(
     }
 
     override fun onClick(productId: Int) {
-        onProductItemClick(productId)
+        onProductItemClicked(productId)
     }
 }
