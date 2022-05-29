@@ -50,4 +50,5 @@
     <string name="categories">دسته بندی ها</string>
     <string name="search_in">جستجو در</string>
     <string name="search_all_products">جستجو در همه ی کالاها</string>
+    <string name="product_in_category">در دسته  <strong>%s</strong></string>
 </resources>
