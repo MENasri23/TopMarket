@@ -39,7 +39,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         repeatOnViewLifecycleOwner {
             launch {
                 viewModel.searchResult.collect { result ->
-                    Timber.tag("collectUiStates").d(result.joinToString { it.productName })
+                    result?.forEach {
+                        Timber.tag("collectUiStates").d(it.toString())
+                    }
 
                 }
             }

@@ -4,6 +4,7 @@ import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.util.CharSequenceDistance
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
+import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,7 +20,7 @@ class SearchProductsUseCase @Inject constructor(
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    operator fun invoke(textQuery: String, taken: Int): Flow<Resource<List<SearchProductsResult>>> {
+    operator fun invoke(textQuery: String, taken: Int): Flow<Resource<List<NetworkProduct>>> {
         val params = makeProductParams {
             searchQuery = textQuery
         }
@@ -35,18 +36,6 @@ class SearchProductsUseCase @Inject constructor(
                             charSequenceDistance.unlimitedCompare(textQuery, product.name)
                         }
                         .take(taken)
-                        .mapNotNull { product ->
-                            val nestedCategory = product.categories.lastOrNull()
-                                ?: return@mapNotNull null
-
-                            SearchProductsResult(
-                                productId = product.id,
-                                productName = product.name,
-                                categoryId = nestedCategory.id,
-                                categoryName = nestedCategory.name
-                            )
-
-                        }
                     Resource.success(result)
                 }
             }
@@ -56,11 +45,4 @@ class SearchProductsUseCase @Inject constructor(
     }
 
 }
-
-data class SearchProductsResult(
-    val productId: Int,
-    val productName: String,
-    val categoryId: Int,
-    val categoryName: String
-)
 
