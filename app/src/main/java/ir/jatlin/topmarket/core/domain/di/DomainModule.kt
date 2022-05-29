@@ -4,7 +4,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ir.jatlin.topmarket.core.domain.util.CharSequenceDistance
 import ir.jatlin.topmarket.core.domain.util.DefaultErrorHandler
+import ir.jatlin.topmarket.core.domain.util.LevenshteinDistance
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 
 @Module
@@ -15,4 +17,10 @@ interface DomainModule {
     fun bindsErrorHandler(
         handler: DefaultErrorHandler
     ): ErrorHandler
+
+
+    @Binds
+    fun bindsCharSequenceDistance(
+        charSequenceDistance: LevenshteinDistance
+    ): CharSequenceDistance
 }
