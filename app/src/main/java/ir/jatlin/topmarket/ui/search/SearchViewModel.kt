@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.param.DiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.search.SearchProductsResult
+import ir.jatlin.topmarket.core.domain.search.SearchProductsUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
@@ -22,16 +24,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchProductsUseCase: FetchProductsListUseCase
+    private val searchProductsUseCase: SearchProductsUseCase
 ) : ViewModel() {
 
-    private val _searchResult = MutableStateFlow<List<NetworkProduct>>(emptyList())
+    private val _searchResult = MutableStateFlow<List<SearchProductsResult>>(emptyList())
     val searchResult = _searchResult.asStateFlow()
 
     private val _error = MutableSharedFlow<ErrorCause?>()
     val error = _error.asSharedFlow()
 
-    private var prevSearchResult: List<NetworkProduct>? = null
+    private var prevSearchResult: List<SearchProductsResult>? = null
 
     private var textQuery: String = ""
 
@@ -64,7 +66,7 @@ class SearchViewModel @Inject constructor(
                 pageSize = DiscoverParameters.PAGE_SIZE_INFINITE
 
             }
-            searchProductsUseCase(params = discoverParams)
+            searchProductsUseCase(textQuery = textQuery, taken = 20)
                 .collect { searchResult ->
                     processSearchResult(searchResult)
                 }
@@ -73,7 +75,7 @@ class SearchViewModel @Inject constructor(
 
     }
 
-    private suspend fun processSearchResult(searchResult: Resource<List<NetworkProduct>>) {
+    private suspend fun processSearchResult(searchResult: Resource<List<SearchProductsResult>>) {
         if (searchResult.isSuccess) {
             _searchResult.value = searchResult.data!!
             prevSearchResult = this.searchResult.value

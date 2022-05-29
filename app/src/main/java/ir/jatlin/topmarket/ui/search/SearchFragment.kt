@@ -38,8 +38,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun collectUiStates() {
         repeatOnViewLifecycleOwner {
             launch {
-                viewModel.searchResult.collect {
-                    Timber.d(it.size.toString())
+                viewModel.searchResult.collect { result ->
+                    Timber.tag("collectUiStates").d(result.joinToString { it.productName })
 
                 }
             }
@@ -61,7 +61,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             if (requestFocus()) {
                 showKeyboard()
             }
-            setOnEditorActionListener { _, actionId, event ->
+            setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     clearFocus()
                     hideKeyboard()
