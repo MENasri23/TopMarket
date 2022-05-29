@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:stateListAnimator="@animator/smooth_fading">
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -16,7 +17,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingVertical="@dimen/space_small"
-        android:stateListAnimator="@animator/smooth_fading"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/search_icon"
         app:layout_constraintStart_toStartOf="parent"
