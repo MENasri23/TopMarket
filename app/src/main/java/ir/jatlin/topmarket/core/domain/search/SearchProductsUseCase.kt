@@ -30,13 +30,16 @@ class SearchProductsUseCase @Inject constructor(
                 is Resource.Error -> Resource.error(searchResult.cause ?: ErrorCause.Unknown())
                 is Resource.Success -> {
                     val products = searchResult.data!!
-
-                    val result = products
-                        .sortedBy { product ->
-                            charSequenceDistance.unlimitedCompare(textQuery, product.name)
-                        }
-                        .take(taken)
-                    Resource.success(result)
+                    try {
+                        val result = products
+                            .sortedBy { product ->
+                                charSequenceDistance.unlimitedCompare(textQuery, product.name)
+                            }
+                            .take(taken)
+                        Resource.success(result)
+                    } catch (e: Exception) {
+                        Resource.error(ErrorCause.Unknown(e))
+                    }
                 }
             }
 
