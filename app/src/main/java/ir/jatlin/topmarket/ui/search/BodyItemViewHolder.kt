@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.ui.search
 
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.SearchResultBodyItemViewBinding
+import ir.jatlin.topmarket.ui.util.setTextFromHtml
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 class BodyItemViewHolder(
@@ -23,8 +24,11 @@ class BodyItemViewHolder(
         bodyItem = item
         with(binding) {
             productName.text = item.productName
-            categoryText.text = root.context
-                .getString(R.string.product_in_category, item.categoryName)
+            categoryText.setTextFromHtml(
+                root.context.getString(
+                    R.string.product_in_category, item.categoryName
+                )
+            )
         }
     }
 

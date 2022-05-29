@@ -26,13 +26,13 @@ class SearchViewModel @Inject constructor(
     private val searchProductsUseCase: SearchProductsUseCase
 ) : ViewModel() {
 
-    private val _searchResult = MutableStateFlow<List<SearchDisplayItem>?>(null)
+    private val _searchResult = MutableStateFlow<SearchResult?>(null)
     val searchResult = _searchResult.asStateFlow()
 
     private val _error = MutableSharedFlow<ErrorCause?>()
     val error = _error.asSharedFlow()
 
-    private var prevSearchResult: List<SearchDisplayItem>? = null
+    private var prevSearchResult: SearchResult? = null
 
     private var textQuery: String = ""
 
@@ -60,12 +60,7 @@ class SearchViewModel @Inject constructor(
     private fun searchProducts(query: String) {
         searchJob = viewModelScope.launch {
             delay(500L)
-            val discoverParams = makeProductParams {
-                searchQuery = query
-                pageSize = DiscoverParameters.PAGE_SIZE_INFINITE
-
-            }
-            searchProductsUseCase(textQuery = textQuery, taken = 20)
+            searchProductsUseCase(textQuery = query, taken = 20)
                 .collect { searchResult ->
                     processSearchResult(searchResult)
                 }
@@ -86,7 +81,7 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun processToDisplayItems(products: List<NetworkProduct>): List<SearchDisplayItem>? {
+    private fun processToDisplayItems(products: List<NetworkProduct>): SearchResult? {
         val categoryWithProducts = products.groupBy {
             try {
                 it.categories.last()
@@ -96,7 +91,6 @@ class SearchViewModel @Inject constructor(
             }
         }
 
-        val displayItems = mutableListOf<SearchDisplayItem>()
         val largestCategory = categoryWithProducts.maxByOrNull { it.value.size }
 
         if (largestCategory == null) {
@@ -104,24 +98,22 @@ class SearchViewModel @Inject constructor(
             return null
         }
 
-        addHeaderItem(largestCategory = largestCategory, displayItems = displayItems)
-        addBodyItems(
+        val headerItem = getHeaderItem(largestCategory)
+        val bodyItems = getBodyItems(
             largestCategoryId = largestCategory.key.id,
-            categoryWithProducts = categoryWithProducts,
-            displayItems = displayItems
+            categoryWithProducts = categoryWithProducts
         )
 
-        return displayItems
+        return SearchResult(header = headerItem, body = bodyItems)
     }
 
-    private fun addBodyItems(
+    private fun getBodyItems(
         largestCategoryId: Int,
-        categoryWithProducts: Map<NetworkCategory, List<NetworkProduct>>,
-        displayItems: MutableList<SearchDisplayItem>
-    ) {
-        categoryWithProducts
-            .filterNot { it.key.id == largestCategoryId}
-            .mapTo(displayItems) {
+        categoryWithProducts: Map<NetworkCategory, List<NetworkProduct>>
+    ): List<SearchDisplayItem.BodyItem> {
+        return categoryWithProducts
+            .filterNot { it.key.id == largestCategoryId }
+            .map {
                 val category = it.key
                 val product = it.value.first()
 
@@ -134,15 +126,13 @@ class SearchViewModel @Inject constructor(
             }
     }
 
-    private fun addHeaderItem(
-        largestCategory: Map.Entry<NetworkCategory, List<NetworkProduct>>,
-        displayItems: MutableList<SearchDisplayItem>
-    ) {
-        val header = SearchDisplayItem.HeaderItem(
+    private fun getHeaderItem(
+        largestCategory: Map.Entry<NetworkCategory, List<NetworkProduct>>
+    ): SearchDisplayItem.HeaderItem {
+        return SearchDisplayItem.HeaderItem(
             categoryId = largestCategory.key.id,
             largestCategory.value.map(NetworkProduct::asSearchProductItem)
         )
-        displayItems.add(header)
     }
 
     private fun clearSearch() {
@@ -151,6 +141,10 @@ class SearchViewModel @Inject constructor(
 
 }
 
+data class SearchResult(
+    val header: SearchDisplayItem.HeaderItem,
+    val body: List<SearchDisplayItem.BodyItem>
+)
 
 data class SearchProductItem(
     val id: Int,
