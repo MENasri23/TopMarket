@@ -4,15 +4,20 @@ import ir.jatlin.topmarket.databinding.SearchSuggestProductItemViewBinding
 import ir.jatlin.topmarket.ui.util.loadFromUrl
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
-class SearchSuggestProductItemView(
-    private val binding: SearchSuggestProductItemViewBinding
+class HeaderItemViewHolder(
+    private val binding: SearchSuggestProductItemViewBinding,
+    private val eventListener: EventListener
 ) : BaseViewHolder<SearchProductItem>(binding) {
 
 
     override fun bind(item: SearchProductItem) {
         with(binding) {
-            binding.productName.text = item.name
-            binding.productImage.loadFromUrl(item.imageUrl)
+            productName.text = item.name
+            productImage.loadFromUrl(item.imageUrl)
         }
+    }
+
+    interface EventListener {
+        fun onClick(productId: Int)
     }
 }
