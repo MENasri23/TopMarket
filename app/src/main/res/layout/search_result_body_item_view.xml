@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/space_small"
     android:stateListAnimator="@animator/smooth_fading">
 
 
@@ -13,14 +14,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/space_medium"
-        android:drawablePadding="@dimen/space_small"
         android:ellipsize="end"
         android:maxLines="1"
-        android:paddingVertical="@dimen/space_small"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/category_text"
         app:layout_constraintEnd_toStartOf="@id/search_icon"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="تلویزیون ال ای دی" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -28,14 +30,15 @@
         style="@style/TextAppearance.MarketApp.LabelMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/space_small"
+        android:layout_marginTop="@dimen/space_very_small"
         android:ellipsize="end"
         android:maxLines="1"
-        android:paddingVertical="@dimen/space_small"
         android:stateListAnimator="@animator/smooth_fading"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/product_name"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_name"
+        app:layout_constraintTop_toBottomOf="@+id/product_name"
         tools:text="در دسته ی لوازم منزل" />
 
     <androidx.appcompat.widget.AppCompatImageView
