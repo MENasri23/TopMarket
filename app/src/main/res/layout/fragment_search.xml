@@ -49,8 +49,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
+                    android:overScrollMode="never"
                     android:paddingHorizontal="@dimen/space_medium"
                     android:paddingVertical="@dimen/space_small"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     tools:listitem="@layout/search_result_body_item_view" />
 
