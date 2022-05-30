@@ -13,6 +13,6 @@
 
     <color name="transparent">#0fff</color>
     <color name="background_gray_light">#f0f0f1</color>
-    <color name="background_gray_dark">#e3e3e5</color>
+    <color name="background_gray_dark">#64646D</color>
     <color name="amazing_suggestion_background_color">#EF3F55</color>
 </resources>
