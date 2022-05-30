@@ -8,7 +8,7 @@ import ir.jatlin.topmarket.databinding.SearchResultBodyItemViewBinding
 
 
 class BodyItemAdapter(
-    private val onProductInCategoryClicked: (categoryId: Int, productId: Int) -> Unit
+    private val onProductInCategoryClicked: (categoryId: Int) -> Unit
 ) : ListAdapter<SearchDisplayItem.BodyItem, BodyItemViewHolder>(DiffCallback()),
     BodyItemViewHolder.EventListener {
 
@@ -42,7 +42,7 @@ class BodyItemAdapter(
         }
     }
 
-    override fun onProductInCategoryClick(categoryId: Int, productId: Int) {
-        onProductInCategoryClicked(categoryId, productId)
+    override fun onProductInCategoryClick(categoryId: Int) {
+        onProductInCategoryClicked(categoryId)
     }
 }

@@ -14,7 +14,6 @@ import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -90,8 +89,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         findNavController().navigate(action)
     }
 
-    private fun navigateToSearchFilterScreen(categoryId: Int, productId: Int) {
-        // TODO: Complete here when filter screen added
+    private fun navigateToSearchFilterScreen(categoryId: Int) {
+        val action = SearchFragmentDirections
+            .toSearchFiltersFragment()
+        findNavController().navigate(action)
     }
 
 

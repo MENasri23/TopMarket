@@ -15,7 +15,7 @@ class BodyItemViewHolder(
     init {
         binding.root.setOnClickListener {
             bodyItem?.let {
-                eventListener.onProductInCategoryClick(it.categoryId, it.productId)
+                eventListener.onProductInCategoryClick(it.categoryId)
             }
         }
     }
@@ -33,6 +33,6 @@ class BodyItemViewHolder(
     }
 
     interface EventListener {
-        fun onProductInCategoryClick(categoryId: Int, productId: Int)
+        fun onProductInCategoryClick(categoryId: Int)
     }
 }
