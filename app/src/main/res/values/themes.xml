@@ -13,6 +13,9 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <!-- Customize your theme here. -->
+        <item name="elevationOverlayEnabled">false</item>
+
+        <item name="itemBackgroundColor">@color/background_gray_light</item>
 
         <!-- Widget style -->
         <item name="bottomNavigationStyle">@style/Widget.Market.BottomNavigationView</item>

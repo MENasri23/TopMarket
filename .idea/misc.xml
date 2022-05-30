@@ -17,10 +17,12 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_close.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_search_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20261713803292528" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_home.xml" value="0.20521590423257802" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_loading.xml" value="0.20436083796494228" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_search_app_bar.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_search_perspective.xml" value="0.20521590423257802" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_search_perspective.xml" value="0.2" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_category_item_view.xml" value="0.20521590423257802" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_item_view.xml" value="0.20521590423257802" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_appbar.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_body_item_view.xml" value="0.264" />

@@ -12,5 +12,7 @@
     <color name="blue_sky700">#0288D1</color>
 
     <color name="transparent">#0fff</color>
+    <color name="background_gray_light">#f0f0f1</color>
+    <color name="background_gray_dark">#e3e3e5</color>
     <color name="amazing_suggestion_background_color">#EF3F55</color>
 </resources>

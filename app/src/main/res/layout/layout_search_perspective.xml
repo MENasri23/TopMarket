@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:padding="@dimen/space_small"
+    app:liftOnScroll="true"
     tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -18,6 +19,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:cardBackgroundColor="?attr/itemBackgroundColor"
             app:contentPaddingLeft="@dimen/space_medium"
             app:contentPaddingRight="@dimen/space_medium"
             app:strokeWidth="0dp">
