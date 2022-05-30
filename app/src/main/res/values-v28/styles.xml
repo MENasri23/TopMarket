@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Market.AppBar" parent="@style/Widget.Material3.AppBarLayout">
+        <item name="elevation">@dimen/space_very_small</item>
+        <item name="android:elevation">@dimen/space_very_small</item>
+        <item name="android:outlineAmbientShadowColor">?attr/itemBackgroundColor</item>
+        <item name="android:outlineSpotShadowColor">?attr/itemBackgroundColor</item>
+    </style>
+
+</resources>
