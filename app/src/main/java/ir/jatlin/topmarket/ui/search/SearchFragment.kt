@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
-    private val viewModel by viewModels<SearchViewModel>()
+    private val viewModel by hiltNavGraphViewModels<SearchViewModel>(R.id.search_graph)
     private val binding by dataBindings(FragmentSearchBinding::bind)
 
     private lateinit var headerItemAdapter: HeaderItemAdapter

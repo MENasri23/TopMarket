@@ -22,7 +22,7 @@ import timber.log.Timber
 class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
     private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
-    private val searchViewModel by hiltNavGraphViewModels<SearchViewModel>(R.id.main_graph_xml)
+    private val searchViewModel by hiltNavGraphViewModels<SearchViewModel>(R.id.search_graph)
 
     private val binding by viewBinding(FragmentSearchFiltersBinding::bind)
 
