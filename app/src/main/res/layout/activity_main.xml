@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_graph" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/loading_screen"
+        android:name="ir.jatlin.topmarket.ui.loading.LoadingFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/navHostFragment"
+        app:layout_constraintEnd_toEndOf="@id/navHostFragment"
+        app:layout_constraintStart_toStartOf="@id/navHostFragment"
+        app:layout_constraintTop_toTopOf="@id/navHostFragment"
+        tools:visibility="gone" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"

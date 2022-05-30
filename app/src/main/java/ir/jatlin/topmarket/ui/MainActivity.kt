@@ -2,6 +2,11 @@ package ir.jatlin.topmarket.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -9,9 +14,14 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
+import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val loadingViewModel by viewModels<LoadSateViewModel>()
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -26,6 +36,21 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         setupBottomNavMenu(navController)
 
+        navController.addOnDestinationChangedListener { navController, _, _ ->
+            Timber.d("BackStackSize: ${navController.backQueue.size}")
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    /* Show loading screen based on the current state of each visible fragment */
+                    loadingViewModel.loading.collect { isLoading ->
+                        binding.loadingScreen.isVisible = isLoading
+                    }
+                }
+            }
+        }
+
     }
 
 
@@ -35,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             setOnItemSelectedListener {
                 NavigationUI.onNavDestinationSelected(
-                    it,navController
+                    it, navController
                 )
                 true
             }

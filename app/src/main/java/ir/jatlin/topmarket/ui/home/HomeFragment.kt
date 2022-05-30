@@ -3,11 +3,13 @@ package ir.jatlin.topmarket.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
+import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.util.dataBindings
@@ -21,7 +23,7 @@ class HomeFragment :
     Fragment(R.layout.fragment_home),
     ProductDisplayGroupEventListener,
     ProductItemEventListener {
-
+    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
 
@@ -60,12 +62,14 @@ class HomeFragment :
     }
 
     private fun collectStates() = repeatOnViewLifecycleOwner {
+        loadStateViewModel.startLoading()
         launch { collectHomeUiState() }
     }
 
     private suspend fun collectHomeUiState() = viewModel.homeUiState.safeCollect(
         onFailure = { showErrorMessage(it) }
     ) { items ->
+        loadStateViewModel.stopLoading()
         homeDisplayItemAdapter.submitList(items.homeDisplayItems)
     }
 

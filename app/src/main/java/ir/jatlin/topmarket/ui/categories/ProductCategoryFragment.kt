@@ -3,11 +3,13 @@ package ir.jatlin.topmarket.ui.categories
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import ir.jatlin.topmarket.databinding.FragmentProductCategoryBinding
+import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -17,6 +19,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
     ProductCategoryDisplayItemEventListener,
     ProductCategoryDisplayGroupItemEventListener {
 
+    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
 
     private val viewModel by viewModels<ProductCategoryViewModel>()
     private val binding by viewBinding(FragmentProductCategoryBinding::bind)
@@ -43,12 +46,13 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
+        loadStateViewModel.startLoading()
         launch {
             viewModel.categories.safeCollect(
                 onLoading = { Timber.d("category loading") },
                 onFailure = { showErrorMessage(it) },
             ) { categoryDetails ->
-                Timber.d("triggered")
+                // TODO: Move this logical operations to view model
                 val categoryGroupItem = categoryDetails.groupBy { it.parentId }
                     .mapKeys { entry ->
                         categoryDetails.find { it.id == entry.key }
@@ -60,7 +64,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
                             categories = entry.value.map(NetworkCategoryDetails::asCategoryItem)
                         )
                     }
-
+                loadStateViewModel.stopLoading()
                 categoryDisplayItemAdapter.submitList(categoryGroupItem)
             }
         }

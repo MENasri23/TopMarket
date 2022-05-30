@@ -9,6 +9,7 @@ import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDe
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import timber.log.Timber
 import javax.inject.Inject
 
 class FetchCategoryDetailsListUseCase @Inject constructor(
@@ -20,6 +21,7 @@ class FetchCategoryDetailsListUseCase @Inject constructor(
     dispatcher
 ) {
     override fun execute(params: Parameters): Flow<List<NetworkCategoryDetails>> {
+        Timber.d("execute fetch")
         return productRepository.getProductCategories(
             page = params.page,
             pageSize = params.pageSize,

@@ -42,19 +42,19 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
     }
 }
 
-suspend inline fun <T> Fragment.collectOnSuccess(
+suspend fun <T> Fragment.collectOnSuccess(
     flow: Flow<Resource<T>>,
-    crossinline onSuccess: ((data: T) -> Unit) = {},
+    onSuccess: ((data: T) -> Unit) = {},
 ) = flow.safeCollect(
     onSuccess = onSuccess,
     onFailure = { showErrorMessage(it) }
 )
 
 
-suspend inline fun <T> Flow<Resource<T>>.safeCollect(
-    crossinline onLoading: ((data: T?) -> Unit) = {},
-    crossinline onFailure: (cause: ErrorCause?) -> Unit = {},
-    crossinline onSuccess: ((data: T) -> Unit) = {}
+suspend fun <T> Flow<Resource<T>>.safeCollect(
+    onLoading: ((data: T?) -> Unit) = {},
+    onFailure: (cause: ErrorCause?) -> Unit = {},
+    onSuccess: suspend ((data: T) -> Unit)
 ) {
     collect { state ->
         when (state) {

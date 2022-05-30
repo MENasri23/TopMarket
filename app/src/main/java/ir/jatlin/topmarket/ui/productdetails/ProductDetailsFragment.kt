@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.ui.productdetails
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,6 +13,7 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
+import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayAdapter
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.product.asProductItem
@@ -25,6 +27,7 @@ import kotlinx.coroutines.launch
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
     ProductItemEventListener {
 
+    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
 
@@ -127,10 +130,14 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
         viewModel.productDetailsState.collect { state ->
             when (state) {
                 is Resource.Error -> {
+                    loadStateViewModel.stopLoading()
                     showErrorMessage(state.cause)
                 }
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    loadStateViewModel.startLoading()
+                }
                 is Resource.Success -> {
+                    loadStateViewModel.stopLoading()
                     val productDetails = state.data!!
                     viewModel.updateUiStatesWith(productDetails)
                 }
