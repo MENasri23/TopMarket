@@ -85,13 +85,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun navigateToProductDetailsScreen(productId: Int) {
-        val action = SearchFragmentDirections.toProductDetailsFragment(productId)
+        val action = SearchFragmentDirections.toProductDetailsFragment().apply {
+            this.arguments.putInt("productId", productId)
+        }
         findNavController().navigate(action)
     }
 
     private fun navigateToSearchFilterScreen(categoryId: Int) {
         val action = SearchFragmentDirections
             .toSearchFiltersFragment()
+        action.categoryId = categoryId
         findNavController().navigate(action)
     }
 

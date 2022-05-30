@@ -15,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -46,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 launch {
                     /* Show loading screen based on the current state of each visible fragment */
-                    loadingViewModel.loading.collect { isLoading ->
+                    loadingViewModel.loading.collectLatest { isLoading ->
                         binding.loadingScreen.isVisible = isLoading
                     }
                 }
