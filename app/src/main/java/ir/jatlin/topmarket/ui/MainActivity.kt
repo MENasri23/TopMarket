@@ -16,7 +16,6 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+
+    private val topLevelDestinations = arrayOf(
+        R.id.homeFragment,
+        R.id.productCategoryFragment
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +40,9 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         setupBottomNavMenu(navController)
 
-        navController.addOnDestinationChangedListener { navController, _, _ ->
-            Timber.d("BackStackSize: ${navController.backQueue.size}")
+        navController.addOnDestinationChangedListener { navController, destination, _ ->
+            val bottomNav = binding.bottomNav
+            bottomNav.isVisible = destination.id in topLevelDestinations
         }
 
         lifecycleScope.launch {
