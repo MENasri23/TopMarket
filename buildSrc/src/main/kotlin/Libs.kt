@@ -144,4 +144,9 @@ object Libs {
         const val LOTTIE = "com.airbnb.android:lottie:$lottieVersion"
     }
 
+    object ImageSlider {
+        private const val version = "1.4.0"
+        const val AUTO_IMAGE_SLIDER = "com.github.smarteist:autoimageslider:$version"
+    }
+
 }
