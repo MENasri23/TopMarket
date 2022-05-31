@@ -32,7 +32,7 @@ class CircleIndicatorView @JvmOverloads constructor(
                     radius = tRadius.toFloat()
                 }
 
-                color = getDimensionPixelSize(
+                color = getColor(
                     R.styleable.CircleIndicatorView_color,
                     0
                 )
