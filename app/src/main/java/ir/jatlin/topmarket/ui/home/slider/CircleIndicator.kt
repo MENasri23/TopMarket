@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import ir.jatlin.topmarket.R
+import kotlin.math.min
 
 class CircleIndicatorView @JvmOverloads constructor(
     context: Context,
@@ -48,6 +49,19 @@ class CircleIndicatorView @JvmOverloads constructor(
         color = this@CircleIndicatorView.color
     }
 
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val circleSize = (2 * radius + 1f).toInt()
+        val minW =
+            paddingLeft + paddingRight + min(circleSize, suggestedMinimumWidth)
+        val width = resolveSize(minW, widthMeasureSpec)
+
+        val minH =
+            paddingTop + paddingBottom + min(circleSize, suggestedMinimumHeight)
+        val height = resolveSize(minH, heightMeasureSpec)
+
+        setMeasuredDimension(width, height)
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
