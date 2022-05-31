@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_200sdp"
+    android:layout_margin="@dimen/space_medium"
+    android:paddingVertical="@dimen/space_medium">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/special_sale"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        android:textColor="?attr/colorError"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/special_sale" />
+
+    <View
+        android:id="@+id/special_divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/hair_line"
+        android:layout_marginTop="@dimen/space_small"
+        android:background="?attr/colorError"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/special_sale" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/product_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_separator"
+        app:layout_constraintTop_toTopOf="@id/special_sale"
+        tools:background="@color/black" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        app:layout_constraintEnd_toEndOf="@id/glv_separator"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="@id/barrier_top"
+        tools:layout_editor_absoluteY="109dp"
+        tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_medium" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/space_medium" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="special_divider" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_special"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="special_sale,special_divider" />
+</androidx.constraintlayout.widget.ConstraintLayout>
