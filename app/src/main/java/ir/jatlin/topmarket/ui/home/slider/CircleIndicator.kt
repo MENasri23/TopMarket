@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.ui.home.slider
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -14,9 +15,8 @@ class CircleIndicatorView @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
-    private val shapePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-
-    var radius: Float
+    var radius: Float = 0f
+    var color: Int = Color.TRANSPARENT
 
     init {
         context.obtainStyledAttributes(
@@ -24,10 +24,18 @@ class CircleIndicatorView @JvmOverloads constructor(
         ).apply {
 
             try {
-                radius = getDimensionPixelSize(
+                val tRadius = getDimensionPixelSize(
                     R.styleable.CircleIndicatorView_radius,
-                    NO_RADIUS
-                ).toFloat()
+                    0
+                )
+                if (tRadius >= 0) {
+                    radius = tRadius.toFloat()
+                }
+
+                color = getDimensionPixelSize(
+                    R.styleable.CircleIndicatorView_color,
+                    0
+                )
 
             } finally {
                 recycle()
@@ -35,15 +43,18 @@ class CircleIndicatorView @JvmOverloads constructor(
         }
     }
 
+    private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL
+        color = this@CircleIndicatorView.color
+    }
+
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
         canvas ?: return
-        canvas.drawCircle(x, y, radius, shapePaint)
+        canvas.drawCircle(x, y, radius, circlePaint)
     }
 
-    companion object {
-        private const val NO_RADIUS = 0
-    }
 
 }
