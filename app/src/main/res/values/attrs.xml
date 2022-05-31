@@ -4,4 +4,11 @@
     <declare-styleable name="Theme">
         <attr name="itemBackgroundColor" format="color" />
     </declare-styleable>
+
+
+    <declare-styleable name="CircleIndicatorView">
+        <attr name="radius" format="float" />
+    </declare-styleable>
+
+
 </resources>
