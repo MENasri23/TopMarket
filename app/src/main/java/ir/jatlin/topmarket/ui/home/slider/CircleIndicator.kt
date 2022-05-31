@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import ir.jatlin.topmarket.R
@@ -17,7 +18,6 @@ class CircleIndicatorView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
     var radius: Float = 0f
-    var color: Int = Color.TRANSPARENT
 
     init {
         context.obtainStyledAttributes(
@@ -33,21 +33,13 @@ class CircleIndicatorView @JvmOverloads constructor(
                     radius = tRadius.toFloat()
                 }
 
-                color = getColor(
-                    R.styleable.CircleIndicatorView_color,
-                    0
-                )
-
             } finally {
                 recycle()
             }
         }
     }
 
-    private val circlePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.FILL
-        color = this@CircleIndicatorView.color
-    }
+    private val circlePath = Path()
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -65,9 +57,12 @@ class CircleIndicatorView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
         canvas ?: return
-        canvas.drawCircle(x, y, radius, circlePaint)
+
+        circlePath.reset()
+        circlePath.addCircle(width / 2f, height / 2f, radius, Path.Direction.CW)
+
+        canvas.clipPath(circlePath)
     }
 
 

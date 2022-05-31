@@ -8,12 +8,15 @@
 
     <declare-styleable name="CircleIndicatorView">
         <attr name="radius" format="float" />
-        <attr name="color" format="color" />
+        <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="LinearCircleIndicator">
+    <declare-styleable name="CircleIndicatorLayout">
         <attr name="activeIndicatorRadius" format="integer" />
+        <attr name="activeIndicatorColor" format="color" />
         <attr name="inActiveIndicatorRadius" format="integer" />
+        <attr name="inActiveIndicatorColor" format="color" />
+        <attr name="indicatorMargin" format="integer" />
     </declare-styleable>
 
 </resources>
