@@ -4,6 +4,7 @@
     <style name="Widget.Market.AppBar" parent="@style/Widget.Material3.AppBarLayout">
         <item name="elevation">@dimen/space_very_small</item>
         <item name="android:elevation">@dimen/space_very_small</item>
+        <item name="background">@color/background_gray_dark</item>
         <item name="android:outlineAmbientShadowColor">?attr/itemBackgroundColor</item>
         <item name="android:outlineSpotShadowColor">?attr/itemBackgroundColor</item>
     </style>
