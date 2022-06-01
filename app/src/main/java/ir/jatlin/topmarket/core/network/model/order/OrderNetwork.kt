@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.network.model.order
 
 import com.google.gson.annotations.SerializedName
-import ir.jatlin.topmarket.core.network.model.user.BillingNetwork
-import ir.jatlin.topmarket.core.network.model.user.ShippingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.BillingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.ShippingNetwork
 
 data class OrderNetwork(
     val billing: BillingNetwork,

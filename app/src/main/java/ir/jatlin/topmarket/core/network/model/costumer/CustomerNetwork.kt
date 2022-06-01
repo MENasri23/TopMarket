@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.network.model.user
+package ir.jatlin.topmarket.core.network.model.costumer
 
 import com.google.gson.annotations.SerializedName
 

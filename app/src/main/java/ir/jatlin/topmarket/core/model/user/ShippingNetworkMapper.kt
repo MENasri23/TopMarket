@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.model.user
 
-import ir.jatlin.topmarket.core.network.model.user.ShippingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.ShippingNetwork
 
 data class Shipping(
     val firstName: kotlin.String,

@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.model.user
 
-import ir.jatlin.topmarket.core.network.model.user.BillingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.BillingNetwork
 
 data class Billing(
     val address1: kotlin.String,

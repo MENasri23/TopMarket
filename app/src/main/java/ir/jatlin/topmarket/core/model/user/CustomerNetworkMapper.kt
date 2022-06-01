@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.model.user
 
-import ir.jatlin.topmarket.core.network.model.user.BillingNetwork
-import ir.jatlin.topmarket.core.network.model.user.CustomerNetwork
-import ir.jatlin.topmarket.core.network.model.user.ShippingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.BillingNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
+import ir.jatlin.topmarket.core.network.model.costumer.ShippingNetwork
 
 data class Customer(
     val id: kotlin.Int,
