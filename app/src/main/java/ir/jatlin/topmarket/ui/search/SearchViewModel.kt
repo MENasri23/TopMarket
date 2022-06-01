@@ -29,13 +29,17 @@ class SearchViewModel @Inject constructor(
         Timber.d("SearchViewModel is creating")
     }
 
+    private val _loading = MutableSharedFlow<Boolean>()
+    val loading = _loading.asSharedFlow()
+
     private val _searchResult = MutableStateFlow<SearchMatchedResult?>(null)
     val searchResult = _searchResult.asStateFlow()
 
     private val _error = MutableSharedFlow<ErrorCause?>()
     val error = _error.asSharedFlow()
 
-    private val _productsInCategory = MutableStateFlow<List<SearchProductInCategoryItem>?>(null)
+    private val _productsInCategory =
+        MutableStateFlow<Resource<List<SearchProductInCategoryItem>>>(Resource.loading())
     val productsInCategory = _productsInCategory.asStateFlow()
 
     private var prevSearchResult: SearchMatchedResult? = null
@@ -58,15 +62,16 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun processSearchResult(result: Resource<List<NetworkProduct>>) {
-        if (result.isSuccess) {
-            _searchResult.value = convertToSearchMatchedResult(result.data!!)
-            prevSearchResult = this.searchResult.value
-        } else {
-            if (result is Resource.Error) {
-                _error.emit(result.cause)
+        when (result) {
+            is Resource.Error -> _loading.emit(true)
+            is Resource.Loading -> _error.emit(result.cause)
+            is Resource.Success -> {
+                _searchResult.value = convertToSearchMatchedResult(result.data!!)
+                prevSearchResult = this.searchResult.value
+                return
             }
-            clearSearch()
         }
+        clearSearch()
     }
 
     private fun convertToSearchMatchedResult(products: List<NetworkProduct>): SearchMatchedResult? {
@@ -167,21 +172,18 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun processProductsInCategoryResult(result: Resource<List<NetworkProduct>>) {
-        result.processTo { products ->
-            _productsInCategory.emit(
-                products.map(::SearchProductInCategoryItem)
-            )
-        }
-    }
-
-    private suspend fun <T> Resource<T>.processTo(
-        onSuccess: suspend (result: T) -> Unit
-    ) {
-        if (isSuccess) {
-            onSuccess(data!!)
-        } else {
-            if (this is Resource.Error) {
-                _error.emit(cause)
+        with(_productsInCategory) {
+            when (result) {
+                is Resource.Error -> emit(Resource.error(result.cause ?: ErrorCause.Unknown()))
+                is Resource.Loading -> emit(Resource.loading())
+                is Resource.Success -> {
+                    val products = result.data!!
+                    emit(
+                        Resource.success(
+                            products.map(::SearchProductInCategoryItem)
+                        )
+                    )
+                }
             }
         }
     }

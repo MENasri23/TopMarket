@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:maxHeight="@dimen/_180sdp"
     android:minHeight="@dimen/_180sdp"
-    android:paddingVertical="@dimen/space_medium">
+    android:paddingVertical="@dimen/space_small">
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_top"
@@ -70,7 +70,6 @@
         app:layout_constraintEnd_toEndOf="@id/glv_separator"
         app:layout_constraintStart_toStartOf="@id/glv_start"
         app:layout_constraintTop_toTopOf="@id/barrier_top"
-        tools:layout_editor_absoluteY="109dp"
         tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
 
 
@@ -140,13 +139,11 @@
         android:id="@+id/product_regular_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_small"
         android:alpha="0.5"
         android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/product_price"
-        app:layout_constraintTop_toBottomOf="@+id/product_price"
         tools:ignore="TextContrastCheck"
         tools:text="4,000,000 "
         tools:visibility="visible" />

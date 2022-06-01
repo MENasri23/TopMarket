@@ -76,6 +76,14 @@
                 android:name="categoryId"
                 android:defaultValue="-1"
                 app:argType="integer" />
+            <action
+                android:id="@+id/action_searchFiltersFragment_to_productDetailsFragment"
+                app:destination="@id/productDetailsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popUpTo="@id/homeFragment" />
+
+
         </fragment>
 
     </navigation>

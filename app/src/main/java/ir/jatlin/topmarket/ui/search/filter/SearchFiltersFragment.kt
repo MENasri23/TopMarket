@@ -16,6 +16,7 @@ import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
 import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.showErrorMessage
 import ir.jatlin.topmarket.ui.util.viewBinding
 import kotlinx.coroutines.launch
@@ -58,12 +59,25 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
-        loadStateViewModel.startLoading()
+
         launch {
-            searchViewModel.productsInCategory.collect { items ->
+            searchViewModel.loading.collect { isLoading ->
+                if (isLoading) {
+                    loadStateViewModel.startLoading()
+                } else {
+                    loadStateViewModel.stopLoading()
+                }
+            }
+        }
+
+        launch {
+            searchViewModel.productsInCategory.safeCollect(
+                onLoading = { loadStateViewModel.startLoading() },
+                onFailure = { showErrorMessage(it) }
+            ) { items ->
                 loadStateViewModel.stopLoading()
                 productPreviewAdapter.submitList(items)
-                Timber.tag("SearchFilterFragment").d("${items?.size}")
+                Timber.tag("SearchFilterFragment").d("${items.size}")
             }
         }
 
@@ -78,7 +92,8 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
     private fun navigateToDetailsScreen(productId: Int) {
         findNavController().navigate(
-            SearchFragmentDirections.toProductDetailsFragment(productId)
+            SearchFiltersFragmentDirections
+                .actionSearchFiltersFragmentToProductDetailsFragment(productId)
         )
     }
 

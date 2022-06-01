@@ -56,8 +56,8 @@ suspend fun <T> Fragment.collectOnSuccess(
 
 
 suspend fun <T> Flow<Resource<T>>.safeCollect(
-    onLoading: ((data: T?) -> Unit) = {},
-    onFailure: (cause: ErrorCause?) -> Unit = {},
+    onLoading: suspend ((data: T?) -> Unit) = {},
+    onFailure: suspend (cause: ErrorCause?) -> Unit = {},
     onSuccess: suspend ((data: T) -> Unit)
 ) {
     collect { state ->
