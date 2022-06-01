@@ -25,6 +25,10 @@ class SearchViewModel @Inject constructor(
     private val fetchProductsListUseCase: FetchProductsListUseCase
 ) : ViewModel() {
 
+    init {
+        Timber.d("SearchViewModel is creating")
+    }
+
     private val _searchResult = MutableStateFlow<SearchMatchedResult?>(null)
     val searchResult = _searchResult.asStateFlow()
 
@@ -41,27 +45,9 @@ class SearchViewModel @Inject constructor(
     private var searchJob: Job? = null
 
 
-    fun onSearchTextChanged(query: String?) {
-        searchJob?.cancel()
-
-        val search = query?.trim()
-        if (search == null || search.length < 2) {
-            clearSearch()
-            return
-        }
-
-        if (textQuery != search) {
-            textQuery = search
-
-            searchProducts(search)
-        } else {
-            _searchResult.value = prevSearchResult
-        }
-    }
-
     private fun searchProducts(query: String) {
         searchJob = viewModelScope.launch {
-            delay(500L)
+            delay(700L)
             searchProductsUseCase(textQuery = query, taken = 20)
                 .collect { searchResult ->
                     processSearchResult(searchResult)
@@ -141,8 +127,27 @@ class SearchViewModel @Inject constructor(
         _searchResult.value = null
     }
 
+    fun onSearchTextChanged(query: String?) {
+        searchJob?.cancel()
+
+        val search = query?.trim()
+        if (search == null || search.length < 2) {
+            clearSearch()
+            return
+        }
+
+        if (textQuery != search) {
+            textQuery = search
+
+            searchProducts(search)
+        } else {
+            _searchResult.value = prevSearchResult
+        }
+    }
+
     fun searchProductsWith(categoryId: Int) {
         val query = textQuery
+        Timber.d("searchViewModel query: $query")
         val params = makeProductParams {
             if (categoryId != INVALID_ID) {
                 this.categoryId = categoryId
@@ -181,6 +186,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Timber.d("SearchViewModel cleared...")
+    }
 
     companion object {
         private const val INVALID_ID = -1

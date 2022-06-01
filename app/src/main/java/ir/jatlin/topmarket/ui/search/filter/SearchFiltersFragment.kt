@@ -5,12 +5,15 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchFiltersBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
+import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import ir.jatlin.topmarket.ui.util.showErrorMessage
@@ -28,6 +31,8 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
     private val args by navArgs<SearchFiltersFragmentArgs>()
 
+    private lateinit var productPreviewAdapter: ProductPreviewAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,7 +46,15 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     }
 
     private fun initViews() = binding.apply {
-        root
+        productsList.apply {
+            addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            )
+            adapter = ProductPreviewAdapter(
+                onProductClicked = this@SearchFiltersFragment::navigateToDetailsScreen
+            ).also { productPreviewAdapter = it }
+
+        }
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
@@ -49,6 +62,7 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
         launch {
             searchViewModel.productsInCategory.collect { items ->
                 loadStateViewModel.stopLoading()
+                productPreviewAdapter.submitList(items)
                 Timber.tag("SearchFilterFragment").d("${items?.size}")
             }
         }
@@ -62,5 +76,10 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
         }
     }
 
+    private fun navigateToDetailsScreen(productId: Int) {
+        findNavController().navigate(
+            SearchFragmentDirections.toProductDetailsFragment(productId)
+        )
+    }
 
 }

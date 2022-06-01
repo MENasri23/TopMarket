@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="@dimen/_180sdp"
+    android:minHeight="@dimen/_180sdp"
+    android:paddingVertical="@dimen/space_medium">
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="special_divider" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/special_sale"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="@string/special_sale"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        android:textColor="?attr/colorError"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/special_divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/hair_line"
+        android:layout_marginTop="@dimen/space_small"
+        android:background="?attr/colorError"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/special_sale" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/product_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"
+        app:layout_constraintStart_toStartOf="@id/glv_separator"
+        app:layout_constraintTop_toTopOf="@id/barrier_top"
+        tools:background="@color/black" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        app:layout_constraintEnd_toEndOf="@id/glv_separator"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="@id/barrier_top"
+        tools:layout_editor_absoluteY="109dp"
+        tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_stock_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_small"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:drawablePadding="@dimen/space_very_small"
+        android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+        android:textColor="#00796B"
+        app:drawableEndCompat="@drawable/ic_instock_24"
+        app:layout_constraintEnd_toEndOf="@id/glv_separator"
+        app:layout_constraintStart_toEndOf="@id/product_avg_rating"
+        app:layout_constraintTop_toBottomOf="@id/product_name"
+        tools:ignore="TextContrastCheck"
+        tools:text="@string/product_avaialble"
+        tools:textColor="?attr/colorAccent" />
+
+    <ImageView
+        android:id="@+id/product_rating_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_star_rate_24"
+        app:layout_constraintBottom_toBottomOf="@id/product_stock_status"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@id/product_name"
+        app:layout_constraintTop_toTopOf="@id/product_stock_status" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_avg_rating"
+        style="@style/TextAppearance.MarketApp.LabelSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_very_small"
+        android:layout_marginEnd="@dimen/space_very_small"
+        android:text="@{viewModel.productDetails.averageRating}"
+        app:layout_constraintBottom_toBottomOf="@id/product_rating_image"
+        app:layout_constraintStart_toEndOf="@id/product_rating_image"
+        app:layout_constraintTop_toTopOf="@id/product_rating_image"
+        tools:layout_editor_absoluteY="42dp"
+        tools:text="4.5" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_medium"
+        android:drawablePadding="@dimen/space_very_small"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_toman"
+        app:layout_constraintBottom_toTopOf="@+id/barrier_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/product_discount"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@id/glv_start"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@+id/product_stock_status"
+        app:layout_constraintVertical_bias="0.7"
+        tools:text="4,000,000" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_regular_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:alpha="0.5"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/product_price"
+        app:layout_constraintTop_toBottomOf="@+id/product_price"
+        tools:ignore="TextContrastCheck"
+        tools:text="4,000,000 "
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/product_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:background="?attr/colorError"
+        android:paddingHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+        android:textColor="?attr/colorOnError"
+        app:layout_constraintBottom_toBottomOf="@+id/product_price"
+        app:layout_constraintEnd_toEndOf="@id/glv_separator"
+        app:layout_constraintStart_toEndOf="@+id/product_price"
+        app:layout_constraintTop_toTopOf="@+id/product_price"
+        tools:text="25%" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_medium" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/space_medium" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="product_regular_price" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_special"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="special_sale,special_divider" />
+</androidx.constraintlayout.widget.ConstraintLayout>

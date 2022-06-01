@@ -47,7 +47,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/search_in_category_suggests"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:overScrollMode="never"
                     android:paddingHorizontal="@dimen/space_medium"

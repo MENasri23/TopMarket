@@ -1,13 +1,18 @@
 package ir.jatlin.topmarket.ui.search
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.internal.ViewUtils
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchBinding
@@ -20,7 +25,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
-    private val viewModel by hiltNavGraphViewModels<SearchViewModel>(R.id.search_graph)
+    private val viewModel by viewModels<SearchViewModel>()
     private val binding by dataBindings(FragmentSearchBinding::bind)
 
     private lateinit var headerItemAdapter: HeaderItemAdapter
@@ -52,6 +57,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
     }
 
+    @SuppressLint("WrongConstant")
     private fun initViews() = binding.apply {
         val etSearch = includeSearchBar.searchEditText
         root.clearFocusOnTouchEvent(etSearch)
@@ -78,6 +84,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         )
         searchProductSuggests.adapter = headerItemAdapter
 
+        searchInCategorySuggests.doOnApplyWindowInsets { v, insets, padding, _ ->
+            v.updatePadding(
+                bottom = padding.bottom + insets.systemWindowInsetBottom
+            )
+            insets
+        }
+
         bodyItemAdapter = BodyItemAdapter(
             onProductInCategoryClicked = this@SearchFragment::navigateToSearchFilterScreen
         )
@@ -86,9 +99,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun navigateToProductDetailsScreen(productId: Int) {
-        val action = SearchFragmentDirections.toProductDetailsFragment().apply {
-            this.arguments.putInt("productId", productId)
-        }
+        val action = SearchFragmentDirections.toProductDetailsFragment(productId)
         findNavController().navigate(action)
     }
 

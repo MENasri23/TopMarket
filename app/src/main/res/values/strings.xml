@@ -52,4 +52,6 @@
     <string name="search_all_products">جستجو در همه ی کالاها</string>
     <!-- <string name="product_in_category">در دسته  <b>%s</b></string>-->
     <string name="product_in_category">&lt;font color="#B3000000">از دسته &lt;/font> &lt;b>%s&lt;/b></string>
+    <string name="special_sale">فروش ویژه</string>
+    <string name="app_amazing_suggestions">شگفت انگیز اختصاصی اپ</string>
 </resources>

@@ -4,11 +4,15 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -177,9 +181,9 @@ private fun percentDiscount(
 
     } catch (e: NumberFormatException) {
         when {
-            beforeDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
-            afterDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
-            else -> Timber.d("Unresolved number format for values: $beforeDiscount, $afterDiscount")
+            beforeDiscount.length > 10 -> Timber.e("Integer parsing overflow for input: $beforeDiscount")
+            afterDiscount.length > 10 -> Timber.e("Integer parsing overflow for input: $beforeDiscount")
+            else -> Timber.e("Unresolved number format for values: $beforeDiscount, $afterDiscount")
         }
         null
     }
@@ -198,4 +202,50 @@ fun View.hideKeyboard() {
         Context.INPUT_METHOD_SERVICE
     ) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+}
+
+/**
+ * Set up a listener to apply window insets. The lambda also receives this View's initial padding
+ * and margin values, to aid in properly updating the view based on the insets.
+ */
+fun View.doOnApplyWindowInsets(
+    f: (v: View, insets: WindowInsetsCompat, padding: Insets, margins: Insets) -> WindowInsetsCompat
+) {
+    // Create a snapshot of the view's padding and margins.
+    val padding = recordPadding()
+    val margins = recordMargins()
+    // Set a listener which proxies to the given lambda, also passing in the recorded state.
+    ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
+        f(view, insets, padding, margins)
+    }
+
+    requestApplyInsetsWhenAttached()
+}
+
+fun View.recordPadding() = Insets.of(paddingLeft, paddingTop, paddingRight, paddingBottom)
+
+fun View.recordMargins(): Insets {
+    val lp = layoutParams as? ViewGroup.MarginLayoutParams ?: return Insets.NONE
+    return Insets.of(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
+}
+
+/**
+ * Convenience to request window insets, or ensure that the request is made when attached to the
+ * view hierarchy.
+ */
+fun View.requestApplyInsetsWhenAttached() {
+    if (isAttachedToWindow) {
+        // We're already attached, just request as normal.
+        requestApplyInsets()
+    } else {
+        // Add a listener to request when we are attached to the hierarchy.
+        addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
+                v.requestApplyInsets()
+            }
+
+            override fun onViewDetachedFromWindow(v: View) = Unit
+        })
+    }
 }

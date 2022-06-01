@@ -51,7 +51,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private val amazingSuggestions = stateFlow {
-        fetchProducts { searchQuery = "تخفیفات" }
+        fetchProducts { categoryId = 119 }
     }
 
     val homeUiState: Flow<Resource<HomeUiState>> = combine(

@@ -44,6 +44,7 @@
     <style name="Widget.Market.AppBar" parent="@style/Widget.Material3.AppBarLayout">
         <item name="elevation">@dimen/space_very_small</item>
         <item name="android:elevation">@dimen/space_very_small</item>
+        <item name="background">@color/background_gray_dark</item>
     </style>
 
     <style name="Widget.Market.Button" parent="Widget.Material3.Button">

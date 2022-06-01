@@ -11,6 +11,8 @@
     <dimen name="category_image_height">@dimen/_100sdp</dimen>
     <dimen name="include_search_appbar_height">@dimen/_48sdp</dimen>
 
+    <dimen name="hair_line">@dimen/_2sdp</dimen>
+
     <dimen name="slider_image_corner_size">@dimen/space_small</dimen>
     <dimen name="slider_height">@dimen/_128sdp</dimen>
 
