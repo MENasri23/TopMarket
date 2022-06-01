@@ -8,6 +8,8 @@ import ir.jatlin.topmarket.core.data.source.remote.ProductRemoteDataSource
 import ir.jatlin.topmarket.core.data.source.remote.ProductRetrofitDataSource
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRemoteDataSource
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRetrofitDataSource
+import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
+import ir.jatlin.topmarket.core.data.source.remote.order.OrderRetrofitDataSource
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -22,4 +24,9 @@ interface SourceModule {
     fun bindsCustomerRemoteDataSource(
         remoteDataSource: CustomerRetrofitDataSource
     ): CustomerRemoteDataSource
+
+    @Binds
+    fun bindsOrderRemoteDataSource(
+        remoteDataSource: OrderRetrofitDataSource
+    ): OrderRemoteDataSource
 }
