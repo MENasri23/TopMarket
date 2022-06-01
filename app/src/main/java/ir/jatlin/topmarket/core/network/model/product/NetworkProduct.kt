@@ -21,5 +21,7 @@ data class NetworkProduct(
     @SerializedName("rating_count")
     val ratingCount: Int,
     @SerializedName("total_sales")
-    val totalSales: Int
+    val totalSales: Int,
+    @SerializedName("average_rating")
+    val averageRating: String
 )

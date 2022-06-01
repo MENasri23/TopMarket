@@ -6,13 +6,14 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.databinding.ProductPreviewItemViewBinding
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
+import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 class ProductPreviewItemViewHolder(
     private val binding: ProductPreviewItemViewBinding,
     private val eventListener: ProductItemEventListener
-) : BaseViewHolder<NetworkProduct>(binding) {
+) : BaseViewHolder<SearchProductInCategoryItem>(binding) {
 
     private var currentProduct: NetworkProduct? = null
     private val context = binding.root.context
@@ -25,24 +26,30 @@ class ProductPreviewItemViewHolder(
         }
     }
 
-    override fun bind(item: NetworkProduct) {
-        currentProduct = item
+    override fun bind(item: SearchProductInCategoryItem) {
+        val product = item.product.also { currentProduct = it }
         with(binding) {
-            showPrice(item.regularPrice, item.price)
-            productName.text = item.name
-            productStockStatus.text = if (item.stockStatus == "instock") {
+            showPrice(product.regularPrice, product.price)
+            groupSpecial.isVisible = productDiscount.isVisible
+            productName.text = product.name
+            productStockStatus.text = if (product.stockStatus == "instock") {
                 context.resources.getString(R.string.product_avaialble)
             } else {
                 context.resources.getString(R.string.product_unavailable)
             }
-
-            productImage.loadFromUrl(item.images.first().url)
+            productAvgRating.text = product.averageRating
+            productImage.loadFromUrl(product.images.first().url)
 
         }
     }
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
-        productPrice.text = withSeparator(price)
+        if (price.isNotEmpty()) {
+            productPrice.visible()
+            productPrice.text = withSeparator(price)
+        } else {
+            productPrice.invisible()
+        }
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,
             afterDiscount = price
@@ -55,7 +62,7 @@ class ProductPreviewItemViewHolder(
             productRegularPrice.paintFlags =
                 productRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
-            productRegularPrice.invisible()
+            productRegularPrice.gone()
         }
 
     }

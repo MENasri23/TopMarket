@@ -51,5 +51,7 @@ data class NetworkProductDetails(
     val stockQuantity: Int,
     @SerializedName("variations")
     val variationIds: List<Any>,
-    val weight: String
+    val weight: String,
+    @SerializedName("stock_status")
+    val stockStatus: String
 )

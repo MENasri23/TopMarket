@@ -7,17 +7,20 @@ import androidx.recyclerview.widget.ListAdapter
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.databinding.ProductPreviewItemViewBinding
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
+import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 class ProductPreviewAdapter(
     private val onProductClicked: (productId: Int) -> Unit
-) : ListAdapter<NetworkProduct, BaseViewHolder<NetworkProduct>>(DiffCallback()),
+) : ListAdapter<SearchProductInCategoryItem, BaseViewHolder<SearchProductInCategoryItem>>(
+    DiffCallback()
+),
     ProductItemEventListener {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BaseViewHolder<NetworkProduct> {
+    ): BaseViewHolder<SearchProductInCategoryItem> {
         return ProductPreviewItemViewHolder(
             binding = ProductPreviewItemViewBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -26,17 +29,26 @@ class ProductPreviewAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<NetworkProduct>, position: Int) {
+    override fun onBindViewHolder(
+        holder: BaseViewHolder<SearchProductInCategoryItem>,
+        position: Int
+    ) {
         holder.bind(getItem(position))
     }
 
-    private class DiffCallback : DiffUtil.ItemCallback<NetworkProduct>() {
-        override fun areItemsTheSame(oldItem: NetworkProduct, newItem: NetworkProduct): Boolean {
-            return newItem.id == oldItem.id
+    private class DiffCallback : DiffUtil.ItemCallback<SearchProductInCategoryItem>() {
+        override fun areItemsTheSame(
+            oldItem: SearchProductInCategoryItem,
+            newItem: SearchProductInCategoryItem
+        ): Boolean {
+            return newItem.product.id == oldItem.product.id
         }
 
-        override fun areContentsTheSame(oldItem: NetworkProduct, newItem: NetworkProduct): Boolean {
-            return newItem == oldItem
+        override fun areContentsTheSame(
+            oldItem: SearchProductInCategoryItem,
+            newItem: SearchProductInCategoryItem
+        ): Boolean {
+            return newItem.product == oldItem.product
         }
     }
 
