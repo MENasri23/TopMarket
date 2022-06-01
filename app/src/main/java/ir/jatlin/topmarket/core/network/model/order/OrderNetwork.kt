@@ -7,7 +7,7 @@ import ir.jatlin.topmarket.core.network.model.user.ShippingNetwork
 data class OrderNetwork(
     val billing: BillingNetwork,
     @SerializedName("line_items")
-    val lineItems: List<OrderLineItem>,
+    val lineItems: List<OrderLineItemNetwork>,
     @SerializedName("payment_method")
     val paymentMethod: String,
     @SerializedName("payment_method_title")
