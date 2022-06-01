@@ -47,7 +47,7 @@ class SearchViewModel @Inject constructor(
 
     private fun searchProducts(query: String) {
         searchJob = viewModelScope.launch {
-            delay(500L)
+            delay(700L)
             searchProductsUseCase(textQuery = query, taken = 20)
                 .collect { searchResult ->
                     processSearchResult(searchResult)
