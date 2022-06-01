@@ -12,7 +12,7 @@ data class OrderNetwork(
     @SerializedName("payment_method")
     val paymentMethod: String,
     @SerializedName("payment_method_title")
-    val paymentMethod_title: String,
+    val paymentMethodTitle: String,
     @SerializedName("set_paid")
     val setPaid: Boolean,
     val shipping: ShippingNetwork

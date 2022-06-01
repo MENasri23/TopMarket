@@ -8,7 +8,7 @@ data class Order(
     val billing: ir.jatlin.topmarket.core.network.model.costumer.BillingNetwork,
     val lineItems: kotlin.collections.List<OrderLineItemNetwork>,
     val paymentMethod: String,
-    val paymentMethod_title: String,
+    val paymentMethodTitle: String,
     val setPaid: kotlin.Boolean,
     val shipping: ir.jatlin.topmarket.core.network.model.costumer.ShippingNetwork,
 )
