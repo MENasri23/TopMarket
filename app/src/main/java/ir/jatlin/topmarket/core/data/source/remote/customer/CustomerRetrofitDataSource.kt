@@ -5,7 +5,7 @@ import ir.jatlin.topmarket.core.network.api.MarketApi
 import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import javax.inject.Inject
 
-class CustomerRetrofitRemoteDataSource @Inject constructor(
+class CustomerRetrofitDataSource @Inject constructor(
     private val marketApi: MarketApi,
     private val convertResponse: ResponseConverter
 ) : CustomerRemoteDataSource {

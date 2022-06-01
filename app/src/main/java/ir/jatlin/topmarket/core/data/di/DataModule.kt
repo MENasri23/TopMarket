@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.jatlin.topmarket.core.data.repository.DefaultProductRepository
 import ir.jatlin.topmarket.core.data.repository.ProductRepository
+import ir.jatlin.topmarket.core.data.repository.customer.CustomerRepository
+import ir.jatlin.topmarket.core.data.repository.customer.DefaultCustomerRepository
 import javax.inject.Singleton
 
 @Module
@@ -18,4 +20,9 @@ interface DataModule {
         productRepository: DefaultProductRepository
     ): ProductRepository
 
+    @Binds
+    @Singleton
+    fun bindsCustomerRepository(
+       customerRepository: DefaultCustomerRepository
+    ): CustomerRepository
 }
