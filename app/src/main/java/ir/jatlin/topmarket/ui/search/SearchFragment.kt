@@ -1,17 +1,20 @@
 package ir.jatlin.topmarket.ui.search
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.internal.ViewUtils
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
@@ -24,12 +27,26 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
+    companion object {
+        private const val NO_CATEGORY_ID = -1
+    }
 
     private val viewModel by viewModels<SearchViewModel>()
     private val binding by dataBindings(FragmentSearchBinding::bind)
 
+    private val navArgs by navArgs<SearchFragmentArgs>()
+
     private lateinit var headerItemAdapter: HeaderItemAdapter
     private lateinit var bodyItemAdapter: BodyItemAdapter
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val categoryId = navArgs.categoryId
+        if (categoryId != NO_CATEGORY_ID) {
+            navigateToSearchFilterScreen(categoryId)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,8 +80,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         root.clearFocusOnTouchEvent(etSearch)
 
         etSearch.apply {
-            if (requestFocus()) {
-                showKeyboard()
+            doOnLayout {
+                if (requestFocus()) {
+                    showKeyboard()
+                }
             }
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {

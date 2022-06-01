@@ -2,9 +2,12 @@ package ir.jatlin.topmarket.ui.categories
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavGraph
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
@@ -75,7 +78,10 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
     }
 
     override fun onCategoryItemClick(categoryId: Int) {
-        // TODO: Navigate to show related products
+        val action = ProductCategoryFragmentDirections
+            .actionProductCategoryFragmentToSearchGraph()
+        action.arguments.putInt("categoryId", categoryId)
+        findNavController().navigate(action)
     }
 
 

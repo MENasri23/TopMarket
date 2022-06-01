@@ -32,8 +32,13 @@
         android:id="@+id/productCategoryFragment"
         android:name="ir.jatlin.topmarket.ui.categories.ProductCategoryFragment"
         android:label="fragment_product_category"
-        tools:layout="@layout/fragment_product_category" />
-
+        tools:layout="@layout/fragment_product_category">
+        <action
+            android:id="@+id/action_productCategoryFragment_to_search_graph"
+            app:destination="@id/search_graph"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
 
 
     <navigation
@@ -57,6 +62,10 @@
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 app:popUpTo="@id/homeFragment" />
+            <argument
+                android:name="categoryId"
+                android:defaultValue="-1"
+                app:argType="integer" />
         </fragment>
         <fragment
             android:id="@+id/searchFiltersFragment"
