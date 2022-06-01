@@ -32,7 +32,9 @@ class AmazingSuggestionItemViewHolder(
     }
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
-        productPrice.text = withSeparator(price)
+        if (price.isNotBlank()) {
+            productPrice.text = withSeparator(price)
+        }
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,
             afterDiscount = price
@@ -40,11 +42,10 @@ class AmazingSuggestionItemViewHolder(
         if (productDiscount.isVisible) {
             productDiscount.clipToRoundRect(true)
 
-            productRegularPrice.text = withSeparator(regularPrice)
-            productRegularPrice.visible()
             productRegularPrice.paintFlags =
                 productRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
+            productPrice.invisible()
             productRegularPrice.invisible()
         }
 

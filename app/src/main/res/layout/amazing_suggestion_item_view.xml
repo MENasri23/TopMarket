@@ -34,11 +34,11 @@
             style="@style/TextAppearance.MarketApp.LabelMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/app_amazing_suggestions"
             android:textColor="?attr/colorError"
             app:layout_constraintEnd_toEndOf="@id/glv_end"
             app:layout_constraintStart_toStartOf="@id/glv_start"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="شگفت انگیز اختصاصی اپ" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +72,7 @@
             android:id="@+id/product_stock_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/space_small"
             android:drawablePadding="@dimen/space_very_small"
             android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
             app:drawableEndCompat="@drawable/ic_instock_24"

@@ -181,9 +181,9 @@ private fun percentDiscount(
 
     } catch (e: NumberFormatException) {
         when {
-            beforeDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
-            afterDiscount.length > 10 -> Timber.d("Integer parsing overflow for input: $beforeDiscount")
-            else -> Timber.d("Unresolved number format for values: $beforeDiscount, $afterDiscount")
+            beforeDiscount.length > 10 -> Timber.e("Integer parsing overflow for input: $beforeDiscount")
+            afterDiscount.length > 10 -> Timber.e("Integer parsing overflow for input: $beforeDiscount")
+            else -> Timber.e("Unresolved number format for values: $beforeDiscount, $afterDiscount")
         }
         null
     }
