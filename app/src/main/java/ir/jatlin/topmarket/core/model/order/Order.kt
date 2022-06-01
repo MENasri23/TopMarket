@@ -12,13 +12,3 @@ data class Order(
     val setPaid: kotlin.Boolean,
     val shipping: ir.jatlin.topmarket.core.network.model.costumer.ShippingNetwork,
 )
-
-fun OrderNetwork.asOrder() = Order(
-    id = id,
-    billing = billing,
-    lineItems = lineItems,
-    paymentMethod = paymentMethod,
-    paymentMethod_title = paymentMethod_title,
-    setPaid = setPaid,
-    shipping = shipping,
-)
