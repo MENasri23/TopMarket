@@ -32,8 +32,18 @@ interface MarketApi {
     @POST(Route.CUSTOMER_NEW)
     suspend fun createCustomer(
         @Body customerNetwork: CustomerNetwork
-    ) : Response<CustomerNetwork>
+    ): Response<CustomerNetwork>
 
+    @GET(Route.COSTUMER)
+    suspend fun getCustomer(
+        @Path("id") id: Int
+    ): Response<CustomerNetwork>
+
+    @PUT(Route.COSTUMER)
+    suspend fun updateCustomer(
+        @Path("id") id: Int,
+        @Body customer: CustomerNetwork
+    )
 
     private object Route {
         private const val PREFIX = "/wp-json/wc/v3"
