@@ -7,7 +7,7 @@ import ir.jatlin.topmarket.ui.util.loadFromUrl
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 
 class SpecialProductSliderViewHolder(
-    private val binding: SpecialProductSlideViewBinding,
+    private val binding: SpecialProductSlideViewBinding
 ) : BaseViewHolder<NetworkImage>(binding) {
 
     override fun bind(item: NetworkImage) {

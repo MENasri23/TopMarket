@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.ui.home
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.domain.product.FetchProductBanners
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
@@ -18,6 +19,8 @@ import ir.jatlin.topmarket.ui.util.anyLoading
 import ir.jatlin.topmarket.ui.util.findAnyFailed
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,11 +28,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val fetchProductList: FetchProductsListUseCase
+    private val fetchProductList: FetchProductsListUseCase,
+    private val fetchProductBanners: FetchProductBanners
 ) : ViewModel() {
 
-    /* private val _error = MutableStateFlow<ErrorCause?>(null)
-     val error = _error.asStateFlow()*/
+    private val _currentBannerPosition = MutableStateFlow<Int>(0)
+    val sliderItemPosition = _currentBannerPosition.asStateFlow()
+
+    private val banners = stateFlow {
+        fetchProductBanners()
+    }
 
     private val latestProducts = stateFlow {
         fetchProducts {
@@ -54,54 +62,28 @@ class HomeViewModel @Inject constructor(
         fetchProducts { categoryId = 119 }
     }
 
-    val homeUiState: Flow<Resource<HomeUiState>> = combine(
+    private val productsGroupItems = combine(
         latestProducts,
         popularProducts,
-        topRatedProducts,
-        amazingSuggestions
-    ) { latest, popular, topRated, amazing ->
-        Timber.d("latest: ${latest.javaClass.simpleName}, popular: ${popular.javaClass.simpleName}, topRated: ${topRated.javaClass.simpleName}, amazing: ${amazing.javaClass.simpleName}")
+        topRatedProducts
+    ) { latest, popular, topRated ->
+        Timber.d("latest: ${latest.javaClass.simpleName}, popular: ${popular.javaClass.simpleName}, topRated: ${topRated.javaClass.simpleName}")
+
         when {
-            anyLoading(latest, popular, topRated, amazing) -> Resource.loading()
-            allSuccess(latest, popular, topRated, amazing) -> Resource.success(
-                data = HomeUiState(
-                    listOf(
-                        HomeDisplayItem.SpecialProductsSliderItem(
-                            specialProductImages = amazing.data!!.mapNotNull { it.images.firstOrNull() }
-                        ),
-                        HomeDisplayItem.ProductDisplayGroupItem(
-                            label = R.string.products_latest,
-                            products = latest.data!!.map(NetworkProduct::asProductItem)
-                        ),
-                        HomeDisplayItem.AmazingSuggestionGroupItem(
-                            suggestionItems = mutableListOf<AmazingDisplayItem>(
-                                AmazingDisplayItem.Header(
-                                    shapeIcon = R.drawable.amazing_suggestion
-                                )
-                            ).apply {
-                                addAll(amazing.data!!.map(NetworkProduct::asAmazingItem))
-                            }
-
-                        ),
-                        HomeDisplayItem.ProductDisplayGroupItem(
-                            label = R.string.products_popular,
-                            products = popular.data!!.map(NetworkProduct::asProductItem)
-                        ),
-                        HomeDisplayItem.AmazingSuggestionGroupItem(
-                            suggestionItems = mutableListOf<AmazingDisplayItem>(
-                                AmazingDisplayItem.Header(
-                                    shapeIcon = R.drawable.amazing_suggestion2
-                                )
-                            ).apply {
-                                addAll(amazing.data!!.map(NetworkProduct::asAmazingItem))
-                            },
-                            backgroundColor = 0x41b10b
-
-                        ),
-                        HomeDisplayItem.ProductDisplayGroupItem(
-                            products = topRated.data!!.map(NetworkProduct::asProductItem),
-                            label = R.string.products_top_rated
-                        )
+            anyLoading(latest, popular, topRated) -> Resource.loading()
+            allSuccess(latest, popular, topRated) -> Resource.success(
+                data = listOf(
+                    HomeDisplayItem.ProductDisplayGroupItem(
+                        label = R.string.products_latest,
+                        products = latest.data!!.map(NetworkProduct::asProductItem)
+                    ),
+                    HomeDisplayItem.ProductDisplayGroupItem(
+                        label = R.string.products_popular,
+                        products = popular.data!!.map(NetworkProduct::asProductItem)
+                    ),
+                    HomeDisplayItem.ProductDisplayGroupItem(
+                        products = topRated.data!!.map(NetworkProduct::asProductItem),
+                        label = R.string.products_top_rated
                     )
                 )
             )
@@ -109,6 +91,56 @@ class HomeViewModel @Inject constructor(
                 Resource.error(error?.cause ?: ErrorCause.Unknown())
             }
         }
+
+    }
+
+    val homeUiState: Flow<Resource<HomeUiState>> = combine(
+        banners,
+        amazingSuggestions,
+        productsGroupItems,
+    ) { banners, amazing, productGroups ->
+        Timber.d("banners: ${banners.javaClass.simpleName}, amazing: ${amazing.javaClass.simpleName}")
+        when {
+            anyLoading(banners, amazing, productGroups) -> Resource.loading()
+            allSuccess(banners, amazing, productGroups) -> {
+                val result = mutableListOf<HomeDisplayItem>(
+                    HomeDisplayItem.SpecialProductsSliderItem(banners.data!!)
+                )
+                val amazingItems = amazing.data!!.map(NetworkProduct::asAmazingItem)
+                val amazingHeader = AmazingDisplayItem.Header(
+                    shapeIcon = R.drawable.amazing_suggestion
+                )
+                val amazingGroupItems = HomeDisplayItem.AmazingSuggestionGroupItem(
+                    suggestionItems = mutableListOf<AmazingDisplayItem>(
+                        amazingHeader
+                    ).apply {
+                        addAll(amazingItems)
+                    },
+                    backgroundColor = 0xEF3F55
+                )
+                result.add(amazingGroupItems)
+
+                productGroups.data!!.forEachIndexed { index, item ->
+                    if (index == 1) {
+                        result.add(
+                            HomeDisplayItem.AmazingSuggestionGroupItem(
+                                suggestionItems = mutableListOf<AmazingDisplayItem>(
+                                    amazingHeader.copy(shapeIcon = R.drawable.amazing_suggestion2)
+                                ).apply { addAll(amazingItems) },
+                                backgroundColor = 0x41b10b
+                            )
+                        )
+                    }
+                    result.add(item)
+                }
+
+                Resource.success(HomeUiState(result))
+            }
+            else -> findAnyFailed(banners, amazing, productGroups).let { error ->
+                Resource.error(error?.cause ?: ErrorCause.Unknown())
+            }
+        }
+
     }
 
 
@@ -118,6 +150,10 @@ class HomeViewModel @Inject constructor(
         return fetchProductList(
             params = makeProductParams(block)
         )
+    }
+
+    fun onSliderItemPositionChanged(currentPosition: Int) {
+        _currentBannerPosition.value = currentPosition
     }
 
 }

@@ -9,27 +9,27 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
-import ir.jatlin.topmarket.ui.home.slider.SpecialProductSliderAdapter
+import ir.jatlin.topmarket.ui.home.slider.SpecialProductGroupViewHolder
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
-import ir.jatlin.topmarket.ui.util.dataBindings
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.safeCollect
-import ir.jatlin.topmarket.ui.util.showErrorMessage
+import ir.jatlin.topmarket.ui.util.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment :
     Fragment(R.layout.fragment_home),
     ProductDisplayGroupEventListener,
-    ProductItemEventListener {
+    ProductItemEventListener,
+    SpecialProductGroupViewHolder.EventListener {
     private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
 
     private lateinit var homeDisplayItemAdapter: HomeDisplayItemAdapter
-    private lateinit var specialProductSliderAdapter: SpecialProductSliderAdapter
+
+    private var autoSlideJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,7 +46,14 @@ class HomeFragment :
 
         homeDisplayItemAdapter = HomeDisplayItemAdapter(
             this@HomeFragment,
+            this@HomeFragment,
             this@HomeFragment
+        )
+
+        productCategories.addItemDecoration(
+            SpacerItemDecoration(
+                resources.getDimensionPixelOffset(R.dimen.space_medium)
+            )
         )
         productCategories.adapter = homeDisplayItemAdapter
 
@@ -83,6 +90,14 @@ class HomeFragment :
         val action = HomeFragmentDirections
             .actionHomeFragmentToProductDetailsFragment(productId)
         findNavController().navigate(action)
+    }
+
+    override fun onSliderItemPositionChanged(currentPosition: Int) {
+        viewModel.onSliderItemPositionChanged(currentPosition)
+    }
+
+    override fun getCurrentSpecialProductItemPosition(): Int {
+        return viewModel.sliderItemPosition.value
     }
 
 }

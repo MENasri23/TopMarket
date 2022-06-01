@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/slider_height">
+    android:layout_height="@dimen/slider_height"
+    android:clickable="true"
+    android:focusable="true">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/special_product_slider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:clickable="false"
+        android:clipToPadding="false"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/dots_indicator"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,13 +24,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_small"
-        app:dotsColor="?attr/itemBackgroundColor"
+        android:clickable="false"
+        app:dotsColor="?attr/indicatorBackgroundColor"
         app:dotsCornerRadius="@dimen/space_small"
         app:dotsSize="@dimen/space_small"
         app:dotsSpacing="@dimen/space_very_small"
         app:dotsWidthFactor="2.5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/special_product_slider"
         app:layout_constraintStart_toStartOf="@id/special_product_slider"
         app:layout_constraintTop_toBottomOf="@id/special_product_slider"
-        app:selectedDotColor="?attr/itemBackgroundColor" />
+        app:selectedDotColor="?attr/indicatorBackgroundColor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

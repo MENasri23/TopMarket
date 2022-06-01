@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.databinding.SpecialProductSlideViewBinding
-import ir.jatlin.topmarket.ui.home.HomeDisplayItem
 
-class SpecialProductSliderAdapter : ListAdapter<NetworkImage,
+class SpecialProductSliderAdapter: ListAdapter<NetworkImage,
         SpecialProductSliderViewHolder>(DifCallback()) {
 
     override fun onCreateViewHolder(

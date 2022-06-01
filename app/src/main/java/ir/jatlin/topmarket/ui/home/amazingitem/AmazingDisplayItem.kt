@@ -11,7 +11,7 @@ sealed interface AmazingDisplayItem {
 
     val id: Int
 
-    class Header(
+    data class Header(
         // TODO: Change the type of this properties
         //  if the service provide the same functionality
         @StringRes val label: Int = 0,
@@ -21,7 +21,7 @@ sealed interface AmazingDisplayItem {
         override val id: Int = Int.MIN_VALUE + 1
     }
 
-    class AmazingItem(val product: NetworkProduct) : AmazingDisplayItem {
+    data class AmazingItem(val product: NetworkProduct) : AmazingDisplayItem {
 
         override val id: Int
             get() = product.id

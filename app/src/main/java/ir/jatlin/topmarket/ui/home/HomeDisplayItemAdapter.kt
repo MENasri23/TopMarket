@@ -8,7 +8,6 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.AmaziingSuggestionGroupViewBinding
 import ir.jatlin.topmarket.databinding.ProductDisplayGroupViewBinding
 import ir.jatlin.topmarket.databinding.SpecialProductSlideGroupBinding
-import ir.jatlin.topmarket.databinding.SpecialProductSlideViewBinding
 import ir.jatlin.topmarket.ui.home.amazinggroup.AmazingSuggestionGroupViewHolder
 import ir.jatlin.topmarket.ui.home.slider.SpecialProductGroupViewHolder
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
@@ -21,7 +20,8 @@ typealias ViewHolder = BaseViewHolder<HomeDisplayItem>
 
 class HomeDisplayItemAdapter(
     private val displayItemEventListener: ProductDisplayGroupEventListener,
-    private val productItemEventListener: ProductItemEventListener
+    private val productItemEventListener: ProductItemEventListener,
+    private val specialProductGroupEventListener: SpecialProductGroupViewHolder.EventListener
 ) :
     ListAdapter<HomeDisplayItem, ViewHolder>(HomeDisplayItemDiffCallback()),
     ViewHolderCreator<HomeDisplayItem> {
@@ -62,7 +62,8 @@ class HomeDisplayItemAdapter(
                     binding = AmaziingSuggestionGroupViewBinding.inflate(inflater, parent, false)
                 )
             R.layout.special_product_slide_group -> SpecialProductGroupViewHolder(
-                binding = SpecialProductSlideGroupBinding.inflate(inflater, parent, false)
+                binding = SpecialProductSlideGroupBinding.inflate(inflater, parent, false),
+                specialProductGroupEventListener
             )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
         }

@@ -3,6 +3,7 @@
 
     <declare-styleable name="Theme">
         <attr name="itemBackgroundColor" format="color" />
+        <attr name="indicatorBackgroundColor" format="color" />
     </declare-styleable>
 
 
