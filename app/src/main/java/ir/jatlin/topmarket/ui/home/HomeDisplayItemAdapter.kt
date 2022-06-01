@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.AmaziingSuggestionGroupViewBinding
 import ir.jatlin.topmarket.databinding.ProductDisplayGroupViewBinding
+import ir.jatlin.topmarket.databinding.SpecialProductSlideGroupBinding
+import ir.jatlin.topmarket.databinding.SpecialProductSlideViewBinding
 import ir.jatlin.topmarket.ui.home.amazinggroup.AmazingSuggestionGroupViewHolder
+import ir.jatlin.topmarket.ui.home.slider.SpecialProductGroupViewHolder
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupViewHolder
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
@@ -38,6 +41,7 @@ class HomeDisplayItemAdapter(
         return when (getItem(position)) {
             is HomeDisplayItem.ProductDisplayGroupItem -> R.layout.product_display_group_view
             is HomeDisplayItem.AmazingSuggestionGroupItem -> R.layout.amaziing_suggestion_group_view
+            is HomeDisplayItem.SpecialProductsSliderItem -> R.layout.special_product_slide_group
             else -> super.getItemViewType(position)
         }
     }
@@ -57,6 +61,9 @@ class HomeDisplayItemAdapter(
                 AmazingSuggestionGroupViewHolder(
                     binding = AmaziingSuggestionGroupViewBinding.inflate(inflater, parent, false)
                 )
+            R.layout.special_product_slide_group -> SpecialProductGroupViewHolder(
+                binding = SpecialProductSlideGroupBinding.inflate(inflater, parent, false)
+            )
             else -> throw IllegalArgumentException("View type not found with identifier: $viewType")
         }
 

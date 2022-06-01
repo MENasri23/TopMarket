@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/slider_height">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/special_product_slider"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        app:dotsColor="?attr/itemBackgroundColor"
+        app:dotsCornerRadius="@dimen/space_small"
+        app:dotsSize="@dimen/space_small"
+        app:dotsSpacing="@dimen/space_very_small"
+        app:dotsWidthFactor="2.5"
+        app:layout_constraintEnd_toEndOf="@id/special_product_slider"
+        app:layout_constraintStart_toStartOf="@id/special_product_slider"
+        app:layout_constraintTop_toBottomOf="@id/special_product_slider"
+        app:selectedDotColor="?attr/itemBackgroundColor" />
+</androidx.constraintlayout.widget.ConstraintLayout>

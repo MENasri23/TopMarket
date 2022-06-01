@@ -66,6 +66,9 @@ class HomeViewModel @Inject constructor(
             allSuccess(latest, popular, topRated, amazing) -> Resource.success(
                 data = HomeUiState(
                     listOf(
+                        HomeDisplayItem.SpecialProductsSliderItem(
+                            specialProductImages = amazing.data!!.mapNotNull { it.images.firstOrNull() }
+                        ),
                         HomeDisplayItem.ProductDisplayGroupItem(
                             label = R.string.products_latest,
                             products = latest.data!!.map(NetworkProduct::asProductItem)

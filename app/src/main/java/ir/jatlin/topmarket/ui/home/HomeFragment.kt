@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
+import ir.jatlin.topmarket.ui.home.slider.SpecialProductSliderAdapter
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
@@ -28,6 +29,7 @@ class HomeFragment :
     private val binding by dataBindings(FragmentHomeBinding::bind)
 
     private lateinit var homeDisplayItemAdapter: HomeDisplayItemAdapter
+    private lateinit var specialProductSliderAdapter: SpecialProductSliderAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,13 +52,13 @@ class HomeFragment :
 
 
         includeSearchBar.apply {
-            val onSearchLinstener = View.OnClickListener {
+            val onSearchListener = View.OnClickListener {
                 findNavController().navigate(
                     HomeFragmentDirections.toSearchFragment()
                 )
             }
-            tvSearch.setOnClickListener(onSearchLinstener)
-            ivSearch.setOnClickListener(onSearchLinstener)
+            tvSearch.setOnClickListener(onSearchListener)
+            ivSearch.setOnClickListener(onSearchListener)
         }
 
     }

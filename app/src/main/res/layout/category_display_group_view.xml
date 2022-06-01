@@ -25,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="تجهیزات" />
 
+        <!-- todo: Remove show more indicator -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/show_more"
             style="@style/TextAppearance.MarketApp.TitleMedium"

@@ -149,4 +149,9 @@ object Libs {
         const val AUTO_IMAGE_SLIDER = "com.github.smarteist:autoimageslider:$version"
     }
 
+    object Indicator {
+        private const val version = "4.3"
+        const val INDICATOR = "com.tbuonomo:dotsindicator:${version}"
+    }
+
 }

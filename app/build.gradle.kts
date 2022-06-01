@@ -128,8 +128,8 @@ dependencies {
     // timber
     implementation(Libs.Debug.TIMBER)
 
-    // image slider
-    implementation(Libs.ImageSlider.AUTO_IMAGE_SLIDER)
+    // slider indicator
+    implementation(Libs.Indicator.INDICATOR)
 
     testImplementation(Libs.Test.JUNIT)
     testImplementation(Libs.Kotlinx.COROUTINES_TEST)
