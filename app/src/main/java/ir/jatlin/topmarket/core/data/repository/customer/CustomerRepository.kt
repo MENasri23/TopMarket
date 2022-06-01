@@ -11,10 +11,10 @@ interface CustomerRepository {
     ): Flow<Customer>
 
     suspend fun createCustomer(
-        customerNetwork: CustomerNetwork
+        customer: Customer
     ): Customer
 
     suspend fun updateCustomer(
-        customer: CustomerNetwork
+        customer: Customer
     ): Customer
 }

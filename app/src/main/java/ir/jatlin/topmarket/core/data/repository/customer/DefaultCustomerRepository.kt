@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.data.repository.customer
 
+import ir.jatlin.topmarket.core.data.mapper.asCustomer
+import ir.jatlin.topmarket.core.data.mapper.asCustomerNetwork
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRemoteDataSource
 import ir.jatlin.topmarket.core.model.user.Customer
-import ir.jatlin.topmarket.core.model.user.asCustomer
-import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -14,15 +14,21 @@ class DefaultCustomerRepository @Inject constructor(
 
     override fun findCustomerById(customerId: Int): Flow<Customer> {
         return flow {
-            emit(remoteDataSource.findCustomerById(customerId).asCustomer())
+            emit(
+                remoteDataSource.findCustomerById(customerId).asCustomer()
+            )
         }
     }
 
-    override suspend fun createCustomer(customerNetwork: CustomerNetwork): Customer {
-        return remoteDataSource.createCustomer(customerNetwork).asCustomer()
+    override suspend fun createCustomer(customer: Customer): Customer {
+        return remoteDataSource.createCustomer(
+            customer.asCustomerNetwork()
+        ).asCustomer()
     }
 
-    override suspend fun updateCustomer(customer: CustomerNetwork): Customer {
-        return remoteDataSource.updateCustomer(customer).asCustomer()
+    override suspend fun updateCustomer(customer: Customer): Customer {
+        return remoteDataSource.updateCustomer(
+            customer.asCustomerNetwork()
+        ).asCustomer()
     }
 }
