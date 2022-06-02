@@ -21,13 +21,13 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20261713803292528" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/amazing_suggestion_item_view.xml" value="0.20261713803292528" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/category_display_group_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/filter_search_appbar.xml" value="0.4" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/filter_search_appbar.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_home.xml" value="0.1834862385321101" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_loading.xml" value="0.20436083796494228" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_category.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_details.xml" value="0.4" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_details.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search_filters.xml" value="0.1" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search_filters.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_special_product_slide_page.xml" value="0.18671875" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/image_slider_item_view.xml" value="0.20261713803292528" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/laout_shopping_cart_counter.xml" value="0.20521590423257802" />
@@ -58,7 +58,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.4" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
