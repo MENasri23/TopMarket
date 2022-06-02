@@ -8,6 +8,8 @@ import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchFiltersBinding
@@ -32,6 +34,7 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     private val args by navArgs<SearchFiltersFragmentArgs>()
 
     private lateinit var productPreviewAdapter: ProductPreviewAdapter
+    private lateinit var behavior: BottomSheetBehavior<RecyclerView>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +49,14 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     }
 
     private fun initViews() = binding.apply {
+
+        behavior = BottomSheetBehavior.from(productsList)
+        behavior.peekHeight = 0
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        filterAppbar.apply {
+            filters.setOnClickListener { behavior.state = BottomSheetBehavior.STATE_COLLAPSED }
+        }
+
         productsList.apply {
             addItemDecoration(
                 DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
