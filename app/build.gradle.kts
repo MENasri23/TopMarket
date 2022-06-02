@@ -98,6 +98,11 @@ dependencies {
     // coroutine
     implementation(Libs.Kotlinx.COROUTINES_ANDROID)
 
+    // room
+    implementation(Libs.Androidx.Room.RUNTIME)
+    implementation(Libs.Androidx.Room.KTX)
+    kapt(Libs.Androidx.Room.COMPILER)
+
 
     // hilt
     implementation(Libs.Hilt.HILT)
