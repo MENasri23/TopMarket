@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-v24/fading_snackbar_background.xml" value="0.1985" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_add_shopping_cart_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_arrow_forward_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_category_24.xml" value="0.1605" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20261713803292528" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/amazing_suggestion_item_view.xml" value="0.20261713803292528" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/category_display_group_view.xml" value="0.20521590423257802" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fading_snackbar_layout.xml" value="0.536" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/filter_search_appbar.xml" value="0.264" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_filter_items.xml" value="0.176" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_home.xml" value="0.1834862385321101" />

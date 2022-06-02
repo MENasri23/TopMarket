@@ -52,6 +52,11 @@
         <item name="android:textAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
     </style>
 
+    <style name="Widget.Market.SnackbarActionButton" parent="Widget.Material3.Button.TextButton">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
+    </style>
+
     <style name="Widget.Market.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="fontFamily">@font/samim_fd</item>
         <item name="itemTextAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
