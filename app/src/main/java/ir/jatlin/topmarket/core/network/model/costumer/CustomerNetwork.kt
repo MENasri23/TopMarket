@@ -12,8 +12,6 @@ data class CustomerNetwork(
     val lastName: String,
     @SerializedName("avatar_url")
     val avatar_url: String,
-    val billing: BillingNetwork,
-    val shipping: ShippingNetwork,
     @SerializedName("is_paying_customer")
     val isPayingCustomer: Boolean,
     val role: String,
