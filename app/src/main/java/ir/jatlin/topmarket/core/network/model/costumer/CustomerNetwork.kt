@@ -14,9 +14,5 @@ data class CustomerNetwork(
     val avatar_url: String,
     @SerializedName("is_paying_customer")
     val isPayingCustomer: Boolean,
-    val role: String,
-    @SerializedName("date_created_gmt")
-    val dateCreatedGmt: String,
-    @SerializedName("date_modified_gmt")
-    val dateModifiedGmt: String,
+    val role: String
 )
