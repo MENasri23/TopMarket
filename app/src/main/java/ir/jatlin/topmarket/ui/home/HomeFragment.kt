@@ -67,7 +67,12 @@ class HomeFragment :
     }
 
     private suspend fun collectHomeUiState() = viewModel.homeUiState.safeCollect(
-        onFailure = { showErrorMessage(it) }
+        onFailure = {
+            loadStateViewModel.stopLoading()
+            showErrorMessage(it) {
+                // TODO: reload result
+            }
+        }
     ) { items ->
         loadStateViewModel.stopLoading()
         homeDisplayItemAdapter.submitList(items.homeDisplayItems)

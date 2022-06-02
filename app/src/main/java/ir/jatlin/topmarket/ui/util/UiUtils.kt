@@ -26,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.databinding.FadingSnackbarLayoutBinding
+import ir.jatlin.topmarket.ui.widget.FadingSnackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

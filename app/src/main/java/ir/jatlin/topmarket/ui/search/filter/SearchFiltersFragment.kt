@@ -3,21 +3,17 @@ package ir.jatlin.topmarket.ui.search.filter
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchFiltersBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
-import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import ir.jatlin.topmarket.ui.util.safeCollect
@@ -90,7 +86,12 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     private suspend fun collectProducts() {
         searchViewModel.productsInCategory.safeCollect(
             onLoading = { loadStateViewModel.startLoading() },
-            onFailure = { showErrorMessage(it) }
+            onFailure = {
+                loadStateViewModel.stopLoading()
+                showErrorMessage(it) {
+                    searchViewModel.searchProducts()
+                }
+            }
         ) { productsInCategory ->
             productPreviewAdapter.submitList(productsInCategory)
             loadStateViewModel.stopLoading()
