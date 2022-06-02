@@ -7,8 +7,5 @@ data class Customer(
     val firstName: String,
     val lastName: String,
     val avatarUrl: String,
-    val isPayingCustomer: Boolean,
-    val role: String,
-    val dateCreatedGmt: String,
-    val dateModifiedGmt: String,
+    val role: String
 )
