@@ -8,6 +8,8 @@ import ir.jatlin.topmarket.core.data.repository.DefaultProductRepository
 import ir.jatlin.topmarket.core.data.repository.ProductRepository
 import ir.jatlin.topmarket.core.data.repository.customer.CustomerRepository
 import ir.jatlin.topmarket.core.data.repository.customer.DefaultCustomerRepository
+import ir.jatlin.topmarket.core.data.repository.order.DefaultOrderRepository
+import ir.jatlin.topmarket.core.data.repository.order.OrderRepository
 import javax.inject.Singleton
 
 @Module
@@ -23,6 +25,12 @@ interface DataModule {
     @Binds
     @Singleton
     fun bindsCustomerRepository(
-       customerRepository: DefaultCustomerRepository
+        customerRepository: DefaultCustomerRepository
     ): CustomerRepository
+
+    @Binds
+    @Singleton
+    fun bindsOrderRepository(
+        orderRepository: DefaultOrderRepository
+    ): OrderRepository
 }
