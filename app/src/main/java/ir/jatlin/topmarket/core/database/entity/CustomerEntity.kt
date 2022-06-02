@@ -9,7 +9,7 @@ import ir.jatlin.topmarket.core.model.user.Customer
     tableName = "customers"
 )
 data class CustomerEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Int,
     val email: String,
     @ColumnInfo(defaultValue = "")

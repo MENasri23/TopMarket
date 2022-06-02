@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import ir.jatlin.topmarket.core.model.product.PurchaseProduct
 
 @Entity(
-    tableName = "purchase_products"
+    tableName = "purchase_products",
 )
 data class PurchaseProductEntity(
     @PrimaryKey(autoGenerate = true)
