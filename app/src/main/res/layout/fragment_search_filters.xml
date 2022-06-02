@@ -3,16 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
+    <include
+        android:id="@+id/filter_appbar"
+        layout="@layout/filter_search_appbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:paddingVertical="@dimen/space_small"
         android:id="@+id/productsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/space_medium"
+        android:paddingVertical="@dimen/space_small"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/product_preview_item_view" />
 
 

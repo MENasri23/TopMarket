@@ -7,14 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
-    android:padding="@dimen/space_small"
     app:liftOnScroll="true"
     tools:parentTag="androidx.coordinatorlayout.widget.CoordinatorLayout">
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <com.google.android.material.appbar.CollapsingToolbarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:contentInsetStart="0dp">
+        app:contentInsetStart="0dp"
+        app:layout_scrollFlags="scroll|enterAlways">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -50,8 +50,7 @@
                         android:text="@string/search_in"
                         android:textAppearance="@style/TextAppearance.MarketApp.TitleMedium"
                         app:drawableStartCompat="@drawable/ic_digi_placeholder"
-                        app:layout_constraintEnd_toStartOf="@id/iv_search"
-                        app:layout_constraintTop_toTopOf="" />
+                        app:layout_constraintEnd_toStartOf="@id/iv_search" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_search"
@@ -78,10 +77,10 @@
                 android:drawableEnd="@drawable/ic_sort_24"
                 android:drawablePadding="@dimen/space_small"
                 android:stateListAnimator="@animator/smooth_fading"
+                android:text="مرتبط ترین"
                 app:layout_constraintBottom_toBottomOf="@id/filters"
                 app:layout_constraintEnd_toStartOf="@id/filters"
-                app:layout_constraintTop_toTopOf="@id/filters"
-                tools:text="مرتبط ترین" />
+                app:layout_constraintTop_toTopOf="@id/filters" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/filters"
@@ -93,14 +92,14 @@
                 android:drawableEnd="@drawable/ic_filter_24"
                 android:drawablePadding="@dimen/space_small"
                 android:stateListAnimator="@animator/smooth_fading"
+                android:text="@string/filters"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_bar_container"
-                tools:text="@string/filters" />
+                app:layout_constraintTop_toBottomOf="@id/search_bar_container" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 </com.google.android.material.appbar.AppBarLayout>
