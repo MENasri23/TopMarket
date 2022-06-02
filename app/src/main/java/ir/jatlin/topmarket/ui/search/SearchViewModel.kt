@@ -3,7 +3,9 @@ package ir.jatlin.topmarket.ui.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.topmarket.core.domain.param.DiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.search.SearchProductsUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
@@ -18,6 +20,9 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+
+typealias OrderBy = ProductDiscoverParameters.OrderBY
+typealias Order = DiscoverParameters.Order
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -35,8 +40,19 @@ class SearchViewModel @Inject constructor(
     private val _error = MutableSharedFlow<ErrorCause?>()
     val error = _error.asSharedFlow()
 
-    private val _productsInCategory = MutableStateFlow<List<SearchProductInCategoryItem>?>(null)
+    private val _productsInCategory =
+        MutableStateFlow<Resource<List<SearchProductInCategoryItem>>>(Resource.loading())
     val productsInCategory = _productsInCategory.asStateFlow()
+
+    var orderBy: OrderBy = OrderBy.Date
+
+    var order: Order = Order.Desc
+
+    var categoryId: Int = UNKNOWN_CATEGORY
+        set(value) {
+            field = value
+            searchProducts()
+        }
 
     private var prevSearchResult: SearchMatchedResult? = null
 
@@ -52,7 +68,6 @@ class SearchViewModel @Inject constructor(
                 .collect { searchResult ->
                     processSearchResult(searchResult)
                 }
-
         }
 
     }
@@ -146,15 +161,21 @@ class SearchViewModel @Inject constructor(
     }
 
     fun searchProductsWith(categoryId: Int) {
-        val query = textQuery
-        Timber.d("searchViewModel query: $query")
+        this.categoryId = categoryId
+    }
+
+    fun searchProducts() {
+        Timber.d("searchViewModel query: $textQuery")
         val params = makeProductParams {
-            if (categoryId != INVALID_ID) {
-                this.categoryId = categoryId
+            if (textQuery.isNotBlank()) {
+                searchQuery = textQuery
             }
-            if (query.isNotBlank()) {
-                searchQuery = query
+            val category = this@SearchViewModel.categoryId
+            if (category != UNKNOWN_CATEGORY) {
+                categoryId = category
             }
+            order = this@SearchViewModel.order
+            orderBy = this@SearchViewModel.orderBy
         }
 
         viewModelScope.launch {
@@ -163,28 +184,20 @@ class SearchViewModel @Inject constructor(
                     processProductsInCategoryResult(it)
                 }
         }
-
     }
 
     private suspend fun processProductsInCategoryResult(result: Resource<List<NetworkProduct>>) {
-        result.processTo { products ->
-            _productsInCategory.emit(
-                products.map(::SearchProductInCategoryItem)
+        when (result) {
+            is Resource.Loading -> _productsInCategory.emit(Resource.loading())
+            is Resource.Error -> _productsInCategory.emit(
+                Resource.error(result.cause ?: ErrorCause.Unknown())
+            )
+            is Resource.Success -> _productsInCategory.emit(
+                Resource.success(result.data!!.map(::SearchProductInCategoryItem))
             )
         }
     }
 
-    private suspend fun <T> Resource<T>.processTo(
-        onSuccess: suspend (result: T) -> Unit
-    ) {
-        if (isSuccess) {
-            onSuccess(data!!)
-        } else {
-            if (this is Resource.Error) {
-                _error.emit(cause)
-            }
-        }
-    }
 
     override fun onCleared() {
         super.onCleared()
@@ -192,7 +205,7 @@ class SearchViewModel @Inject constructor(
     }
 
     companion object {
-        private const val INVALID_ID = -1
+        private const val UNKNOWN_CATEGORY = -1
     }
 
 }

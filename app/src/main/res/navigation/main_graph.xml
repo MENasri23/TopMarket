@@ -67,7 +67,15 @@
                 android:name="categoryId"
                 android:defaultValue="-1"
                 app:argType="integer" />
+            <action
+                android:id="@+id/action_searchFiltersFragment_to_sortingFragment"
+                app:destination="@id/sortingFragment" />
+
         </fragment>
+        <dialog
+            android:id="@+id/sortingFragment"
+            android:name="ir.jatlin.topmarket.ui.search.filter.SortingFragment"
+            android:label="SortingFragment" />
 
     </navigation>
 

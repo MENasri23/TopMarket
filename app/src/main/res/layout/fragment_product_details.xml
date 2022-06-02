@@ -312,7 +312,7 @@
             app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/space_very_small"
             app:contentPaddingBottom="@dimen/space_small"
-            app:contentPaddingTop="@dimen/space_medium"
+            app:contentPaddingTop="@dimen/space_small"
             app:strokeWidth="0dp">
 
             <com.google.android.material.textview.MaterialTextView

@@ -2,6 +2,8 @@ package ir.jatlin.topmarket.ui.search.filter
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -18,6 +20,7 @@ import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
 import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.showErrorMessage
 import ir.jatlin.topmarket.ui.util.viewBinding
 import kotlinx.coroutines.launch
@@ -34,7 +37,6 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     private val args by navArgs<SearchFiltersFragmentArgs>()
 
     private lateinit var productPreviewAdapter: ProductPreviewAdapter
-    private lateinit var behavior: BottomSheetBehavior<RecyclerView>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,11 +52,14 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
     private fun initViews() = binding.apply {
 
-        behavior = BottomSheetBehavior.from(productsList)
-        behavior.peekHeight = 0
-        behavior.state = BottomSheetBehavior.STATE_EXPANDED
         filterAppbar.apply {
-            filters.setOnClickListener { behavior.state = BottomSheetBehavior.STATE_COLLAPSED }
+
+            sortBy.setOnClickListener {
+                findNavController().navigate(R.id.sortingFragment)
+            }
+
+            filters.setOnClickListener {
+            }
         }
 
         productsList.apply {
@@ -69,27 +74,33 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
-        loadStateViewModel.startLoading()
+
         launch {
-            searchViewModel.productsInCategory.collect { items ->
-                loadStateViewModel.stopLoading()
-                productPreviewAdapter.submitList(items)
-                Timber.tag("SearchFilterFragment").d("${items?.size}")
-            }
+            collectProducts()
         }
 
         launch {
             searchViewModel.error.collect { cause ->
                 loadStateViewModel.stopLoading()
                 showErrorMessage(cause)
-
             }
+        }
+    }
+
+    private suspend fun collectProducts() {
+        searchViewModel.productsInCategory.safeCollect(
+            onLoading = { loadStateViewModel.startLoading() },
+            onFailure = { showErrorMessage(it) }
+        ) { productsInCategory ->
+            productPreviewAdapter.submitList(productsInCategory)
+            loadStateViewModel.stopLoading()
+            Timber.tag("SearchFilterFragment").d("${productsInCategory.size}")
         }
     }
 
     private fun navigateToDetailsScreen(productId: Int) {
         findNavController().navigate(
-            SearchFragmentDirections.toProductDetailsFragment(productId)
+            R.id.productDetailsFragment, bundleOf("productId" to productId)
         )
     }
 
