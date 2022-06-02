@@ -47,6 +47,17 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     }
 
     private fun initViews() = binding.apply {
+
+        filterAppbar.apply {
+
+            sortBy.setOnClickListener {
+                findNavController().navigate(R.id.sortingFragment)
+            }
+
+            filters.setOnClickListener {
+            }
+        }
+
         productsList.apply {
             addItemDecoration(
                 DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
@@ -71,22 +82,30 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
         }
 
         launch {
-            searchViewModel.productsInCategory.safeCollect(
-                onLoading = { loadStateViewModel.startLoading() },
-                onFailure = { showErrorMessage(it) }
-            ) { items ->
-                loadStateViewModel.stopLoading()
-                productPreviewAdapter.submitList(items)
-                Timber.tag("SearchFilterFragment").d("${items.size}")
-            }
+            collectProducts()
         }
 
         launch {
             searchViewModel.error.collect { cause ->
                 loadStateViewModel.stopLoading()
                 showErrorMessage(cause)
-
             }
+        }
+    }
+
+    private suspend fun collectProducts() {
+        searchViewModel.productsInCategory.safeCollect(
+            onLoading = { loadStateViewModel.startLoading() },
+            onFailure = {
+                loadStateViewModel.stopLoading()
+                showErrorMessage(it) {
+                    searchViewModel.searchProducts()
+                }
+            }
+        ) { productsInCategory ->
+            productPreviewAdapter.submitList(productsInCategory)
+            loadStateViewModel.stopLoading()
+            Timber.tag("SearchFilterFragment").d("${productsInCategory.size}")
         }
     }
 

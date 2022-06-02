@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<data>
+
+    <variable
+        name="viewModel"
+        type="ir.jatlin.topmarket.ui.search.SearchViewModel" />
+</data>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/space_medium">
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MarketApp.TitleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_medium"
+        android:drawableStart="@drawable/ic_arrow_drop_down_24"
+        android:stateListAnimator="@animator/smooth_fading"
+        android:text="@string/sorting" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/most_sales"
+                style="@style/TextAppearance.MarketApp.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stateListAnimator="@animator/smooth_fading"
+                android:text="@string/most_sales" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/most_expensive"
+                style="@style/TextAppearance.MarketApp.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:stateListAnimator="@animator/smooth_fading"
+                android:text="@string/most_expensive" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/cheapest"
+                style="@style/TextAppearance.MarketApp.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:stateListAnimator="@animator/smooth_fading"
+                android:text="@string/cheapest" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/newest"
+                style="@style/TextAppearance.MarketApp.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:stateListAnimator="@animator/smooth_fading"
+                android:text="@string/newest" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

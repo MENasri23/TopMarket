@@ -312,17 +312,15 @@
             app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/space_very_small"
             app:contentPaddingBottom="@dimen/space_small"
-            app:contentPaddingLeft="@dimen/space_medium"
-            app:contentPaddingRight="@dimen/space_medium"
             app:contentPaddingTop="@dimen/space_small"
             app:strokeWidth="0dp">
-
 
             <com.google.android.material.textview.MaterialTextView
                 style="@style/TextAppearance.MarketApp.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="@dimen/space_medium"
                 android:drawablePadding="@dimen/space_very_small"
                 android:gravity="center_vertical"
                 app:drawableStartCompat="@drawable/ic_toman"
@@ -334,6 +332,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
+                android:layout_marginVertical="@dimen/space_small"
+                android:layout_marginEnd="@dimen/space_medium"
                 android:onClick="@{() -> viewModel.addToCart()}"
                 android:text="@string/add_to_cart"
                 app:contentPadding="@dimen/space_small"
