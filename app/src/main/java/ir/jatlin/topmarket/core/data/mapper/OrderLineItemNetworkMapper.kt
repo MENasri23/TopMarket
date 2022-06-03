@@ -5,13 +5,15 @@ import ir.jatlin.topmarket.core.network.model.order.OrderLineItemNetwork
 
 
 fun OrderLineItemNetwork.asOrderLineItem() = OrderLineItem(
-productId = productId,
-quantity = quantity,
-variationId = variationId,
+    productId = productId,
+    quantity = quantity,
+    id = id,
+    name = name
 )
 
 fun OrderLineItem.asOrderLineItemNetwork() = OrderLineItemNetwork(
     productId = productId,
     quantity = quantity,
-    variationId = variationId,
+    id = id,
+    name = name
 )

@@ -30,6 +30,6 @@ object DatabaseModule {
 
     @Provides
     fun providePurchaseProductDao(database: MarketDatabase) =
-        database.purchaseProductDao()
+        database.orderItemDao()
 
 }
