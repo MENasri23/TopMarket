@@ -19,3 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class ir.jatlin.topmarket.core.network.model.** { *; }
+-keep class ir.jatlin.topmarket.core.network.api.** { *; }
+-keep class ir.jatlin.topmarket.core.network.response.** { *; }
+
+-keep class ir.jatlin.topmarket.core.data.di.** { *; }
+-keep class ir.jatlin.topmarket.core.data.repository.** { *; }
+-keep class ir.jatlin.topmarket.core.data.repository.order.** { *; }
+-keep class ir.jatlin.topmarket.core.data.repository.customer.** { *; }
+
+-keep class ir.jatlin.topmarket.core.database.di.** { *; }
+-keep class ir.jatlin.topmarket.core.database.converter.** { *; }
+-keep class ir.jatlin.topmarket.core.database.dao.** { *; }
+-keep class ir.jatlin.topmarket.core.database.entity.** { *; }
+
+-keep class ir.jatlin.topmarket.core.domain.** { *; }

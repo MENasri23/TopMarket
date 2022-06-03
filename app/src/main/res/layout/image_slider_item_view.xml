@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/slider_container"
     android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/space_small"
     android:layout_height="@dimen/_200sdp"
     app:cardCornerRadius="@dimen/space_small"
     app:cardElevation="@dimen/space_very_small"
