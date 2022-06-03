@@ -56,6 +56,9 @@ interface MarketApi {
         @Body orderNetwork: OrderNetwork
     ): Response<OrderNetwork>
 
+    @POST(Route.ORDER_NEW)
+    suspend fun createOrder(): Response<OrderNetwork>
+
     @PUT(Route.ORDER)
     suspend fun updateOrder(
         @Path("id") id: Int,

@@ -11,10 +11,7 @@ fun CustomerNetwork.asCustomer() = Customer(
     firstName = firstName,
     lastName = lastName,
     avatarUrl = avatar_url,
-    isPayingCustomer = isPayingCustomer,
     role = role,
-    dateCreatedGmt = dateCreatedGmt,
-    dateModifiedGmt = dateModifiedGmt,
 )
 
 fun Customer.asCustomerNetwork() = CustomerNetwork(
@@ -24,8 +21,5 @@ fun Customer.asCustomerNetwork() = CustomerNetwork(
     firstName = firstName,
     lastName = lastName,
     avatar_url = avatarUrl,
-    isPayingCustomer = isPayingCustomer,
-    role = role,
-    dateCreatedGmt = dateCreatedGmt,
-    dateModifiedGmt = dateModifiedGmt,
+    role = role
 )

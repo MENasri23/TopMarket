@@ -18,6 +18,10 @@ class OrderRetrofitDataSource @Inject constructor(
         return convertResponse(marketApi.createOrder(orderNetwork))
     }
 
+    override suspend fun createEmptyOrder(): OrderNetwork {
+        return convertResponse(marketApi.createOrder())
+    }
+
     override suspend fun updateOrder(order: OrderNetwork): OrderNetwork {
         return convertResponse(
             marketApi.updateOrder(

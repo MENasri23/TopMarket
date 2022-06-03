@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import ir.jatlin.topmarket.core.database.MarketDatabase
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     private const val DATABASE_NAME = "topmarket-db"
@@ -29,7 +32,11 @@ object DatabaseModule {
         database.customerDao()
 
     @Provides
-    fun providePurchaseProductDao(database: MarketDatabase) =
+    fun provideOrderDao(database: MarketDatabase) =
+        database.orderDao()
+
+    @Provides
+    fun provideOrderItemDao(database: MarketDatabase) =
         database.orderItemDao()
 
 }

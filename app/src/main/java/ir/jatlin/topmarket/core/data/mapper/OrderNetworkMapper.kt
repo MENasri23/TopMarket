@@ -1,21 +1,21 @@
 package ir.jatlin.topmarket.core.data.mapper
 
+import ir.jatlin.topmarket.core.database.entity.OrderEntity
 import ir.jatlin.topmarket.core.model.order.Order
+import ir.jatlin.topmarket.core.model.order.OrderLineItem
+import ir.jatlin.topmarket.core.model.order.asOrderStatusName
 import ir.jatlin.topmarket.core.network.model.order.OrderNetwork
 
 
-fun OrderNetwork.asOrder() = Order(
+fun OrderNetwork.asOrderEntity() = OrderEntity(
     id = id,
-    lineItems = lineItems,
-    paymentMethod = paymentMethod,
-    paymentMethodTitle = paymentMethodTitle,
-    setPaid = setPaid,
+    customerId = customerId,
+    status = status.asOrderStatusName()
 )
 
 fun Order.asOrderNetwork() = OrderNetwork(
     id = id,
-    lineItems = lineItems,
-    paymentMethod = paymentMethod,
-    paymentMethodTitle = paymentMethodTitle,
-    setPaid = setPaid,
+    customerId = customer.id,
+    lineItems = orderItems.map(OrderLineItem::asOrderLineItemNetwork),
+    status = status.statusName
 )

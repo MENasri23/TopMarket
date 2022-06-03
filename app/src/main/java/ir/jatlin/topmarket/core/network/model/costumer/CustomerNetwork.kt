@@ -12,7 +12,5 @@ data class CustomerNetwork(
     val lastName: String,
     @SerializedName("avatar_url")
     val avatar_url: String,
-    @SerializedName("is_paying_customer")
-    val isPayingCustomer: Boolean,
     val role: String
 )

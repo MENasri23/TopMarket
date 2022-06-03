@@ -1,19 +1,23 @@
 package ir.jatlin.topmarket.core.data.mapper
 
+import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.network.model.order.OrderLineItemNetwork
 
 
-fun OrderLineItemNetwork.asOrderLineItem() = OrderLineItem(
+fun OrderLineItemNetwork.asOrderLineItemEntity() = OrderLineItemEntity(
     productId = productId,
     quantity = quantity,
     id = id,
-    name = name
+    productName = name,
+    totalPrice = totalPrice,
+    orderId = 0 // TODO: Fix it
 )
 
 fun OrderLineItem.asOrderLineItemNetwork() = OrderLineItemNetwork(
     productId = productId,
     quantity = quantity,
     id = id,
-    name = name
+    name = productName,
+    totalPrice = totalPrice
 )

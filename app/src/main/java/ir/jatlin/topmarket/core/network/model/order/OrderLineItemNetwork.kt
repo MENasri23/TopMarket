@@ -7,5 +7,7 @@ data class OrderLineItemNetwork(
     val name: String,
     @SerializedName("quantity")
     val productId: Int,
+    @SerializedName("total")
+    val totalPrice: String,
     val quantity: Int,
 )

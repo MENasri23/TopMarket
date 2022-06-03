@@ -21,9 +21,9 @@ interface CustomerDao {
     ): Flow<List<CustomerWithOrders>>
 
     @Insert
-    suspend fun insert(customer: CustomerEntity): Int
+    suspend fun insert(customer: CustomerEntity): Long
 
     @Insert
-    suspend fun insert(customers: List<CustomerEntity>): List<Int>
+    suspend fun insert(customers: List<CustomerEntity>): List<Long>
 
 }

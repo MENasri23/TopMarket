@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ir.jatlin.topmarket.core.database.converter.OrderStatusConverter
 import ir.jatlin.topmarket.core.database.dao.CustomerDao
+import ir.jatlin.topmarket.core.database.dao.OrderDao
 import ir.jatlin.topmarket.core.database.dao.OrderItemDao
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.database.entity.CustomerOrderCrossRef
 import ir.jatlin.topmarket.core.database.entity.OrderEntity
 import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 
@@ -15,8 +15,7 @@ import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
     entities = [
         CustomerEntity::class,
         OrderEntity::class,
-        OrderLineItemEntity::class,
-        CustomerOrderCrossRef::class
+        OrderLineItemEntity::class
     ],
     version = 1,
     exportSchema = true,
@@ -25,5 +24,6 @@ import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 abstract class MarketDatabase : RoomDatabase() {
 
     abstract fun customerDao(): CustomerDao
+    abstract fun orderDao(): OrderDao
     abstract fun orderItemDao(): OrderItemDao
 }

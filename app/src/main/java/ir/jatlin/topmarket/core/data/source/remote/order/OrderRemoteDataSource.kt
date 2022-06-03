@@ -8,5 +8,7 @@ interface OrderRemoteDataSource {
 
     suspend fun createOrder(orderNetwork: OrderNetwork): OrderNetwork
 
+    suspend fun createEmptyOrder(): OrderNetwork
+
     suspend fun updateOrder(order: OrderNetwork): OrderNetwork
 }

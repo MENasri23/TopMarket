@@ -32,7 +32,6 @@ data class OrderLineItemEntity(
 
 fun OrderLineItemEntity.asOrderLineItem() = OrderLineItem(
     id = id,
-    orderId = orderId,
     productId = productId,
     productName = productName,
     totalPrice = totalPrice,
