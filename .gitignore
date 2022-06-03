@@ -88,4 +88,4 @@ lint/tmp/
 *.hprof
 /apikey.properties
 /keystore.properties
-/market-keystore.jks
+/app/market-keystore.jks
