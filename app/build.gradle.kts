@@ -27,6 +27,18 @@ android {
         buildConfigField("String", "BASE_URL", apiProperties["base_url"] as String)
         buildConfigField("String", "CONSUMER_KEY", apiProperties["consumer_key"] as String)
         buildConfigField("String", "CONSUMER_SECRET", apiProperties["consumer_secret"] as String)
+
+
+        signingConfigs {
+            create("staging") {
+                val keystoreProperties = getProperties("${rootDir}/keystore.properties")
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["keyPassword"] as String
+            }
+
+        }
     }
 
     buildTypes {
@@ -41,6 +53,7 @@ android {
         create("staging") {
             initWith(getByName("debug"))
             matchingFallbacks.add("debug")
+            signingConfig = signingConfigs.getByName("staging")
         }
         sourceSets {
             getByName("staging") {
