@@ -87,3 +87,4 @@ lint/tmp/
 # Android Profiling
 *.hprof
 /apikey.properties
+/keystore.properties
