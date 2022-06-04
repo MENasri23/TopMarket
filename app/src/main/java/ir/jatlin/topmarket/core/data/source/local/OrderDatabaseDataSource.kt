@@ -8,8 +8,8 @@ import javax.inject.Inject
 class OrderDatabaseDataSource @Inject constructor(
     private val orderDao: OrderDao
 ) {
-    suspend fun createOrder(order: OrderEntity) {
-        orderDao.insert(order)
+    suspend fun saveOrder(order: OrderEntity): Long {
+        return orderDao.insert(order)
     }
 
     fun findOrderById(orderId: Int): OrderWithOrderItems? {

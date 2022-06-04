@@ -13,4 +13,4 @@ enum class OrderStatus(val statusName: String) {
 
 fun String.asOrderStatusName() =
     OrderStatus.values().firstOrNull { it.statusName == this }
-        ?: OrderStatus.Failed
+        ?: OrderStatus.Trash
