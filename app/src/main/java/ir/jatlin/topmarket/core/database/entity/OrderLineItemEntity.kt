@@ -1,9 +1,6 @@
 package ir.jatlin.topmarket.core.database.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
 
 @Entity(
@@ -14,6 +11,10 @@ import ir.jatlin.topmarket.core.model.order.OrderLineItem
             parentColumns = ["id"],
             childColumns = ["order_id"]
         )
+    ],
+    indices = [
+        Index(value = ["order_id"]),
+        Index(value = ["product_id"])
     ]
 )
 data class OrderLineItemEntity(

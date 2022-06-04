@@ -1,9 +1,6 @@
 package ir.jatlin.topmarket.core.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import ir.jatlin.topmarket.core.database.entity.OrderEntity
 import ir.jatlin.topmarket.core.database.entity.OrderWithOrderItems
 
@@ -15,6 +12,7 @@ interface OrderDao {
         SELECT * FROM orders WHERE id = :id
     """
     )
+    @Transaction
     fun getOrderById(id: Int): OrderWithOrderItems?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

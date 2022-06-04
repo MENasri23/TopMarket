@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.core.database.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
 import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +17,7 @@ interface CustomerDao {
             WHERE id = :customerId
     """
     )
+    @Transaction
     fun getCustomerWithOrders(
         customerId: Int
     ): Flow<List<CustomerWithOrders>>
