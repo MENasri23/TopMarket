@@ -315,29 +315,92 @@
             app:contentPaddingTop="@dimen/space_small"
             app:strokeWidth="0dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/TextAppearance.MarketApp.TitleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="@dimen/space_medium"
-                android:drawablePadding="@dimen/space_very_small"
-                android:gravity="center_vertical"
-                app:drawableStartCompat="@drawable/ic_toman"
-                app:price="@{String.valueOf(viewModel.productDetails.price)}"
-                tools:text="20,000" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.Market.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginVertical="@dimen/space_small"
-                android:layout_marginEnd="@dimen/space_medium"
-                android:onClick="@{() -> viewModel.addToCart()}"
-                android:text="@string/add_to_cart"
-                app:contentPadding="@dimen/space_small"
-                app:icon="@drawable/ic_add_shopping_cart_24" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView"
+                    style="@style/TextAppearance.MarketApp.TitleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:drawablePadding="@dimen/space_very_small"
+                    android:gravity="center_vertical"
+                    app:drawableStartCompat="@drawable/ic_toman"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/addToCart"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:price="@{String.valueOf(viewModel.productDetails.price)}"
+                    tools:text="20,000" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addToCart"
+                    style="@style/Widget.Market.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/space_small"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:onClick="@{() -> viewModel.addToCart()}"
+                    android:paddingVertical="@dimen/cart_button_vertical_padding"
+                    android:text="@string/add_to_cart"
+                    app:cornerRadius="@dimen/space_small"
+                    app:icon="@drawable/ic_add_shopping_cart_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/materialTextView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <FrameLayout
+                    android:id="@+id/quantity_background"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/change_quantity_button_background"
+                    app:layout_constraintBottom_toBottomOf="@id/addToCart"
+                    app:layout_constraintEnd_toEndOf="@id/addToCart"
+                    app:layout_constraintStart_toStartOf="@id/addToCart"
+                    app:layout_constraintTop_toTopOf="@id/addToCart" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+                    app:layout_constraintEnd_toEndOf="@id/quantity_background"
+                    app:layout_constraintTop_toTopOf="@id/quantity_background" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextAppearance.MarketApp.BodySmall"
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/digi_red_color_500"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+                    app:layout_constraintEnd_toEndOf="@id/quantity_background"
+                    app:layout_constraintStart_toStartOf="@id/quantity_background"
+                    app:layout_constraintTop_toTopOf="@id/quantity_background"
+                    tools:text="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:background="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_delete"
+                    app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+                    app:layout_constraintStart_toStartOf="@id/quantity_background"
+                    app:layout_constraintTop_toTopOf="@id/quantity_background" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
