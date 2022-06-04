@@ -5,13 +5,13 @@ import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.network.model.order.OrderLineItemNetwork
 
 
-fun OrderLineItemNetwork.asOrderLineItemEntity() = OrderLineItemEntity(
+fun OrderLineItemNetwork.asOrderLineItemEntity(orderId: Int) = OrderLineItemEntity(
     productId = productId,
     quantity = quantity,
     id = id,
     productName = name,
     totalPrice = totalPrice,
-    orderId = 0 // TODO: Fix it
+    orderId = orderId
 )
 
 fun OrderLineItem.asOrderLineItemNetwork() = OrderLineItemNetwork(
