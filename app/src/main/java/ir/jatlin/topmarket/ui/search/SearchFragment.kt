@@ -87,6 +87,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
                     clearFocus()
                     hideKeyboard()
                     true
