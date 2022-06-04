@@ -85,6 +85,11 @@ object Libs {
             const val COMMON = "androidx.room:room-common:${version}"
         }
 
+        object DataStore {
+            private const val version = "1.0.0"
+            const val DATA_STORE = "androidx.datastore:datastore-preferences:${version}"
+        }
+
         private const val IMPLEMENTATION = "implementation"
 
         fun DependencyHandler.implementAppLibraries() {

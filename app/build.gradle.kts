@@ -103,6 +103,9 @@ dependencies {
     implementation(Libs.Androidx.Room.KTX)
     kapt(Libs.Androidx.Room.COMPILER)
 
+    // data store
+    implementation(Libs.Androidx.DataStore.DATA_STORE)
+
 
     // hilt
     implementation(Libs.Hilt.HILT)
