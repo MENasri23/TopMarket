@@ -6,7 +6,9 @@ interface OrderRepository {
 
     suspend fun findOrderById(orderId: Int): Order
 
-    suspend fun createOrder(): Order?
+    suspend fun createOrder(): Int
+
+    suspend fun createOrder(order: Order): Int
 
     suspend fun updateOrder(order: Order): Order
 

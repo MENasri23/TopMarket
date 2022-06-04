@@ -1,16 +1,19 @@
 package ir.jatlin.topmarket.core.data.repository.order
 
 import ir.jatlin.topmarket.core.data.mapper.asOrderEntity
+import ir.jatlin.topmarket.core.data.mapper.asOrderLineItemEntity
 import ir.jatlin.topmarket.core.data.mapper.asOrderNetwork
 import ir.jatlin.topmarket.core.data.source.local.OrderDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
 import ir.jatlin.topmarket.core.database.entity.asOrder
 import ir.jatlin.topmarket.core.model.order.Order
+import timber.log.Timber
 import javax.inject.Inject
 
 class DefaultOrderRepository @Inject constructor(
     private val remoteDataSource: OrderRemoteDataSource,
-    private val localDataSource: OrderDatabaseDataSource
+    private val localDataSource: OrderDatabaseDataSource,
+    private val orderLineItemDataSource: OrderLineItemDataSource
 ) : OrderRepository {
 
     @Throws(OrderNotFoundException::class)
@@ -26,12 +29,25 @@ class DefaultOrderRepository @Inject constructor(
     }
 
     @Throws(OrderNotFoundException::class)
-    override suspend fun createOrder(): Order {
+    override suspend fun createOrder(): Int {
         val orderNetwork = remoteDataSource.createEmptyOrder()
-        localDataSource.saveOrder(orderNetwork.asOrderEntity())
-        localDataSource.findOrderById(orderNetwork.id)?.asOrder()
+        return localDataSource.saveOrder(orderNetwork.asOrderEntity()).also {
+            Timber.d(
+                "Created new order with localId: $it and order network id: ${orderNetwork.id}"
+            )
+        }
 
-        return getOrderOrThrow(orderNetwork.id)
+    }
+
+    override suspend fun createOrder(order: Order): Int {
+        val orderNetwork = remoteDataSource.createOrder(order.asOrderNetwork())
+        val orderId = localDataSource.saveOrder(orderNetwork.asOrderEntity())
+        orderLineItemDataSource.save(
+            orderNetwork.lineItems.map {
+                it.asOrderLineItemEntity(orderId)
+            }
+        )
+        return orderId
     }
 
     @Throws(OrderNotFoundException::class)
