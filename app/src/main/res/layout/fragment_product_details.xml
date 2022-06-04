@@ -11,17 +11,18 @@
 
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fitsSystemWindows="true">
+            android:layout_height="0dp"
+            android:fitsSystemWindows="true"
+            app:layout_constraintBottom_toTopOf="@id/sale_detail_container"
+            app:layout_constraintTop_toTopOf="parent">
 
             <include
                 android:id="@+id/include_app_bar"
@@ -310,9 +311,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:fitsSystemWindows="true"
             app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/space_small"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:strokeWidth="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -423,5 +424,5 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
