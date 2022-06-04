@@ -30,7 +30,7 @@ class PurchasePreferences @Inject constructor(
 ) {
 
 
-    val customerPreferencesFlow: Flow<PurchasePrefsInfo> = customerDataStore.data
+    val purchasePreferencesStream: Flow<PurchasePrefsInfo> = customerDataStore.data
         .catch { cause ->
             if (cause is IOException) {
                 emit(emptyPreferences())
