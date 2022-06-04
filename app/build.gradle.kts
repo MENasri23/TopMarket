@@ -27,6 +27,16 @@ android {
         buildConfigField("String", "BASE_URL", apiProperties["base_url"] as String)
         buildConfigField("String", "CONSUMER_KEY", apiProperties["consumer_key"] as String)
         buildConfigField("String", "CONSUMER_SECRET", apiProperties["consumer_secret"] as String)
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
