@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.core.data.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.flow.Flow
@@ -47,6 +48,19 @@ class PurchasePreferences @Inject constructor(
                 activeOrderId = activeOrderId
             )
         }
+
+
+    suspend fun saveCustomerId(id: Int) {
+        customerDataStore.edit { preferences ->
+            preferences[PreferencesKeys.CUSTOMER_ID] = id
+        }
+    }
+
+    suspend fun saveAvtiveOrderId(id: Int) {
+        customerDataStore.edit { preferences ->
+            preferences[PreferencesKeys.ACTIVE_ORDER_ID] = id
+        }
+    }
 
 
     private object PreferencesKeys {
