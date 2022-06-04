@@ -9,8 +9,8 @@ interface CustomerLocalDataSource {
 
     fun getCustomerWithOrders(customerId: Int): Flow<List<CustomerWithOrders>>
 
-    suspend fun findCustomerById(id: Int): Customer?
+    suspend fun findCustomerById(id: Int): CustomerEntity?
 
-    suspend fun insert(customer: CustomerEntity): Int
+    suspend fun save(customer: CustomerEntity): Int
 
 }

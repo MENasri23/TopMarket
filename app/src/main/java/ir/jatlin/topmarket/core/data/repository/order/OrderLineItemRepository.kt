@@ -9,7 +9,15 @@ class OrderLineItemDataSource @Inject constructor(
     private val orderItemDao: OrderItemDao
 ) {
 
-    suspend fun save(orderItems: List<OrderLineItemEntity>) {
-        orderItemDao.insert(orderItems)
+    suspend fun save(orderLineItems: List<OrderLineItemEntity>) {
+        orderItemDao.insert(orderLineItems)
+    }
+
+    suspend fun update(orderLineItems: List<OrderLineItemEntity>) {
+        orderItemDao.updateAndRemoveOthers(orderLineItems)
+    }
+
+    suspend fun cleatAll() {
+        orderItemDao.clearAll()
     }
 }

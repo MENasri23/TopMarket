@@ -15,4 +15,15 @@ interface OrderItemDao {
     @Delete
     suspend fun delete(orderItems: List<OrderLineItemEntity>)
 
+    @Query("DELETE FROM order_items WHERE id NOT IN (:ids)")
+    suspend fun deleteAllExcept(ids: List<Int>)
+
+    @Transaction
+    suspend fun updateAndRemoveOthers(orderLineItems: List<OrderLineItemEntity>) {
+        deleteAllExcept(orderLineItems.map(OrderLineItemEntity::id))
+        update(orderLineItems)
+    }
+
+    @Query("DELETE FROM order_items")
+    suspend fun clearAll()
 }

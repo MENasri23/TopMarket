@@ -24,7 +24,11 @@ class DefaultOrderRepository @Inject constructor(
         }
         val remoteOrder = remoteDataSource.findOrderById(orderId)
         localDataSource.saveOrder(remoteOrder.asOrderEntity())
-
+        orderLineItemDataSource.save(
+            remoteOrder.lineItems.map {
+                it.asOrderLineItemEntity(orderId)
+            }
+        )
         return getOrderOrThrow(orderId)
     }
 
@@ -42,20 +46,28 @@ class DefaultOrderRepository @Inject constructor(
     override suspend fun createOrder(order: Order): Int {
         val orderNetwork = remoteDataSource.createOrder(order.asOrderNetwork())
         val orderId = localDataSource.saveOrder(orderNetwork.asOrderEntity())
+
+        orderLineItemDataSource.cleatAll()
         orderLineItemDataSource.save(
             orderNetwork.lineItems.map {
                 it.asOrderLineItemEntity(orderId)
             }
         )
+
         return orderId
     }
+
 
     @Throws(OrderNotFoundException::class)
     override suspend fun updateOrder(order: Order): Order {
         val remoteOrder = remoteDataSource.updateOrder(order.asOrderNetwork())
         val id = localDataSource.saveOrder(remoteOrder.asOrderEntity())
 
-        return getOrderOrThrow(id.toInt())
+        orderLineItemDataSource.update(remoteOrder.lineItems.map {
+            it.asOrderLineItemEntity(remoteOrder.id)
+        })
+
+        return getOrderOrThrow(id)
     }
 
     private fun getOrderOrThrow(orderId: Int) =

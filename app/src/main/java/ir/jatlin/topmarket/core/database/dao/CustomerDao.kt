@@ -24,7 +24,7 @@ interface CustomerDao {
     ): Flow<List<CustomerWithOrders>>
 
     @Query("SELECT * FROM customers WHERE id = :id")
-    suspend fun findCustomerById(id: Int): Customer?
+    suspend fun findCustomerById(id: Int): CustomerEntity?
 
     @Insert
     suspend fun insert(customer: CustomerEntity): Long
