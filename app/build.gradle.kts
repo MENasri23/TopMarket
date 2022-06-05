@@ -28,6 +28,16 @@ android {
         buildConfigField("String", "CONSUMER_KEY", apiProperties["consumer_key"] as String)
         buildConfigField("String", "CONSUMER_SECRET", apiProperties["consumer_secret"] as String)
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
+        }
+
 
         signingConfigs {
             create("staging") {
@@ -115,6 +125,9 @@ dependencies {
     implementation(Libs.Androidx.Room.RUNTIME)
     implementation(Libs.Androidx.Room.KTX)
     kapt(Libs.Androidx.Room.COMPILER)
+
+    // data store
+    implementation(Libs.Androidx.DataStore.DATA_STORE)
 
 
     // hilt

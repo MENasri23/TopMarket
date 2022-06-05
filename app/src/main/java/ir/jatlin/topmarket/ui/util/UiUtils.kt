@@ -32,6 +32,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.NullPointerException
 
 /**
  * Launches a new coroutine and repeats `block` every time the Fragment's viewLifecycleOwner
@@ -66,7 +67,12 @@ suspend fun <T> Flow<Resource<T>>.safeCollect(
         when (state) {
             is Resource.Error -> onFailure(state.cause)
             is Resource.Loading -> onLoading(state.data)
-            is Resource.Success -> onSuccess(state.data!!)
+            is Resource.Success -> {
+                val data = state.data
+                if (data != null) {
+                    onSuccess(data)
+                } else onFailure(ErrorCause.Unknown(NullPointerException()))
+            }
         }
     }
 }

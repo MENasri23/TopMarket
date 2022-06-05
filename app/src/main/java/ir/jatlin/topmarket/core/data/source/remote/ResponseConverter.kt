@@ -18,7 +18,7 @@ class ResponseConverter @Inject constructor(
         return if (response.isSuccessful) {
             val body = response.body()
             when {
-                response.code() == 200 && body != null -> body
+                response.code() in 200..201 && body != null -> body
                 body == null -> throw NoBodyException()
                 else -> throw Exception()
             }

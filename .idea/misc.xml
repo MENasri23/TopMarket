@@ -14,9 +14,13 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_shop_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_star_rate_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_toman.xml" value="0.1605" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/change_quantity_button_background.xml" value="0.1415" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_amazing_suggestion.xml" value="0.1" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_arrow_forward_24.xml" value="0.1605" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1415" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_close.xml" value="0.1605" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_delete.xml" value="0.1415" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_minus.xml" value="0.2065" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_search_24.xml" value="0.1605" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_sort_24.xml" value="0.1345" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20261713803292528" />
@@ -62,7 +66,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.16" />
       </ProjectState>
     </option>
   </component>

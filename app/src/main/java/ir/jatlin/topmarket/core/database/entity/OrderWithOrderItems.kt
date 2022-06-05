@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.core.database.entity
 import androidx.room.Embedded
 import androidx.room.Relation
 import ir.jatlin.topmarket.core.model.order.Order
+import ir.jatlin.topmarket.core.model.user.Customer
 
 
 data class OrderWithOrderItems(
@@ -14,7 +15,7 @@ data class OrderWithOrderItems(
         parentColumn = "customer_id",
         entityColumn = "id"
     )
-    val customer: CustomerEntity,
+    val customer: CustomerEntity?,
 
     @Relation(
         parentColumn = "id",
@@ -25,7 +26,7 @@ data class OrderWithOrderItems(
 
 fun OrderWithOrderItems.asOrder() = Order(
     id = order.id,
-    customer = customer.asCustomer(),
+    customer = customer?.asCustomer() ?: Customer.Empty,
     orderItems = orderItems.map(OrderLineItemEntity::asOrderLineItem),
     status = order.status
 )

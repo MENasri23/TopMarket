@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CustomerRepository {
 
-    fun findCustomerById(
+    suspend fun findCustomerById(
         customerId: Int
-    ): Flow<Customer>
+    ): Customer
 
     suspend fun createCustomer(
         customer: Customer

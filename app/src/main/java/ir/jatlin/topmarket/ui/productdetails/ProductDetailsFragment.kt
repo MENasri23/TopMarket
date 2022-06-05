@@ -102,8 +102,17 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
 
     private fun CoroutineScope.collectProductDependents() {
         launch {
-            viewModel.addToCartCount.collect {
-                /* Update the badge in future */
+            viewModel.onLoadingQuantity.collect { quantityOnLoading ->
+                with(binding.orderQuantityLoading) {
+                    if (quantityOnLoading) {
+                        visible()
+                        playAnimation()
+                    }
+                    else {
+                        gone()
+                        pauseAnimation()
+                    }
+                }
             }
         }
         launch {

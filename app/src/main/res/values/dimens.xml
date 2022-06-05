@@ -15,5 +15,6 @@
 
     <dimen name="slider_image_corner_size">@dimen/space_small</dimen>
     <dimen name="slider_height">@dimen/_128sdp</dimen>
+    <dimen name="cart_button_vertical_padding">@dimen/_12sdp</dimen>
 
 </resources>

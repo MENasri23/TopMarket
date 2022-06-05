@@ -2,13 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.TopMarket" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/digi_red_color_700</item>
+        <item name="colorPrimaryVariant">@color/digi_red_color_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue_sky</item>
         <item name="colorSecondaryVariant">@color/blue_sky700</item>
         <item name="colorOnSecondary">@color/black</item>
+        <!-- Accent brand color -->
+        <item name="colorAccent">@color/digi_blue_200</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
         <item name="android:statusBarColor">@color/transparent</item>

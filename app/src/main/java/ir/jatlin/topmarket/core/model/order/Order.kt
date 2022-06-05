@@ -7,4 +7,14 @@ data class Order(
     val orderItems: List<OrderLineItem>,
     val customer: Customer,
     val status: OrderStatus
-)
+) {
+
+    companion object {
+        val Empty = Order(
+            id = 0,
+            orderItems = listOf(),
+            customer = Customer.Empty,
+            status = OrderStatus.Pending
+        )
+    }
+}

@@ -8,4 +8,11 @@ data class Customer(
     val lastName: String,
     val avatarUrl: String,
     val role: String
-)
+) {
+
+    companion object {
+        val Empty = Customer(
+            0, "", "", "", "", "", ""
+        )
+    }
+}

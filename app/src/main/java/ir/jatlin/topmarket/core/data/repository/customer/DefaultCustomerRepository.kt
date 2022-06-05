@@ -1,34 +1,47 @@
 package ir.jatlin.topmarket.core.data.repository.customer
 
-import ir.jatlin.topmarket.core.data.mapper.asCustomer
+import ir.jatlin.topmarket.core.data.mapper.asCustomerEntity
 import ir.jatlin.topmarket.core.data.mapper.asCustomerNetwork
+import ir.jatlin.topmarket.core.data.source.local.CustomerLocalDataSource
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRemoteDataSource
+import ir.jatlin.topmarket.core.database.entity.asCustomer
 import ir.jatlin.topmarket.core.model.user.Customer
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import javax.inject.Inject
 
 class DefaultCustomerRepository @Inject constructor(
     private val remoteDataSource: CustomerRemoteDataSource,
+    private val localDataSource: CustomerLocalDataSource
 ) : CustomerRepository {
 
-    override fun findCustomerById(customerId: Int): Flow<Customer> {
-        return flow {
-            emit(
-                remoteDataSource.findCustomerById(customerId).asCustomer()
-            )
+    override suspend fun findCustomerById(customerId: Int): Customer {
+        val local = localDataSource.findCustomerById(customerId)
+        if (local != null) {
+            return local.asCustomer()
         }
+        val customerNetwork = remoteDataSource.findCustomerById(customerId)
+        return saveOrUpdateLocal(customerNetwork)
     }
 
     override suspend fun createCustomer(customer: Customer): Customer {
-        return remoteDataSource.createCustomer(
+        val customerNetwork = remoteDataSource.createCustomer(
             customer.asCustomerNetwork()
-        ).asCustomer()
+        )
+        return saveOrUpdateLocal(customerNetwork)
     }
 
     override suspend fun updateCustomer(customer: Customer): Customer {
-        return remoteDataSource.updateCustomer(
+        val customerNetwork = remoteDataSource.updateCustomer(
             customer.asCustomerNetwork()
-        ).asCustomer()
+        )
+        return saveOrUpdateLocal(customerNetwork)
     }
+
+    private suspend fun saveOrUpdateLocal(customerNetwork: CustomerNetwork): Customer {
+        val customerEntity = customerNetwork.asCustomerEntity()
+        localDataSource.save(customerEntity)
+        return customerEntity.asCustomer()
+    }
+
+
 }

@@ -77,7 +77,7 @@ interface MarketApi {
 
         /* Orders */
         const val ORDER_NEW = "$PREFIX/orders"
-        const val ORDER = "$PREFIX/{id}"
+        const val ORDER = "$PREFIX/orders/{id}"
     }
 
     private object PARAMS {

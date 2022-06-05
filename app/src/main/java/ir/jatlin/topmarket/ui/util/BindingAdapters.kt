@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.ui.util
 
+import android.view.View
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
@@ -20,6 +21,16 @@ fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: S
 @BindingAdapter("htmlText")
 fun TextView.setTextFromHtml(htmlText: String?) {
     text = HtmlCompat.fromHtml(htmlText ?: "", FROM_HTML_MODE_COMPACT)
+}
+
+@BindingAdapter("goneWhile")
+fun View.goneWhile(isGone: Boolean) {
+    visibility = if (isGone) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("invisibleWhile")
+fun View.invisilbeWhile(isInvisible: Boolean) {
+    visibility = if (isInvisible) View.INVISIBLE else View.VISIBLE
 }
 
 @BindingAdapter(
