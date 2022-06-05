@@ -382,6 +382,7 @@
                     style="@style/TextAppearance.MarketApp.BodySmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{viewModel.orderQuantity.toString()}"
                     android:textColor="@color/digi_red_color_500"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="@id/quantity_background"
@@ -407,17 +408,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_medium"
                     android:background="?attr/selectableItemBackground"
-                    android:src="@drawable/ic_delete"
+                    android:src="@{viewModel.orderQuantity > 0 ? @drawable/ic_minus :  @drawable/ic_delete}"
                     app:layout_constraintBottom_toBottomOf="@id/quantity_background"
                     app:layout_constraintStart_toStartOf="@id/quantity_background"
                     app:layout_constraintTop_toTopOf="@id/quantity_background" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/group_quantity"
+                    goneWhile="@{viewModel.orderQuantity == 0}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="iv_remove,tv_quantity,iv_add,quantity_background" />
+                    app:constraint_referenced_ids="iv_remove,tv_quantity,iv_add,quantity_background"
+                    tools:visibility="gone" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

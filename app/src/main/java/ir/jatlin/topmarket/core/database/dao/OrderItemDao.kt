@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.core.database.dao
 
 import androidx.room.*
 import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderItemDao {
@@ -18,10 +19,13 @@ interface OrderItemDao {
     @Query("DELETE FROM order_items WHERE id NOT IN (:ids)")
     suspend fun deleteAllExcept(ids: List<Int>)
 
+    @Query("SELECT * FROM order_items WHERE product_id = :productId")
+    fun findOrderLineItemByProductId(productId: Int): Flow<OrderLineItemEntity?>
+
     @Transaction
     suspend fun updateAndRemoveOthers(orderLineItems: List<OrderLineItemEntity>) {
         deleteAllExcept(orderLineItems.map(OrderLineItemEntity::id))
-        update(orderLineItems)
+        insert(orderLineItems)
     }
 
     @Query("DELETE FROM order_items")

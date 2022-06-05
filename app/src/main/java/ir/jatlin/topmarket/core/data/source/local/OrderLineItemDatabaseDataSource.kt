@@ -1,11 +1,11 @@
-package ir.jatlin.topmarket.core.data.repository.order
+package ir.jatlin.topmarket.core.data.source.local
 
 import ir.jatlin.topmarket.core.database.dao.OrderItemDao
 import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-
-class OrderLineItemDataSource @Inject constructor(
+class OrderLineItemDatabaseDataSource @Inject constructor(
     private val orderItemDao: OrderItemDao
 ) {
 
@@ -19,5 +19,9 @@ class OrderLineItemDataSource @Inject constructor(
 
     suspend fun cleatAll() {
         orderItemDao.clearAll()
+    }
+
+    fun findOrderLineItemByProductId(productId: Int): Flow<OrderLineItemEntity?> {
+        return orderItemDao.findOrderLineItemByProductId(productId)
     }
 }

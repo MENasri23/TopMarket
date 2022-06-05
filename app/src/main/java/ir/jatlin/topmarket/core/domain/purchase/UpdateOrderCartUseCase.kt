@@ -3,7 +3,6 @@ package ir.jatlin.topmarket.core.domain.purchase
 import ir.jatlin.topmarket.core.data.datastore.PurchasePreferences
 import ir.jatlin.topmarket.core.data.datastore.PurchasePrefsInfo
 import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.data.repository.customer.CustomerRepository
 import ir.jatlin.topmarket.core.data.repository.order.OrderRepository
 import ir.jatlin.topmarket.core.domain.FlowUseCase
 import ir.jatlin.topmarket.core.model.order.Order
@@ -13,6 +12,7 @@ import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import javax.inject.Inject
 
 class UpdateOrderCartUseCase @Inject constructor(
@@ -20,24 +20,23 @@ class UpdateOrderCartUseCase @Inject constructor(
     private val purchasePreferences: PurchasePreferences,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
-) : FlowUseCase<List<OrderLineItem>?, Unit>(errorHandler, dispatcher) {
+) : FlowUseCase<OrderLineItem, Unit>(errorHandler, dispatcher) {
 
-    override fun execute(params: List<OrderLineItem>?): Flow<Unit> {
-        return purchasePreferences.purchasePreferencesStream.map {
-            val (customerId, activeOrderId) = it
-            val orderLineItems = params ?: emptyList()
+    override fun execute(params: OrderLineItem): Flow<Unit> {
+        return purchasePreferences.purchasePreferencesStream.map { purchasePreferencesInfo ->
+            val (customerId, activeOrderId) = purchasePreferencesInfo
 
             val noActiveOrder = activeOrderId == PurchasePrefsInfo.NO_ACTIVE_ORDER
             val isGuestCustomer = customerId == PurchasePrefsInfo.GUEST_CUSTOMER
             when {
                 noActiveOrder && isGuestCustomer -> {
-                    val tempOrder = Order.Empty.copy(orderItems = orderLineItems)
-                    val orderId = orderRepository.createOrder(tempOrder)
+                    val orderId = orderRepository.createOrder(Order.Empty)
 
                     purchasePreferences.saveAvtiveOrderId(orderId)
                 }
                 noActiveOrder -> {
                     val order = Order.Empty.copy(
+                        orderItems = listOf(params),
                         customer = Customer.Empty.copy(id = customerId)
                     )
                     val orderId = orderRepository.createOrder(order)
@@ -45,8 +44,20 @@ class UpdateOrderCartUseCase @Inject constructor(
                 }
                 else -> {
                     val order = orderRepository.findOrderById(activeOrderId)
+
+                    val newOrderItems = order.orderItems.toMutableList()
+                    val inList = newOrderItems.withIndex()
+                        .find { it.value.id == params.id }
+
+                    if (inList != null) {
+                        newOrderItems[inList.index] = params
+                    } else {
+                        newOrderItems.add(params)
+                    }
+                    Timber.d("updateUseCase-orderItems: $newOrderItems")
+
                     orderRepository.updateOrder(
-                        order.copy(orderItems = order.orderItems + orderLineItems)
+                        order.copy(orderItems = newOrderItems)
                     )
 
                 }

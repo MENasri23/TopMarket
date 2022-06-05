@@ -5,16 +5,6 @@ import ir.jatlin.topmarket.core.model.order.OrderStatus
 
 @Entity(
     tableName = "orders",
-    foreignKeys = [
-        ForeignKey(
-            entity = CustomerEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["customer_id"]
-        )
-    ],
-    indices = [
-        Index(value = ["customer_id"])
-    ]
 )
 data class OrderEntity(
     @PrimaryKey

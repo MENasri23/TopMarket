@@ -4,6 +4,7 @@ import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 
 abstract class FlowUseCase<P, R>(
@@ -19,6 +20,7 @@ abstract class FlowUseCase<P, R>(
             emit(Resource.loading())
         }
         .catch { cause ->
+            Timber.e(cause.stackTraceToString())
             val errorCause = errorHandler.handle(cause)
             emit(Resource.error(errorCause))
         }.flowOn(dispatcher)

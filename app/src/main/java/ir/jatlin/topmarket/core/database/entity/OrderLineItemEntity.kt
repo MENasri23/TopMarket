@@ -31,6 +31,12 @@ data class OrderLineItemEntity(
     val quantity: Int,
 )
 
+// TODO: Use this sub data class in details screen
+data class OrderItemQuantity(
+    @ColumnInfo(name = "product_id") val productId: Int,
+    @ColumnInfo(name = "quantity") val quantity: Int
+)
+
 fun OrderLineItemEntity.asOrderLineItem() = OrderLineItem(
     id = id,
     productId = productId,

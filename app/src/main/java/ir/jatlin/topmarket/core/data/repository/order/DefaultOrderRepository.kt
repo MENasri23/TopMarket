@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.core.data.repository.order
 import ir.jatlin.topmarket.core.data.mapper.asOrderEntity
 import ir.jatlin.topmarket.core.data.mapper.asOrderLineItemEntity
 import ir.jatlin.topmarket.core.data.mapper.asOrderNetwork
+import ir.jatlin.topmarket.core.data.repository.orderlineitem.OrderLineItemRepository
 import ir.jatlin.topmarket.core.data.source.local.OrderDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
 import ir.jatlin.topmarket.core.database.entity.asOrder
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class DefaultOrderRepository @Inject constructor(
     private val remoteDataSource: OrderRemoteDataSource,
     private val localDataSource: OrderDatabaseDataSource,
-    private val orderLineItemDataSource: OrderLineItemDataSource
+    private val orderLineItemRepository: OrderLineItemRepository
 ) : OrderRepository {
 
     @Throws(OrderNotFoundException::class)
@@ -24,7 +25,7 @@ class DefaultOrderRepository @Inject constructor(
         }
         val remoteOrder = remoteDataSource.findOrderById(orderId)
         localDataSource.saveOrder(remoteOrder.asOrderEntity())
-        orderLineItemDataSource.save(
+        orderLineItemRepository.save(
             remoteOrder.lineItems.map {
                 it.asOrderLineItemEntity(orderId)
             }
@@ -47,8 +48,8 @@ class DefaultOrderRepository @Inject constructor(
         val orderNetwork = remoteDataSource.createOrder(order.asOrderNetwork())
         val orderId = localDataSource.saveOrder(orderNetwork.asOrderEntity())
 
-        orderLineItemDataSource.cleatAll()
-        orderLineItemDataSource.save(
+        orderLineItemRepository.cleatAll()
+        orderLineItemRepository.save(
             orderNetwork.lineItems.map {
                 it.asOrderLineItemEntity(orderId)
             }
@@ -63,7 +64,7 @@ class DefaultOrderRepository @Inject constructor(
         val remoteOrder = remoteDataSource.updateOrder(order.asOrderNetwork())
         val id = localDataSource.saveOrder(remoteOrder.asOrderEntity())
 
-        orderLineItemDataSource.update(remoteOrder.lineItems.map {
+        orderLineItemRepository.update(remoteOrder.lineItems.map {
             it.asOrderLineItemEntity(remoteOrder.id)
         })
 
