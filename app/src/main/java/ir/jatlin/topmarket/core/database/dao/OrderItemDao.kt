@@ -24,7 +24,7 @@ interface OrderItemDao {
 
     @Transaction
     suspend fun updateAndRemoveOthers(orderLineItems: List<OrderLineItemEntity>) {
-        deleteAllExcept(orderLineItems.map(OrderLineItemEntity::id))
+        clearAll()
         insert(orderLineItems)
     }
 

@@ -54,6 +54,7 @@ class UpdateOrderCartUseCase @Inject constructor(
                     } else {
                         newOrderItems.add(params)
                     }
+
                     Timber.d("updateUseCase-orderItems: $newOrderItems")
 
                     orderRepository.updateOrder(

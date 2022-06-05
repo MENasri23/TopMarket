@@ -28,6 +28,11 @@ fun View.goneWhile(isGone: Boolean) {
     visibility = if (isGone) View.GONE else View.VISIBLE
 }
 
+@BindingAdapter("invisibleWhile")
+fun View.invisilbeWhile(isInvisible: Boolean) {
+    visibility = if (isInvisible) View.INVISIBLE else View.VISIBLE
+}
+
 @BindingAdapter(
     value = ["price", "separator"], requireAll = false
 )

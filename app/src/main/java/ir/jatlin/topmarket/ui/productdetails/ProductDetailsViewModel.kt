@@ -15,11 +15,13 @@ import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.isSuccess
+import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,12 +34,7 @@ class ProductDetailsViewModel @Inject constructor(
 ) : ViewModel() {
     private val productId = state.getLiveData<Int>("productId").asFlow()
 
-    private val _orderLineItem = MutableStateFlow<Resource<OrderLineItem?>>(Resource.loading())
-    val orderLineItem = _orderLineItem.asStateFlow()
-
-    init {
-        fetchRelatedOrderLineItem()
-    }
+    private var orderLineItem: OrderLineItem? = null
 
     private val _productDetails = MutableStateFlow<NetworkProductDetails?>(null)
     val productDetails = _productDetails.asStateFlow()
@@ -53,6 +50,9 @@ class ProductDetailsViewModel @Inject constructor(
     private val _orderQuantity = MutableStateFlow(0)
     val orderQuantity = _orderQuantity.asStateFlow()
 
+    private val _onLoadingQuantity = MutableStateFlow(true)
+    val onLoadingQuantity = _onLoadingQuantity.asStateFlow()
+
     val productDetailsState = stateFlow {
         productId.map {
             Timber.d("productId: $it")
@@ -60,16 +60,29 @@ class ProductDetailsViewModel @Inject constructor(
         }
     }
 
+    init {
+        fetchRelatedOrderLineItem()
+    }
+
 
     private fun fetchRelatedOrderLineItem() {
         viewModelScope.launch {
             productId.collect { productId ->
-                fetchOrderLineItemUseCase(productId).collectLatest {
+                fetchOrderLineItemUseCase(productId).safeCollect(
+                    onFailure = {
+                        if (it is ErrorCause.Unknown && it.throwable is NullPointerException) {
+                            orderLineItem = null
+                        }
+                        _onLoadingQuantity.value = false
+                        _orderQuantity.value = 0
+                    },
+                    onLoading = { _onLoadingQuantity.value = true }
+                ) {
                     Timber.d("$it")
-                    _orderLineItem.value = it
-                    if (it.isSuccess) {
-                        _orderQuantity.value = it.data!!.quantity
-                    }
+                    orderLineItem = it
+                    _onLoadingQuantity.value = false
+                    _orderQuantity.value = it?.quantity ?: 0
+
                 }
             }
         }
@@ -95,12 +108,32 @@ class ProductDetailsViewModel @Inject constructor(
 
 
     fun addToCart() {
-        val itemResource = orderLineItem.value
-        val orderLineItem = if (itemResource.isSuccess) {
-            val oldOrderLineItem = itemResource.data!!
-            oldOrderLineItem.copy(quantity = oldOrderLineItem.quantity + 1)
+        val newOrderLineItem = updateOrderLineItemQuantity(add = true)
+        updateCart(newOrderLineItem)
+    }
+
+    fun removeFromCart() {
+        val newOrderLineItem = updateOrderLineItemQuantity(add = false)
+        updateCart(newOrderLineItem)
+    }
+
+    private fun updateCart(orderLineItem: OrderLineItem?) {
+        orderLineItem ?: return
+        _onLoadingQuantity.value = true
+        viewModelScope.launch {
+            updateOrderCartUseCase(orderLineItem).collect {
+                Timber.d("$it")
+            }
+        }
+    }
+
+    private fun updateOrderLineItemQuantity(add: Boolean): OrderLineItem? {
+        val item = orderLineItem
+        return if (item != null) {
+            val quantity = item.quantity + (if (add) 1 else -1)
+            item.copy(quantity = quantity)
         } else {
-            val product = productDetails.value ?: return
+            val product = productDetails.value ?: return null
             OrderLineItem(
                 id = 0,
                 productId = product.id,
@@ -108,11 +141,6 @@ class ProductDetailsViewModel @Inject constructor(
                 totalPrice = "",
                 quantity = 1
             )
-        }
-        viewModelScope.launch {
-            updateOrderCartUseCase(orderLineItem).collect {
-                Timber.d("$it")
-            }
         }
     }
 

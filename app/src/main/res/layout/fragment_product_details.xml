@@ -344,6 +344,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/space_small"
                     android:layout_marginEnd="@dimen/space_medium"
+                    android:enabled="@{viewModel.orderQuantity == 0}"
                     android:onClick="@{() -> viewModel.addToCart()}"
                     android:paddingVertical="@dimen/cart_button_vertical_padding"
                     android:text="@string/add_to_cart"
@@ -370,7 +371,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_medium"
-                    android:background="?attr/selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.addToCart()}"
                     android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="@id/quantity_background"
                     app:layout_constraintEnd_toEndOf="@id/quantity_background"
@@ -380,6 +382,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_quantity"
                     style="@style/TextAppearance.MarketApp.BodySmall"
+                    invisibleWhile="@{viewModel.onLoadingQuantity}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.orderQuantity.toString()}"
@@ -392,9 +395,10 @@
                     tools:text="1" />
 
                 <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/order_quantity_loading"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginHorizontal="@dimen/space_medium"
+                    android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@id/tv_quantity"
                     app:layout_constraintEnd_toStartOf="@id/iv_add"
                     app:layout_constraintStart_toEndOf="@id/iv_remove"
@@ -407,8 +411,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_medium"
-                    android:background="?attr/selectableItemBackground"
-                    android:src="@{viewModel.orderQuantity > 0 ? @drawable/ic_minus :  @drawable/ic_delete}"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.removeFromCart()}"
+                    android:src="@{viewModel.orderQuantity > 1 ? @drawable/ic_minus :  @drawable/ic_delete}"
                     app:layout_constraintBottom_toBottomOf="@id/quantity_background"
                     app:layout_constraintStart_toStartOf="@id/quantity_background"
                     app:layout_constraintTop_toTopOf="@id/quantity_background" />
@@ -419,7 +424,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:constraint_referenced_ids="iv_remove,tv_quantity,iv_add,quantity_background"
-                    tools:visibility="gone" />
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
