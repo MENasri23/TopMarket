@@ -129,6 +129,9 @@ dependencies {
     // data store
     implementation(Libs.Androidx.DataStore.DATA_STORE)
 
+    // work manager
+    implementation(Libs.Androidx.WorkManager.RUNTIME_KTX)
+
 
     // hilt
     implementation(Libs.Hilt.HILT)

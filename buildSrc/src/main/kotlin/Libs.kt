@@ -90,6 +90,11 @@ object Libs {
             const val DATA_STORE = "androidx.datastore:datastore-preferences:${version}"
         }
 
+        object WorkManager {
+            private const val version = "2.7.1"
+            const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$version"
+        }
+
         private const val IMPLEMENTATION = "implementation"
 
         fun DependencyHandler.implementAppLibraries() {
