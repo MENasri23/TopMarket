@@ -17,6 +17,8 @@ data class NetworkProduct(
     val stockStatus: String,
     // TODO: These property maybe removed in future
     @SerializedName("date_created_gmt")
+    val createdDateGmt: String,
+    @SerializedName("date_created")
     val createdDate: String,
     @SerializedName("rating_count")
     val ratingCount: Int,
