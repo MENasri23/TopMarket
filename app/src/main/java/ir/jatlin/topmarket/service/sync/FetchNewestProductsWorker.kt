@@ -25,11 +25,11 @@ class FetchNewestProductsWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         val result = withContext(dispatcher) {
-            val result = fetchNewestProductsUseCase()
-            if (result is Resource.Error) return@withContext Result.retry()
+            val resource = fetchNewestProductsUseCase()
+            if (resource is Resource.Error) return@withContext Result.retry()
 
-            if (result is Resource.Success) {
-                val products = result.data
+            if (resource is Resource.Success) {
+                val products = resource.data
                 if (products == null) {
                     Timber.d("retrieved a success result with null data")
                     return@withContext Result.failure()
