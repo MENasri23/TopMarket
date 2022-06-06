@@ -33,3 +33,6 @@ sealed class Resource<out R>(
 
 val <T> Resource<T>.isSuccess
     get() = this is Resource.Success && data != null
+
+fun <T> Resource<T>.dataOnSuccessOr(default: T): T =
+    (this as? Resource.Success<T>)?.data ?: default

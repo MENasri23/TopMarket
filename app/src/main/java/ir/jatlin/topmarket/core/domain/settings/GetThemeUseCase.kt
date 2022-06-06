@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.core.domain.settings
 
-import android.os.Build
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.CoroutineUseCase
@@ -17,9 +16,7 @@ class GetThemeUseCase @Inject constructor(
 ) : CoroutineUseCase<Unit, Theme>(errorHandler, dispatcher) {
 
     override suspend fun execute(params: Unit): Theme {
-        return marketPreferences.selectedTheme.firstOrNull() ?: when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> Theme.SYSTEM
-            else -> Theme.BATTERY_SAVER
-        }
+        return marketPreferences.selectedTheme.firstOrNull()
+            ?: ThemeUtils.defaultTheme()
     }
 }
