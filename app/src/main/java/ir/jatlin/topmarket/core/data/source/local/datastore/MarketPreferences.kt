@@ -1,11 +1,11 @@
 package ir.jatlin.topmarket.core.data.source.local.datastore
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.*
+import ir.jatlin.topmarket.core.data.di.ProductPreferencesDataStore
+import ir.jatlin.topmarket.core.data.di.PurchasePreferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
@@ -26,17 +26,15 @@ data class PurchasePrefsInfo(
 }
 
 class MarketPreferences @Inject constructor(
-    private val purchaseDataStore: DataStore<Preferences>
+    @PurchasePreferencesDataStore
+    private val purchaseDataStore: DataStore<Preferences>,
+    @ProductPreferencesDataStore
+    private val productDataStore: DataStore<Preferences>
 ) {
 
 
     val purchasePreferencesStream: Flow<PurchasePrefsInfo> = purchaseDataStore.data
-        .catch { cause ->
-            if (cause is IOException) {
-                emit(emptyPreferences())
-            }
-            Timber.e("reading the customer preferences failed with error: $cause")
-        }
+        .catch { cause -> catch(purchaseDataStore.toString(), cause) }
         .map { preferences ->
             val customerId = preferences[PreferencesKeys.CUSTOMER_ID]
                 ?: PurchasePrefsInfo.GUEST_CUSTOMER
@@ -48,6 +46,19 @@ class MarketPreferences @Inject constructor(
                 activeOrderId = activeOrderId
             )
         }
+
+    val lastNewestProductDate: Flow<String?> = productDataStore.data
+        .catch { cause -> catch(productDataStore.toString(), cause) }
+        .map { preferences ->
+            preferences[PreferencesKeys.LAST_PRODUCT_DATE]
+        }
+
+    private suspend fun FlowCollector<Preferences>.catch(dataStore: String, cause: Throwable) {
+        if (cause is IOException) {
+            emit(emptyPreferences())
+        }
+        Timber.e("reading from dataStore: $dataStore failed with error: $cause")
+    }
 
 
     suspend fun saveCustomerId(id: Int) {
@@ -66,6 +77,8 @@ class MarketPreferences @Inject constructor(
     private object PreferencesKeys {
         val CUSTOMER_ID = intPreferencesKey("customer_id")
         val ACTIVE_ORDER_ID = intPreferencesKey("active_order_id")
+
+        val LAST_PRODUCT_DATE = stringPreferencesKey("last_product_date")
     }
 
 }
