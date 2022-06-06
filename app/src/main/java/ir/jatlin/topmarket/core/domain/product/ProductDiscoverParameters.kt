@@ -22,6 +22,8 @@ class ProductDiscoverParameters : DefaultDiscoverParameters() {
 
     var includeIds: List<Int>? = null
 
+    var after: String? = null
 
+    var before: String? = null
 
 }

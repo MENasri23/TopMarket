@@ -26,6 +26,12 @@ inline fun makeProductParams(
 
             val productIds = includeIds
             if (productIds != null) put("include", productIds.joinToString())
+
+            val after = after
+            if (after != null) put("after", after)
+
+            val before = before
+            if (before != null) put("before", before)
         }
 
         FetchProductsListUseCase.Parameters(

@@ -16,7 +16,7 @@ class DefaultProductRepository @Inject constructor(
         return remoteDataSource.findProductDetailsById(id)
     }
 
-    override fun getProductsList(
+    override fun getProductsListStream(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
@@ -24,6 +24,14 @@ class DefaultProductRepository @Inject constructor(
         return flow {
             emit(remoteDataSource.getProductsList(page, pageSize, filters))
         }
+    }
+
+    override suspend fun getProductsList(
+        page: Int,
+        pageSize: Int?,
+        filters: Map<String, String>?
+    ): List<NetworkProduct> {
+        return remoteDataSource.getProductsList(page, pageSize, filters)
     }
 
     override fun getProductCategories(

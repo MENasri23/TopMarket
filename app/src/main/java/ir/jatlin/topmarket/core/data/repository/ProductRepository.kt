@@ -11,11 +11,17 @@ interface ProductRepository {
         id: Int
     ): NetworkProductDetails?
 
-    fun getProductsList(
+    fun getProductsListStream(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
     ): Flow<List<NetworkProduct>>
+
+    suspend fun getProductsList(
+        page: Int,
+        pageSize: Int?,
+        filters: Map<String, String>?
+    ): List<NetworkProduct>
 
     fun getProductCategories(
         page: Int,

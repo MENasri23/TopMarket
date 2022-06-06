@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.core.data.source.remote
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ir.jatlin.topmarket.core.data.di.IODispatcher
+import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails

@@ -19,7 +19,7 @@ class FetchProductsListUseCase @Inject constructor(
 ) {
 
     override fun execute(params: Parameters): Flow<List<NetworkProduct>> {
-        return productRepository.getProductsList(
+        return productRepository.getProductsListStream(
             page = params.page,
             pageSize = params.pageSize,
             filters = params.filters
