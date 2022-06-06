@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.purchase
 
-import ir.jatlin.topmarket.core.data.datastore.PurchasePreferences
-import ir.jatlin.topmarket.core.data.datastore.PurchasePrefsInfo
+import ir.jatlin.topmarket.core.data.source.local.datastore.PurchasePreferences
+import ir.jatlin.topmarket.core.data.source.local.datastore.PurchasePrefsInfo
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.order.OrderRepository
 import ir.jatlin.topmarket.core.domain.FlowUseCase

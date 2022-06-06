@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.data.datastore
+package ir.jatlin.topmarket.core.data.source.local.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
