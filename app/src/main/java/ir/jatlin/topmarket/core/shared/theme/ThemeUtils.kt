@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.domain.settings
+package ir.jatlin.topmarket.core.shared.theme
 
 import android.os.Build
 import ir.jatlin.topmarket.core.model.Theme

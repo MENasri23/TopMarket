@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.ui.util
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.view.MotionEvent
@@ -10,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -24,6 +27,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.topmarket.R
+import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.databinding.FadingSnackbarLayoutBinding
@@ -46,6 +50,18 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
         viewLifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
             block()
         }
+    }
+}
+
+fun Activity.updateTheme(theme: Theme) {
+    val nightMode = when (theme) {
+        Theme.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+        Theme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+        Theme.SYSTEM -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        Theme.BATTERY_SAVER -> AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+    }
+    if (AppCompatDelegate.getDefaultNightMode() != nightMode) {
+        AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 }
 

@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.model.purchase.PurchasePrefsInfo
+import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
 import java.io.IOException
@@ -41,10 +42,7 @@ class MarketPreferences @Inject constructor(
     val selectedTheme: Flow<Theme> = marketData.map { preferences ->
         preferences[PreferencesKeys.THEME_MODE]?.let {
             Theme.fromPreferenceKey(it)
-        } ?: when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> Theme.SYSTEM
-            else -> Theme.BATTERY_SAVER
-        }
+        } ?: ThemeUtils.defaultTheme()
 
     }.distinctUntilChanged()
 

@@ -16,13 +16,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.theme.ThemeViewModel
+import ir.jatlin.topmarket.ui.util.updateTheme
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val loadingViewModel by viewModels<LoadSateViewModel>()
+    private val themeViewModel by viewModels<ThemeViewModel>()
 
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
@@ -34,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        updateTheme(themeViewModel.currentTheme)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -57,6 +64,12 @@ class MainActivity : AppCompatActivity() {
                     /* Show loading screen based on the current state of each visible fragment */
                     loadingViewModel.loading.collectLatest { isLoading ->
                         binding.loadingScreen.isVisible = isLoading
+                    }
+                }
+                launch {
+                    themeViewModel.selectedTheme.collectLatest {
+                        Timber.d("$theme")
+                        updateTheme(it)
                     }
                 }
             }
