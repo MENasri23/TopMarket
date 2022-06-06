@@ -5,10 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.model.purchase.PurchasePrefsInfo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
@@ -49,7 +46,7 @@ class MarketPreferences @Inject constructor(
             else -> Theme.BATTERY_SAVER
         }
 
-    }
+    }.distinctUntilChanged()
 
 
     private val marketData
