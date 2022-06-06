@@ -15,20 +15,17 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
 
-    private const val PURCHASE_PREFERENCES_NAME = "purchase_preferences"
-    private const val PRODUCT_PREFERENCES_NAME = "product_preferences"
+    private const val MARKET_PREFERENCES_NAME = "market_preferences"
 
     @Provides
     @Singleton
-    @PurchasePreferencesDataStore
-    fun providePurchasePreferencesDataStore(
+    fun provideMarketPreferencesDataStore(
         @ApplicationContext context: Context,
         @IODispatcher dispatcher: CoroutineDispatcher
     ): DataStore<Preferences> {
@@ -38,34 +35,8 @@ object DataStoreModule {
                 produceNewData = { emptyPreferences() }
             ),
             produceFile = {
-                context.preferencesDataStoreFile(PURCHASE_PREFERENCES_NAME)
-            }
-        )
-    }
-
-    @Provides
-    @Singleton
-    @ProductPreferencesDataStore
-    fun provideProductPreferencesDataStore(
-        @ApplicationContext context: Context,
-        @IODispatcher dispatcher: CoroutineDispatcher
-    ): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            scope = CoroutineScope(dispatcher + SupervisorJob()),
-            corruptionHandler = ReplaceFileCorruptionHandler(
-                produceNewData = { emptyPreferences() }
-            ),
-            produceFile = {
-                context.preferencesDataStoreFile(PRODUCT_PREFERENCES_NAME)
+                context.preferencesDataStoreFile(MARKET_PREFERENCES_NAME)
             }
         )
     }
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class PurchasePreferencesDataStore
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class ProductPreferencesDataStore
