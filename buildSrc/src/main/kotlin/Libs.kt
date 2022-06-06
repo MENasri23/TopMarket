@@ -128,10 +128,11 @@ object Libs {
 
     object Hilt {
         const val version = "2.41"
-        private const val hiltNavigationVersion = "1.0.0"
+        private const val hiltAndroidxVersion = "1.0.0"
         private const val androidXCompilerVersion = "1.0.0"
         const val HILT = "com.google.dagger:hilt-android:${version}"
-        const val NAVIGATION = "androidx.hilt:hilt-navigation-fragment:$hiltNavigationVersion"
+        const val NAVIGATION = "androidx.hilt:hilt-navigation-fragment:$hiltAndroidxVersion"
+        const val WORK_MANAGER = "androidx.hilt:hilt-work:$hiltAndroidxVersion"
         const val HILT_COMPILER = "com.google.dagger:hilt-compiler:${version}"
         const val ANDROIDX_HILT_COMPILER = "androidx.hilt:hilt-compiler:${androidXCompilerVersion}"
         const val TEST = "com.google.dagger:hilt-android-testing:${version}"

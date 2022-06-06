@@ -136,6 +136,7 @@ dependencies {
     // hilt
     implementation(Libs.Hilt.HILT)
     implementation(Libs.Hilt.NAVIGATION)
+    implementation(Libs.Hilt.WORK_MANAGER)
     kapt(Libs.Hilt.HILT_COMPILER)
     kapt(Libs.Hilt.ANDROIDX_HILT_COMPILER)
 
