@@ -73,6 +73,12 @@ class MarketPreferences @Inject constructor(
         }
     }
 
+    suspend fun saveLastProductDate(date: String) {
+        productDataStore.edit { preferences ->
+            preferences[PreferencesKeys.LAST_PRODUCT_DATE] = date
+        }
+    }
+
 
     private object PreferencesKeys {
         val CUSTOMER_ID = intPreferencesKey("customer_id")
