@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.domain.purchase
 
-import ir.jatlin.topmarket.core.data.source.local.datastore.PurchasePreferences
+import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.data.source.local.datastore.PurchasePrefsInfo
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.order.OrderRepository
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class UpdateOrderCartUseCase @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val purchasePreferences: PurchasePreferences,
+    private val purchasePreferences: MarketPreferences,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
 ) : FlowUseCase<OrderLineItem, Unit>(errorHandler, dispatcher) {
@@ -32,7 +32,7 @@ class UpdateOrderCartUseCase @Inject constructor(
                 noActiveOrder && isGuestCustomer -> {
                     val orderId = orderRepository.createOrder(Order.Empty)
 
-                    purchasePreferences.saveAvtiveOrderId(orderId)
+                    purchasePreferences.saveActiveOrderId(orderId)
                 }
                 noActiveOrder -> {
                     val order = Order.Empty.copy(
@@ -40,7 +40,7 @@ class UpdateOrderCartUseCase @Inject constructor(
                         customer = Customer.Empty.copy(id = customerId)
                     )
                     val orderId = orderRepository.createOrder(order)
-                    purchasePreferences.saveAvtiveOrderId(orderId)
+                    purchasePreferences.saveActiveOrderId(orderId)
                 }
                 else -> {
                     val order = orderRepository.findOrderById(activeOrderId)

@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.data.source.remote
+package ir.jatlin.topmarket.core.data.source.remote.product
 
 import ir.jatlin.data.source.remote.ResponseConverter
 import ir.jatlin.topmarket.core.network.api.MarketApi

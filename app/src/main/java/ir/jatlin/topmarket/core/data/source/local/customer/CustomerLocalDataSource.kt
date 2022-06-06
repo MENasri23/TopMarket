@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.data.source.local
+package ir.jatlin.topmarket.core.data.source.local.customer
 
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
 import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders

@@ -25,12 +25,12 @@ data class PurchasePrefsInfo(
     }
 }
 
-class PurchasePreferences @Inject constructor(
-    private val customerDataStore: DataStore<Preferences>
+class MarketPreferences @Inject constructor(
+    private val purchaseDataStore: DataStore<Preferences>
 ) {
 
 
-    val purchasePreferencesStream: Flow<PurchasePrefsInfo> = customerDataStore.data
+    val purchasePreferencesStream: Flow<PurchasePrefsInfo> = purchaseDataStore.data
         .catch { cause ->
             if (cause is IOException) {
                 emit(emptyPreferences())
@@ -51,13 +51,13 @@ class PurchasePreferences @Inject constructor(
 
 
     suspend fun saveCustomerId(id: Int) {
-        customerDataStore.edit { preferences ->
+        purchaseDataStore.edit { preferences ->
             preferences[PreferencesKeys.CUSTOMER_ID] = id
         }
     }
 
-    suspend fun saveAvtiveOrderId(id: Int) {
-        customerDataStore.edit { preferences ->
+    suspend fun saveActiveOrderId(id: Int) {
+        purchaseDataStore.edit { preferences ->
             preferences[PreferencesKeys.ACTIVE_ORDER_ID] = id
         }
     }

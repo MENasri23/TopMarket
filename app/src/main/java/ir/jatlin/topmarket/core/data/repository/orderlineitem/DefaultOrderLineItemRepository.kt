@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.repository.orderlineitem
 
-import ir.jatlin.topmarket.core.data.source.local.OrderLineItemDatabaseDataSource
+import ir.jatlin.topmarket.core.data.source.local.order.OrderLineItemDatabaseDataSource
 import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 import ir.jatlin.topmarket.core.database.entity.asOrderLineItem
 import ir.jatlin.topmarket.core.model.order.OrderLineItem

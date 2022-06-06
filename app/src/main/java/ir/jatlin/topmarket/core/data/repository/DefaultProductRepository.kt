@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.repository
 
-import ir.jatlin.topmarket.core.data.source.remote.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
