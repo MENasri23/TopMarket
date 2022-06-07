@@ -72,4 +72,7 @@
     <string name="close_settings">Close Settings</string>
     <string name="settings_title">تنظیمات</string>
     <string name="enable_notification">جدیدترین محصولات را به من اطلاع بده</string>
+    <string name="default_system_theme">حالت پیشفرض سیستم</string>
+    <string name="enable_dark_theme">نمایش در حالت تم تاریک</string>
+    <string name="app_theme">حالت تم برنامه</string>
 </resources>

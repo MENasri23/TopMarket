@@ -26,7 +26,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:contentInsetStart="0dp">
+                app:contentInsetStart="0dp"
+                app:popupTheme="@style/Theme.Material3.Light">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -89,8 +90,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_small"
-                    android:orientation="vertical">
+                    android:background="?attr/colorSurface"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/space_medium">
 
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.MarketApp.BodySmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/space_medium"
+                        android:text="@string/app_theme"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/settings_dark_theme"
+                        style="@style/Widget.IOSched.Settings.Switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:background="?attr/colorSurface"
+                        android:checked="@{viewModel.darkThemeEnabled}"
+                        android:enabled="@{!viewModel.defaultSystemTheme}"
+                        android:layoutDirection="rtl"
+                        android:onCheckedChanged="@{(view, checked) -> viewModel.setDarkTheme(checked)}"
+                        android:paddingHorizontal="@dimen/space_medium"
+                        android:paddingVertical="@dimen/space_medium"
+                        android:text="@string/enable_dark_theme" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/settings_system_theme"
+                        style="@style/Widget.Market.Settings.CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:checked="@{viewModel.defaultSystemTheme}"
+                        android:onCheckedChanged="@{(view, checked) -> viewModel.setDefaultSystemTheme(checked)}"
+                        android:paddingHorizontal="@dimen/space_medium"
+                        android:text="@string/default_system_theme" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
