@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.isSuccess
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +20,9 @@ inline fun <T> ViewModel.stateFlow(
     )
 }
 
+fun Job?.cancelIfAlive() {
+    if (this?.isActive == true) cancel()
+}
 
 fun <T> allSuccess(vararg resources: Resource<T>): Boolean =
     resources.all { it.isSuccess }

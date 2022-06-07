@@ -50,6 +50,9 @@ class MarketPreferences @Inject constructor(
         preferences[PreferencesKeys.NOTIFICATION] ?: true
     }
 
+    val notificationInterval = marketData.map { preferences ->
+        preferences[PreferencesKeys.NOTIFICATION_INTERVAL] ?: 5
+    }
 
     private val marketData
         get() = marketDataStore.data.catch { cause -> catch(cause) }
@@ -92,6 +95,12 @@ class MarketPreferences @Inject constructor(
         }
     }
 
+    suspend fun saveNotificationInterval(interval: Int) {
+        marketDataStore.edit { preferences ->
+            preferences[PreferencesKeys.NOTIFICATION_INTERVAL] = interval
+        }
+    }
+
 
     private object PreferencesKeys {
         val CUSTOMER_ID = intPreferencesKey("customer_id")
@@ -99,6 +108,7 @@ class MarketPreferences @Inject constructor(
         val LAST_PRODUCT_DATE = stringPreferencesKey("last_product_date")
         val THEME_MODE = stringPreferencesKey("theme_mode")
         val NOTIFICATION = booleanPreferencesKey("notification")
+        val NOTIFICATION_INTERVAL = intPreferencesKey("notification_interval")
     }
 
 }

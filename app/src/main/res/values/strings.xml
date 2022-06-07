@@ -75,4 +75,6 @@
     <string name="default_system_theme">حالت پیشفرض سیستم</string>
     <string name="enable_dark_theme">نمایش در حالت تم تاریک</string>
     <string name="app_theme">حالت تم برنامه</string>
+    <string name="set_interval">تنظیم مدت زمان:</string>
+    <string name="choose_hour">انتخاب ساعت</string>
 </resources>

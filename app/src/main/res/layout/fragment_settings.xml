@@ -13,7 +13,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -72,19 +73,68 @@
                 android:background="?attr/itemBackgroundColor"
                 android:orientation="vertical">
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/settings_notify"
-                    style="@style/Widget.IOSched.Settings.Switch"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/space_small"
                     android:background="?attr/colorSurface"
-                    android:checked="@{viewModel.notificationEnabled}"
-                    android:layoutDirection="rtl"
-                    android:onCheckedChanged="@{(view, checked) -> viewModel.enableNotification(checked)}"
-                    android:paddingHorizontal="@dimen/space_medium"
-                    android:paddingVertical="@dimen/space_medium"
-                    android:text="@string/enable_notification" />
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/space_medium">
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/settings_notify"
+                        style="@style/Widget.IOSched.Settings.Switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:background="?attr/colorSurface"
+                        android:checked="@{viewModel.notificationEnabled}"
+                        android:layoutDirection="rtl"
+                        android:onCheckedChanged="@{(view, checked) -> viewModel.enableNotification(checked)}"
+                        android:paddingHorizontal="@dimen/space_medium"
+                        android:paddingVertical="@dimen/space_medium"
+                        android:text="@string/enable_notification" />
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="rtl"
+                        android:paddingHorizontal="@dimen/space_medium">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance.MarketApp.BodySmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:enabled="@{viewModel.notificationEnabled}"
+                            android:text="@string/set_interval"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/menu_hour"
+                            style="@style/Widget.Market.Settings.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/space_small"
+                            android:enabled="@{viewModel.notificationEnabled}"
+                            android:hint="@string/choose_hour">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/tv_hour"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@null" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
