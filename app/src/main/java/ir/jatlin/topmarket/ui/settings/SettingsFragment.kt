@@ -70,6 +70,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         launch {
             viewModel.notificationInterval.collectLatest {
                 binding.tvHour.setText(it.toString(), false)
+                binding.tvHour.setSelection(binding.tvHour.text.length)
             }
         }
 
