@@ -95,6 +95,11 @@
             android:label="SortingFragment" />
 
     </navigation>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ir.jatlin.topmarket.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
 
 
 </navigation>

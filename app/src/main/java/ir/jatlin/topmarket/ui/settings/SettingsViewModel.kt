@@ -85,13 +85,14 @@ class SettingsViewModel @Inject constructor(
 
     fun setDarkTheme(isEnabled: Boolean) {
         viewModelScope.launch {
+            delay(200L)
             setThemeUseCase(if (isEnabled) Theme.DARK else Theme.LIGHT)
         }
     }
 
     fun setDefaultSystemTheme(isEnabled: Boolean) {
         viewModelScope.launch {
-            delay(100)
+            delay(100L)
             setThemeUseCase(
                 when {
                     isEnabled -> ThemeUtils.defaultTheme()

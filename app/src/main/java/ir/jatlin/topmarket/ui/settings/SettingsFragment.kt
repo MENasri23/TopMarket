@@ -1,13 +1,8 @@
 package ir.jatlin.topmarket.ui.settings
 
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.PopupMenu
-import androidx.annotation.MenuRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
