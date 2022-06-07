@@ -67,4 +67,9 @@
     <string name="sync_newest_proudcts_channel_description">Background task for fetching new products</string>
     <string name="newest_products_notification_title">تاپ مارکت</string>
     <string name="newest_products_notification_content">%d کالای جدید اضافه شد.</string>
+
+    <!-- Settings -->
+    <string name="close_settings">Close Settings</string>
+    <string name="settings_title">تنظیمات</string>
+    <string name="enable_notification">جدیدترین محصولات را به من اطلاع بده</string>
 </resources>

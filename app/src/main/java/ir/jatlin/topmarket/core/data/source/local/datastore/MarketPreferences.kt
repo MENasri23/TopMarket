@@ -46,6 +46,10 @@ class MarketPreferences @Inject constructor(
 
     }.distinctUntilChanged()
 
+    val enableNotification = marketData.map { preferences ->
+        preferences[PreferencesKeys.NOTIFICATION] ?: true
+    }
+
 
     private val marketData
         get() = marketDataStore.data.catch { cause -> catch(cause) }
@@ -82,14 +86,19 @@ class MarketPreferences @Inject constructor(
         }
     }
 
+    suspend fun enableNotification(isEnabled: Boolean) {
+        marketDataStore.edit { preferences ->
+            preferences[PreferencesKeys.NOTIFICATION] = isEnabled
+        }
+    }
+
 
     private object PreferencesKeys {
         val CUSTOMER_ID = intPreferencesKey("customer_id")
         val ACTIVE_ORDER_ID = intPreferencesKey("active_order_id")
-
         val LAST_PRODUCT_DATE = stringPreferencesKey("last_product_date")
-
         val THEME_MODE = stringPreferencesKey("theme_mode")
+        val NOTIFICATION = booleanPreferencesKey("notification")
     }
 
 }

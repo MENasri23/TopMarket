@@ -24,6 +24,7 @@
 
     <style name="TextAppearance.MarketApp.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:fontFamily">@font/samim_fd</item>
         <item name="android:textSize">@dimen/_10ssp</item>
     </style>
 
@@ -60,6 +61,19 @@
     <style name="Widget.Market.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="fontFamily">@font/samim_fd</item>
         <item name="itemTextAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
+    </style>
+
+    <!-- Settings -->
+    <style name="Widget.Market.Settings" />
+
+    <style name="Widget.IOSched.Settings.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="android:background">@null</item>
+        <item name="android:foreground">?selectableItemBackground</item>
+        <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="switchTextAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
     </style>
 
 

@@ -17,4 +17,7 @@
     <dimen name="slider_height">@dimen/_128sdp</dimen>
     <dimen name="cart_button_vertical_padding">@dimen/_12sdp</dimen>
 
+    <!-- Settings -->
+    <dimen name="setting_title_text_size">@dimen/_16ssp</dimen>
+
 </resources>
