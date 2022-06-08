@@ -6,15 +6,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
+import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.theme.ThemeViewModel
 import ir.jatlin.topmarket.ui.util.updateTheme
@@ -57,6 +61,8 @@ class MainActivity : AppCompatActivity() {
 
         collectUiStates()
 
+        tryEnqueueNewestProductsWork()
+
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -73,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun collectUiStates() {
         lifecycleScope.launch {
@@ -93,6 +98,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun tryEnqueueNewestProductsWork() {
+        val workInfosLiveData = WorkManager.getInstance(this)
+            .getWorkInfosForUniqueWorkLiveData(FetchNewestProductsWorker.WORKER_NAME)
+
+        val observer = object : Observer<MutableList<WorkInfo>> {
+
+            override fun onChanged(t: MutableList<WorkInfo>?) {
+                if (t.isNullOrEmpty()) {
+                    Timber.d("work info is empty or null")
+                    viewModel.enqueueNewestProductsWorkRequest()
+                    return
+                }
+                val workInfoState = t[0].state
+                Timber.d("$workInfoState")
+                /*
+                if (workInfoState != WorkInfo.State.ENQUEUED &&
+                    workInfoState != WorkInfo.State.RUNNING
+                ) {
+                    viewModel.enqueueNewestProductsWorkRequest()
+                }*/
+
+                // TODO: Remove observer
+//                workInfosLiveData.removeObserver(this)
+            }
+        }
+
+        workInfosLiveData.observeForever(observer)
     }
 
 }

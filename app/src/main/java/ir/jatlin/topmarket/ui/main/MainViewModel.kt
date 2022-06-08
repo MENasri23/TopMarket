@@ -2,24 +2,23 @@ package ir.jatlin.topmarket.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ir.jatlin.topmarket.core.domain.service.CancelWorkRequestUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.settings.GetNotificationEnabledStreamUseCase
 import ir.jatlin.topmarket.core.domain.settings.GetNotificationIntervalStreamUseCase
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
-import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
-import ir.jatlin.topmarket.ui.util.cancelIfAlive
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(
+    private val externalScope: CoroutineScope,
     private val enqueueNewestProductsWorkRequestUseCase: EnqueueFetchNewestProductsWorkRequestUseCase,
-    private val cancelWorkRequestUseCase: CancelWorkRequestUseCase,
     getNotificationEnabledStreamUseCase: GetNotificationEnabledStreamUseCase,
     getNotificationIntervalStreamUseCase: GetNotificationIntervalStreamUseCase,
 ) : ViewModel() {
@@ -30,48 +29,33 @@ class MainViewModel @Inject constructor(
     private val _notificationInterval = MutableStateFlow(5)
     private val notificationInterval = _notificationInterval.asStateFlow()
 
-    private var enqueueWorkJob: Job? = null
-    private var cancelWorkJob: Job? = null
-
+    private var notifIntervalJob: Job? = null
+    private var notifEnabledJob: Job? = null
 
     init {
-        viewModelScope.launch {
-            getNotificationEnabledStreamUseCase(Unit).collectLatest {
-                _notificationEnabled.value = it.dataOnSuccessOr(true)
-                invalidateNewestProductsWorkRequest()
+        notifEnabledJob = viewModelScope.launch {
+            _notificationEnabled.value =
+                getNotificationEnabledStreamUseCase(Unit)
+                    .firstOrNull().dataOnSuccessOr(true)
+
+        }
+        notifIntervalJob = viewModelScope.launch {
+            _notificationInterval.value = getNotificationIntervalStreamUseCase(Unit)
+                .firstOrNull().dataOnSuccessOr(5)
+        }
+    }
+
+
+    fun enqueueNewestProductsWorkRequest() {
+        externalScope.launch {
+            notifIntervalJob?.join()
+            notifEnabledJob?.join()
+
+            if (notificationEnabled.value) {
+                enqueueNewestProductsWorkRequestUseCase(
+                    15 // notificationInterval.value
+                )
             }
-        }
-
-        viewModelScope.launch {
-            getNotificationIntervalStreamUseCase(Unit).collectLatest {
-                _notificationInterval.value = it.dataOnSuccessOr(5)
-                if (notificationEnabled.value) enqueueNewestProductsWorkRequest()
-            }
-        }
-
-
-    }
-
-    private fun invalidateNewestProductsWorkRequest() {
-        if (notificationEnabled.value) enqueueNewestProductsWorkRequest()
-        else cancelEnqueueNewestProductsWorkRequest()
-    }
-
-    private fun enqueueNewestProductsWorkRequest() {
-        enqueueWorkJob?.cancelIfAlive()
-        enqueueWorkJob = viewModelScope.launch {
-            delay(700L)
-            enqueueNewestProductsWorkRequestUseCase(
-                notificationInterval.value
-            )
-        }
-    }
-
-    private fun cancelEnqueueNewestProductsWorkRequest() {
-        cancelWorkJob?.cancelIfAlive()
-        cancelWorkJob = viewModelScope.launch {
-            delay(700L)
-            cancelWorkRequestUseCase(FetchNewestProductsWorker.WORKER_NAME)
         }
     }
 

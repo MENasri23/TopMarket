@@ -3,8 +3,11 @@ package ir.jatlin.topmarket
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.WorkManager
 import dagger.hilt.android.HiltAndroidApp
 import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
+import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,7 +21,6 @@ class MarketApplication : Application(), Configuration.Provider {
 
     @Inject
     lateinit var scope: CoroutineScope
-
 
     override fun onCreate() {
         super.onCreate()
@@ -34,7 +36,11 @@ class MarketApplication : Application(), Configuration.Provider {
     override fun getWorkManagerConfiguration(): Configuration {
         return Configuration.Builder()
             .setWorkerFactory(workerFactory)
-            .setMinimumLoggingLevel(android.util.Log.INFO)
+            .setMinimumLoggingLevel(android.util.Log.DEBUG)
             .build()
+    }
+
+    companion object {
+        const val INITIAL_INTERVAL = 5
     }
 }

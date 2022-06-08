@@ -34,10 +34,10 @@ class FetchNewestProductsWorker @AssistedInject constructor(
                     Timber.d("retrieved a success result with null data")
                     return@withContext Result.failure()
                 }
-
-                if (products.isNotEmpty()) {
-                    applicationContext.sendNewestProductsNotification(products)
-                }
+                applicationContext.sendNewestProductsNotification(products)
+//                if (products.isNotEmpty()) {
+//                    applicationContext.sendNewestProductsNotification(products)
+//                }
             }
             Result.success()
         }
@@ -49,11 +49,13 @@ class FetchNewestProductsWorker @AssistedInject constructor(
     companion object {
 
         const val WORKER_NAME = "ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker"
+        const val TAG = "FetchNewestProductsWorkerTag"
 
         fun setupFetchNewestProductsWorkRequest(interval: Int) =
             PeriodicWorkRequestBuilder<FetchNewestProductsWorker>(
-                interval.toLong(), TimeUnit.HOURS
+                interval.toLong(), TimeUnit.MINUTES
             )
+                .addTag(TAG)
                 .setConstraints(fetchNewestProductsConstraints())
                 .build()
 
