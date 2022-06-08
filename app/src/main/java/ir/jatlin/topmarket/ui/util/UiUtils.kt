@@ -1,17 +1,18 @@
 package ir.jatlin.topmarket.ui.util
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -31,13 +32,10 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
-import ir.jatlin.topmarket.databinding.FadingSnackbarLayoutBinding
-import ir.jatlin.topmarket.ui.widget.FadingSnackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.NullPointerException
 
 /**
  * Launches a new coroutine and repeats `block` every time the Fragment's viewLifecycleOwner
@@ -275,4 +273,13 @@ fun View.requestApplyInsetsWhenAttached() {
             override fun onViewDetachedFromWindow(v: View) = Unit
         })
     }
+}
+
+@SuppressLint("WrongConstant")
+fun WindowInsetsCompat.bottomInsets() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    getInsetsIgnoringVisibility(
+        WindowInsets.Type.systemBars()
+    ).bottom
+} else {
+    systemWindowInsetBottom
 }
