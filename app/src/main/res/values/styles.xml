@@ -102,4 +102,20 @@
     </style>
 
 
+    <!-- SignIn -->
+    <style name="Widget.Market.SignIn" parent="" />
+
+    <style name="Widget.Market.SignIn.TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusBottomStart">@dimen/space_very_small</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/space_very_small</item>
+        <item name="boxCornerRadiusTopStart">@dimen/space_very_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/space_very_small</item>
+    </style>
+
+    <style name="Divider" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
 </resources>

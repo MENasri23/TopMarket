@@ -276,7 +276,7 @@ fun View.requestApplyInsetsWhenAttached() {
 }
 
 @SuppressLint("WrongConstant")
-fun WindowInsetsCompat.bottomInsets() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+fun WindowInsetsCompat.bottomInset() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
     getInsetsIgnoringVisibility(
         WindowInsets.Type.systemBars()
     ).bottom
