@@ -14,6 +14,8 @@ interface CustomerRepository {
         customer: Customer
     ): Customer
 
+    suspend fun createUserByEmail(email: String): Boolean
+
     suspend fun updateCustomer(
         customer: Customer
     ): Customer

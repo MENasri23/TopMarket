@@ -30,6 +30,13 @@ class DefaultCustomerRepository @Inject constructor(
         return saveOrUpdateLocal(customerNetwork)
     }
 
+    override suspend fun createUserByEmail(email: String): Boolean {
+        val customerNetwork = remoteDataSource.createCustomer(
+            Customer.Empty.copy(email = email).asCustomerNetwork()
+        )
+        return localDataSource.save(customerNetwork.asCustomerEntity()) != -1
+    }
+
     override suspend fun updateCustomer(customer: Customer): Customer {
         val customerNetwork = remoteDataSource.updateCustomer(
             customer.asCustomerNetwork()

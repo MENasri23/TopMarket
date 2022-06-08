@@ -1,9 +1,6 @@
 package ir.jatlin.topmarket.core.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
 import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
 import ir.jatlin.topmarket.core.model.user.Customer
@@ -26,7 +23,7 @@ interface CustomerDao {
     @Query("SELECT * FROM customers WHERE id = :id")
     suspend fun findCustomerById(id: Int): CustomerEntity?
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(customer: CustomerEntity): Long
 
 }
