@@ -7,12 +7,9 @@ import ir.jatlin.topmarket.core.domain.settings.*
 import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
-import ir.jatlin.topmarket.ui.util.cancelIfAlive
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val enableNotificationUseCase: EnableNotificationUseCase,
-    getNotificationEnabledUseCase: GetNotificationEnabledUseCase,
+    getNotificationEnabledUseCase: GetNotificationEnabledStreamUseCase,
     private val setThemeUseCase: SetThemeUseCase,
     getThemeStreamUseCase: GetThemeStreamUseCase,
     private val setNotificationInterval: SetNotificationIntervalUseCase,
@@ -53,7 +50,6 @@ class SettingsViewModel @Inject constructor(
 
         viewModelScope.launch {
             getThemeStreamUseCase(Unit).collect {
-                Timber.d("dark theme enabled: $it")
                 val theme = it.dataOnSuccessOr(ThemeUtils.defaultTheme())
                 val systemTheme = theme == Theme.SYSTEM || theme == Theme.BATTERY_SAVER
                 _defaultSystemTheme.value = systemTheme
@@ -104,6 +100,8 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setInterval(interval: Int) {
+        if (interval <= 0) return
+
         viewModelScope.launch {
             setNotificationInterval(interval)
         }

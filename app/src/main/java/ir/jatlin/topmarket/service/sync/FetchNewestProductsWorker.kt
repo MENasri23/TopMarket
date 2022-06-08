@@ -2,8 +2,7 @@ package ir.jatlin.topmarket.service.sync
 
 import android.content.Context
 import androidx.hilt.work.HiltWorker
-import androidx.work.CoroutineWorker
-import androidx.work.WorkerParameters
+import androidx.work.*
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import ir.jatlin.topmarket.core.data.di.IODispatcher
@@ -13,6 +12,7 @@ import ir.jatlin.topmarket.service.notification.sendNewestProductsNotification
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 
 @HiltWorker
@@ -44,5 +44,24 @@ class FetchNewestProductsWorker @AssistedInject constructor(
 
 
         return result
+    }
+
+    companion object {
+
+        const val WORKER_NAME = "ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker"
+
+        fun setupFetchNewestProductsWorkRequest(interval: Int) =
+            PeriodicWorkRequestBuilder<FetchNewestProductsWorker>(
+                interval.toLong(), TimeUnit.HOURS
+            )
+                .setConstraints(fetchNewestProductsConstraints())
+                .build()
+
+
+        private fun fetchNewestProductsConstraints() = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+
     }
 }

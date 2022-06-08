@@ -25,6 +25,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.model.Theme
@@ -53,7 +54,7 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
     }
 }
 
-fun Activity.updateTheme(theme: Theme) {
+fun updateTheme(theme: Theme) {
     val nightMode = when (theme) {
         Theme.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
         Theme.DARK -> AppCompatDelegate.MODE_NIGHT_YES
@@ -147,14 +148,16 @@ fun ImageView.loadFromUrl(
     @DrawableRes placeholder: Int = R.drawable.loading_animation,
 
     ) {
+    val factory =
+        DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
     Glide.with(context)
         .load(url)
+        .transition(DrawableTransitionOptions.withCrossFade(factory))
         .apply(
             RequestOptions()
                 .placeholder(placeholder)
                 .error(R.drawable.ic_broken_image)
         )
-        .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
 }
 

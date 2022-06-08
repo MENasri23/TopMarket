@@ -29,8 +29,6 @@ class HomeFragment :
 
     private lateinit var homeDisplayItemAdapter: HomeDisplayItemAdapter
 
-    private var autoSlideJob: Job? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.root

@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetNotificationEnabledUseCase @Inject constructor(
+class GetNotificationEnabledStreamUseCase @Inject constructor(
     private val marketPreferences: MarketPreferences,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher

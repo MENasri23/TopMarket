@@ -14,9 +14,9 @@ class FetchProductsInDateRangeUseCase @Inject constructor(
     private val productRepository: ProductRepository,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
-) : CoroutineUseCase<Pair<String, String?>, List<NetworkProduct>>(errorHandler, dispatcher) {
+) : CoroutineUseCase<Pair<String?, String?>, List<NetworkProduct>>(errorHandler, dispatcher) {
 
-    override suspend fun execute(params: Pair<String, String?>): List<NetworkProduct> {
+    override suspend fun execute(params: Pair<String?, String?>): List<NetworkProduct> {
         val (afterDate, beforeDate) = params
         val productParams = makeProductParams {
             pageSize = DiscoverParameters.PAGE_SIZE_INFINITE

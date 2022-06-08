@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.ui.main
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -25,6 +25,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel by viewModels<MainViewModel>()
     private val loadingViewModel by viewModels<LoadSateViewModel>()
     private val themeViewModel by viewModels<ThemeViewModel>()
 
@@ -51,13 +52,30 @@ class MainActivity : AppCompatActivity() {
         val navHost = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHost.navController
+
         setupBottomNavMenu(navController)
 
-        navController.addOnDestinationChangedListener { navController, destination, _ ->
-            val bottomNav = binding.bottomNav
-            bottomNav.isVisible = destination.id in topLevelDestinations
-        }
+        collectUiStates()
 
+    }
+
+    private fun setupBottomNavMenu(navController: NavController) {
+        binding.bottomNav.apply {
+            setupWithNavController(navController)
+            setOnItemSelectedListener {
+                NavigationUI.onNavDestinationSelected(
+                    it, navController
+                )
+                true
+            }
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                isVisible = destination.id in topLevelDestinations
+            }
+        }
+    }
+
+
+    private fun collectUiStates() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 launch {
@@ -75,20 +93,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-
-    private fun setupBottomNavMenu(navController: NavController) {
-        binding.bottomNav.apply {
-            setupWithNavController(navController)
-
-            setOnItemSelectedListener {
-                NavigationUI.onNavDestinationSelected(
-                    it, navController
-                )
-                true
-            }
-        }
     }
 
 }

@@ -23,7 +23,14 @@ class FetchNewestProductsUseCase @Inject constructor(
 
         val result = if (lastDate != null) {
             fetchProductsInDateRangeUseCase(lastDate to null)
-        } else Resource.success(emptyList())
+        } else {
+            /* It's first request, so save last date in data store */
+            val firstAttempt = fetchProductsInDateRangeUseCase(null to null)
+            firstAttempt.data?.lastOrNull()?.let { lastProduct ->
+                marketPreferences.saveLastProductDate(lastProduct.createdDate)
+            }
+            Resource.success(emptyList())
+        }
 
         if (result.isSuccess) {
             val newLastDate = result.data!!.firstOrNull()?.createdDate

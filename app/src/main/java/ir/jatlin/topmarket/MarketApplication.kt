@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
+import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -13,9 +16,19 @@ class MarketApplication : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
 
+    @Inject
+    lateinit var scope: CoroutineScope
+
+
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        delayInitComponents()
+    }
+
+    private fun delayInitComponents() {
+        scope.launch {
+            if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        }
     }
 
     override fun getWorkManagerConfiguration(): Configuration {

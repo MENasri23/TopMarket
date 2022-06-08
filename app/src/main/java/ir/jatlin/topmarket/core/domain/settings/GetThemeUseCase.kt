@@ -8,6 +8,7 @@ import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.lastOrNull
 import javax.inject.Inject
 
 class GetThemeUseCase @Inject constructor(
