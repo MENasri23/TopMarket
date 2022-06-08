@@ -283,3 +283,12 @@ fun WindowInsetsCompat.bottomInset() = if (Build.VERSION.SDK_INT >= Build.VERSIO
 } else {
     systemWindowInsetBottom
 }
+
+@SuppressLint("WrongConstant")
+fun WindowInsetsCompat.topInset() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    getInsetsIgnoringVisibility(
+        WindowInsets.Type.systemBars()
+    ).top
+} else {
+    systemWindowInsetTop
+}

@@ -10,6 +10,7 @@ import ir.jatlin.topmarket.databinding.FragmentSignInBinding
 import ir.jatlin.topmarket.ui.util.bottomInset
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.doOnApplyWindowInsets
+import ir.jatlin.topmarket.ui.util.topInset
 
 @AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
@@ -35,7 +36,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private fun applyBottomInset() {
         binding.root.doOnApplyWindowInsets { v, insets, padding, _ ->
             val insetBottom = insets.bottomInset()
-            v.updatePadding(bottom = insetBottom + padding.bottom)
+            val insetTop = insets.topInset()
+            v.updatePadding(
+                top = padding.top + insetTop,
+                right = padding.right,
+                left = padding.left,
+                bottom = insetBottom + padding.bottom
+            )
             insets
         }
     }

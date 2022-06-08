@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import ir.jatlin.topmarket.core.data.source.local.customer.CustomerDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.local.customer.CustomerLocalDataSource
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRetrofitDataSource
@@ -33,6 +34,6 @@ interface SourceModule {
 
     @Binds
     fun bindsCustomerLocalDataSource(
-        localDataSource: CustomerLocalDataSource
+        localDataSource: CustomerDatabaseDataSource
     ): CustomerLocalDataSource
 }
