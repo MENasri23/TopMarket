@@ -1,9 +1,12 @@
 package ir.jatlin.topmarket.ui.util
 
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.View
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.databinding.BindingAdapter
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 
@@ -16,6 +19,12 @@ fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: S
     val names = categories.map(NetworkCategory::name)
     text = names.joinToString(separator = delimiter ?: "/")
 
+}
+
+@BindingAdapter("htmlLinkText")
+fun TextView.setTextFromHtmlLink(htmlLink: String?) {
+    setTextFromHtml(htmlLink)
+    movementMethod = LinkMovementMethod.getInstance()
 }
 
 @BindingAdapter("htmlText")
