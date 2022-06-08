@@ -77,4 +77,10 @@
     <string name="app_theme">حالت تم برنامه</string>
     <string name="set_interval">تنظیم مدت زمان:</string>
     <string name="choose_hour">انتخاب ساعت</string>
+
+    <!-- SignIn -->
+    <string name="sign_in_text_helper">برای ورود و یا ثبت نام در دیجی کالا پست الکترونیک خود را وارد نمایید</string>
+    <string name="email">پست الکتروینک</string>
+    <string name="sign_in_digikala">ورود به دیجی کالا</string>
+    <string name="privacy">با ورود و یا ثبت نام در دیجی کالا شما &lt;a href=\"https://www.digikala.com/page/terms\"&gt; شرایط و قوانین &lt;/a&gt; استفاده از سرویس های سایت دیجی کالا و &lt;a href=\"https://www.digikala.com/page/privacy\"&gt; قوانین حریم خصوصی&lt;/a&gt; آن را می پذیرید.</string>
 </resources>
