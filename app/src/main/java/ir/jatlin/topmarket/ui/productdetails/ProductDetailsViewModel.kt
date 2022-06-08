@@ -6,7 +6,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.purchase.FetchOrderLineItemUseCase
 import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
@@ -27,7 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
     private val fetchProductDetailsUseCase: FetchProductDetailsUseCase,
-    private val fetchProductsListUseCase: FetchProductsListUseCase,
+    private val fetchProductsListStreamUseCase: FetchProductsListStreamUseCase,
     private val fetchOrderLineItemUseCase: FetchOrderLineItemUseCase,
     private val updateOrderCartUseCase: UpdateOrderCartUseCase,
     state: SavedStateHandle
@@ -100,7 +100,7 @@ class ProductDetailsViewModel @Inject constructor(
     private fun fetchSimilarProducts(relatedIds: List<Int>) = viewModelScope.launch {
         if (relatedIds.isNotEmpty()) {
             val params = makeProductParams { includeIds = relatedIds }
-            fetchProductsListUseCase(params).collect {
+            fetchProductsListStreamUseCase(params).collect {
                 _similarProducts.emit(it)
             }
         }

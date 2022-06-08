@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.param.DiscoverParameters
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.search.SearchProductsUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
@@ -12,7 +12,6 @@ import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
-import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -27,7 +26,7 @@ typealias Order = DiscoverParameters.Order
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchProductsUseCase: SearchProductsUseCase,
-    private val fetchProductsListUseCase: FetchProductsListUseCase
+    private val fetchProductsListStreamUseCase: FetchProductsListStreamUseCase
 ) : ViewModel() {
 
     init {
@@ -183,7 +182,7 @@ class SearchViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            fetchProductsListUseCase(params)
+            fetchProductsListStreamUseCase(params)
                 .collect {
                     processProductsInCategoryResult(it)
                 }

@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.search
 
 import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
+import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.util.CharSequenceDistance
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SearchProductsUseCase @Inject constructor(
-    private val fetchProductsListUseCase: FetchProductsListUseCase,
+    private val etchProductsListStreamUseCase: FetchProductsListStreamUseCase,
     private val charSequenceDistance: CharSequenceDistance,
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
@@ -24,7 +24,7 @@ class SearchProductsUseCase @Inject constructor(
         val params = makeProductParams {
             searchQuery = textQuery
         }
-        return fetchProductsListUseCase(params = params).map { searchResult ->
+        return etchProductsListStreamUseCase(params = params).map { searchResult ->
             when (searchResult) {
                 is Resource.Loading -> Resource.loading()
                 is Resource.Error -> Resource.error(searchResult.cause ?: ErrorCause.Unknown())

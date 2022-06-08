@@ -4,11 +4,12 @@ import ir.jatlin.topmarket.core.domain.category.CategoryDiscoverParameter
 import ir.jatlin.topmarket.core.domain.category.FetchCategoryDetailsListUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
+import ir.jatlin.topmarket.core.domain.product.ProductsParameters
 
 
 inline fun makeProductParams(
     build: ProductDiscoverParameters.() -> Unit = {}
-): FetchProductsListUseCase.Parameters {
+): ProductsParameters {
     return ProductDiscoverParameters().apply(build).run {
         val filters = HashMap<String, String>().apply {
             put("order", order.name.lowercase())
@@ -34,7 +35,7 @@ inline fun makeProductParams(
             if (before != null) put("before", before)
         }
 
-        FetchProductsListUseCase.Parameters(
+        ProductsParameters(
             page = page,
             pageSize = pageSize,
             filters = filters
