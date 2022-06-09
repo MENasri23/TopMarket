@@ -11,9 +11,9 @@ class RegisterCustomerByEmailUseCase @Inject constructor(
     private val customerRepository: CustomerRepository,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
-) : CoroutineUseCase<String, Boolean>(errorHandler, dispatcher) {
+) : CoroutineUseCase<String, Int>(errorHandler, dispatcher) {
 
-    override suspend fun execute(params: String): Boolean {
-        return customerRepository.createUserByEmail(email = params)
+    override suspend fun execute(params: String): Int {
+        return customerRepository.createCustomerByEmail(email = params)
     }
 }

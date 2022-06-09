@@ -30,36 +30,41 @@ interface MarketApi {
     ): Response<List<NetworkCategoryDetails>>
 
 
-    @GET(Route.COSTUMER)
+    @GET(Route.CUSTOMER_ID)
     suspend fun getCustomer(
         @Path("id") id: Int
     ): Response<CustomerNetwork>
 
-    @POST(Route.CUSTOMER_NEW)
+    @GET(Route.CUSTOMER)
+    suspend fun getCustomerByEmail(
+        @Query("email") email: String
+    ): Response<List<CustomerNetwork>>
+
+    @POST(Route.CUSTOMER)
     suspend fun createCustomer(
         @Body customerNetwork: CustomerNetwork
     ): Response<CustomerNetwork>
 
-    @PUT(Route.COSTUMER)
+    @PUT(Route.CUSTOMER_ID)
     suspend fun updateCustomer(
         @Path("id") id: Int,
         @Body customer: CustomerNetwork
     ): Response<CustomerNetwork>
 
-    @GET(Route.ORDER)
+    @GET(Route.ORDER_ID)
     suspend fun getOrder(
         @Path("id") id: Int
     ): Response<OrderNetwork>
 
-    @POST(Route.ORDER_NEW)
+    @POST(Route.ORDER)
     suspend fun createOrder(
         @Body orderNetwork: OrderNetwork
     ): Response<OrderNetwork>
 
-    @POST(Route.ORDER_NEW)
+    @POST(Route.ORDER)
     suspend fun createOrder(): Response<OrderNetwork>
 
-    @PUT(Route.ORDER)
+    @PUT(Route.ORDER_ID)
     suspend fun updateOrder(
         @Path("id") id: Int,
         @Body order: OrderNetwork
@@ -72,12 +77,12 @@ interface MarketApi {
         const val PRODUCTS_CATEGORIES = "$PREFIX/products/categories"
 
         /* customer */
-        const val CUSTOMER_NEW = "$PREFIX/customers"
-        const val COSTUMER = "$PREFIX/customers/{id}"
+        const val CUSTOMER = "$PREFIX/customers"
+        const val CUSTOMER_ID = "$PREFIX/customers/{id}"
 
         /* Orders */
-        const val ORDER_NEW = "$PREFIX/orders"
-        const val ORDER = "$PREFIX/orders/{id}"
+        const val ORDER = "$PREFIX/orders"
+        const val ORDER_ID = "$PREFIX/orders/{id}"
     }
 
     private object PARAMS {

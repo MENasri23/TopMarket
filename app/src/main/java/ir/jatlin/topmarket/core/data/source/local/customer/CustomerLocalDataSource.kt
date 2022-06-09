@@ -11,6 +11,8 @@ interface CustomerLocalDataSource {
 
     suspend fun findCustomerById(id: Int): CustomerEntity?
 
+    fun findCustomerByEmail(email: String): CustomerEntity?
+
     suspend fun save(customer: CustomerEntity): Int
 
 }

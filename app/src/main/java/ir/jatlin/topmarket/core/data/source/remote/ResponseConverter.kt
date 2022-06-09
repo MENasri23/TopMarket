@@ -1,10 +1,11 @@
-package ir.jatlin.data.source.remote
+package ir.jatlin.topmarket.core.data.source.remote
 
 import com.google.gson.Gson
 import ir.jatlin.topmarket.core.data.source.remote.model.Error
 import ir.jatlin.topmarket.core.data.source.remote.model.asError
-import ir.jatlin.webservice.model.response.NetworkError
+import ir.jatlin.topmarket.core.network.response.NetworkError
 import retrofit2.Response
+import timber.log.Timber
 import javax.inject.Inject
 
 class ResponseConverter @Inject constructor(
@@ -25,6 +26,7 @@ class ResponseConverter @Inject constructor(
         } else {
             val errorBody = response.errorBody()
             val networkError = gson.fromJson(errorBody?.charStream(), NetworkError::class.java)
+            Timber.d("Network request failed with error: $networkError")
 
             throw NetworkException(error = networkError.asError())
         }

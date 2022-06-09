@@ -23,6 +23,7 @@
         android:name="ir.jatlin.topmarket.ui.loading.LoadingFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/navHostFragment"
         app:layout_constraintEnd_toEndOf="@id/navHostFragment"
         app:layout_constraintStart_toStartOf="@id/navHostFragment"

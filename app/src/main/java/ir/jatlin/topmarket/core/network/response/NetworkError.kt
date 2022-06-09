@@ -1,10 +1,16 @@
-package ir.jatlin.webservice.model.response
+package ir.jatlin.topmarket.core.network.response
 
 import com.google.gson.annotations.SerializedName
 
 data class NetworkError(
-    @SerializedName("status_code")
-    val code: Int,
+    @SerializedName("code")
+    val identity: String,
     @SerializedName("status_message")
-    val message: String
+    val message: String,
+    val networkStatus: NetworkStatus
+)
+
+data class NetworkStatus(
+    @SerializedName("status")
+    val code: Int
 )

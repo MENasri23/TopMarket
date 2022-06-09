@@ -8,6 +8,8 @@ interface CustomerRemoteDataSource {
         customerId: Int
     ): CustomerNetwork
 
+    suspend fun findCustomerByEmail(email: String): List<CustomerNetwork>
+
     suspend fun createCustomer(
         customerNetwork: CustomerNetwork
     ): CustomerNetwork

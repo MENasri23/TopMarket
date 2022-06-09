@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.util
 
-import ir.jatlin.data.source.remote.NetworkException
-import ir.jatlin.data.source.remote.NoBodyException
+import ir.jatlin.topmarket.core.data.source.remote.NetworkException
+import ir.jatlin.topmarket.core.data.source.remote.NoBodyException
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import java.io.IOException
@@ -17,7 +17,7 @@ class DefaultErrorHandler @Inject constructor() : ErrorHandler {
         is NetworkException -> {
             val networkError = cause.error
             with(StatusCode) {
-                when (val code = networkError.code) {
+                when (val code = networkError.status.code) {
                     BAD_REQUEST -> ErrorCause.BadRequest
                     FORBIDDEN -> ErrorCause.Forbidden
                     NOT_FOUND -> ErrorCause.NotFound

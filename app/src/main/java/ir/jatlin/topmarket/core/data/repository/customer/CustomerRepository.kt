@@ -8,13 +8,15 @@ interface CustomerRepository {
 
     suspend fun findCustomerById(
         customerId: Int
-    ): Customer
+    ): Customer?
+
+    suspend fun findCustomerByEmail(email: String): Customer?
 
     suspend fun createCustomer(
         customer: Customer
     ): Customer
 
-    suspend fun createUserByEmail(email: String): Boolean
+    suspend fun createCustomerByEmail(email: String): Int
 
     suspend fun updateCustomer(
         customer: Customer

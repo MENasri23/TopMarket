@@ -83,4 +83,6 @@
     <string name="email">پست الکتروینک</string>
     <string name="sign_in_digikala">ورود به دیجی کالا</string>
     <string name="privacy">با ورود و یا ثبت نام در دیجی کالا شما &lt;a href=\"https://www.digikala.com/page/terms\"&gt; شرایط و قوانین &lt;/a&gt; استفاده از سرویس های سایت دیجی کالا و &lt;a href=\"https://www.digikala.com/page/privacy\"&gt; قوانین حریم خصوصی&lt;/a&gt; آن را می پذیرید.</string>
+    <string name="error_email_is_empty">پست الکترونیک را وارد نمایید</string>
+    <string name="error_invalid_email">ایمیل معتبر نیست</string>
 </resources>

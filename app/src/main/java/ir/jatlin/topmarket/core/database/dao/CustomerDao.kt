@@ -23,6 +23,9 @@ interface CustomerDao {
     @Query("SELECT * FROM customers WHERE id = :id")
     suspend fun findCustomerById(id: Int): CustomerEntity?
 
+    @Query("SELECT * FROM customers WHERE email = :email")
+    fun findCustomerByEmail(email: String): CustomerEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(customer: CustomerEntity): Long
 

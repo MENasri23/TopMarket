@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.source.remote.customer
 
-import ir.jatlin.data.source.remote.ResponseConverter
+import ir.jatlin.topmarket.core.data.source.remote.ResponseConverter
 import ir.jatlin.topmarket.core.network.api.MarketApi
 import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import javax.inject.Inject
@@ -12,6 +12,10 @@ class CustomerRetrofitDataSource @Inject constructor(
 
     override suspend fun findCustomerById(customerId: Int): CustomerNetwork {
         return convertResponse(marketApi.getCustomer(customerId))
+    }
+
+    override suspend fun findCustomerByEmail(email: String): List<CustomerNetwork> {
+        return convertResponse(marketApi.getCustomerByEmail(email))
     }
 
     override suspend fun createCustomer(customerNetwork: CustomerNetwork): CustomerNetwork {
