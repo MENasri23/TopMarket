@@ -5,6 +5,7 @@ import ir.jatlin.topmarket.core.network.model.order.OrderNetwork
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -30,45 +31,50 @@ interface MarketApi {
     ): Response<List<NetworkCategoryDetails>>
 
 
-    @GET(Route.CUSTOMER_ID)
+    @GET(Route.CUSTOMERS_ID)
     suspend fun getCustomer(
         @Path("id") id: Int
     ): Response<CustomerNetwork>
 
-    @GET(Route.CUSTOMER)
+    @GET(Route.CUSTOMERS)
     suspend fun getCustomerByEmail(
         @Query("email") email: String
     ): Response<List<CustomerNetwork>>
 
-    @POST(Route.CUSTOMER)
+    @POST(Route.CUSTOMERS)
     suspend fun createCustomer(
         @Body customerNetwork: CustomerNetwork
     ): Response<CustomerNetwork>
 
-    @PUT(Route.CUSTOMER_ID)
+    @PUT(Route.CUSTOMERS_ID)
     suspend fun updateCustomer(
         @Path("id") id: Int,
         @Body customer: CustomerNetwork
     ): Response<CustomerNetwork>
 
-    @GET(Route.ORDER_ID)
+    @GET(Route.ORDERS_ID)
     suspend fun getOrder(
         @Path("id") id: Int
     ): Response<OrderNetwork>
 
-    @POST(Route.ORDER)
+    @POST(Route.ORDERS)
     suspend fun createOrder(
         @Body orderNetwork: OrderNetwork
     ): Response<OrderNetwork>
 
-    @POST(Route.ORDER)
+    @POST(Route.ORDERS)
     suspend fun createOrder(): Response<OrderNetwork>
 
-    @PUT(Route.ORDER_ID)
+    @PUT(Route.ORDERS_ID)
     suspend fun updateOrder(
         @Path("id") id: Int,
         @Body order: OrderNetwork
     ): Response<OrderNetwork>
+
+    @GET(Route.REVIEWS)
+    suspend fun getProductReviews(
+        @QueryMap filters: Map<String, String>?
+    ): Response<List<ProductReviewNetwork>>
 
     private object Route {
         private const val PREFIX = "/wp-json/wc/v3"
@@ -77,12 +83,15 @@ interface MarketApi {
         const val PRODUCTS_CATEGORIES = "$PREFIX/products/categories"
 
         /* customer */
-        const val CUSTOMER = "$PREFIX/customers"
-        const val CUSTOMER_ID = "$PREFIX/customers/{id}"
+        const val CUSTOMERS = "$PREFIX/customers"
+        const val CUSTOMERS_ID = "$PREFIX/customers/{id}"
 
         /* Orders */
-        const val ORDER = "$PREFIX/orders"
-        const val ORDER_ID = "$PREFIX/orders/{id}"
+        const val ORDERS = "$PREFIX/orders"
+        const val ORDERS_ID = "$PREFIX/orders/{id}"
+
+        /* Reviews */
+        const val REVIEWS = "$PREFIX/products/reviews"
     }
 
     private object PARAMS {

@@ -1,9 +1,11 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import kotlinx.coroutines.flow.Flow
+import retrofit2.http.QueryMap
 
 interface ProductRepository {
     // TODO: Change return types of its method to external model
@@ -28,5 +30,9 @@ interface ProductRepository {
         pageSize: Int?,
         filters: Map<String, String>?
     ): Flow<List<NetworkCategoryDetails>>
+
+    suspend fun getProductReviews(
+        filters: Map<String, String>?
+    ): List<ProductReview>
 
 }

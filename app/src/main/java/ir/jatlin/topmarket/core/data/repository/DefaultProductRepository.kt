@@ -1,9 +1,12 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.data.mapper.asProductPreview
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -44,4 +47,8 @@ class DefaultProductRepository @Inject constructor(
         }
     }
 
+    override suspend fun getProductReviews(filters: Map<String, String>?): List<ProductReview> {
+        return remoteDataSource.getProductReviews(filters)
+            .map(ProductReviewNetwork::asProductPreview)
+    }
 }

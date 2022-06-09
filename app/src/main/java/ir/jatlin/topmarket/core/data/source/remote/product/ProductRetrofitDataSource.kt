@@ -5,6 +5,7 @@ import ir.jatlin.topmarket.core.network.api.MarketApi
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 import javax.inject.Inject
 
 class ProductRetrofitDataSource @Inject constructor(
@@ -30,5 +31,11 @@ class ProductRetrofitDataSource @Inject constructor(
         filters: Map<String, String>?
     ): List<NetworkCategoryDetails> {
         return convertResponse(marketApi.getProductCategories(page, pageSize, filters))
+    }
+
+    override suspend fun getProductReviews(
+        filters: Map<String, String>?
+    ): List<ProductReviewNetwork> {
+        return convertResponse(marketApi.getProductReviews(filters))
     }
 }

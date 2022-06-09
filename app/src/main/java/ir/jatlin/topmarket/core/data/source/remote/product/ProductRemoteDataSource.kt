@@ -3,6 +3,8 @@ package ir.jatlin.topmarket.core.data.source.remote.product
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
+import retrofit2.http.QueryMap
 
 interface ProductRemoteDataSource {
 
@@ -21,5 +23,9 @@ interface ProductRemoteDataSource {
         pageSize: Int?,
         filters: Map<String, String>?
     ): List<NetworkCategoryDetails>
+
+    suspend fun getProductReviews(
+        filters: Map<String, String>?
+    ): List<ProductReviewNetwork>
 
 }
