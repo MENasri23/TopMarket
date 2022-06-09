@@ -16,8 +16,11 @@
     <dimen name="slider_image_corner_size">@dimen/space_small</dimen>
     <dimen name="slider_height">@dimen/_128sdp</dimen>
     <dimen name="cart_button_vertical_padding">@dimen/_12sdp</dimen>
+    <dimen name="product_review_item_height">@dimen/_144sdp</dimen>
+    <dimen name="product_review_item_with">@dimen/_224sdp</dimen>
 
     <!-- Settings -->
     <dimen name="setting_title_text_size">@dimen/_16ssp</dimen>
+
 
 </resources>

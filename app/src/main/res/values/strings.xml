@@ -30,6 +30,10 @@
     <string name="add_to_cart">افزودن به سبد خرید</string>
     <string name="show_more">مشاهده بیشتر</string>
     <string name="rating_format">(%d)</string>
+    <string name="product_reviews">دیدگاه کاربران</string>
+    <string name="product_reviews_count">%d نظر</string>
+    <string name="add_reviews_here">دیدگاه خود را درباره این کالا بنویسید</string>
+    <string name="get_badges">5 امتیاز دیجی کلاب با ثبت دیدگاه پس از خرید کالا</string>
 
     <!-- Error messages -->
     <string name="error_bad_request">درخواست مورد نظر یافت نشد</string>

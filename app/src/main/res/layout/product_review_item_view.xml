@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/product_review_item_with"
+    android:layout_height="@dimen/product_review_item_height"
+    android:layout_margin="@dimen/space_small"
+    app:cardCornerRadius="@dimen/space_small"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:strokeColor="?attr/itemBackgroundColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/product_review_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_medium"
+        android:stateListAnimator="@animator/smooth_fading">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_review"
+            style="@style/TextAppearance.MarketApp.BodySmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="4"
+            app:layout_constraintBottom_toTopOf="@+id/tv_created_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            tools:text="@string/lorem_large" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_created_date"
+            style="@style/TextAppearance.MarketApp.LabelMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="یک ماه پیش" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_reviewer_name"
+            style="@style/TextAppearance.MarketApp.LabelSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_small"
+            android:drawablePadding="@dimen/space_small"
+            android:gravity="center_vertical"
+            app:drawableEndCompat="@drawable/ic_dot"
+            app:layout_constraintBottom_toBottomOf="@id/tv_created_date"
+            app:layout_constraintEnd_toStartOf="@id/tv_created_date"
+            app:layout_constraintTop_toTopOf="@id/tv_created_date"
+            tools:text="نام کاربر" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
