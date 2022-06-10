@@ -90,6 +90,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/register_loading"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="@dimen/space_medium"
             android:layout_marginTop="@dimen/space_small"
             android:scaleType="centerCrop"

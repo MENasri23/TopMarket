@@ -85,9 +85,9 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 launch {
                     /* Show loading screen based on the current state of each visible fragment */
-                    /*loadingViewModel.loading.collectLatest { isLoading ->
-//                        binding.loadingScreen.isVisible = isLoading
-                    }*/
+                    loadingViewModel.loading.collectLatest { isLoading ->
+                        binding.loadingScreen.isVisible = isLoading
+                    }
                 }
                 launch {
                     themeViewModel.selectedTheme.collectLatest {

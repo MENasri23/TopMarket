@@ -40,6 +40,7 @@ class ProductViewHolder(
     }
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
+        productPrice.isVisible = regularPrice.isNotBlank()
         productPrice.text = withSeparator(price)
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,

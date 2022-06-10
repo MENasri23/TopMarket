@@ -3,9 +3,13 @@ package ir.jatlin.topmarket.ui.search.filter
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,10 +21,7 @@ import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
 import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
-import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.safeCollect
-import ir.jatlin.topmarket.ui.util.showErrorMessage
-import ir.jatlin.topmarket.ui.util.viewBinding
+import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -77,6 +78,13 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
             adapter = ProductPreviewAdapter(
                 onProductClicked = this@SearchFiltersFragment::navigateToDetailsScreen
             ).also { productPreviewAdapter = it }
+
+            doOnApplyWindowInsets { v, insets, padding, _ ->
+                v.updatePadding(
+                    bottom = padding.bottom + insets.bottomInset()
+                )
+                insets
+            }
 
         }
     }
