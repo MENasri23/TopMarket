@@ -7,14 +7,20 @@ import ir.jatlin.topmarket.core.domain.service.CancelWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.settings.*
 import ir.jatlin.topmarket.core.model.Theme
+import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
+import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
 import ir.jatlin.topmarket.ui.util.cancelIfAlive
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.dropWhile
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -53,10 +59,15 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getNotificationEnabledUseCase(Unit).collect {
-                Timber.d("Notification enabled: $it")
-                _notificationEnabled.value = it.dataOnSuccessOr(true)
-            }
+            getNotificationEnabledUseCase(Unit)
+                .dropWhileFirstLaunched()
+                .collect {
+                    Timber.d("Notification enabled: $it")
+                    if (it.isSuccess) {
+                        _notificationEnabled.value = it.dataOnSuccessOr(true)
+                        invalidateNewestProductsWorkRequest()
+                    }
+                }
         }
 
         viewModelScope.launch {
@@ -71,28 +82,21 @@ class SettingsViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            getNotificationIntervalStreamUseCase(Unit).collect {
-                _notificationInterval.value = it.dataOnSuccessOr(5)
-            }
+            getNotificationIntervalStreamUseCase(Unit)
+                .dropWhileFirstLaunched()
+                .collect {
+                    if (it.isSuccess) {
+                        _notificationInterval.value = it.dataOnSuccessOr(5)
+                        if (notificationEnabled.value) {
+                            enqueueNewestProductsWorkRequest()
+                        }
+                    }
+                }
         }
 
         viewModelScope.launch {
             _preSetNotificationIntervals.value =
                 getPreSetNotificationIntervals(Unit).dataOnSuccessOr(emptyList())
-        }
-
-        viewModelScope.launch {
-            getNotificationEnabledUseCase(Unit).collectLatest {
-                _notificationEnabled.value = it.dataOnSuccessOr(true)
-                invalidateNewestProductsWorkRequest()
-            }
-        }
-
-        viewModelScope.launch {
-            getNotificationIntervalStreamUseCase(Unit).collectLatest {
-                _notificationInterval.value = it.dataOnSuccessOr(5)
-                if (notificationEnabled.value) enqueueNewestProductsWorkRequest()
-            }
         }
 
     }
@@ -137,7 +141,6 @@ class SettingsViewModel @Inject constructor(
         else cancelEnqueueNewestProductsWorkRequest()
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun enqueueNewestProductsWorkRequest() {
         enqueueWorkJob?.cancelIfAlive()
         enqueueWorkJob = externalScope.launch {
@@ -148,12 +151,23 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun cancelEnqueueNewestProductsWorkRequest() {
         cancelWorkJob?.cancelIfAlive()
         cancelWorkJob = externalScope.launch {
             delay(700L)
             cancelWorkRequestUseCase(FetchNewestProductsWorker.WORKER_NAME)
+        }
+    }
+
+
+    private fun <T> Flow<Resource<T>>.dropWhileFirstLaunched(): Flow<Resource<T>> {
+        var firstLaunch = true
+        return dropWhile {
+            val drop = firstLaunch
+            if (it is Resource.Success && firstLaunch) {
+                firstLaunch = false
+            }
+            drop
         }
     }
 

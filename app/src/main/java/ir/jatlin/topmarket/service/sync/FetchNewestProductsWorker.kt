@@ -57,6 +57,7 @@ class FetchNewestProductsWorker @AssistedInject constructor(
             PeriodicWorkRequestBuilder<FetchNewestProductsWorker>(
                 interval.toLong(), TimeUnit.MINUTES
             )
+//                .setInitialDelay(15, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .setConstraints(fetchNewestProductsConstraints())
                 .build()
