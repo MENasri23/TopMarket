@@ -36,3 +36,7 @@ val <T> Resource<T>.isSuccess
 
 fun <T> Resource<T>?.dataOnSuccessOr(default: T): T =
     (this as? Resource.Success<T>)?.data ?: default
+
+fun <T> emptyResource(value: T): Resource<T> = Resource.success(value)
+
+fun <T> emptyListResource(): Resource<List<T>> = emptyResource(emptyList())

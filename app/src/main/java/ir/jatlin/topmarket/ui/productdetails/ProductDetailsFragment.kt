@@ -2,6 +2,7 @@ package ir.jatlin.topmarket.ui.productdetails
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayAdapter
@@ -21,6 +23,7 @@ import ir.jatlin.topmarket.ui.slider.SliderAdapter
 import ir.jatlin.topmarket.ui.slider.SliderItem
 import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,6 +36,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
 
     private lateinit var similarProductsAdapter: ProductDisplayAdapter
     private lateinit var imageSliderAdapter: SliderAdapter
+    private lateinit var productReviewAdapter: ProductReviewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +47,8 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
 
     }
 
-    private fun initViews() = binding.apply {
-        includeAppBar.toolbar.apply {
+    private fun initViews() {
+        binding.includeAppBar.toolbar.apply {
 
             setOnMenuItemClickListener {
                 var isHandled = true
@@ -68,7 +72,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
             }
         }
 
-        similarProducts.apply {
+        binding.similarProducts.apply {
             similarProductsAdapter = ProductDisplayAdapter(
                 this@ProductDetailsFragment
             )
@@ -78,7 +82,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
             )
         }
 
-        productImageSlider.apply {
+        binding.productImageSlider.apply {
             imageSliderAdapter = SliderAdapter()
             adapter = imageSliderAdapter
             addItemDecoration(
@@ -90,6 +94,12 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
             PagerSnapHelper().attachToRecyclerView(this)
         }
 
+        productReviewAdapter = ProductReviewAdapter(
+            onEachProductReviewCLick = ::navigateToProductReviews
+        )
+        binding.productReviews.apply {
+            adapter = productReviewAdapter
+        }
 
     }
 
@@ -107,8 +117,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
                     if (quantityOnLoading) {
                         visible()
                         playAnimation()
-                    }
-                    else {
+                    } else {
                         gone()
                         pauseAnimation()
                     }
@@ -132,6 +141,22 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
                 }
             }
         }
+
+        launch {
+            viewModel.productReviewsState.collect {
+                if (it.isSuccess) {
+                    with(binding.productReviewContainer) {
+                        isVisible = !it.data.isNullOrEmpty()
+                        if (isVisible) {
+                            binding.tvReviewsCount.text =
+                                getString(R.string.user_comments_count, it.data!!.size)
+                        }
+
+                    }
+                    productReviewAdapter.submitList(it.data)
+                }
+            }
+        }
     }
 
 
@@ -152,6 +177,10 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
                 }
             }
         }
+    }
+
+    private fun navigateToProductReviews() {
+        // TODO: navigate to product reviews screen
     }
 
     override fun onProductClick(productId: Int) {

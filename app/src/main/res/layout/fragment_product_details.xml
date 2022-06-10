@@ -359,59 +359,61 @@
                             app:constraint_referenced_ids="product_reviews,tv_reviews"
                             app:layout_constraintTop_toBottomOf="@id/product_reviews" />
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/add_review_container"
-                            android:layout_width="match_parent"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/add_review_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:fitsSystemWindows="true"
+                        android:focusable="true"
+                        android:padding="@dimen/space_medium"
+                        android:stateListAnimator="@animator/smooth_fading"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/product_review_container">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_comment"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fitsSystemWindows="true"
-                            android:padding="@dimen/space_medium"
-                            android:stateListAnimator="@animator/smooth_fading"
+                            android:src="@drawable/ic_comment"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_add_review"
+                            style="@style/TextAppearance.MarketApp.BodySmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/space_small"
+                            android:text="@string/add_reviews_here"
+                            app:layout_constraintEnd_toStartOf="@id/iv_comment"
+                            app:layout_constraintStart_toEndOf="@id/iv_add_comment"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_add_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_left"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/barrier_reviews_bottom">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/iv_comment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_comment"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_add_review"
-                                style="@style/TextAppearance.MarketApp.BodySmall"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/space_small"
-                                android:text="@string/add_reviews_here"
-                                app:layout_constraintEnd_toStartOf="@id/iv_comment"
-                                app:layout_constraintStart_toEndOf="@id/iv_add_comment"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/iv_add_comment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_arrow_left"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/tv_badge"
-                                style="@style/TextAppearance.MarketApp.LabelMedium"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/space_small"
-                                android:text="@string/get_badges"
-                                app:layout_constraintEnd_toEndOf="@id/tv_add_review"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_add_review" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_badge"
+                            style="@style/TextAppearance.MarketApp.LabelMedium"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/space_small"
+                            android:text="@string/get_badges"
+                            app:layout_constraintEnd_toEndOf="@id/tv_add_review"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_add_review" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -421,7 +423,7 @@
                         android:layout_marginHorizontal="@dimen/space_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/product_review_container" />
+                        app:layout_constraintTop_toBottomOf="@id/add_review_container" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/add_question_container"

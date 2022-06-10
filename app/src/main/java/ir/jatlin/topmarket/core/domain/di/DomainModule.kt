@@ -30,12 +30,4 @@ interface DomainModule {
         charSequenceDistance: LevenshteinDistance
     ): CharSequenceDistance
 
-    @Provides
-    fun defaultDateGmtFormat(): DateTimeFormatter = DateTimeFormatter.ofPattern(
-        "yyyy-MM-dd'T'HH:mm:ss",
-        Locale.getDefault()
-    )
-
-    @Provides
-    fun clock(): Clock = Clock.system(ZoneId.of("GMT"))
 }

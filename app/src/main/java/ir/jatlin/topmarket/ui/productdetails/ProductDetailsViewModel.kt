@@ -6,15 +6,17 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
+import ir.jatlin.topmarket.core.domain.product.FetchProductReviewsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.purchase.FetchOrderLineItemUseCase
 import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
+import ir.jatlin.topmarket.core.domain.util.GetFormattedDateUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.*
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.stateFlow
@@ -30,6 +32,8 @@ class ProductDetailsViewModel @Inject constructor(
     private val fetchProductsListStreamUseCase: FetchProductsListStreamUseCase,
     private val fetchOrderLineItemUseCase: FetchOrderLineItemUseCase,
     private val updateOrderCartUseCase: UpdateOrderCartUseCase,
+    private val fetchProductReviewsUseCase: FetchProductReviewsUseCase,
+    private val getFormattedDateUseCase: GetFormattedDateUseCase,
     state: SavedStateHandle
 ) : ViewModel() {
     private val productId = state.getLiveData<Int>("productId").asFlow()
@@ -59,6 +63,38 @@ class ProductDetailsViewModel @Inject constructor(
             fetchProductDetailsUseCase(it)
         }
     }
+
+    val productReviewsState: Flow<Resource<List<ProductReviewItem>>> =
+        productDetailsState.map { getProductReviewsItems(it) }
+
+    private suspend fun getProductReviewsItems(
+        productDetailsResult: Resource<NetworkProductDetails?>
+    ): Resource<List<ProductReviewItem>> {
+        Timber.d("getProductReviewsItems: $productDetailsResult")
+        return if (productDetailsResult.isSuccess) {
+            val productId = productDetailsResult.data?.id ?: return emptyListResource()
+            when (val result = fetchProductReviewsUseCase(productId)) {
+                is Resource.Error -> {
+                    Timber.d("Fetching product reviews failed with error: $result")
+                    emptyListResource()
+                }
+                is Resource.Loading -> Resource.loading()
+                is Resource.Success -> {
+                    val productReviews = result.data ?: return emptyListResource()
+                    val reviewItems = productReviews.map {
+                        ProductReviewItem(
+                            id = it.id,
+                            content = it.content,
+                            reviewerName = it.reviewerName,
+                            createdDate = getFormattedDateUseCase(it.dateCreatedGmt)
+                        )
+                    }
+                    Resource.success(reviewItems)
+                }
+            }
+        } else emptyListResource()
+    }
+
 
     init {
         fetchRelatedOrderLineItem()
@@ -149,3 +185,10 @@ class ProductDetailsViewModel @Inject constructor(
 
     }
 }
+
+data class ProductReviewItem(
+    val id: Int,
+    val content: String,
+    val reviewerName: String,
+    val createdDate: String
+)

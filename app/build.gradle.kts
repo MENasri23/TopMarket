@@ -103,7 +103,7 @@ dependencies {
 
     // legacy
     implementation(Libs.Androidx.LEGACY_SUPPORT)
-    implementation(Libs.Core.DESUGAR)
+    coreLibraryDesugaring(Libs.Core.DESUGAR)
 
     // ktx
     implementation(Libs.Androidx.ACTIVITY_KTX)

@@ -32,9 +32,12 @@ class GetFormattedDateUseCase @Inject constructor(
             days >= 7 -> res.getString(R.string.weeks_till_due, days / 7)
             days >= 1 -> res.getString(R.string.days_till_due, days)
             else -> {
-                val seconds = duration.toSeconds()
-                if (seconds >= 60) res.getString(R.string.minutes_till_due, seconds / 60)
-                else res.getString(R.string.moment_till_due)
+                val seconds = duration.seconds
+                when {
+                    seconds >= 3600 -> res.getString(R.string.hours_till_due, seconds / 3600)
+                    seconds >= 60 -> res.getString(R.string.minutes_till_due, seconds / 60)
+                    else -> res.getString(R.string.moment_till_due)
+                }
             }
         }
 
