@@ -18,6 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.NumberFormatException
 import javax.inject.Inject
 
 typealias OrderBy = ProductDiscoverParameters.OrderBY
@@ -51,10 +52,8 @@ class SearchViewModel @Inject constructor(
     var order: Order = Order.Desc
 
     var categoryId: Int = UNKNOWN_CATEGORY
-        set(value) {
-            field = value
-            searchProducts()
-        }
+
+    var includeIds: String? = null
 
     private var prevSearchResult: SearchMatchedResult? = null
 
@@ -163,25 +162,35 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun searchProductsWith(categoryId: Int) {
+    fun searchProductsWith(categoryId: Int, includeIds: String?) {
         this.categoryId = categoryId
+        this.includeIds = includeIds
+        searchProducts()
     }
 
     fun searchProducts() {
         Timber.d("searchViewModel query: $textQuery")
-        val params = makeProductParams {
-            if (textQuery.isNotBlank()) {
-                searchQuery = textQuery
-            }
-            val category = this@SearchViewModel.categoryId
-            if (category != UNKNOWN_CATEGORY) {
-                categoryId = category
-            }
-            order = this@SearchViewModel.order
-            orderBy = this@SearchViewModel.orderBy
-        }
 
         viewModelScope.launch {
+            val params = makeProductParams {
+                if (textQuery.isNotBlank()) {
+                    searchQuery = textQuery
+                }
+                val category = this@SearchViewModel.categoryId
+                if (category != UNKNOWN_CATEGORY) {
+                    categoryId = category
+                }
+                val ids = this@SearchViewModel.includeIds
+                if (!ids.isNullOrEmpty()) {
+                    try {
+                        includeIds = ids.split(",".toRegex()).map(String::toInt)
+                    } catch (e: NumberFormatException) {
+                        Timber.d("Unable to parse $ids as list of numbers")
+                    }
+                }
+                order = this@SearchViewModel.order
+                orderBy = this@SearchViewModel.orderBy
+            }
             fetchProductsListStreamUseCase(params)
                 .collect {
                     processProductsInCategoryResult(it)

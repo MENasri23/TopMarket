@@ -7,6 +7,8 @@ import android.os.Build
 import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 
@@ -14,7 +16,8 @@ const val newestProductsNotificationId = 0
 private const val newestProductsChannelId = "syncNewestProductsChannelId"
 
 fun Context.sendNewestProductsNotification(
-    products: List<NetworkProduct>
+    includeIds: String,
+    size: Int
 ) {
     createChannel(
         id = newestProductsChannelId,
@@ -22,14 +25,21 @@ fun Context.sendNewestProductsNotification(
         description = R.string.sync_newest_proudcts_channel_description
     )
 
+    val pendingIntent = NavDeepLinkBuilder(this)
+        .setGraph(R.navigation.main_graph)
+        .setDestination(R.id.searchFiltersFragment)
+        .setArguments(bundleOf("includeIds" to includeIds))
+        .createPendingIntent()
+
     val notification = NotificationCompat.Builder(
         this,
         newestProductsChannelId
     )
         .setSmallIcon(R.drawable.ic_digi_smile_24)
         .setContentTitle(getString(R.string.newest_products_notification_title))
-        .setContentText(getString(R.string.newest_products_notification_content, products.size))
+        .setContentText(getString(R.string.newest_products_notification_content, size))
         .setAutoCancel(true)
+        .setContentIntent(pendingIntent)
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .build()
 

@@ -2,9 +2,11 @@ package ir.jatlin.topmarket.ui.search.filter
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -42,7 +44,17 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
 
         val categoryId = args.categoryId
-        searchViewModel.searchProductsWith(categoryId)
+        val includeIds = args.includeIds
+        searchViewModel.searchProductsWith(categoryId, includeIds)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    popBackStackToStartDestination()
+                }
+            }
+        )
 
     }
 
@@ -114,6 +126,13 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
             SearchFiltersFragmentDirections
                 .actionSearchFiltersFragmentToProductDetailsFragment(productId)
         )
+    }
+
+    private fun popBackStackToStartDestination() {
+        val navController = findNavController()
+        val mainGraph = navController
+            .findDestination(R.id.main_graph) as? NavGraph ?: return
+        navController.popBackStack(mainGraph.startDestinationId, false)
     }
 
 }

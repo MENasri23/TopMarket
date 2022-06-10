@@ -38,7 +38,7 @@ class ProductPreviewItemViewHolder(
                 context.resources.getString(R.string.product_unavailable)
             }
             productAvgRating.text = product.averageRating
-            productImage.loadFromUrl(product.images.first().url)
+            productImage.loadFromUrl(product.images.firstOrNull()?.url)
 
         }
     }

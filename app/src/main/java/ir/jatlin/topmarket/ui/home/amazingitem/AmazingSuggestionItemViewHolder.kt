@@ -26,7 +26,7 @@ class AmazingSuggestionItemViewHolder(
                 context.resources.getString(R.string.product_unavailable)
             }
 
-            productImage.loadFromUrl(product.images.first().url)
+            productImage.loadFromUrl(product.images.firstOrNull()?.url)
 
         }
     }
