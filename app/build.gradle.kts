@@ -75,6 +75,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -102,6 +103,7 @@ dependencies {
 
     // legacy
     implementation(Libs.Androidx.LEGACY_SUPPORT)
+    implementation(Libs.Core.DESUGAR)
 
     // ktx
     implementation(Libs.Androidx.ACTIVITY_KTX)
