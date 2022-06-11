@@ -111,5 +111,8 @@
     <string name="purchase_sum">جمع سبد خرید</string>
     <string name="total_discount_value">%1$d(%2$d%%)</string>
     <string name="purchase_warning">کالا‌های موجود در سبد شما ثبت و رزرو نشده اند، برای ثبت سفارش مراحل بعدی را تکمیل کنید.</string>
+    <string name="guarantee_policy">گارانتی اصالت و سلامت فیزیکی کالا</string>
+    <string name="digikala_name">دیجی‌کالا</string>
+    <string name="in_stock">موجود در انبار دیجی‌کالا</string>
 
 </resources>

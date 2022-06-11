@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/space_medium">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/order_item_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.MarketApp.TitleSmall"
+        app:layout_constraintEnd_toEndOf="@id/glv_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="تلویزیون ال ای دی ایکس ویژن مدل 24XS450 سایز 24 اینچ" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/order_item_info_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/glv_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/order_item_product_name">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_small"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:drawableEnd="@drawable/ic_guarantee"
+            android:drawablePadding="@dimen/space_small"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/guarantee_policy"
+            android:textAppearance="@style/TextAppearance.MarketApp.LabelSmall"
+            app:layout_constraintEnd_toEndOf="@id/glv_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_very_small"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:drawableEnd="@drawable/ic_home"
+            android:drawablePadding="@dimen/space_small"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/digikala_name"
+            android:textAppearance="@style/TextAppearance.MarketApp.LabelSmall"
+            app:layout_constraintEnd_toEndOf="@id/glv_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/order_item_in_stock_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_very_small"
+            android:layout_marginEnd="@dimen/space_medium"
+            android:drawableEnd="@drawable/ic_instock_24"
+            android:drawablePadding="@dimen/space_small"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/in_stock"
+            android:textAppearance="@style/TextAppearance.MarketApp.LabelSmall"
+            app:layout_constraintEnd_toEndOf="@id/glv_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bh_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="order_item_product_image, order_item_info_container" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/order_item_product_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/glv_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
