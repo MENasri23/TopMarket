@@ -32,3 +32,13 @@ fun CustomerEntity.asCustomer() = Customer(
     avatarUrl = avatarUrl,
     role = role,
 )
+
+fun Customer.asCustomerEntity() = CustomerEntity(
+    id = id,
+    email = email,
+    username = username,
+    firstName = firstName,
+    lastName = lastName,
+    avatarUrl = avatarUrl,
+    role = role,
+)
