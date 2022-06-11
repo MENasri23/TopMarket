@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/purchase_register_item_height"
-    android:layout_margin="@dimen/space_small"
     app:cardCornerRadius="@dimen/space_small"
     app:cardElevation="@dimen/cardview_default_elevation"
     app:strokeColor="?attr/itemBackgroundColor">

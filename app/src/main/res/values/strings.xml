@@ -102,5 +102,14 @@
     <!-- Purchase -->
     <string name="sign_in_or_register">ورود یا ثبت‌نام</string>
     <string name="sign_in_guide">برای تجربه بهتر خرید‌ و بررسی روش ارسال کالا‌ها لطفا وارد شوید.</string>
+    <string name="deliver_free">ارسال رایگان</string>
+    <string name="free_explanation">برای سفارش بالای 500 هزار تومان</string>
+    <string name="purchase_overview">خلاصه سبد</string>
+    <string name="purchase_product_count">%d کالا</string>
+    <string name="total_price">قیمت کالا‌ها</string>
+    <string name="total_discount">تخفیف کالا‌ها</string>
+    <string name="purchase_sum">جمع سبد خرید</string>
+    <string name="total_discount_value">%1$d(%2$d%%)</string>
+    <string name="purchase_warning">کالا‌های موجود در سبد شما ثبت و رزرو نشده اند، برای ثبت سفارش مراحل بعدی را تکمیل کنید.</string>
 
 </resources>
