@@ -90,6 +90,66 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="order_item_product_image, order_item_info_container" />
 
+    <ImageView
+        android:id="@+id/quantity_background"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="@dimen/space_medium"
+        android:background="@drawable/change_quantity_button_background"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/glv_image"
+        app:layout_constraintTop_toBottomOf="@id/bh_bottom" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_very_small"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+        app:layout_constraintEnd_toEndOf="@id/quantity_background"
+        app:layout_constraintTop_toTopOf="@id/quantity_background" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_quantity"
+        style="@style/TextAppearance.MarketApp.BodySmall"
+        invisibleWhile="@{viewModel.onLoadingQuantity}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{viewModel.orderQuantity.toString()}"
+        android:textColor="@color/digi_red_color_500"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+        app:layout_constraintEnd_toStartOf="@id/iv_add"
+        app:layout_constraintStart_toEndOf="@id/iv_remove"
+        app:layout_constraintTop_toTopOf="@id/quantity_background"
+        tools:text="1" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/order_quantity_loading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/tv_quantity"
+        app:layout_constraintEnd_toStartOf="@id/iv_add"
+        app:layout_constraintStart_toEndOf="@id/iv_remove"
+        app:layout_constraintTop_toTopOf="@id/tv_quantity"
+        app:lottie_rawRes="@raw/loading_animation"
+        app:lottie_repeatMode="reverse" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_very_small"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+        app:layout_constraintStart_toStartOf="@id/quantity_background"
+        app:layout_constraintTop_toTopOf="@id/quantity_background"
+        tools:src="@drawable/ic_minus" />
 
 
     <androidx.constraintlayout.widget.Guideline
