@@ -98,4 +98,9 @@
     <string name="hours_till_due">%d ساعت پیش</string>
     <string name="minutes_till_due">%d دقیقه پیش</string>
     <string name="moment_till_due">چند لحظه پیش</string>
+
+    <!-- Purchase -->
+    <string name="sign_in_or_register">ورود یا ثبت‌نام</string>
+    <string name="sign_in_guide">برای تجربه بهتر خرید‌ و بررسی روش ارسال کالا‌ها لطفا وارد شوید.</string>
+
 </resources>

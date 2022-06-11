@@ -22,5 +22,8 @@
     <!-- Settings -->
     <dimen name="setting_title_text_size">@dimen/_16ssp</dimen>
 
+    <!-- purchase -->
+    <dimen name="purchase_register_item_height">@dimen/_96sdp</dimen>
+
 
 </resources>
