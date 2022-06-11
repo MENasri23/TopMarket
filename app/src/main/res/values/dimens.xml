@@ -25,6 +25,7 @@
     <!-- purchase -->
     <dimen name="purchase_register_item_height">@dimen/_96sdp</dimen>
     <dimen name="deliver_free_container_height">@dimen/_48sdp</dimen>
+    <dimen name="cart_quantity_background_height">@dimen/_36sdp</dimen>
 
 
 </resources>

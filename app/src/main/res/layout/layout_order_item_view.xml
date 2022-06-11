@@ -93,7 +93,7 @@
     <ImageView
         android:id="@+id/quantity_background"
         android:layout_width="0dp"
-        android:layout_height="36dp"
+        android:layout_height="@dimen/cart_quantity_background_height"
         android:layout_marginTop="@dimen/space_medium"
         android:background="@drawable/change_quantity_button_background"
         android:contentDescription="@null"
@@ -163,12 +163,67 @@
         android:id="@+id/order_item_product_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/order_item_info_container"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/glv_image"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/order_item_product_name"
         tools:background="@color/black" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/cart_group_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_quantity,iv_add,quantity_background,order_quantity_loading,iv_remove" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cart_product_discount"
+        style="@style/TextAppearance.MarketApp.LabelSmall"
+        invisibleWhile="@{viewModel.onLoadingQuantity}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:drawablePadding="@dimen/space_very_small"
+        android:text="@string/cart_discount"
+        android:textColor="@color/digi_red_color_500"
+        app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+        app:layout_constraintBottom_toTopOf="@id/cart_product_price"
+        app:layout_constraintEnd_toEndOf="@id/glv_image"
+        app:layout_constraintTop_toTopOf="@id/quantity_background"
+        tools:text="320,000 تومان تخفیف" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cart_product_price"
+        style="@style/TextAppearance.MarketApp.LabelMedium"
+        invisibleWhile="@{viewModel.onLoadingQuantity}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_medium"
+        android:drawableStart="@drawable/ic_toman"
+        android:drawablePadding="@dimen/space_very_small"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/quantity_background"
+        app:layout_constraintEnd_toEndOf="@id/glv_image"
+        app:layout_constraintTop_toBottomOf="@id/cart_product_discount"
+        tools:text="500,000" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cart_next_order"
+        style="@style/TextAppearance.MarketApp.LabelMedium"
+        invisibleWhile="@{viewModel.onLoadingQuantity}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_small"
+        android:drawableStart="@drawable/ic_arrow_left"
+        android:drawablePadding="@dimen/space_very_small"
+        android:text="@string/save_in_next_order"
+        android:textColor="?attr/colorAccent"
+        app:drawableTint="?attr/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantity_background" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
