@@ -17,7 +17,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_comment"
+            android:id="@+id/iv_register_or_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_sign_in"
@@ -34,17 +34,19 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/space_small"
             android:text="@string/sign_in_or_register"
-            app:layout_constraintEnd_toStartOf="@id/iv_comment"
+            app:layout_constraintBottom_toBottomOf="@id/iv_register_or_sign_in"
+            app:layout_constraintEnd_toStartOf="@id/iv_register_or_sign_in"
             app:layout_constraintStart_toEndOf="@id/iv_sign_in"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/iv_register_or_sign_in" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sign_in"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/tv_sign_in" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -58,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_sign_in"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_comment" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_register_or_sign_in" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
