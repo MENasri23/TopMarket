@@ -17,13 +17,13 @@ import javax.inject.Inject
 
 class UpdateOrderCartUseCase @Inject constructor(
     private val orderRepository: OrderRepository,
-    private val purchasePreferences: MarketPreferences,
+    private val marketPreferences: MarketPreferences,
     errorHandler: ErrorHandler,
     @IODispatcher dispatcher: CoroutineDispatcher
 ) : FlowUseCase<OrderLineItem, Unit>(errorHandler, dispatcher) {
 
     override fun execute(params: OrderLineItem): Flow<Unit> {
-        return purchasePreferences.purchasePreferencesStream.map { purchasePreferencesInfo ->
+        return marketPreferences.purchasePreferencesStream.map { purchasePreferencesInfo ->
             val (customerId, activeOrderId) = purchasePreferencesInfo
 
             val noActiveOrder = activeOrderId == PurchasePrefsInfo.NO_ACTIVE_ORDER
@@ -32,7 +32,7 @@ class UpdateOrderCartUseCase @Inject constructor(
                 noActiveOrder && isGuestCustomer -> {
                     val orderId = orderRepository.createOrder(Order.Empty)
 
-                    purchasePreferences.saveActiveOrderId(orderId)
+                    marketPreferences.saveActiveOrderId(orderId)
                 }
                 noActiveOrder -> {
                     val order = Order.Empty.copy(
@@ -40,7 +40,7 @@ class UpdateOrderCartUseCase @Inject constructor(
                         customer = Customer.Empty.copy(id = customerId)
                     )
                     val orderId = orderRepository.createOrder(order)
-                    purchasePreferences.saveActiveOrderId(orderId)
+                    marketPreferences.saveActiveOrderId(orderId)
                 }
                 else -> {
                     val order = orderRepository.findOrderById(activeOrderId)
