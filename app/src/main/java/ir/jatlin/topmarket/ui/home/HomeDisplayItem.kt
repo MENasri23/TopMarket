@@ -2,7 +2,7 @@ package ir.jatlin.topmarket.ui.home
 
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import ir.jatlin.topmarket.core.network.model.common.NetworkImage
+import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
 import ir.jatlin.topmarket.ui.product.ProductDisplayItem
 import java.util.*
@@ -25,7 +25,7 @@ sealed interface HomeDisplayItem {
     ) : HomeDisplayItem
 
     data class SpecialProductsSliderItem(
-        val specialProductImages: List<NetworkImage>,
+        val specialProductImages: List<ProductImage>,
         override val id: String = UUID.randomUUID().toString()
     ) : HomeDisplayItem
 

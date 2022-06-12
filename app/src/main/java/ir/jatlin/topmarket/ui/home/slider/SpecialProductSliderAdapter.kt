@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.core.network.model.common.NetworkImage
+import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.databinding.SpecialProductSlideViewBinding
 
-class SpecialProductSliderAdapter: ListAdapter<NetworkImage,
+class SpecialProductSliderAdapter : ListAdapter<ProductImage,
         SpecialProductSliderViewHolder>(DifCallback()) {
 
     override fun onCreateViewHolder(
@@ -25,18 +25,18 @@ class SpecialProductSliderAdapter: ListAdapter<NetworkImage,
         holder.bind(getItem(position))
     }
 
-    private class DifCallback : DiffUtil.ItemCallback<NetworkImage>() {
+    private class DifCallback : DiffUtil.ItemCallback<ProductImage>() {
 
         override fun areItemsTheSame(
-            oldItem: NetworkImage,
-            newItem: NetworkImage
+            oldItem: ProductImage,
+            newItem: ProductImage
         ): Boolean {
             return newItem.id == oldItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: NetworkImage,
-            newItem: NetworkImage
+            oldItem: ProductImage,
+            newItem: ProductImage
         ): Boolean {
             return newItem == oldItem
         }

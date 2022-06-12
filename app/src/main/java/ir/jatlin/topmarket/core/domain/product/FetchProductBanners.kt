@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.product
 
 import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.network.model.common.NetworkImage
+import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,7 +15,7 @@ class FetchProductBanners @Inject constructor(
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    operator fun invoke(): Flow<Resource<List<NetworkImage>>> {
+    operator fun invoke(): Flow<Resource<List<ProductImage>>> {
         return flow {
             when (val result = fetchProductDetailsListUseCase(608)) {
                 is Resource.Loading -> emit(Resource.loading())

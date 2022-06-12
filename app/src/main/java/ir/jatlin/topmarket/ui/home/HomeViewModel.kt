@@ -5,7 +5,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.domain.product.FetchProductBanners
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
 import ir.jatlin.topmarket.core.domain.util.makeProductParams

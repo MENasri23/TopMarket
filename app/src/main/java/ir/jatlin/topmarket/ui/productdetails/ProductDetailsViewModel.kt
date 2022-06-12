@@ -12,18 +12,22 @@ import ir.jatlin.topmarket.core.domain.purchase.FetchOrderLineItemUseCase
 import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.core.domain.util.GetFormattedDateUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
+import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
-import ir.jatlin.topmarket.core.network.model.common.NetworkImage
+import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.shared.*
+import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.emptyListResource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.stateFlow
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,10 +44,10 @@ class ProductDetailsViewModel @Inject constructor(
 
     private var orderLineItem: OrderLineItem? = null
 
-    private val _productDetails = MutableStateFlow<NetworkProductDetails?>(null)
+    private val _productDetails = MutableStateFlow<ProductDetails?>(null)
     val productDetails = _productDetails.asStateFlow()
 
-    private val _productImages = MutableStateFlow<List<NetworkImage>?>(null)
+    private val _productImages = MutableStateFlow<List<ProductImage>?>(null)
     val productImages = _productImages.asStateFlow()
 
     private val _similarProducts: MutableStateFlow<Resource<List<NetworkProduct>>> =
@@ -68,7 +72,7 @@ class ProductDetailsViewModel @Inject constructor(
         productDetailsState.map { getProductReviewsItems(it) }
 
     private suspend fun getProductReviewsItems(
-        productDetailsResult: Resource<NetworkProductDetails?>
+        productDetailsResult: Resource<ProductDetails?>
     ): Resource<List<ProductReviewItem>> {
         Timber.d("getProductReviewsItems: $productDetailsResult")
         return if (productDetailsResult.isSuccess) {
@@ -124,7 +128,7 @@ class ProductDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun updateUiStatesWith(productDetails: NetworkProductDetails) {
+    suspend fun updateUiStatesWith(productDetails: ProductDetails) {
         Timber.d(productDetails.categories.joinToString())
         _productDetails.emit(productDetails)
         _productImages.emit(productDetails.images)

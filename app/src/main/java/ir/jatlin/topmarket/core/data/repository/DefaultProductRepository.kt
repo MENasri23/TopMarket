@@ -1,10 +1,11 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.data.mapper.asProductDetails
 import ir.jatlin.topmarket.core.data.mapper.asProductPreview
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +16,8 @@ class DefaultProductRepository @Inject constructor(
     private val remoteDataSource: ProductRemoteDataSource
 ) : ProductRepository {
 
-    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails? {
-        return remoteDataSource.findProductDetailsById(id)
+    override suspend fun findProductDetailsById(id: Int): ProductDetails? {
+        return remoteDataSource.findProductDetailsById(id)?.asProductDetails()
     }
 
     override fun getProductsListStream(

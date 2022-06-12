@@ -1,22 +1,20 @@
 package ir.jatlin.topmarket.ui.util
 
 import android.text.method.LinkMovementMethod
-import android.text.util.Linkify
 import android.view.View
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
-import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.databinding.BindingAdapter
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
+import ir.jatlin.topmarket.core.model.category.Category
 
 
 @BindingAdapter(
     value = ["categories", "delimiter"], requireAll = false
 )
-fun TextView.setCategoriesNames(categories: List<NetworkCategory>?, delimiter: String?) {
+fun TextView.setCategoriesNames(categories: List<Category>?, delimiter: String?) {
     if (categories.isNullOrEmpty()) return
-    val names = categories.map(NetworkCategory::name)
+    val names = categories.map(Category::name)
     text = names.joinToString(separator = delimiter ?: "/")
 
 }
