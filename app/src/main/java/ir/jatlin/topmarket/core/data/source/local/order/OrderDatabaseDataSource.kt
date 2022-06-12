@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.core.data.source.local.order
 import ir.jatlin.topmarket.core.database.dao.OrderDao
 import ir.jatlin.topmarket.core.database.entity.OrderEntity
 import ir.jatlin.topmarket.core.database.entity.OrderWithOrderItems
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class OrderDatabaseDataSource @Inject constructor(
@@ -15,5 +16,9 @@ class OrderDatabaseDataSource @Inject constructor(
 
     fun findOrderById(orderId: Int): OrderWithOrderItems? {
         return orderDao.getOrderById(id = orderId)
+    }
+
+    fun findOrderByIdStream(orderId: Int): Flow<OrderWithOrderItems?> {
+        return orderDao.getOrderByIdStream(id = orderId)
     }
 }
