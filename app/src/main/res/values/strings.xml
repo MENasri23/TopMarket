@@ -117,4 +117,10 @@
     <string name="cart_discount">%d تومان تخفیف</string>
     <string name="save_in_next_order">ذخیره در لیست خرید بعدی</string>
 
+
+    <!-- collapsable discount card -->
+    <string name="discount_title">کد تخفیف</string>
+    <string name="apply_discount">اعمال کد تخفیف</string>
+    <string name="type_discount_value">کد تخفیف را وارد کنید…</string>
+
 </resources>

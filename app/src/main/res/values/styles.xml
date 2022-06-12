@@ -103,6 +103,13 @@
     </style>
 
 
+    <!-- discount cart -->
+
+    <style name="Widget.Market.TextInputEditText.OutlinedBox.Discount" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
     <!-- SignIn -->
     <style name="Widget.Market.SignIn" parent="" />
 
