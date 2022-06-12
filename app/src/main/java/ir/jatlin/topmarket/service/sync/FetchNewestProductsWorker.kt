@@ -7,7 +7,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.product.FetchNewestProductsUseCase
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.service.notification.sendNewestProductsNotification
 import kotlinx.coroutines.CoroutineDispatcher
@@ -35,7 +35,7 @@ class FetchNewestProductsWorker @AssistedInject constructor(
                     Timber.d("retrieved a success result with null data")
                     return@withContext Result.failure()
                 }
-                val includeIds = products.map(NetworkProduct::id).joinToString(separator = ",")
+                val includeIds = products.map(Product::id).joinToString(separator = ",")
                 applicationContext.sendNewestProductsNotification(includeIds, products.size)
 //                if (products.isNotEmpty()) {
 //                    applicationContext.sendNewestProductsNotification(products)

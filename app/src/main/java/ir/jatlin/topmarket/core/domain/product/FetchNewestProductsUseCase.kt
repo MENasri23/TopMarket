@@ -2,7 +2,7 @@ package ir.jatlin.topmarket.core.domain.product
 
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.isSuccess
 import kotlinx.coroutines.flow.catch
@@ -16,7 +16,7 @@ class FetchNewestProductsUseCase @Inject constructor(
     private val marketPreferences: MarketPreferences
 ) {
 
-    suspend operator fun invoke(): Resource<List<NetworkProduct>> {
+    suspend operator fun invoke(): Resource<List<Product>> {
         val lastDate = marketPreferences.lastNewestProductDate
             .catch { emit(null) }
             .firstOrNull()
@@ -38,7 +38,7 @@ class FetchNewestProductsUseCase @Inject constructor(
 
     }
 
-    private suspend fun saveLastProductDate(result: Resource<List<NetworkProduct>>) {
+    private suspend fun saveLastProductDate(result: Resource<List<Product>>) {
         if (result.isSuccess) {
             val newLastDate = result.data?.firstOrNull()?.createdDate
             if (newLastDate != null) {

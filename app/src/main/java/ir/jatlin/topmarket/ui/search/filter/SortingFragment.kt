@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.domain.param.DiscoverParameters
 import ir.jatlin.topmarket.databinding.FragmentSortingBinding
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
 import ir.jatlin.topmarket.ui.search.Order
 import ir.jatlin.topmarket.ui.search.OrderBy
 import ir.jatlin.topmarket.ui.search.SearchViewModel
@@ -60,6 +55,11 @@ class SortingFragment : BottomSheetDialogFragment() {
             cheapest.setOnClickListener(onSortItemCLickListener)
             newest.setOnClickListener(onSortItemCLickListener)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

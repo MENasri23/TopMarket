@@ -3,7 +3,7 @@ package ir.jatlin.topmarket.ui.home.amazingitem
 import android.graphics.Paint
 import androidx.core.view.isVisible
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.AmazingSuggestionItemViewBinding
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
@@ -12,7 +12,7 @@ class AmazingSuggestionItemViewHolder(
     private val binding: AmazingSuggestionItemViewBinding
 ) : BaseViewHolder<AmazingDisplayItem.AmazingItem>(binding) {
 
-    private var currentProduct: NetworkProduct? = null
+    private var currentProduct: Product? = null
     private val context = binding.root.context
 
     override fun bind(item: AmazingDisplayItem.AmazingItem) {

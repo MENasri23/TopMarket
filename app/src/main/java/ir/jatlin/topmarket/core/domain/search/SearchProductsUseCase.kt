@@ -4,7 +4,7 @@ import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.util.CharSequenceDistance
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,7 +20,7 @@ class SearchProductsUseCase @Inject constructor(
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    operator fun invoke(textQuery: String, taken: Int): Flow<Resource<List<NetworkProduct>>> {
+    operator fun invoke(textQuery: String, taken: Int): Flow<Resource<List<Product>>> {
         val params = makeProductParams {
             searchQuery = textQuery
         }

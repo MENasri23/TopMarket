@@ -14,8 +14,8 @@ import ir.jatlin.topmarket.core.domain.util.GetFormattedDateUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.model.product.ProductDetails
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.emptyListResource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
@@ -50,7 +50,7 @@ class ProductDetailsViewModel @Inject constructor(
     private val _productImages = MutableStateFlow<List<ProductImage>?>(null)
     val productImages = _productImages.asStateFlow()
 
-    private val _similarProducts: MutableStateFlow<Resource<List<NetworkProduct>>> =
+    private val _similarProducts: MutableStateFlow<Resource<List<Product>>> =
         MutableStateFlow(Resource.success(emptyList()))
     val similarProducts = _similarProducts.asStateFlow()
 

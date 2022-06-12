@@ -3,7 +3,7 @@ package ir.jatlin.topmarket.ui.product.preview
 import android.graphics.Paint
 import androidx.core.view.isVisible
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.ProductPreviewItemViewBinding
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
@@ -15,7 +15,7 @@ class ProductPreviewItemViewHolder(
     private val eventListener: ProductItemEventListener
 ) : BaseViewHolder<SearchProductInCategoryItem>(binding) {
 
-    private var currentProduct: NetworkProduct? = null
+    private var currentProduct: Product? = null
     private val context = binding.root.context
 
     init {

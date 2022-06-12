@@ -4,7 +4,7 @@ import android.graphics.Paint
 import android.view.View
 import androidx.core.view.isVisible
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.ProductItemViewBinding
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
@@ -16,7 +16,7 @@ class ProductViewHolder(
     private val eventListener: ProductItemEventListener
 ) : BaseViewHolder<ProductItem>(binding), View.OnClickListener {
 
-    private var currentProduct: NetworkProduct? = null
+    private var currentProduct: Product? = null
     private val context = binding.root.context
 
     init {

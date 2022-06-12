@@ -8,17 +8,19 @@ import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.search.SearchProductsUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
+import ir.jatlin.topmarket.core.model.category.Category
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.NumberFormatException
 import javax.inject.Inject
 
 typealias OrderBy = ProductDiscoverParameters.OrderBY
@@ -73,7 +75,7 @@ class SearchViewModel @Inject constructor(
 
     }
 
-    private suspend fun processSearchResult(result: Resource<List<NetworkProduct>>) {
+    private suspend fun processSearchResult(result: Resource<List<Product>>) {
         when (result) {
             is Resource.Error -> _loading.emit(true)
             is Resource.Loading -> _error.emit(result.cause)
@@ -86,7 +88,7 @@ class SearchViewModel @Inject constructor(
         clearSearch()
     }
 
-    private fun convertToSearchMatchedResult(products: List<NetworkProduct>): SearchMatchedResult? {
+    private fun convertToSearchMatchedResult(products: List<Product>): SearchMatchedResult? {
         val categoryWithProducts = products.groupBy {
             try {
                 it.categories.last()
@@ -114,7 +116,7 @@ class SearchViewModel @Inject constructor(
 
     private fun getBodyItems(
         largestCategoryId: Int,
-        categoryWithProducts: Map<NetworkCategory, List<NetworkProduct>>
+        categoryWithProducts: Map<Category, List<Product>>
     ): List<SearchDisplayItem.BodyItem> {
         return categoryWithProducts
             .filterNot { it.key.id == largestCategoryId }
@@ -132,11 +134,11 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getHeaderItem(
-        largestCategory: Map.Entry<NetworkCategory, List<NetworkProduct>>
+        largestCategory: Map.Entry<Category, List<Product>>
     ): SearchDisplayItem.HeaderItem {
         return SearchDisplayItem.HeaderItem(
             categoryId = largestCategory.key.id,
-            largestCategory.value.map(NetworkProduct::asSearchProductItem)
+            largestCategory.value.map(Product::asSearchProductItem)
         )
     }
 
@@ -198,7 +200,7 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processProductsInCategoryResult(result: Resource<List<NetworkProduct>>) {
+    private suspend fun processProductsInCategoryResult(result: Resource<List<Product>>) {
         with(_productsInCategory) {
             when (result) {
                 is Resource.Error -> emit(Resource.error(result.cause ?: ErrorCause.Unknown()))
@@ -237,7 +239,7 @@ data class SearchProductItem(
     val imageUrl: String?
 )
 
-fun NetworkProduct.asSearchProductItem() = SearchProductItem(
+fun Product.asSearchProductItem() = SearchProductItem(
     id = id,
     name = name,
     imageUrl = images.firstOrNull()?.url

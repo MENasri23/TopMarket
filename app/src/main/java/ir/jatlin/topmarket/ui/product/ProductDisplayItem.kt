@@ -1,12 +1,12 @@
 package ir.jatlin.topmarket.ui.product
 
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 
 
 sealed interface ProductDisplayItem {
     val id: Int
 
-    class ProductItem(val data: NetworkProduct) : ProductDisplayItem {
+    class ProductItem(val data: Product) : ProductDisplayItem {
         override val id: Int get() = data.id
     }
 
@@ -16,5 +16,5 @@ sealed interface ProductDisplayItem {
     }
 }
 
-fun NetworkProduct.asProductItem() =
+fun Product.asProductItem() =
     ProductDisplayItem.ProductItem(this)

@@ -1,11 +1,9 @@
 package ir.jatlin.topmarket.ui.home.amazingitem
 
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 
 sealed interface AmazingDisplayItem {
 
@@ -21,7 +19,7 @@ sealed interface AmazingDisplayItem {
         override val id: Int = Int.MIN_VALUE + 1
     }
 
-    data class AmazingItem(val product: NetworkProduct) : AmazingDisplayItem {
+    data class AmazingItem(val product: Product) : AmazingDisplayItem {
 
         override val id: Int
             get() = product.id
@@ -34,4 +32,4 @@ sealed interface AmazingDisplayItem {
 
 }
 
-fun NetworkProduct.asAmazingItem() = AmazingDisplayItem.AmazingItem(this)
+fun Product.asAmazingItem() = AmazingDisplayItem.AmazingItem(this)

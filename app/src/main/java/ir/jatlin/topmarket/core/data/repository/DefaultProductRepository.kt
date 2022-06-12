@@ -1,8 +1,10 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.data.mapper.asProduct
 import ir.jatlin.topmarket.core.data.mapper.asProductDetails
 import ir.jatlin.topmarket.core.data.mapper.asProductPreview
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
@@ -24,9 +26,12 @@ class DefaultProductRepository @Inject constructor(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): Flow<List<NetworkProduct>> {
+    ): Flow<List<Product>> {
         return flow {
-            emit(remoteDataSource.getProductsList(page, pageSize, filters))
+            emit(
+                remoteDataSource.getProductsList(page, pageSize, filters)
+                    .map(NetworkProduct::asProduct)
+            )
         }
     }
 
@@ -34,8 +39,9 @@ class DefaultProductRepository @Inject constructor(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): List<NetworkProduct> {
+    ): List<Product> {
         return remoteDataSource.getProductsList(page, pageSize, filters)
+            .map(NetworkProduct::asProduct)
     }
 
     override fun getProductCategories(

@@ -8,7 +8,7 @@ import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
@@ -75,14 +75,14 @@ class HomeViewModel @Inject constructor(
                 data = listOf(
                     HomeDisplayItem.ProductDisplayGroupItem(
                         label = R.string.products_latest,
-                        products = latest.data!!.map(NetworkProduct::asProductItem)
+                        products = latest.data!!.map(Product::asProductItem)
                     ),
                     HomeDisplayItem.ProductDisplayGroupItem(
                         label = R.string.products_popular,
-                        products = popular.data!!.map(NetworkProduct::asProductItem)
+                        products = popular.data!!.map(Product::asProductItem)
                     ),
                     HomeDisplayItem.ProductDisplayGroupItem(
-                        products = topRated.data!!.map(NetworkProduct::asProductItem),
+                        products = topRated.data!!.map(Product::asProductItem),
                         label = R.string.products_top_rated
                     )
                 )
@@ -106,7 +106,7 @@ class HomeViewModel @Inject constructor(
                 val result = mutableListOf<HomeDisplayItem>(
                     HomeDisplayItem.SpecialProductsSliderItem(banners.data!!)
                 )
-                val amazingItems = amazing.data!!.map(NetworkProduct::asAmazingItem)
+                val amazingItems = amazing.data!!.map(Product::asAmazingItem)
                 val amazingHeader = AmazingDisplayItem.Header(
                     shapeIcon = R.drawable.amazing_suggestion
                 )
@@ -146,7 +146,7 @@ class HomeViewModel @Inject constructor(
 
     private inline fun fetchProducts(
         crossinline block: ProductDiscoverParameters.() -> Unit = {}
-    ): Flow<Resource<List<NetworkProduct>>> {
+    ): Flow<Resource<List<Product>>> {
         return fetchProductList(
             params = makeProductParams(block)
         )

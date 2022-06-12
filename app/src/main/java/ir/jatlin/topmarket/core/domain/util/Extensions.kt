@@ -2,7 +2,6 @@ package ir.jatlin.topmarket.core.domain.util
 
 import ir.jatlin.topmarket.core.domain.category.CategoryDiscoverParameter
 import ir.jatlin.topmarket.core.domain.category.FetchCategoryDetailsListUseCase
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductsParameters
 

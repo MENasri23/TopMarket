@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.ui.search.filter
 
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 
 data class SearchProductInCategoryItem(
-    val product: NetworkProduct
+    val product: Product
 )

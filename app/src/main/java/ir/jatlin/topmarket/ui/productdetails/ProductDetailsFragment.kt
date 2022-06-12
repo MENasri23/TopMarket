@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.PagerSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
+import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
@@ -23,7 +23,6 @@ import ir.jatlin.topmarket.ui.slider.SliderAdapter
 import ir.jatlin.topmarket.ui.slider.SliderItem
 import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -127,7 +126,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
         launch {
             collectOnSuccess(viewModel.similarProducts) { similarProducts ->
                 similarProductsAdapter.submitList(
-                    similarProducts.map(NetworkProduct::asProductItem)
+                    similarProducts.map(Product::asProductItem)
                 )
             }
         }
