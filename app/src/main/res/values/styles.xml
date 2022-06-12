@@ -53,6 +53,11 @@
         <item name="android:textAppearance">@style/TextAppearance.MarketApp.TitleMedium</item>
     </style>
 
+    <style name="Widget.Market.DiscountButton" parent="Widget.Material3.Button">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
+    </style>
+
     <style name="Widget.Market.SnackbarActionButton" parent="Widget.Material3.Button.TextButton">
         <item name="fontFamily">@font/samim_fd</item>
         <item name="android:textAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
@@ -106,8 +111,9 @@
     <!-- discount cart -->
 
     <style name="Widget.Market.TextInputEditText.OutlinedBox.Discount" parent="Widget.Material3.TextInputEditText.OutlinedBox">
-        <item name="fontFamily">@font/samim_fd</item>
-        <item name="android:textSize">@dimen/_10ssp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
+        <item name="android:paddingTop">@dimen/space_small</item>
+        <item name="android:paddingBottom">@dimen/space_small</item>
     </style>
 
     <!-- SignIn -->

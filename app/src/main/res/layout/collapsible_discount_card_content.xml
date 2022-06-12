@@ -38,7 +38,7 @@
             android:paddingEnd="@dimen/space_medium">
 
             <ImageView
-                android:id="@+id/expand_icon"
+                android:id="@+id/discount_expand_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:importantForAccessibility="no"
@@ -61,13 +61,15 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/space_medium">
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/space_medium"
+            android:paddingVertical="@dimen/space_small">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu_hour"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/space_small"
+                android:layout_marginEnd="@dimen/space_small"
                 android:layout_weight="1"
                 android:hint="@string/type_discount_value">
 
@@ -81,12 +83,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/discount_apply"
-                style="@style/Widget.Market.Button"
+                style="@style/Widget.Market.DiscountButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:text="@string/apply_discount"
-                app:cornerRadius="@dimen/space_small" />
+                app:cornerRadius="@dimen/space_very_small" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
