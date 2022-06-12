@@ -28,5 +28,6 @@ fun OrderWithOrderItems.asOrder() = Order(
     id = order.id,
     customer = customer?.asCustomer() ?: Customer.Empty,
     orderItems = orderItems.map(OrderLineItemEntity::asOrderLineItem),
-    status = order.status
+    status = order.status,
+    totalPrice = order.totalPrice
 )

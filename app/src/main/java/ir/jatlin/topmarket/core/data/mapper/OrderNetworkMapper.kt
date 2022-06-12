@@ -10,12 +10,14 @@ import ir.jatlin.topmarket.core.network.model.order.OrderNetwork
 fun OrderNetwork.asOrderEntity() = OrderEntity(
     id = id,
     customerId = customerId,
-    status = status.asOrderStatusName()
+    status = status.asOrderStatusName(),
+    totalPrice = totalPrice
 )
 
 fun Order.asOrderNetwork() = OrderNetwork(
     id = id,
     customerId = customer.id,
     lineItems = orderItems.map(OrderLineItem::asOrderLineItemNetwork),
-    status = status.statusName
+    status = status.statusName,
+    totalPrice = totalPrice
 )

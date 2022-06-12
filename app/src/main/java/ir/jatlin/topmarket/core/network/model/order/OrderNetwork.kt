@@ -8,5 +8,7 @@ data class OrderNetwork(
     val lineItems: List<OrderLineItemNetwork>,
     @SerializedName("customer_id")
     val customerId: Int,
-    val status: String
+    val status: String,
+    @SerializedName("total")
+    val totalPrice: String
 )

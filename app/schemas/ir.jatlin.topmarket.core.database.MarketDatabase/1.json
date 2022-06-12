@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ba31e7c77c076f306b5bc97d3a03826e",
+    "identityHash": "f664319f7246e661f349d57c2dd708d7",
     "entities": [
       {
         "tableName": "customers",
@@ -66,7 +66,7 @@
       },
       {
         "tableName": "orders",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `customer_id` INTEGER NOT NULL, `status` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`customer_id`) REFERENCES `customers`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `customer_id` INTEGER NOT NULL, `status` TEXT NOT NULL, `total_price` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`customer_id`) REFERENCES `customers`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -83,6 +83,12 @@
           {
             "fieldPath": "status",
             "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalPrice",
+            "columnName": "total_price",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -203,7 +209,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba31e7c77c076f306b5bc97d3a03826e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f664319f7246e661f349d57c2dd708d7')"
     ]
   }
 }

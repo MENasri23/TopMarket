@@ -6,7 +6,8 @@ data class Order(
     val id: Int,
     val orderItems: List<OrderLineItem>,
     val customer: Customer,
-    val status: OrderStatus
+    val status: OrderStatus,
+    val totalPrice: String
 ) {
 
     companion object {
@@ -14,7 +15,8 @@ data class Order(
             id = 0,
             orderItems = listOf(),
             customer = Customer.Empty,
-            status = OrderStatus.Pending
+            status = OrderStatus.Pending,
+            totalPrice = ""
         )
     }
 }

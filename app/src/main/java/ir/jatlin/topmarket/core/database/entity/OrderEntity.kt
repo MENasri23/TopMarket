@@ -23,5 +23,7 @@ data class OrderEntity(
     val id: Int,
     @ColumnInfo(name = "customer_id")
     val customerId: Int,
-    val status: OrderStatus
+    val status: OrderStatus,
+    @ColumnInfo(name = "total_price")
+    val totalPrice: String
 )
