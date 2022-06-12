@@ -20,7 +20,8 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     }
 
     private fun initViews() {
-        binding.cartOrderItems
+
+
     }
 
     private fun collectUiStates() {

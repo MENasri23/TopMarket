@@ -7,13 +7,9 @@ data class NetworkCategoryDetails(
     @SerializedName("count")
     val productCount: Int,
     val description: String,
-    val display: String, // default, products, subcategories
     val id: Int,
     val image: NetworkImage?,
-    @SerializedName("menu_order")
-    val menuOrder: Int,
     val name: String,
     @SerializedName("parent")
-    val parentId: Int,
-    val slug: String
+    val parentId: Int
 )

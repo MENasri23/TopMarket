@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.core.network.model.order
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import ir.jatlin.topmarket.core.network.serialization.ExcludeInSerialization
 
