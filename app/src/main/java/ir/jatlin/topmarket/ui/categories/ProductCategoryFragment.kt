@@ -2,18 +2,19 @@ package ir.jatlin.topmarket.ui.categories
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.databinding.FragmentProductCategoryBinding
 import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
-import ir.jatlin.topmarket.ui.util.*
+import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.safeCollect
+import ir.jatlin.topmarket.ui.util.showErrorMessage
+import ir.jatlin.topmarket.ui.util.viewBinding
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -64,7 +65,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
                         val parentName = entry.key?.name ?: return@mapNotNull null
                         CategoryDisplayItem.ProductCategoryGroupItem(
                             label = parentName,
-                            categories = entry.value.map(NetworkCategoryDetails::asCategoryItem)
+                            categories = entry.value.map(CategoryDetails::asCategoryItem)
                         )
                     }
                 loadStateViewModel.stopLoading()

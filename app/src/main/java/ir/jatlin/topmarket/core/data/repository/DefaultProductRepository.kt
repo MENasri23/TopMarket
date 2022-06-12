@@ -1,9 +1,11 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.data.mapper.asCategoryDetails
 import ir.jatlin.topmarket.core.data.mapper.asProduct
 import ir.jatlin.topmarket.core.data.mapper.asProductDetails
 import ir.jatlin.topmarket.core.data.mapper.asProductPreview
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.model.product.ProductReview
@@ -48,9 +50,12 @@ class DefaultProductRepository @Inject constructor(
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): Flow<List<NetworkCategoryDetails>> {
+    ): Flow<List<CategoryDetails>> {
         return flow {
-            emit(remoteDataSource.getProductCategories(page, pageSize, filters))
+            emit(
+                remoteDataSource.getProductCategories(page, pageSize, filters)
+                    .map(NetworkCategoryDetails::asCategoryDetails)
+            )
         }
     }
 

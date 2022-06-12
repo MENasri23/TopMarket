@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.model.product.ProductReview
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
@@ -28,7 +28,7 @@ interface ProductRepository {
         page: Int,
         pageSize: Int?,
         filters: Map<String, String>?
-    ): Flow<List<NetworkCategoryDetails>>
+    ): Flow<List<CategoryDetails>>
 
     suspend fun getProductReviews(
         filters: Map<String, String>?

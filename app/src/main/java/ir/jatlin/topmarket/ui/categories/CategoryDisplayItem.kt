@@ -1,7 +1,6 @@
 package ir.jatlin.topmarket.ui.categories
 
-import androidx.annotation.StringRes
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import java.util.*
 
 /**
@@ -23,12 +22,12 @@ sealed interface CategoryDisplayItem {
 sealed interface ProductCategoryDisplayItem {
     val id: Int
 
-    class CategoryItem(val data: NetworkCategoryDetails) : ProductCategoryDisplayItem {
+    class CategoryItem(val data: CategoryDetails) : ProductCategoryDisplayItem {
         override val id: Int
             get() = data.id
     }
 
 }
 
-fun NetworkCategoryDetails.asCategoryItem() =
+fun CategoryDetails.asCategoryItem() =
     ProductCategoryDisplayItem.CategoryItem(this)
