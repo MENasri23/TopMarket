@@ -116,6 +116,7 @@
     <string name="in_stock">موجود در انبار دیجی‌کالا</string>
     <string name="cart_discount">%d تومان تخفیف</string>
     <string name="save_in_next_order">ذخیره در لیست خرید بعدی</string>
+    <string name="continue_purchase">ادامه فرآیند خرید</string>
 
 
     <!-- collapsable discount card -->

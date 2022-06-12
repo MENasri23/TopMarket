@@ -1,265 +1,430 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/itemBackgroundColor"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <data>
+
+        <variable
+            name="cartViewModel"
+            type="ir.jatlin.topmarket.ui.purchase.cart.CartViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/itemBackgroundColor"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/sale_detail_container"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-            <FrameLayout
-                android:id="@+id/register_item_container"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorSurface"
-                android:clipToPadding="false"
-                android:padding="@dimen/space_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <include
-                    android:id="@+id/include_register_item_view"
-                    layout="@layout/purchase_register_item_view" />
-
-            </FrameLayout>
+                android:layout_height="match_parent"
+                android:clipToPadding="false">
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cart_order_items_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_very_small"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/register_item_container"
-                app:strokeWidth="0dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/cart_order_items"
+                <FrameLayout
+                    android:id="@+id/register_item_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/colorSurface"
                     android:clipToPadding="false"
-                    android:paddingVertical="@dimen/space_medium"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/product_review_item_view" />
+                    android:padding="@dimen/space_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <include
+                        android:id="@+id/include_register_item_view"
+                        layout="@layout/purchase_register_item_view" />
 
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/deliver_free_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:padding="@dimen/space_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cart_order_items_container">
-
-                <include
-                    android:id="@+id/include_deliver_free"
-                    layout="@layout/layout_free_send"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cart_order_items_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_very_small"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="@dimen/cardview_default_elevation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/register_item_container"
+                    app:strokeWidth="0dp">
 
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cart_purchase_overview_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="@dimen/cardview_default_elevation"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deliver_free_container"
-                app:strokeWidth="0dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/space_medium">
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/purchase_overview"
-                        style="@style/TextAppearance.MarketApp.TitleMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/purchase_overview"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/purchase_product_count"
-                        style="@style/TextAppearance.MarketApp.BodySmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="@string/purchase_product_count"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="3 کالا" />
-
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/total_price_container"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cart_order_items"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_medium"
-                        android:orientation="horizontal"
-                        android:paddingVertical="@dimen/space_small"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/purchase_overview">
+                        android:background="?attr/colorSurface"
+                        android:clipToPadding="false"
+                        android:paddingVertical="@dimen/space_medium"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/layout_order_item_view" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <FrameLayout
+                    android:id="@+id/deliver_free_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:padding="@dimen/space_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cart_order_items_container">
+
+                    <include
+                        android:id="@+id/include_deliver_free"
+                        layout="@layout/layout_free_send"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cart_purchase_overview_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="@dimen/cardview_default_elevation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/deliver_free_container"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/space_medium">
 
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/total_price_value"
+                            android:id="@+id/purchase_overview"
+                            style="@style/TextAppearance.MarketApp.TitleMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/purchase_overview"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/purchase_product_count"
                             style="@style/TextAppearance.MarketApp.BodySmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_toman"
-                            android:drawablePadding="@dimen/space_very_small"
-                            android:gravity="start"
+                            android:layout_gravity="start"
                             android:text="@string/purchase_product_count"
-                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="4,000,000" />
+                            tools:text="3 کالا" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/purchase_total_price"
-                            style="@style/TextAppearance.MarketApp.BodySmall"
-                            android:layout_width="wrap_content"
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/total_price_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="@string/total_price"
+                            android:layout_marginTop="@dimen/space_medium"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/space_small"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/purchase_overview">
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/discount_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingVertical="@dimen/space_small"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/total_price_container">
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/total_price_value"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_toman"
+                                android:drawablePadding="@dimen/space_very_small"
+                                android:gravity="start"
+                                android:text="@string/purchase_product_count"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="4,000,000" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/total_discount_value"
-                            style="@style/TextAppearance.MarketApp.BodySmall"
-                            android:layout_width="wrap_content"
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/purchase_total_price"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:text="@string/total_price"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/discount_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_toman_red"
-                            android:drawablePadding="@dimen/space_very_small"
-                            android:gravity="start"
-                            android:text="@string/total_discount_value"
-                            android:textColor="?attr/colorPrimary"
-                            android:textStyle="bold"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/space_small"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="400,000" />
+                            app:layout_constraintTop_toBottomOf="@id/total_price_container">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/total_discount"
-                            style="@style/TextAppearance.MarketApp.BodySmall"
-                            android:layout_width="wrap_content"
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/total_discount_value"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_toman_red"
+                                android:drawablePadding="@dimen/space_very_small"
+                                android:gravity="start"
+                                android:text="@string/total_discount_value"
+                                android:textColor="?attr/colorPrimary"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="400,000" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/total_discount"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:text="@string/total_discount"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/collapsable_discount_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="@string/total_discount"
+                            android:clipToPadding="false"
+                            app:layout_constraintBottom_toTopOf="@id/purchase_sum_container"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/discount_container">
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/purchase_sum_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingVertical="@dimen/space_small"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/discount_container">
+                            <ImageView
+                                android:id="@+id/discount_expand_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_baseline_expand_more_24"
+                                app:layout_constraintBottom_toBottomOf="@id/discount_title"
+                                app:layout_constraintEnd_toStartOf="@+id/discount_title"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/discount_title" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/purchase_sum_value"
-                            style="@style/TextAppearance.MarketApp.BodySmall"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/discount_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:paddingTop="@dimen/space_very_small"
+                                android:paddingBottom="@dimen/space_very_small"
+                                android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/discount_expand_icon"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="@string/discount_title" />
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/discount_layout_enter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/space_small"
+                                android:hint="@string/type_discount_value"
+                                app:layout_constraintEnd_toStartOf="@id/discount_apply"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/discount_title">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/discount_enter"
+                                    style="@style/Widget.Market.TextInputEditText.OutlinedBox.Discount"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/discount_apply"
+                                style="@style/Widget.Market.DiscountButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="@string/apply_discount"
+                                app:cornerRadius="@dimen/space_very_small"
+                                app:layout_constraintBottom_toBottomOf="@id/discount_layout_enter"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/discount_title"
+                                app:layout_constraintTop_toTopOf="@id/discount_layout_enter" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/purchase_sum_container"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawableStart="@drawable/ic_toman_red"
-                            android:drawablePadding="@dimen/space_very_small"
-                            android:gravity="start"
-                            android:textColor="?attr/colorPrimary"
-                            android:textStyle="bold"
+                            android:orientation="horizontal"
+                            android:paddingVertical="@dimen/space_small"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="400,000" />
+                            app:layout_constraintTop_toBottomOf="@id/collapsable_discount_container">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/purchase_sum"
-                            style="@style/TextAppearance.MarketApp.BodySmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text="@string/purchase_sum"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/purchase_sum_value"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/ic_toman_red"
+                                android:drawablePadding="@dimen/space_very_small"
+                                android:gravity="start"
+                                android:textColor="?attr/colorPrimary"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="400,000" />
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/purchase_sum"
+                                style="@style/TextAppearance.MarketApp.BodySmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:text="@string/purchase_sum"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/purchase_warning"
-                style="@style/TextAppearance.MarketApp.TitleMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/space_medium"
-                android:layout_marginVertical="@dimen/space_medium"
-                android:drawableEnd="@drawable/ic_warning"
-                android:drawablePadding="@dimen/space_small"
-                android:text="@string/purchase_warning"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cart_purchase_overview_container" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/purchase_warning"
+                    style="@style/TextAppearance.MarketApp.TitleMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_medium"
+                    android:layout_marginVertical="@dimen/space_medium"
+                    android:drawableEnd="@drawable/ic_warning"
+                    android:drawablePadding="@dimen/space_small"
+                    android:text="@string/purchase_warning"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cart_purchase_overview_container" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/sale_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="@dimen/space_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/final_price_sum"
+                    style="@style/TextAppearance.MarketApp.BodySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/purchase_sum"
+                    app:layout_constraintBottom_toTopOf="@id/final_price_sum_value"
+                    app:layout_constraintStart_toStartOf="@id/final_price_sum_value"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/final_price_sum_value"
+                    style="@style/TextAppearance.MarketApp.TitleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_medium"
+                    android:drawablePadding="@dimen/space_very_small"
+                    android:gravity="center_vertical"
+                    app:drawableStartCompat="@drawable/ic_toman"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/continue_purchase"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/final_price_sum"
+                    tools:text="20,000" />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/cart_purchase_button_background"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?attr/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="@id/continue_purchase"
+                    app:layout_constraintEnd_toEndOf="@id/continue_purchase"
+                    app:layout_constraintStart_toStartOf="@id/continue_purchase"
+                    app:layout_constraintTop_toTopOf="@id/continue_purchase"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/continue_purchase"
+                    style="@style/TextAppearance.MarketApp.TitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/space_small"
+                    android:layout_marginEnd="@dimen/space_medium"
+                    android:drawablePadding="@dimen/space_very_small"
+                    android:paddingHorizontal="@dimen/space_medium"
+                    android:paddingVertical="@dimen/cart_button_vertical_padding"
+                    android:stateListAnimator="@animator/smooth_fading"
+                    android:text="@string/continue_purchase"
+                    android:textColor="?attr/colorOnPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/final_price_sum_value"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
