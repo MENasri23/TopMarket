@@ -20,6 +20,17 @@ inline fun <T> ViewModel.stateFlow(
     )
 }
 
+inline fun <T> ViewModel.stateFlow(
+    initialValue: T,
+    crossinline getValue: () -> Flow<T>
+): StateFlow<T> {
+    return getValue().stateIn(
+        scope = viewModelScope,
+        initialValue = initialValue,
+        started = SharingStarted.WhileSubscribed(5000L)
+    )
+}
+
 fun Job?.cancelIfAlive() {
     if (this?.isActive == true) cancel()
 }
