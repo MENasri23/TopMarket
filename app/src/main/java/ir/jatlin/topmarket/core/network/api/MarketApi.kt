@@ -79,7 +79,7 @@ interface MarketApi {
 
 
     @GET(Route.COUPONS)
-    suspend fun getCoupon(code: String): Response<List<CouponNetwork>>
+    suspend fun getCoupon(@Query("code") code: String): Response<List<CouponNetwork>>
 
     private object Route {
         private const val PREFIX = "/wp-json/wc/v3"
