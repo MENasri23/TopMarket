@@ -1,6 +1,7 @@
 package ir.jatlin.topmarket.core.network.api
 
 import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
+import ir.jatlin.topmarket.core.network.model.coupon.CouponNetwork
 import ir.jatlin.topmarket.core.network.model.order.OrderNetwork
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
@@ -76,6 +77,10 @@ interface MarketApi {
         @QueryMap filters: Map<String, String>?
     ): Response<List<ProductReviewNetwork>>
 
+
+    @GET(Route.COUPONS)
+    suspend fun getCoupon(code: String): Response<List<CouponNetwork>>
+
     private object Route {
         private const val PREFIX = "/wp-json/wc/v3"
         const val PRODUCT_DETAILS = "$PREFIX/products/{id}"
@@ -92,6 +97,9 @@ interface MarketApi {
 
         /* Reviews */
         const val REVIEWS = "$PREFIX/products/reviews"
+
+        /* Coupons */
+        const val COUPONS = "$PREFIX/coupons"
     }
 
     private object PARAMS {

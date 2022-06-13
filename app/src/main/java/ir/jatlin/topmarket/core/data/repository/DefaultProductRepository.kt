@@ -20,8 +20,8 @@ class DefaultProductRepository @Inject constructor(
     private val remoteDataSource: ProductRemoteDataSource
 ) : ProductRepository {
 
-    override suspend fun findProductDetailsById(id: Int): ProductDetails? {
-        return remoteDataSource.findProductDetailsById(id)?.asProductDetails()
+    override suspend fun findProductDetailsById(id: Int): ProductDetails {
+        return remoteDataSource.findProductDetailsById(id).asProductDetails()
     }
 
     override fun getProductsListStream(

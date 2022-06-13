@@ -10,7 +10,7 @@ interface ProductRepository {
     // TODO: Change return types of its method to external model
     suspend fun findProductDetailsById(
         id: Int
-    ): ProductDetails?
+    ): ProductDetails
 
     fun getProductsListStream(
         page: Int,

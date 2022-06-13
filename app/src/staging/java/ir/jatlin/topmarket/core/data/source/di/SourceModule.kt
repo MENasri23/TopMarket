@@ -6,12 +6,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.jatlin.topmarket.core.data.source.local.customer.CustomerDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.local.customer.CustomerLocalDataSource
-import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
-import ir.jatlin.topmarket.core.data.source.remote.product.ProductRetrofitDataSource
+import ir.jatlin.topmarket.core.data.source.remote.coupon.CouponRemoteDataSource
+import ir.jatlin.topmarket.core.data.source.remote.coupon.CouponRetrofitDataSource
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRemoteDataSource
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRetrofitDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRetrofitDataSource
+import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
+import ir.jatlin.topmarket.core.data.source.remote.product.ProductRetrofitDataSource
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,4 +38,9 @@ interface SourceModule {
     fun bindsCustomerLocalDataSource(
         localDataSource: CustomerDatabaseDataSource
     ): CustomerLocalDataSource
+
+    @Binds
+    fun bindsCouponRemoteDataSource(
+        remoteDataSource: CouponRetrofitDataSource
+    ): CouponRemoteDataSource
 }

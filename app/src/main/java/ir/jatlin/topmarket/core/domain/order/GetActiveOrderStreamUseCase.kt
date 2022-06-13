@@ -3,7 +3,6 @@ package ir.jatlin.topmarket.core.domain.order
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.order.OrderRepository
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
-import ir.jatlin.topmarket.core.data.source.remote.NetworkException
 import ir.jatlin.topmarket.core.domain.FlowUseCase
 import ir.jatlin.topmarket.core.model.order.Order
 import ir.jatlin.topmarket.core.model.purchase.PurchasePrefsInfo
@@ -13,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetActiveOrderUseCase @Inject constructor(
+class GetActiveOrderStreamUseCase @Inject constructor(
     private val orderRepository: OrderRepository,
     private val marketPreferences: MarketPreferences,
     errorHandler: ErrorHandler,
