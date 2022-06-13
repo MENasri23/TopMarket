@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentHomeBinding
 import ir.jatlin.topmarket.ui.home.slider.SpecialProductGroupViewHolder
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayGroupEventListener
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.util.*
@@ -22,7 +22,7 @@ class HomeFragment :
     ProductDisplayGroupEventListener,
     ProductItemEventListener,
     SpecialProductGroupViewHolder.EventListener {
-    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
+    private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)
 

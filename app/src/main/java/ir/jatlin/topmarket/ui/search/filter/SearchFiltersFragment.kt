@@ -7,9 +7,6 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,9 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSearchFiltersBinding
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.product.preview.ProductPreviewAdapter
-import ir.jatlin.topmarket.ui.search.SearchFragmentDirections
 import ir.jatlin.topmarket.ui.search.SearchViewModel
 import ir.jatlin.topmarket.ui.util.*
 import kotlinx.coroutines.launch
@@ -28,7 +24,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
 
-    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
+    private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
     private val searchViewModel by hiltNavGraphViewModels<SearchViewModel>(R.id.search_graph)
 
     private val binding by viewBinding(FragmentSearchFiltersBinding::bind)

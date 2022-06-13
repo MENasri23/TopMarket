@@ -8,7 +8,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class LoadSateViewModel @Inject constructor(
+class LoadStateViewModel @Inject constructor(
 ) : ViewModel() {
 
 

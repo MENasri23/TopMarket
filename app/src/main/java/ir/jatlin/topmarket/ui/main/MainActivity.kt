@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.ActivityMainBinding
 import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.theme.ThemeViewModel
 import ir.jatlin.topmarket.ui.util.updateTheme
 import kotlinx.coroutines.flow.collectLatest
@@ -30,7 +30,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
-    private val loadingViewModel by viewModels<LoadSateViewModel>()
+    private val loadingViewModel by viewModels<LoadStateViewModel>()
     private val themeViewModel by viewModels<ThemeViewModel>()
 
     private lateinit var navController: NavController

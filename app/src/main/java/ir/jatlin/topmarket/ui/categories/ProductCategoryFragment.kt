@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.databinding.FragmentProductCategoryBinding
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
 import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.showErrorMessage
@@ -23,7 +23,7 @@ class ProductCategoryFragment : Fragment(R.layout.fragment_product_category),
     ProductCategoryDisplayItemEventListener,
     ProductCategoryDisplayGroupItemEventListener {
 
-    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
+    private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
 
     private val viewModel by viewModels<ProductCategoryViewModel>()
     private val binding by viewBinding(FragmentProductCategoryBinding::bind)

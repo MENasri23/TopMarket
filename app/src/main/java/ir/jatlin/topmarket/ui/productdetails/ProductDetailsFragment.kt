@@ -15,7 +15,7 @@ import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
-import ir.jatlin.topmarket.ui.loading.LoadSateViewModel
+import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayAdapter
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.product.asProductItem
@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 class ProductDetailsFragment : Fragment(R.layout.fragment_product_details),
     ProductItemEventListener {
 
-    private val loadStateViewModel by activityViewModels<LoadSateViewModel>()
+    private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
     private val viewModel by viewModels<ProductDetailsViewModel>()
     private val binding by dataBindings(FragmentProductDetailsBinding::bind)
 
