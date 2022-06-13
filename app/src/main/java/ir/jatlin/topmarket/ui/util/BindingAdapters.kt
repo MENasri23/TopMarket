@@ -44,13 +44,13 @@ fun View.invisilbeWhile(isInvisible: Boolean) {
     value = ["price", "separator"], requireAll = false
 )
 fun TextView.setTextWithSeparator(price: String?, separator: String?) {
-    text = withSeparator(price ?: return, separator = separator ?: ",")
+    text = price?.withSeparator(separator = separator ?: ",") ?: ""
 }
 
-fun withSeparator(
-    origin: String,
+fun String.withSeparator(
     separator: String = ","
 ) = buildString {
+    val origin = this@withSeparator
     var i = origin.lastIndex
     while (i > 2) {
         append(origin[i--])

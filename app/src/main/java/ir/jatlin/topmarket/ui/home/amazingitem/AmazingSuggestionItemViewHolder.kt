@@ -33,7 +33,7 @@ class AmazingSuggestionItemViewHolder(
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
         if (price.isNotBlank()) {
-            productPrice.text = withSeparator(price)
+            productPrice.text = price.withSeparator()
         }
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,

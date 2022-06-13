@@ -41,7 +41,7 @@ class ProductViewHolder(
 
     private fun showPrice(regularPrice: String, price: String) = binding.apply {
         productPrice.isVisible = regularPrice.isNotBlank()
-        productPrice.text = withSeparator(price)
+        productPrice.text = price.withSeparator()
         productDiscount.setDiscount(
             beforeDiscount = regularPrice,
             afterDiscount = price
@@ -49,7 +49,7 @@ class ProductViewHolder(
         if (productDiscount.isVisible) {
             productDiscount.clipToRoundRect(true)
 
-            productRegularPrice.text = withSeparator(regularPrice)
+            productRegularPrice.text = regularPrice.withSeparator()
             productRegularPrice.visible()
             productRegularPrice.paintFlags =
                 productRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

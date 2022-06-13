@@ -27,7 +27,7 @@ inline fun <T> ViewModel.stateFlow(
     return getValue().stateIn(
         scope = viewModelScope,
         initialValue = initialValue,
-        started = SharingStarted.WhileSubscribed(5000L)
+        started = SharingStarted.Eagerly
     )
 }
 
