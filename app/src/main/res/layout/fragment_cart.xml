@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/colorSurface"
                         android:clipToPadding="false"
-                        android:paddingVertical="@dimen/space_medium"
+                        android:paddingTop="@dimen/space_medium"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="2"
                         tools:listitem="@layout/layout_cart_product_item_view" />
@@ -123,7 +123,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:text="@string/purchase_product_count"
+                            android:text="@{@string/purchase_product_count(cartViewModel.orderItemsCount)}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="3 کالا" />
@@ -144,6 +144,7 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/total_price_value"
                                 style="@style/TextAppearance.MarketApp.BodySmall"
+                                price="@{cartViewModel.activeOrder.totalPrice}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -151,7 +152,6 @@
                                 android:drawableStart="@drawable/ic_toman"
                                 android:drawablePadding="@dimen/space_very_small"
                                 android:gravity="start"
-                                android:text="@string/purchase_product_count"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -176,6 +176,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:paddingVertical="@dimen/space_small"
+                            goneWhile='@{cartViewModel.sumOfDiscounts == null}'
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/total_price_container">
@@ -190,11 +191,11 @@
                                 android:drawableStart="@drawable/ic_toman_red"
                                 android:drawablePadding="@dimen/space_very_small"
                                 android:gravity="start"
-                                android:text="@string/total_discount_value"
                                 android:textColor="?attr/colorPrimary"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:price="@{cartViewModel.sumOfDiscounts}"
                                 tools:text="400,000" />
 
                             <com.google.android.material.textview.MaterialTextView
@@ -242,9 +243,9 @@
                                 android:layout_weight="1"
                                 android:paddingTop="@dimen/space_very_small"
                                 android:paddingBottom="@dimen/space_very_small"
+                                android:text="@string/discount_title"
                                 android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
                                 android:textStyle="bold"
-                                android:text="@string/discount_title"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toEndOf="@+id/discount_expand_icon"
@@ -298,14 +299,14 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/purchase_sum_value"
                                 style="@style/TextAppearance.MarketApp.BodySmall"
+                                price="@{cartViewModel.totalPrice}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
-                                android:drawableStart="@drawable/ic_toman_red"
+                                android:drawableStart="@drawable/ic_toman"
                                 android:drawablePadding="@dimen/space_very_small"
                                 android:gravity="start"
-                                android:textColor="?attr/colorPrimary"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -377,6 +378,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/final_price_sum_value"
                     style="@style/TextAppearance.MarketApp.TitleLarge"
+                    price="@{cartViewModel.totalPrice}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_medium"
@@ -405,7 +407,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/continue_purchase"
-                    style="@style/TextAppearance.MarketApp.TitleMedium"
+                    style="@style/TextAppearance.MarketApp.TitleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/space_small"

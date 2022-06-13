@@ -6,7 +6,7 @@ data class CartProduct(
     val weight: String,
     val orderLineId: Int,
     val quantity: Int,
-    val totalPrice: String,
-    val regularPrice: String,
+    val totalPrice: Int,
+    val regularPrice: Int,
     val url: String?
 )

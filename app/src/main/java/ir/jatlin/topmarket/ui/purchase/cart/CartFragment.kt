@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentCartBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
+import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
-import ir.jatlin.topmarket.ui.util.viewBinding
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -20,7 +20,7 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
 
     private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
     private val viewModel by viewModels<CartViewModel>()
-    private val binding by viewBinding(FragmentCartBinding::bind)
+    private val binding by dataBindings(FragmentCartBinding::bind)
 
     private lateinit var cartProductAdapter: CartProductAdapter
 
@@ -31,9 +31,9 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
     }
 
     private fun initViews() {
+        binding.cartViewModel = viewModel
 
         cartProductAdapter = CartProductAdapter()
-
         binding.cartOrderItems.apply {
             adapter = cartProductAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

@@ -7,6 +7,7 @@ import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
+import timber.log.Timber
 import javax.inject.Inject
 
 class GetCartProductListUseCase @Inject constructor(
@@ -24,10 +25,17 @@ class GetCartProductListUseCase @Inject constructor(
                 weight = product.weight,
                 orderLineId = orderLineItem.id,
                 quantity = orderLineItem.quantity,
-                totalPrice = orderLineItem.totalPrice,
-                regularPrice = product.regularPrice,
+                totalPrice = parsePrice(orderLineItem.totalPrice),
+                regularPrice = parsePrice(product.regularPrice),
                 url = product.images.firstOrNull()?.url
             )
         }
+    }
+
+    fun parsePrice(price: String): Int = try {
+        price.toInt().coerceAtLeast(0)
+    } catch (e: NumberFormatException) {
+        Timber.d("Invalid fromat for price number: $price")
+        0
     }
 }

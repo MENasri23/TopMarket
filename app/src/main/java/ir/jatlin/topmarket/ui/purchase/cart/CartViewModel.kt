@@ -39,31 +39,49 @@ class CartViewModel @Inject constructor(
     val discountMessage = _discountMessage.asStateFlow()
 
     private val _activeOrder = MutableStateFlow<Order?>(null)
-    private val activeOrder = _activeOrder.asStateFlow()
+    val activeOrder = _activeOrder.asStateFlow()
 
     private val _coupon = MutableStateFlow<Coupon?>(null)
     val coupon = _coupon.asStateFlow()
 
     val cartProductItems = activeOrder.map {
         it?.let {
-            CartProductItems(
+            CartProductsItem(
                 fetchCartProductListUseCase(it.orderItems)
                     .dataOnSuccessOr(null)
             )
         }
     }
 
-    val totalPrice = stateFlow(initialValue = null) {
-        activeOrder.combine(coupon) { order, coupon ->
-            if (order == null || coupon == null) return@combine null
-            val totalPrice = calculatePrice(order.totalPrice, coupon.amount)
-            totalPrice.takeIf { it > 0.0 }
+    val orderItemsCount = stateFlow(0) {
+        activeOrder.map { order ->
+            order?.orderItems?.sumOf { it.quantity }
         }
     }
+
+    val sumOfDiscounts = stateFlow(null) {
+        cartProductItems.map { cartProductItems ->
+            val products = cartProductItems?.products ?: return@map null
+
+            val sum = products.sumOf { it.regularPrice - it.totalPrice }
+            sum.takeIf { it > 0 }?.toString()
+        }
+    }
+
+
+    val totalPrice = stateFlow(initialValue = null) {
+        activeOrder.combine(coupon) { order, coupon ->
+            if (order == null) return@combine null
+            val totalPrice = calculatePrice(order.totalPrice, coupon?.amount)
+            String.format("%.0f", totalPrice)
+        }
+    }
+
 
     init {
         fetchActiveOrder()
     }
+
 
     private fun fetchActiveOrder() {
         viewModelScope.launch {
@@ -73,10 +91,12 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    private fun calculatePrice(regularPrice: String, discount: String): Double {
+    private fun calculatePrice(regularPrice: String, discount: String?): Double {
         return try {
             val price = regularPrice.toLong()
-            floor((1 - discount.toDouble() / 100) * price)
+            if (discount != null) {
+                floor((1 - discount.toDouble() / 100) * price)
+            } else price.toDouble()
         } catch (e: NumberFormatException) {
             Timber.d("The total price can't be obtained from price:$regularPrice, discount:$discount")
             0.0
@@ -101,16 +121,16 @@ class CartViewModel @Inject constructor(
     }
 
 
-    fun onApplyDiscount(code: String) {
-        if (code.isBlank()) {
+    fun onApplyDiscount(code: String?) {
+        if (code.isNullOrBlank()) {
             return
         }
         viewModelScope.launch {
-            _coupon.emit(getCouponByCodeUseCase(code).dataOnSuccessOr(null))
+            _coupon.emit(getCouponByCodeUseCase(code.trim()).dataOnSuccessOr(null))
         }
     }
 }
 
-data class CartProductItems(
+data class CartProductsItem(
     val products: List<CartProduct>?
 )
