@@ -6,10 +6,10 @@ import ir.jatlin.topmarket.core.data.mapper.asOrderNetwork
 import ir.jatlin.topmarket.core.data.repository.orderlineitem.OrderLineItemRepository
 import ir.jatlin.topmarket.core.data.source.local.order.OrderDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
-import ir.jatlin.topmarket.core.database.entity.OrderWithOrderItems
 import ir.jatlin.topmarket.core.database.entity.asOrder
 import ir.jatlin.topmarket.core.model.order.Order
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -73,8 +73,10 @@ class DefaultOrderRepository @Inject constructor(
         return getOrderOrThrow(id)
     }
 
-    override fun getOrderStream(orderId: Int): Flow<OrderWithOrderItems?> {
-        return localDataSource.findOrderByIdStream(orderId)
+    override fun getOrderStream(orderId: Int): Flow<Order?> {
+        return localDataSource
+            .findOrderByIdStream(orderId)
+            .map { it?.asOrder() }
     }
 
     private fun getOrderOrThrow(orderId: Int) =

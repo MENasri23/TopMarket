@@ -9,7 +9,9 @@ import ir.jatlin.topmarket.core.model.purchase.PurchasePrefsInfo
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetActiveOrderStreamUseCase @Inject constructor(
@@ -20,10 +22,15 @@ class GetActiveOrderStreamUseCase @Inject constructor(
 ) : FlowUseCase<Unit, Order?>(errorHandler, dispatcher) {
 
     override fun execute(params: Unit): Flow<Order?> {
-        return marketPreferences.purchasePreferencesStream.map {
-            if (it.activeOrderId != PurchasePrefsInfo.NO_ACTIVE_ORDER) {
-                orderRepository.findOrderById(it.activeOrderId)
-            } else null
+        return flow {
+            val activeOrderId = marketPreferences
+                .purchasePreferencesStream
+                .firstOrNull()?.activeOrderId ?: return@flow
+
+            if (activeOrderId != PurchasePrefsInfo.NO_ACTIVE_ORDER) {
+                emitAll(orderRepository.getOrderStream(activeOrderId))
+            } else emit(null)
         }
+
     }
 }

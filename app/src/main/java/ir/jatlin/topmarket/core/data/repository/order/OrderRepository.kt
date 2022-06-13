@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.core.data.repository.order
 
-import ir.jatlin.topmarket.core.database.entity.OrderWithOrderItems
 import ir.jatlin.topmarket.core.model.order.Order
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +13,6 @@ interface OrderRepository {
 
     suspend fun updateOrder(order: Order): Order
 
-    fun getOrderStream(orderId: Int): Flow<OrderWithOrderItems?>
+    fun getOrderStream(orderId: Int): Flow<Order?>
 
 }
