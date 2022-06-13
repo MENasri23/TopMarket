@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:background="?attr/itemBackgroundColor"
         android:orientation="vertical">
 
@@ -243,11 +244,11 @@
                                 android:paddingBottom="@dimen/space_very_small"
                                 android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
                                 android:textStyle="bold"
+                                android:text="@string/discount_title"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toEndOf="@+id/discount_expand_icon"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:text="@string/discount_title" />
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
                             <com.google.android.material.textfield.TextInputLayout

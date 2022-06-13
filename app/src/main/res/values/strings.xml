@@ -123,5 +123,6 @@
     <string name="discount_title">کد تخفیف</string>
     <string name="apply_discount">اعمال کد تخفیف</string>
     <string name="type_discount_value">کد تخفیف را وارد کنید…</string>
+    <string name="cart">سبد خرید</string>
 
 </resources>

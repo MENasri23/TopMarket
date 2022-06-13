@@ -44,14 +44,12 @@ class CartViewModel @Inject constructor(
     private val _coupon = MutableStateFlow<Coupon?>(null)
     val coupon = _coupon.asStateFlow()
 
-    val cartProductItems = stateFlow(null) {
-        activeOrder.map {
-            it?.let {
-                CartProductItems(
-                    fetchCartProductListUseCase(it.orderItems)
-                        .dataOnSuccessOr(null)
-                )
-            }
+    val cartProductItems = activeOrder.map {
+        it?.let {
+            CartProductItems(
+                fetchCartProductListUseCase(it.orderItems)
+                    .dataOnSuccessOr(null)
+            )
         }
     }
 
@@ -87,6 +85,7 @@ class CartViewModel @Inject constructor(
     }
 
     private fun processActiveOrderResult(result: Resource<Order?>) {
+        Timber.d("$result")
         when (result) {
             is Resource.Error -> _errorCause.value = result.cause
             is Resource.Loading -> _loading.value = true

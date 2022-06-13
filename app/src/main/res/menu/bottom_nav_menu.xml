@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/cartFragment"
+        android:contentDescription="@string/cart"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/cart" />
+
+    <item
         android:id="@+id/productCategoryFragment"
         android:contentDescription="@string/categories"
         android:enabled="true"
