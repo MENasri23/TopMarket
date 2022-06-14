@@ -172,11 +172,11 @@
 
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/discount_container"
+                            goneWhile='@{cartViewModel.sumOfDiscounts == null}'
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:paddingVertical="@dimen/space_small"
-                            goneWhile='@{cartViewModel.sumOfDiscounts == null}'
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/total_price_container">
@@ -241,8 +241,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingTop="@dimen/space_very_small"
-                                android:paddingBottom="@dimen/space_very_small"
+                                android:paddingVertical="@dimen/space_small"
                                 android:text="@string/discount_title"
                                 android:textAppearance="@style/TextAppearance.MarketApp.BodySmall"
                                 android:textStyle="bold"
@@ -252,37 +251,46 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/discount_layout_enter"
-                                android:layout_width="0dp"
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/collapsable_discount_body_container"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/space_small"
-                                android:hint="@string/type_discount_value"
-                                app:layout_constraintEnd_toStartOf="@id/discount_apply"
+                                android:paddingBottom="@dimen/space_small"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/discount_title">
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/discount_enter"
-                                    style="@style/Widget.Market.TextInputEditText.OutlinedBox.Discount"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/discount_layout_enter"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/space_small"
+                                    android:layout_weight="1"
+                                    android:hint="@string/type_discount_value"
+                                    app:layout_constraintEnd_toStartOf="@id/discount_apply"
+                                    app:layout_constraintStart_toStartOf="parent">
 
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/discount_enter"
+                                        style="@style/Widget.Market.TextInputEditText.OutlinedBox.Discount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        tools:ignore="TooDeepLayout" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <com.google.android.material.button.MaterialButton
-                                android:id="@+id/discount_apply"
-                                style="@style/Widget.Market.DiscountButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="0dp"
-                                android:layout_gravity="center_vertical"
-                                android:text="@string/apply_discount"
-                                app:cornerRadius="@dimen/space_very_small"
-                                app:layout_constraintBottom_toBottomOf="@id/discount_layout_enter"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/discount_title"
-                                app:layout_constraintTop_toTopOf="@id/discount_layout_enter" />
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/discount_apply"
+                                    style="@style/Widget.Market.DiscountButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/apply_discount"
+                                    app:cornerRadius="@dimen/space_very_small" />
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

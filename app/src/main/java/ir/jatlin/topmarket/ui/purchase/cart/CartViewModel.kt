@@ -12,6 +12,7 @@ import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.ui.util.processResult
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,14 +45,20 @@ class CartViewModel @Inject constructor(
     private val _coupon = MutableStateFlow<Coupon?>(null)
     val coupon = _coupon.asStateFlow()
 
+    private val _discountExpanded = MutableStateFlow(false)
+    val discountExpanded = _discountExpanded.asStateFlow()
+
     val cartProductItems = activeOrder.map {
         it?.let {
+            startLoading()
             CartProductsItem(
                 fetchCartProductListUseCase(it.orderItems)
                     .dataOnSuccessOr(null)
-            )
+            ).also { stopLoading() }
+
         }
     }
+
 
     val orderItemsCount = stateFlow(0) {
         activeOrder.map { order ->
@@ -107,8 +114,11 @@ class CartViewModel @Inject constructor(
     private fun processActiveOrderResult(result: Resource<Order?>) {
         Timber.d("$result")
         when (result) {
-            is Resource.Error -> _errorCause.value = result.cause
-            is Resource.Loading -> _loading.value = true
+            is Resource.Error -> {
+                stopLoading()
+                _errorCause.value = result.cause
+            }
+            is Resource.Loading -> startLoading()
             is Resource.Success -> {
                 val order = result.data
                 if (order == null) {
@@ -120,14 +130,39 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    private fun processCouponResult(result: Resource<Coupon?>) {
+        Timber.d("coupon: $coupon")
+        result.processResult(
+            onError = { cause -> _errorCause.value = cause },
+            onLoading = { }
+        ) {
+            _coupon.value = it
+        }
+    }
 
-    fun onApplyDiscount(code: String?) {
+    private fun startLoading() {
+        _loading.value = true
+    }
+
+    private fun stopLoading() {
+        _loading.value = false
+    }
+
+
+    fun checkCouponCode(code: String?) {
+        Timber.d("coupon code: $code")
         if (code.isNullOrBlank()) {
             return
         }
         viewModelScope.launch {
-            _coupon.emit(getCouponByCodeUseCase(code.trim()).dataOnSuccessOr(null))
+            val coupon = getCouponByCodeUseCase(code.trim())
+            processCouponResult(coupon)
         }
+    }
+
+
+    fun onToggleDiscountExpand() {
+        _discountExpanded.value = !discountExpanded.value
     }
 }
 

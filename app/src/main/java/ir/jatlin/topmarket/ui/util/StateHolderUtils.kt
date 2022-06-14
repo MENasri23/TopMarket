@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.ui.util
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.shared.isSuccess
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,20 @@ inline fun <T> ViewModel.stateFlow(
         initialValue = initialValue,
         started = SharingStarted.Eagerly
     )
+}
+
+inline fun <T> Resource<T>.processResult(
+    crossinline onLoading: (T?) -> Unit = {},
+    crossinline onError: (cause: ErrorCause?) -> Unit = {},
+    crossinline onSuccess: (T?) -> Unit
+) {
+    when (this) {
+        is Resource.Loading -> onLoading(data)
+        is Resource.Error -> onError(cause)
+        else -> {
+            onSuccess(data)
+        }
+    }
 }
 
 fun Job?.cancelIfAlive() {
