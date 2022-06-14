@@ -50,7 +50,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         }
     }
 
-    fun collectUiStates() = repeatOnViewLifecycleOwner {
+    private fun collectUiStates() = repeatOnViewLifecycleOwner {
         launch {
             viewModel.error.collect {
                 it?.let { errorMsg ->
