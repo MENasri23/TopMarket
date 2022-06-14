@@ -59,7 +59,8 @@ class SearchViewModel @Inject constructor(
 
     private var prevSearchResult: SearchMatchedResult? = null
 
-    private var textQuery: String = ""
+    var textQuery: String = ""
+        private set
 
     private var searchJob: Job? = null
 
@@ -147,6 +148,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onSearchTextChanged(query: String?) {
+        Timber.d("onSearchTextChanged :$query")
         searchJob?.cancel()
 
         val search = query?.trim()

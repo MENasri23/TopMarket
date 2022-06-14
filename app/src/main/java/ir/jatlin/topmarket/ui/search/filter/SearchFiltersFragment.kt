@@ -36,19 +36,22 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val categoryId = args.categoryId
+        val includeIds = args.includeIds
+        searchViewModel.searchProductsWith(categoryId, includeIds)
+
         initViews()
         collectUiStates()
 
 
-        val categoryId = args.categoryId
-        val includeIds = args.includeIds
-        searchViewModel.searchProductsWith(categoryId, includeIds)
 
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    popBackStackToStartDestination()
+                    if (includeIds != null) {
+                        popBackStackToStartDestination()
+                    } else findNavController().popBackStack()
                 }
             }
         )
@@ -58,6 +61,10 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
     private fun initViews() = binding.apply {
 
         filterAppbar.apply {
+
+            if (searchViewModel.textQuery.isNotBlank()) {
+                tvSearch.text = searchViewModel.textQuery
+            }
 
             sortBy.setOnClickListener {
                 findNavController().navigate(R.id.sortingFragment)
