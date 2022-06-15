@@ -9,6 +9,8 @@ import ir.jatlin.topmarket.core.database.entity.asCustomer
 import ir.jatlin.topmarket.core.model.user.Customer
 import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import timber.log.Timber
@@ -44,6 +46,12 @@ class DefaultCustomerRepository @Inject constructor(
                 Timber.d("Invalid local customer id: $customerId")
                 null
             } else throw e
+        }
+    }
+
+    override fun findCustomerByIdStream(customerId: Int): Flow<Customer?> {
+        return localDataSource.findCustomerByIdStream(customerId).map {
+            it?.asCustomer()
         }
     }
 

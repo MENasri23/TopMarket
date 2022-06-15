@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
@@ -61,6 +62,14 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             toggleDiscountExpanded()
         }
 
+        binding.continuePurchase.setOnClickListener {
+            navigateToShippingScreen()
+        }
+
+    }
+
+    private fun navigateToShippingScreen() {
+        findNavController().navigate(CartFragmentDirections.toShippingFragment())
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {

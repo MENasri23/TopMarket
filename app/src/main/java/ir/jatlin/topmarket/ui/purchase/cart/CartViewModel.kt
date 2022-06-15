@@ -120,6 +120,7 @@ class CartViewModel @Inject constructor(
             }
             is Resource.Loading -> startLoading()
             is Resource.Success -> {
+                stopLoading()
                 val order = result.data
                 if (order == null) {
                     _errorCause.value = ErrorCause.NoContent

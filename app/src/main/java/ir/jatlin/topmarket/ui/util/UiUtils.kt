@@ -45,7 +45,7 @@ inline fun Fragment.repeatOnViewLifecycleOwner(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend CoroutineScope.() -> Unit
 ) {
-    viewLifecycleOwner.lifecycleScope.launch {
+    viewLifecycleOwner.lifecycleScope.launch() {
         viewLifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
             block()
         }

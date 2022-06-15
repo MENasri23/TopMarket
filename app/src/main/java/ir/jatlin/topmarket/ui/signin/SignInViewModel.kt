@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.domain.signin.*
+import ir.jatlin.topmarket.core.domain.signin.GetCurrentCustomerIdStreamUseCase
+import ir.jatlin.topmarket.core.domain.signin.IsValidEmailUseCase
+import ir.jatlin.topmarket.core.domain.signin.RegisterOrSignInCustomerUseCase
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,8 +22,8 @@ class SignInViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _currentCustomerId = MutableStateFlow<Int?>(null)
-    val currentCustomerId = _currentCustomerId.asStateFlow()
+    private val _sigendIn = MutableStateFlow(false)
+    val signedIn = _sigendIn.asStateFlow()
 
 
     private val _error = MutableStateFlow<Int?>(null)
@@ -30,7 +32,7 @@ class SignInViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             getCurrentCustomerIdStreamUseCase(Unit).collectLatest {
-                _currentCustomerId.value = it.dataOnSuccessOr(null)
+                _sigendIn.value = it.dataOnSuccessOr(null) != null
             }
         }
     }

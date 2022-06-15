@@ -116,7 +116,16 @@
         android:id="@+id/cartFragment"
         android:name="ir.jatlin.topmarket.ui.purchase.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/to_shippingFragment"
+            app:destination="@id/shippingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shippingFragment"
+        android:name="ir.jatlin.topmarket.ui.purchase.shipping.ShippingFragment"
+        android:label="ShippingFragment"
+        tools:layout="@layout/fragment_shipping" />
 
 
 </navigation>
