@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     private val fetchProductBanners: FetchProductBanners
 ) : ViewModel() {
 
-    private val _currentBannerPosition = MutableStateFlow<Int>(0)
+    private val _currentBannerPosition = MutableStateFlow(0)
     val sliderItemPosition = _currentBannerPosition.asStateFlow()
 
     private val banners = stateFlow {

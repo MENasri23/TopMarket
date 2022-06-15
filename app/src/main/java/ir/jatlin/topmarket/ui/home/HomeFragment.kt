@@ -22,6 +22,7 @@ class HomeFragment :
     ProductDisplayGroupEventListener,
     ProductItemEventListener,
     SpecialProductGroupViewHolder.EventListener {
+
     private val loadStateViewModel by activityViewModels<LoadStateViewModel>()
     private val viewModel by viewModels<HomeViewModel>()
     private val binding by dataBindings(FragmentHomeBinding::bind)

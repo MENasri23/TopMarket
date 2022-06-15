@@ -48,15 +48,19 @@ class CartViewModel @Inject constructor(
     private val _discountExpanded = MutableStateFlow(false)
     val discountExpanded = _discountExpanded.asStateFlow()
 
-    val cartProductItems = activeOrder.map {
-        it?.let {
-            startLoading()
-            CartProductsItem(
-                fetchCartProductListUseCase(it.orderItems)
-                    .dataOnSuccessOr(null)
-            ).also { stopLoading() }
+    val cartProductItems = stateFlow(CartProductsItem(emptyList())) {
+        activeOrder.map(this::toCartProductItem)
+    }
 
-        }
+    private suspend fun toCartProductItem(order: Order?): CartProductsItem? {
+        if (order == null) return null
+        startLoading()
+        val cartProductItem = CartProductsItem(
+            fetchCartProductListUseCase(order.orderItems)
+                .dataOnSuccessOr(null)
+        )
+        stopLoading()
+        return cartProductItem
     }
 
 
