@@ -117,7 +117,7 @@
     <string name="cart_discount">%s تومان تخفیف</string>
     <string name="save_in_next_order">ذخیره در لیست خرید بعدی</string>
     <string name="continue_purchase">ادامه فرآیند خرید</string>
-
+    <string name="empty_cart">سبد خرید شما خالی است.</string>
 
     <!-- collapsable discount card -->
     <string name="discount_title">کد تخفیف</string>

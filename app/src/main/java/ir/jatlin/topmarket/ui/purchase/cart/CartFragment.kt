@@ -15,7 +15,9 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentCartBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.util.dataBindings
+import ir.jatlin.topmarket.ui.util.gone
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import ir.jatlin.topmarket.ui.util.visible
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -75,7 +77,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         launch {
             viewModel.cartProductItems.collect { cartProducts ->
                 Timber.d("cart products size: ${cartProducts?.products?.size} ${cartProducts?.products}")
-                cartProductAdapter.submitList(cartProducts?.products)
+                val products = cartProducts?.products
+                if (products.isNullOrEmpty()) {
+                    binding.cartGroupContent.gone()
+                    binding.purchaseApplyContainer.gone()
+                    binding.emptyCartContainer.visible()
+                } else {
+                    binding.cartGroupContent.visible()
+                    binding.purchaseApplyContainer.visible()
+                    binding.emptyCartContainer.gone()
+                    cartProductAdapter.submitList(products)
+                }
             }
         }
 
