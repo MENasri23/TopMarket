@@ -82,7 +82,7 @@ class SearchFiltersFragment : Fragment(R.layout.fragment_search_filters) {
                 onProductClicked = this@SearchFiltersFragment::navigateToDetailsScreen
             ).also { productPreviewAdapter = it }
 
-            doOnApplyWindowInsets { v, insets, padding, _ ->
+            doOnApplyWindowInsets { v, insets, padding, margin ->
                 v.updatePadding(
                     bottom = padding.bottom + insets.bottomInset()
                 )

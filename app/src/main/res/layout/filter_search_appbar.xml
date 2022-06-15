@@ -18,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/space_small">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/search_bar_container"
@@ -88,7 +89,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_medium"
-                android:layout_marginEnd="@dimen/space_small"
                 android:drawableEnd="@drawable/ic_filter_24"
                 android:drawablePadding="@dimen/space_small"
                 android:stateListAnimator="@animator/smooth_fading"
