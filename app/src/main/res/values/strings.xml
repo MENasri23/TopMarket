@@ -125,4 +125,7 @@
     <string name="type_discount_value">کد تخفیف را وارد کنید…</string>
     <string name="cart">سبد خرید</string>
 
+    <!-- NoNetworkConnection -->
+    <string name="no_network_connection">خطا در اتصال به اینترنت...</string>
+
 </resources>

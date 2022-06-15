@@ -100,7 +100,11 @@ class MainActivity : AppCompatActivity() {
 
                 launch {
                     viewModel.isNetworkAvailable.collect { isOnline ->
-                        Timber.d("has active network: $isOnline")
+                        if (!isOnline) {
+                            navigateToNoNetworkConnection()
+                        } else {
+                            tryPopUpNoNetworkConnection()
+                        }
                     }
                 }
 
@@ -109,6 +113,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun tryPopUpNoNetworkConnection() {
+        val topBackStackEntry = navController.backQueue.lastOrNull()
+        val destinationId = topBackStackEntry?.destination?.id ?: return
+
+        if (destinationId == R.id.noNetworkConnectionFragment) {
+            navController.popBackStack()
+        }
+    }
+
+    private fun navigateToNoNetworkConnection() {
+        navController.navigate(R.id.noNetworkConnectionFragment)
     }
 
     private fun tryEnqueueNewestProductsWork() {

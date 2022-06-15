@@ -23,7 +23,9 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_comment.xml" value="0.1815" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_delete.xml" value="0.1415" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digi_smile_24.xml" value="0.1545" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digi_smile_line.xml" value="0.149" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digikala_logo.xml" value="0.1815" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digikala_logo_white.xml" value="0.149" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_home.xml" value="0.1555" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_minus.xml" value="0.2065" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_question.xml" value="0.2525" />
@@ -41,6 +43,7 @@
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_filter_items.xml" value="0.176" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_home.xml" value="0.1834862385321101" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_loading.xml" value="0.20436083796494228" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_no_network.xml" value="0.20436083796494228" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_category.xml" value="0.20521590423257802" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_details.xml" value="0.152" />
         <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_purshase.xml" value="0.20436083796494228" />

@@ -126,6 +126,11 @@
         android:name="ir.jatlin.topmarket.ui.purchase.shipping.ShippingFragment"
         android:label="ShippingFragment"
         tools:layout="@layout/fragment_shipping" />
+    <fragment
+        android:id="@+id/noNetworkConnectionFragment"
+        android:name="ir.jatlin.topmarket.ui.ar.NoNetworkConnectionFragment"
+        android:label="NoNetworkConnectionFragment"
+        tools:layout="@layout/fragment_no_network" />
 
 
 </navigation>
