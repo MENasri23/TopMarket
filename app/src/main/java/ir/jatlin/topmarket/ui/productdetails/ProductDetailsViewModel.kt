@@ -161,9 +161,7 @@ class ProductDetailsViewModel @Inject constructor(
         orderLineItem ?: return
         _onLoadingQuantity.value = true
         viewModelScope.launch {
-            updateOrderCartUseCase(orderLineItem).collect {
-                Timber.d("$it")
-            }
+            updateOrderCartUseCase(orderLineItem)
         }
     }
 

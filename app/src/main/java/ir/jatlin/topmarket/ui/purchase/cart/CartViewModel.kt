@@ -6,14 +6,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.topmarket.core.domain.coupon.GetCouponByCodeUseCase
 import ir.jatlin.topmarket.core.domain.order.GetActiveOrderStreamUseCase
 import ir.jatlin.topmarket.core.domain.purchase.GetCartProductListUseCase
+import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.core.model.coupon.Coupon
 import ir.jatlin.topmarket.core.model.order.Order
+import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.topmarket.ui.util.cancelIfAlive
 import ir.jatlin.topmarket.ui.util.processResult
 import ir.jatlin.topmarket.ui.util.stateFlow
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
@@ -27,7 +32,8 @@ import kotlin.math.floor
 class CartViewModel @Inject constructor(
     private val getActiveOrderStreamUseCase: GetActiveOrderStreamUseCase,
     private val fetchCartProductListUseCase: GetCartProductListUseCase,
-    private val getCouponByCodeUseCase: GetCouponByCodeUseCase
+    private val getCouponByCodeUseCase: GetCouponByCodeUseCase,
+    private val updateOrderCartUseCase: UpdateOrderCartUseCase
 ) : ViewModel() {
 
     private val _loading = MutableStateFlow(true)
@@ -47,6 +53,14 @@ class CartViewModel @Inject constructor(
 
     private val _discountExpanded = MutableStateFlow(false)
     val discountExpanded = _discountExpanded.asStateFlow()
+
+    private var updateOrderJob: Job? = null
+
+    private val _cartItemLoadingState = MutableStateFlow<Unit?>(null)
+    val cartItemLoadingState = _cartItemLoadingState.asStateFlow()
+
+    var cartItemLoadingPosition: Int? = null
+        private set
 
     val cartProductItems = activeOrder.map {
         it?.let {
@@ -141,11 +155,21 @@ class CartViewModel @Inject constructor(
     }
 
     private fun startLoading() {
-        _loading.value = true
+        if (noNestedLoading()) {
+            _loading.value = true
+        }
     }
 
     private fun stopLoading() {
         _loading.value = false
+    }
+
+    private fun getUpdatedOrderLineItem(cartProduct: CartProduct, add: Boolean): OrderLineItem {
+        return OrderLineItem.Empty.copy(
+            id = cartProduct.orderLineId,
+            productId = cartProduct.productId,
+            quantity = cartProduct.quantity + (if (add) 1 else -1)
+        )
     }
 
 
@@ -163,6 +187,39 @@ class CartViewModel @Inject constructor(
 
     fun onToggleDiscountExpand() {
         _discountExpanded.value = !discountExpanded.value
+    }
+
+    fun addToCart(cartProduct: CartProduct, position: Int) {
+        cartItemLoadingPosition = position
+        _cartItemLoadingState.value = Unit
+
+        updateOrderJob.cancelIfAlive()
+        val orderLineItem = getUpdatedOrderLineItem(cartProduct, true)
+        updateOrderJob = viewModelScope.launch {
+            delay(500L)
+            updateOrderCartUseCase(orderLineItem)
+        }
+    }
+
+    fun removeFromCart(cartProduct: CartProduct, position: Int) {
+        cartItemLoadingPosition = position
+        _cartItemLoadingState.value = Unit
+
+        updateOrderJob.cancelIfAlive()
+        val orderLineItem = getUpdatedOrderLineItem(cartProduct, false)
+        updateOrderJob = viewModelScope.launch {
+            delay(500L)
+            updateOrderCartUseCase(orderLineItem)
+        }
+    }
+
+    fun onCartItemLoadingCompleted() {
+        _cartItemLoadingState.value = null
+        cartItemLoadingPosition = null
+    }
+
+    fun noNestedLoading(): Boolean {
+        return cartItemLoadingState.value == null
     }
 }
 
