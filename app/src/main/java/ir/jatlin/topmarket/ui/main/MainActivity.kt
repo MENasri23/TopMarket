@@ -90,13 +90,23 @@ class MainActivity : AppCompatActivity() {
                         binding.loadingScreen.isVisible = isLoading
                     }
                 }
+
                 launch {
                     themeViewModel.selectedTheme.collectLatest {
                         Timber.d("$theme")
                         updateTheme(it)
                     }
                 }
+
+                launch {
+                    viewModel.isNetworkAvailable.collect { isOnline ->
+                        Timber.d("has active network: $isOnline")
+                    }
+                }
+
             }
+
+
         }
 
     }
