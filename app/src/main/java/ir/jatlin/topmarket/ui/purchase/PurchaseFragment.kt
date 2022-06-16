@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.graphics.Insets
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -49,6 +50,7 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
         val tabLayout = binding.purchaseTabLayout
         val viewPager = binding.purchaseViewPager.apply {
             adapter = pagerAdapter
+            doOnLayout { currentItem = pagerAdapter.itemCount - 1 }
         }
 
         val tabTitles = resources.getStringArray(R.array.purchase_tabs_titles)
