@@ -142,8 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:lottie_rawRes="@raw/loading_animation"
-            app:lottie_repeatMode="reverse" />
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_animation" />
 
     </FrameLayout>
 
