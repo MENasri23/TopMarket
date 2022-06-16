@@ -70,15 +70,14 @@ class HomeFragment :
 
     private fun collectStates() = repeatOnViewLifecycleOwner {
         loadStateViewModel.startLoading()
+        launch { viewModel.error.collect(this@HomeFragment::showErrorMessage) }
         launch { collectHomeUiState() }
     }
 
     private suspend fun collectHomeUiState() = viewModel.homeUiState.safeCollect(
         onFailure = {
             loadStateViewModel.stopLoading()
-            showErrorMessage(it) {
-                // TODO: reload result
-            }
+            viewModel.showErrorMessage(it)
         }
     ) { items ->
         loadStateViewModel.stopLoading()

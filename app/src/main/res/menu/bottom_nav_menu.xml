@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/cartFragment"
+        android:id="@+id/purchaseFragment"
         android:contentDescription="@string/cart"
         android:enabled="true"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_add_shopping_cart_24"
         android:title="@string/cart" />
 
     <item

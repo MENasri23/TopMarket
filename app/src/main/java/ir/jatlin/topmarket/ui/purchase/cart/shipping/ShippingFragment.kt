@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.ui.purchase.shipping
+package ir.jatlin.topmarket.ui.purchase.cart.shipping
 
 import android.os.Bundle
 import android.view.View
@@ -26,7 +26,7 @@ class ShippingFragment : Fragment(R.layout.fragment_shipping) {
             .getLiveData<Boolean>(SignInFragment.SIGNED_IN_KEY)
             .observe(this) { isSignedId ->
                 if (!isSignedId) {
-                    navController.popBackStack()
+                    navController.popBackStack(R.id.shippingFragment, true)
                 }
             }
     }

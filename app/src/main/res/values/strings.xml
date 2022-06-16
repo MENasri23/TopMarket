@@ -118,6 +118,12 @@
     <string name="save_in_next_order">ذخیره در لیست خرید بعدی</string>
     <string name="continue_purchase">ادامه فرآیند خرید</string>
     <string name="empty_cart">سبد خرید شما خالی است.</string>
+    <string name="next_cart">سبد خرید بعدی</string>
+
+    <string-array name="purchase_tabs_titles">
+        <item>خرید بعدی</item>
+        <item>سبد خرید</item>
+    </string-array>
 
     <!-- collapsable discount card -->
     <string name="discount_title">کد تخفیف</string>
@@ -126,6 +132,7 @@
     <string name="cart">سبد خرید</string>
 
     <!-- NoNetworkConnection -->
-    <string name="no_network_connection">خطا در اتصال به اینترنت...</string>
+    <string name="no_network_connection">خطا در اتصال به اینترنت…</string>
+
 
 </resources>

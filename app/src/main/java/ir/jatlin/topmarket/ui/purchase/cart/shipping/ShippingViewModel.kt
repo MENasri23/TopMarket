@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.ui.purchase.shipping
+package ir.jatlin.topmarket.ui.purchase.cart.shipping
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

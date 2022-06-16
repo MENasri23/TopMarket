@@ -6,6 +6,7 @@ import android.transition.TransitionInflater
 import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,6 +17,7 @@ import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.databinding.FragmentCartBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
+import ir.jatlin.topmarket.ui.purchase.PurchaseFragmentDirections
 import ir.jatlin.topmarket.ui.util.dataBindings
 import ir.jatlin.topmarket.ui.util.gone
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
@@ -75,7 +77,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
     }
 
     private fun navigateToShippingScreen() {
-        findNavController().navigate(CartFragmentDirections.toShippingFragment())
+        findNavController().navigate(PurchaseFragmentDirections.toShippingFragment())
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
@@ -93,12 +95,17 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
                 val products = cartProducts?.products
                 if (products.isNullOrEmpty()) {
                     binding.purchaseApplyContainer.gone()
-                    binding.cartGroupContent.gone()
-                    TransitionManager.beginDelayedTransition(binding.root as ViewGroup, rootBounds)
+                    binding.orderContainer.gone()
+                    binding.root.doOnLayout {
+                        TransitionManager.beginDelayedTransition(
+                            binding.root as ViewGroup,
+                            rootBounds
+                        )
+                    }
                     binding.emptyCartContainer.visible()
                 } else {
                     binding.emptyCartContainer.gone()
-                    binding.cartGroupContent.visible()
+                    binding.orderContainer.visible()
                     binding.purchaseApplyContainer.visible()
                     cartProductAdapter.submitList(products)
                 }
@@ -111,7 +118,12 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
         launch {
             viewModel.discountExpanded.collectLatest { expanded ->
                 toggle.duration = if (expanded) 300L else 200L
-                TransitionManager.beginDelayedTransition(binding.root.parent as ViewGroup, toggle)
+                binding.root.doOnLayout {
+                    TransitionManager.beginDelayedTransition(
+                        binding.root.parent as? ViewGroup,
+                        toggle
+                    )
+                }
                 binding.collapsableDiscountBodyContainer.visibility =
                     if (expanded) View.VISIBLE else View.GONE
                 binding.discountExpandIcon.rotationX = if (expanded) 180f else 0f
