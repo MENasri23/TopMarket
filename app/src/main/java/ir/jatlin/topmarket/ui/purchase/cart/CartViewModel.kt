@@ -68,7 +68,7 @@ class CartViewModel @Inject constructor(
             CartProductsItem(
                 fetchCartProductListUseCase(it.orderItems)
                     .dataOnSuccessOr(null)
-            ).also { stopLoading() }
+            )
 
         }
     }
@@ -154,13 +154,13 @@ class CartViewModel @Inject constructor(
         }
     }
 
-    private fun startLoading() {
+    fun startLoading() {
         if (noNestedLoading()) {
             _loading.value = true
         }
     }
 
-    private fun stopLoading() {
+    fun stopLoading() {
         _loading.value = false
     }
 

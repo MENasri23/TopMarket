@@ -93,6 +93,7 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
                     binding.purchaseApplyContainer.visible()
                     cartProductAdapter.submitList(products)
                 }
+                viewModel.stopLoading()
                 viewModel.onCartItemLoadingCompleted()
 
             }
