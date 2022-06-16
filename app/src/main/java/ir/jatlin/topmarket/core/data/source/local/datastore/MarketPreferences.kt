@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.core.data.source.local.datastore
 
-import android.os.Build
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import ir.jatlin.topmarket.core.model.Theme
@@ -28,7 +27,7 @@ class MarketPreferences @Inject constructor(
                 PurchasePrefsInfo(
                     customerId = customerId,
                     activeOrderId = activeOrderId
-                )
+                ).also { Timber.d("$it") }
             }
     }
 
@@ -98,6 +97,12 @@ class MarketPreferences @Inject constructor(
     suspend fun saveNotificationInterval(interval: Int) {
         marketDataStore.edit { preferences ->
             preferences[PreferencesKeys.NOTIFICATION_INTERVAL] = interval
+        }
+    }
+
+    suspend fun clearActiveOrder() {
+        marketDataStore.edit { preferences ->
+            preferences[PreferencesKeys.ACTIVE_ORDER_ID] = PurchasePrefsInfo.NO_ACTIVE_ORDER
         }
     }
 

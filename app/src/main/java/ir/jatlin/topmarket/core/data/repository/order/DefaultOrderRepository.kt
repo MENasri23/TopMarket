@@ -9,6 +9,7 @@ import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
 import ir.jatlin.topmarket.core.database.entity.asOrder
 import ir.jatlin.topmarket.core.model.order.Order
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
@@ -76,6 +77,7 @@ class DefaultOrderRepository @Inject constructor(
     override fun getOrderStream(orderId: Int): Flow<Order?> {
         return localDataSource
             .findOrderByIdStream(orderId)
+            .distinctUntilChanged()
             .map { it?.asOrder() }
     }
 

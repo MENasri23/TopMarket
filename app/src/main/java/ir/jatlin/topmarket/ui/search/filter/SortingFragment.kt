@@ -33,15 +33,19 @@ class SortingFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val onSortItemCLickListener = View.OnClickListener {
+        val onSortItemCLickListener = View.OnClickListener { v ->
+            v ?: return@OnClickListener
+
             with(binding) {
-                val orderBy = when (it?.id) {
+                val orderBy = when (v.id) {
                     mostSales.id -> OrderBy.Popularity
                     mostExpensive.id -> OrderBy.Price
-                    cheapest.id -> OrderBy.Price.also {
-                        searchViewModel.order = Order.Asc
-                    }
+                    cheapest.id -> OrderBy.Price
                     else -> OrderBy.Date
+                }
+
+                if (orderBy == OrderBy.Price && v.id == cheapest.id) {
+                    searchViewModel.order = Order.Asc
                 }
                 searchViewModel.orderBy = orderBy
                 searchViewModel.searchProducts()

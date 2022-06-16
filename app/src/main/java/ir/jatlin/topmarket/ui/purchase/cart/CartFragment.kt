@@ -40,6 +40,10 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (savedInstanceState != null) {
+            viewModel.fetchActiveOrder()
+        }
         initViews()
         collectUiStates()
     }
@@ -71,13 +75,15 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
         }
 
         binding.continuePurchase.setOnClickListener {
-            navigateToShippingScreen()
+            viewModel.onNavigateToShippingScreen()
         }
 
     }
 
-    private fun navigateToShippingScreen() {
-        findNavController().navigate(PurchaseFragmentDirections.toShippingFragment())
+    private fun navigateToShippingScreen(orderId: Int) {
+        findNavController().navigate(
+            PurchaseFragmentDirections.toShippingFragment(orderId)
+        )
     }
 
     private fun collectUiStates() = repeatOnViewLifecycleOwner {
@@ -94,21 +100,21 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
                 Timber.d("cart products size: ${cartProducts?.products?.size} ${cartProducts?.products}")
                 val products = cartProducts?.products
                 if (products.isNullOrEmpty()) {
-                    binding.purchaseApplyContainer.gone()
-                    binding.orderContainer.gone()
                     binding.root.doOnLayout {
                         TransitionManager.beginDelayedTransition(
                             binding.root as ViewGroup,
                             rootBounds
                         )
                     }
+                    binding.purchaseApplyContainer.gone()
+                    binding.orderContainer.gone()
                     binding.emptyCartContainer.visible()
                 } else {
                     binding.emptyCartContainer.gone()
                     binding.orderContainer.visible()
                     binding.purchaseApplyContainer.visible()
-                    cartProductAdapter.submitList(products)
                 }
+                cartProductAdapter.submitList(products)
                 viewModel.stopLoading()
                 viewModel.onCartItemLoadingCompleted()
 
@@ -147,6 +153,14 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
             }
         }
 
+        launch {
+            viewModel.orderId.collect {
+                it?.let { orderId ->
+                    navigateToShippingScreen(orderId)
+                    viewModel.onNavigateToShippingScreenCompleted()
+                }
+            }
+        }
     }
 
     private fun toggleDiscountExpanded() {
@@ -163,6 +177,12 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartProductViewHolder.Eve
 
     override fun onCartProductClick(productId: Int) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.d("destroy view")
+        viewModel.clearCache()
     }
 
 }

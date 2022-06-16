@@ -122,7 +122,11 @@
         android:id="@+id/shippingFragment"
         android:name="ir.jatlin.topmarket.ui.purchase.cart.shipping.ShippingFragment"
         android:label="ShippingFragment"
-        tools:layout="@layout/fragment_shipping" />
+        tools:layout="@layout/fragment_shipping">
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/noNetworkConnectionFragment"
         android:name="ir.jatlin.topmarket.ui.ar.NoNetworkConnectionFragment"

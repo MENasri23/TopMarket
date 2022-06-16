@@ -21,7 +21,7 @@ class OrderLineItemDatabaseDataSource @Inject constructor(
         orderItemDao.clearAll()
     }
 
-    fun findOrderLineItemByProductId(productId: Int): Flow<OrderLineItemEntity?> {
-        return orderItemDao.findOrderLineItemByProductId(productId)
+    fun findOrderLineItem(orderId: Int, productId: Int): Flow<OrderLineItemEntity?> {
+        return orderItemDao.findOrderLineItem(orderId, productId)
     }
 }

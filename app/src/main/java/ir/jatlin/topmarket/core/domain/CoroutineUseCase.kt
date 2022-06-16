@@ -4,6 +4,7 @@ import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 abstract class CoroutineUseCase<in P, R>(
     private val errorHandler: ErrorHandler,
@@ -18,6 +19,7 @@ abstract class CoroutineUseCase<in P, R>(
                 }
             }
         } catch (t: Throwable) {
+            Timber.e(t.stackTraceToString())
             Resource.error(errorHandler.handle(t))
         }
     }

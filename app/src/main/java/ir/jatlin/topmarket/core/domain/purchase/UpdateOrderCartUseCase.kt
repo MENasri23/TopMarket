@@ -23,27 +23,35 @@ class UpdateOrderCartUseCase @Inject constructor(
 
     override suspend fun execute(params: OrderLineItem) {
         val purchasePreferencesInfo = marketPreferences.purchasePreferencesStream.first()
-
+        Timber.d("$purchasePreferencesInfo")
         val (customerId, activeOrderId) = purchasePreferencesInfo
 
         val noActiveOrder = activeOrderId == PurchasePrefsInfo.NO_ACTIVE_ORDER
         val isGuestCustomer = customerId == PurchasePrefsInfo.GUEST_CUSTOMER
         when {
             noActiveOrder && isGuestCustomer -> {
-                val orderId = orderRepository.createOrder(Order.Empty)
-
+                Timber.d("Create new empty order for guest customer")
+                val orderId = orderRepository.createOrder(
+                    Order.Empty.copy(
+                        orderItems = listOf(params)
+                    )
+                )
+                Timber.d("new order id: $orderId")
                 marketPreferences.saveActiveOrderId(orderId)
             }
             noActiveOrder -> {
+                Timber.d("Create new empty order for customer with id: $customerId")
                 val order = Order.Empty.copy(
                     orderItems = listOf(params),
                     customer = Customer.Empty.copy(id = customerId)
                 )
                 val orderId = orderRepository.createOrder(order)
+                Timber.d("new order id: $orderId")
                 marketPreferences.saveActiveOrderId(orderId)
             }
             else -> {
                 val order = orderRepository.findOrderById(activeOrderId)
+                Timber.d("update the order: $order, with orderLineItem: $params")
 
                 val newOrderItems = order.orderItems.toMutableList()
                 val inList = newOrderItems.withIndex()

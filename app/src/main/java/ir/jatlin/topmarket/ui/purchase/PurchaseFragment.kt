@@ -31,14 +31,16 @@ class PurchaseFragment : Fragment(R.layout.fragment_purchase) {
         binding.root.doOnApplyWindowInsets { v, insets, padding, _ ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.updatePadding(
-                top = insets.topInset() + padding.top
+                top = insets.topInset() + padding.top,
+                left = systemBars.left + padding.left,
+                right = systemBars.right + padding.right
             )
             WindowInsetsCompat.Builder().setInsets(
                 WindowInsetsCompat.Type.systemBars(),
                 Insets.of(
-                    systemBars.left,
                     0,
-                    systemBars.right,
+                    0,
+                    0,
                     systemBars.bottom
                 )
             ).build()

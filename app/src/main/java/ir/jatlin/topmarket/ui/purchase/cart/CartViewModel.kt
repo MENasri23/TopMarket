@@ -19,10 +19,7 @@ import ir.jatlin.topmarket.ui.util.processResult
 import ir.jatlin.topmarket.ui.util.stateFlow
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,8 +30,12 @@ class CartViewModel @Inject constructor(
     private val getActiveOrderStreamUseCase: GetActiveOrderStreamUseCase,
     private val fetchCartProductListUseCase: GetCartProductListUseCase,
     private val getCouponByCodeUseCase: GetCouponByCodeUseCase,
-    private val updateOrderCartUseCase: UpdateOrderCartUseCase
-) : ViewModel() {
+    private val updateOrderCartUseCase: UpdateOrderCartUseCase,
+
+    ) : ViewModel() {
+
+    private var updateOrderJob: Job? = null
+    private var activeOrderJob: Job? = null
 
     private val _loading = MutableStateFlow(true)
     val loading = _loading.asStateFlow()
@@ -54,9 +55,6 @@ class CartViewModel @Inject constructor(
     private val _discountExpanded = MutableStateFlow(false)
     val discountExpanded = _discountExpanded.asStateFlow()
 
-
-    private var updateOrderJob: Job? = null
-
     private val _cartItemLoadingState = MutableStateFlow<Unit?>(null)
     val cartItemLoadingState = _cartItemLoadingState.asStateFlow()
 
@@ -68,14 +66,16 @@ class CartViewModel @Inject constructor(
         activeOrder.map(this::toCartProductItem)
     }
 
+    private val _orderId = MutableStateFlow<Int?>(null)
+    val orderId = _orderId.asStateFlow()
+
     private suspend fun toCartProductItem(order: Order?): CartProductsItem? {
         if (order == null) return null
         startLoading()
-        val cartProductItem = CartProductsItem(
+        return CartProductsItem(
             fetchCartProductListUseCase(order.orderItems)
                 .dataOnSuccessOr(null)
         )
-        return cartProductItem
     }
 
 
@@ -109,9 +109,9 @@ class CartViewModel @Inject constructor(
     }
 
 
-    private fun fetchActiveOrder() {
-        viewModelScope.launch {
-            getActiveOrderStreamUseCase(Unit).collect {
+    fun fetchActiveOrder() {
+        activeOrderJob = viewModelScope.launch {
+            getActiveOrderStreamUseCase(Unit).collectLatest {
                 processActiveOrderResult(it)
             }
         }
@@ -220,12 +220,25 @@ class CartViewModel @Inject constructor(
     }
 
     fun onCartItemLoadingCompleted() {
-        _cartItemLoadingState.value = null
         cartItemLoadingPosition = null
+        _cartItemLoadingState.value = null
     }
 
     fun noNestedLoading(): Boolean {
         return cartItemLoadingState.value == null
+    }
+
+    fun onNavigateToShippingScreen() {
+        _orderId.value = activeOrder.value?.id
+    }
+
+    fun onNavigateToShippingScreenCompleted() {
+        _activeOrder.value = null
+        _orderId.value = null
+    }
+
+    fun clearCache() {
+        activeOrderJob.cancelIfAlive()
     }
 }
 
