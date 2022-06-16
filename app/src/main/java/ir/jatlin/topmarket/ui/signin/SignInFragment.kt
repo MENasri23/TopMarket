@@ -5,16 +5,14 @@ import android.view.View
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentSignInBinding
 import ir.jatlin.topmarket.ui.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
@@ -22,16 +20,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private val viewModel by viewModels<SignInViewModel>()
     private val binding by dataBindings(FragmentSignInBinding::bind)
 
+    private lateinit var savedStateHandle: SavedStateHandle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch(Dispatchers.Main.immediate) {
-            viewModel.currentCustomerId.collectLatest {
-                it?.let {
-                    Timber.d("current user id: $it")
-                    // TODO: navigate to profile screen
-                }
-            }
-        }
+        val navController = findNavController()
+        savedStateHandle = navController.previousBackStackEntry!!.savedStateHandle
+        savedStateHandle.set(SIGNED_IN_KEY, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,6 +55,15 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
             }
         }
+
+        launch {
+            viewModel.signedIn.collect { isSignedIn ->
+                if (isSignedIn) {
+                    savedStateHandle.set(SIGNED_IN_KEY, true)
+                    findNavController().popBackStack()
+                }
+            }
+        }
     }
 
     private fun applyBottomInset() {
@@ -74,5 +78,9 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             )
             insets
         }
+    }
+
+    companion object {
+        const val SIGNED_IN_KEY = "signed_in_key"
     }
 }

@@ -32,8 +32,11 @@ class HomeViewModel @Inject constructor(
     private val fetchProductBanners: FetchProductBanners
 ) : ViewModel() {
 
-    private val _currentBannerPosition = MutableStateFlow<Int>(0)
+    private val _currentBannerPosition = MutableStateFlow(0)
     val sliderItemPosition = _currentBannerPosition.asStateFlow()
+
+    private val _error = MutableStateFlow<ErrorCause?>(null)
+    val error = _error.asStateFlow()
 
     private val banners = stateFlow {
         fetchProductBanners()
@@ -154,6 +157,14 @@ class HomeViewModel @Inject constructor(
 
     fun onSliderItemPositionChanged(currentPosition: Int) {
         _currentBannerPosition.value = currentPosition
+    }
+
+    fun showErrorMessage(error: ErrorCause?) {
+        _error.value = error
+    }
+
+    fun onShowErrorCompleted() {
+        _error.value = null
     }
 
 }

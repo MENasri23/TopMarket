@@ -21,7 +21,8 @@ class MainViewModel @Inject constructor(
     private val enqueueNewestProductsWorkRequestUseCase: EnqueueFetchNewestProductsWorkRequestUseCase,
     getNotificationEnabledStreamUseCase: GetNotificationEnabledStreamUseCase,
     getNotificationIntervalStreamUseCase: GetNotificationIntervalStreamUseCase,
-) : ViewModel() {
+    marketNetworkManager: MarketNetworkManager,
+) : ViewModel(), MarketNetworkManager by marketNetworkManager {
 
     private val _notificationEnabled = MutableStateFlow(true)
     private val notificationEnabled = _notificationEnabled.asStateFlow()
@@ -53,7 +54,7 @@ class MainViewModel @Inject constructor(
 
             if (notificationEnabled.value) {
                 enqueueNewestProductsWorkRequestUseCase(
-                    15 // notificationInterval.value
+                    notificationInterval.value
                 )
             }
         }

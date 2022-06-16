@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f664319f7246e661f349d57c2dd708d7",
+    "identityHash": "91b3bc863b19d18726d919f5398ab76b",
     "entities": [
       {
         "tableName": "customers",
@@ -66,7 +66,7 @@
       },
       {
         "tableName": "orders",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `customer_id` INTEGER NOT NULL, `status` TEXT NOT NULL, `total_price` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`customer_id`) REFERENCES `customers`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `customer_id` INTEGER NOT NULL, `status` TEXT NOT NULL, `total_price` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -110,19 +110,7 @@
             "createSql": "CREATE INDEX IF NOT EXISTS `index_orders_customer_id` ON `${TABLE_NAME}` (`customer_id`)"
           }
         ],
-        "foreignKeys": [
-          {
-            "table": "customers",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "customer_id"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       },
       {
         "tableName": "order_items",
@@ -209,7 +197,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f664319f7246e661f349d57c2dd708d7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '91b3bc863b19d18726d919f5398ab76b')"
     ]
   }
 }

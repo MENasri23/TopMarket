@@ -1,19 +1,14 @@
 package ir.jatlin.topmarket.core.database.entity
 
-import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import ir.jatlin.topmarket.core.model.order.OrderStatus
 
 @Entity(
     tableName = "orders",
-    foreignKeys = [
-        ForeignKey(
-            entity = CustomerEntity::class,
-            parentColumns = ["id"],
-            childColumns = ["customer_id"],
-            onDelete = CASCADE
-        )
-    ],
+
     indices = [
         Index(value = ["customer_id"])
     ]

@@ -3,7 +3,6 @@ package ir.jatlin.topmarket.core.database.dao
 import androidx.room.*
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
 import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
-import ir.jatlin.topmarket.core.model.user.Customer
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +21,9 @@ interface CustomerDao {
 
     @Query("SELECT * FROM customers WHERE id = :id")
     suspend fun findCustomerById(id: Int): CustomerEntity?
+
+    @Query("SELECT * FROM customers WHERE id = :customerId")
+    fun findCustomerByIdStream(customerId: Int): Flow<CustomerEntity?>
 
     @Query("SELECT * FROM customers WHERE email = :email")
     fun findCustomerByEmail(email: String): CustomerEntity?

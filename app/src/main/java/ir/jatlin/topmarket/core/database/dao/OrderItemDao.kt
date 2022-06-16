@@ -19,8 +19,8 @@ interface OrderItemDao {
     @Query("DELETE FROM order_items WHERE id NOT IN (:ids)")
     suspend fun deleteAllExcept(ids: List<Int>)
 
-    @Query("SELECT * FROM order_items WHERE product_id = :productId")
-    fun findOrderLineItemByProductId(productId: Int): Flow<OrderLineItemEntity?>
+    @Query("SELECT * FROM order_items WHERE order_id = :orderId AND product_id = :productId")
+    fun findOrderLineItem(orderId: Int, productId: Int): Flow<OrderLineItemEntity?>
 
     @Transaction
     suspend fun updateAndRemoveOthers(orderLineItems: List<OrderLineItemEntity>) {
@@ -30,4 +30,7 @@ interface OrderItemDao {
 
     @Query("DELETE FROM order_items")
     suspend fun clearAll()
+
+    @Query("SELECT * FROM order_items")
+    suspend fun getAll(): List<OrderLineItemEntity>
 }

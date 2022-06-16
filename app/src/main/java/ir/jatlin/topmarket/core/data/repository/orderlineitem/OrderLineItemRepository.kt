@@ -12,5 +12,5 @@ interface OrderLineItemRepository {
 
     suspend fun cleatAll()
 
-    fun findOrderLineItemByProductId(productId: Int): Flow<OrderLineItem?>
+    fun findOrderLineItem(orderId: Int, productId: Int): Flow<OrderLineItem?>
 }

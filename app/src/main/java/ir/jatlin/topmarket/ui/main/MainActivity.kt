@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     private val topLevelDestinations = arrayOf(
         R.id.homeFragment,
         R.id.productCategoryFragment,
-        R.id.cartFragment
+        R.id.purchaseFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,15 +90,42 @@ class MainActivity : AppCompatActivity() {
                         binding.loadingScreen.isVisible = isLoading
                     }
                 }
+
                 launch {
                     themeViewModel.selectedTheme.collectLatest {
                         Timber.d("$theme")
                         updateTheme(it)
                     }
                 }
+
+                launch {
+                    viewModel.isNetworkAvailable.collect { isOnline ->
+                        if (!isOnline) {
+                            navigateToNoNetworkConnection()
+                        } else {
+                            tryPopUpNoNetworkConnection()
+                        }
+                    }
+                }
+
             }
+
+
         }
 
+    }
+
+    private fun tryPopUpNoNetworkConnection() {
+        val topBackStackEntry = navController.backQueue.lastOrNull()
+        val destinationId = topBackStackEntry?.destination?.id ?: return
+
+        if (destinationId == R.id.noNetworkConnectionFragment) {
+            navController.popBackStack()
+        }
+    }
+
+    private fun navigateToNoNetworkConnection() {
+        navController.navigate(R.id.noNetworkConnectionFragment)
     }
 
     private fun tryEnqueueNewestProductsWork() {

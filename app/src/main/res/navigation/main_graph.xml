@@ -116,7 +116,31 @@
         android:id="@+id/cartFragment"
         android:name="ir.jatlin.topmarket.ui.purchase.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+    </fragment>
+    <fragment
+        android:id="@+id/shippingFragment"
+        android:name="ir.jatlin.topmarket.ui.purchase.cart.shipping.ShippingFragment"
+        android:label="ShippingFragment"
+        tools:layout="@layout/fragment_shipping">
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/noNetworkConnectionFragment"
+        android:name="ir.jatlin.topmarket.ui.ar.NoNetworkConnectionFragment"
+        android:label="NoNetworkConnectionFragment"
+        tools:layout="@layout/fragment_no_network" />
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="ir.jatlin.topmarket.ui.purchase.PurchaseFragment"
+        android:label="PurchaseFragment"
+        tools:layout="@layout/fragment_purchase">
+        <action
+            android:id="@+id/to_shippingFragment"
+            app:destination="@id/shippingFragment" />
+    </fragment>
 
 
 </navigation>

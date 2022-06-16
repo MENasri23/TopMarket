@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.topmarket.core.domain.order.GetActiveOrderUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductReviewsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
@@ -13,23 +14,22 @@ import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.core.domain.util.GetFormattedDateUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.core.model.common.ProductImage
+import ir.jatlin.topmarket.core.model.order.Order
 import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.shared.Resource
+import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.emptyListResource
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.shared.isSuccess
-import ir.jatlin.topmarket.ui.util.safeCollect
 import ir.jatlin.topmarket.ui.util.stateFlow
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class ProductDetailsViewModel @Inject constructor(
     private val fetchProductDetailsUseCase: FetchProductDetailsUseCase,
@@ -38,11 +38,12 @@ class ProductDetailsViewModel @Inject constructor(
     private val updateOrderCartUseCase: UpdateOrderCartUseCase,
     private val fetchProductReviewsUseCase: FetchProductReviewsUseCase,
     private val getFormattedDateUseCase: GetFormattedDateUseCase,
+    private val getActiveOrderStreamUseCase: GetActiveOrderUseCase,
     state: SavedStateHandle
 ) : ViewModel() {
     private val productId = state.getLiveData<Int>("productId").asFlow()
 
-    private var orderLineItem: OrderLineItem? = null
+//    private var orderLineItem: OrderLineItem? = null
 
     private val _productDetails = MutableStateFlow<ProductDetails?>(null)
     val productDetails = _productDetails.asStateFlow()
@@ -55,11 +56,35 @@ class ProductDetailsViewModel @Inject constructor(
     val similarProducts = _similarProducts.asStateFlow()
 
 
-    private val _orderQuantity = MutableStateFlow(0)
-    val orderQuantity = _orderQuantity.asStateFlow()
-
     private val _onLoadingQuantity = MutableStateFlow(true)
     val onLoadingQuantity = _onLoadingQuantity.asStateFlow()
+
+    private val _activeOrder = MutableStateFlow<Resource<Order?>>(Resource.loading())
+    val activeOrder = _activeOrder.asStateFlow()
+
+    private val orderLineItemParams = productId.combine(activeOrder) { productId, activeOrder ->
+        val successOrder = activeOrder.dataOnSuccessOr(null) ?: return@combine null
+        FetchOrderLineItemUseCase.Params(successOrder.id, productId)
+    }
+
+    val orderLineItem = stateFlow(null) {
+        orderLineItemParams.flatMapLatest {
+            Timber.d("params:$it")
+            fetchOrderLineItemUseCase(it).map { orderLineItemResult ->
+                Timber.d("orderlineitemresult: $orderLineItemResult")
+                orderLineItemResult.dataOnSuccessOr(null)
+            }
+        }
+    }
+
+    val orderQuantity = stateFlow(0) {
+        orderLineItem.map {
+            Timber.d("orderLine item : $it")
+            _onLoadingQuantity.value = false
+            it?.quantity ?: 0
+        }
+    }
+
 
     val productDetailsState = stateFlow {
         productId.map {
@@ -70,6 +95,22 @@ class ProductDetailsViewModel @Inject constructor(
 
     val productReviewsState: Flow<Resource<List<ProductReviewItem>>> =
         productDetailsState.map { getProductReviewsItems(it) }
+
+
+    init {
+        fetchActiveOrderStream()
+    }
+
+
+    private fun fetchActiveOrderStream() {
+        viewModelScope.launch {
+            getActiveOrderStreamUseCase(Unit).collect {
+                Timber.d("active order: $it")
+                _activeOrder.value = it
+            }
+        }
+    }
+
 
     private suspend fun getProductReviewsItems(
         productDetailsResult: Resource<ProductDetails?>
@@ -100,41 +141,11 @@ class ProductDetailsViewModel @Inject constructor(
     }
 
 
-    init {
-        fetchRelatedOrderLineItem()
-    }
-
-
-    private fun fetchRelatedOrderLineItem() {
-        viewModelScope.launch {
-            productId.collect { productId ->
-                fetchOrderLineItemUseCase(productId).safeCollect(
-                    onFailure = {
-                        if (it is ErrorCause.Unknown && it.throwable is NullPointerException) {
-                            orderLineItem = null
-                        }
-                        _onLoadingQuantity.value = false
-                        _orderQuantity.value = 0
-                    },
-                    onLoading = { _onLoadingQuantity.value = true }
-                ) {
-                    Timber.d("$it")
-                    orderLineItem = it
-                    _onLoadingQuantity.value = false
-                    _orderQuantity.value = it?.quantity ?: 0
-
-                }
-            }
-        }
-    }
-
     suspend fun updateUiStatesWith(productDetails: ProductDetails) {
         Timber.d(productDetails.categories.joinToString())
         _productDetails.emit(productDetails)
         _productImages.emit(productDetails.images)
         fetchSimilarProducts(productDetails.relatedIds)
-
-
     }
 
     private fun fetchSimilarProducts(relatedIds: List<Int>) = viewModelScope.launch {
@@ -161,14 +172,12 @@ class ProductDetailsViewModel @Inject constructor(
         orderLineItem ?: return
         _onLoadingQuantity.value = true
         viewModelScope.launch {
-            updateOrderCartUseCase(orderLineItem).collect {
-                Timber.d("$it")
-            }
+            updateOrderCartUseCase(orderLineItem)
         }
     }
 
     private fun updateOrderLineItemQuantity(add: Boolean): OrderLineItem? {
-        val item = orderLineItem
+        val item = orderLineItem.value
         return if (item != null) {
             val quantity = item.quantity + (if (add) 1 else -1)
             item.copy(quantity = quantity)
@@ -186,7 +195,7 @@ class ProductDetailsViewModel @Inject constructor(
 
 
     fun toggleFavorite() {
-
+        // TODO: toggle the product favorite state
     }
 }
 
