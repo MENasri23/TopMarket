@@ -128,17 +128,24 @@
         app:layout_constraintTop_toTopOf="@id/quantity_background"
         tools:text="1" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/order_quantity_loading"
+    <FrameLayout
+        android:id="@+id/order_quantity_loading_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/tv_quantity"
         app:layout_constraintEnd_toStartOf="@id/iv_add"
         app:layout_constraintStart_toEndOf="@id/iv_remove"
-        app:layout_constraintTop_toTopOf="@id/tv_quantity"
-        app:lottie_rawRes="@raw/loading_animation"
-        app:lottie_repeatMode="reverse" />
+        app:layout_constraintTop_toTopOf="@id/tv_quantity">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/order_quantity_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:lottie_rawRes="@raw/loading_animation"
+            app:lottie_repeatMode="reverse" />
+
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_remove"
