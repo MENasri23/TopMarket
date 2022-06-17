@@ -1,14 +1,14 @@
 package ir.jatlin.topmarket.core.data.repository
 
+import ir.jatlin.core.model.category.CategoryDetails
+import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.model.product.ProductDetails
+import ir.jatlin.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.data.mapper.asCategoryDetails
 import ir.jatlin.topmarket.core.data.mapper.asProduct
 import ir.jatlin.topmarket.core.data.mapper.asProductDetails
 import ir.jatlin.topmarket.core.data.mapper.asProductPreview
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
-import ir.jatlin.topmarket.core.model.category.CategoryDetails
-import ir.jatlin.topmarket.core.model.product.Product
-import ir.jatlin.topmarket.core.model.product.ProductDetails
-import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork

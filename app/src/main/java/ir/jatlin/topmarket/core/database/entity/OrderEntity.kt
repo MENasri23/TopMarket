@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import ir.jatlin.topmarket.core.model.order.OrderStatus
+import ir.jatlin.core.model.order.OrderStatus
 
 @Entity(
     tableName = "orders",

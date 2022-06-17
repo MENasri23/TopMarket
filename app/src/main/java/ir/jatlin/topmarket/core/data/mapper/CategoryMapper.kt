@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.mapper
 
-import ir.jatlin.topmarket.core.model.category.Category
-import ir.jatlin.topmarket.core.model.category.CategoryDetails
+import ir.jatlin.core.model.category.Category
+import ir.jatlin.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
 import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 

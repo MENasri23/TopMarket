@@ -7,8 +7,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import ir.jatlin.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.category.CategoryDetails
 import ir.jatlin.topmarket.databinding.FragmentProductCategoryBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner

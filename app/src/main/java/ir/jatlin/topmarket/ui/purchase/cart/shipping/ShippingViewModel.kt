@@ -3,10 +3,10 @@ package ir.jatlin.topmarket.ui.purchase.cart.shipping
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.model.order.Order
+import ir.jatlin.core.model.order.OrderStatus
 import ir.jatlin.topmarket.core.domain.order.MarkOrderCompletedUseCase
 import ir.jatlin.topmarket.core.domain.signin.GetCurrentCustomerIdStreamUseCase
-import ir.jatlin.topmarket.core.model.order.Order
-import ir.jatlin.topmarket.core.model.order.OrderStatus
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause

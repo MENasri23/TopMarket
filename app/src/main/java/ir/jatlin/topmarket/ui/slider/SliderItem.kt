@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.ui.slider
 
-import ir.jatlin.topmarket.core.model.common.ProductImage
+import ir.jatlin.core.model.common.ProductImage
 
 sealed interface SliderItem {
 

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.databinding.ProductReviewItemViewBinding
 
 class ProductReviewAdapter(

@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.ui.product.preview
 
 import android.graphics.Paint
 import androidx.core.view.isVisible
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.ProductPreviewItemViewBinding
 import ir.jatlin.topmarket.ui.product.ProductItemEventListener
 import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem

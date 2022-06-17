@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.attirbute
+package ir.jatlin.core.model.attirbute
 
 open class DefaultAttribute(
     val id: Int,

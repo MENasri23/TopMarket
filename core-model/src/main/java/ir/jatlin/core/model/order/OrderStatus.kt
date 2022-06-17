@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.order
+package ir.jatlin.core.model.order
 
 enum class OrderStatus(val statusName: String) {
     Pending("pending"),

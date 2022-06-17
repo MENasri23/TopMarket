@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.user
+package ir.jatlin.core.model.user
 
 data class Customer(
     val id: Int,

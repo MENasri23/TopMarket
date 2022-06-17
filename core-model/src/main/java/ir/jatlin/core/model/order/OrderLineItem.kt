@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.order
+package ir.jatlin.core.model.order
 
 data class OrderLineItem(
     val id: Int,

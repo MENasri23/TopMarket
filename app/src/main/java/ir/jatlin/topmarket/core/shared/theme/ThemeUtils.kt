@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.shared.theme
 
 import android.os.Build
-import ir.jatlin.topmarket.core.model.Theme
+import ir.jatlin.core.model.Theme
 
 object ThemeUtils {
 

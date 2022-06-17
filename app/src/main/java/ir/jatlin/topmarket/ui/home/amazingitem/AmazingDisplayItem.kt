@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.ui.home.amazingitem
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.Product
 
 sealed interface AmazingDisplayItem {
 

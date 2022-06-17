@@ -13,8 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import ir.jatlin.core.model.product.CartProduct
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.databinding.FragmentCartBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.purchase.PurchaseFragmentDirections

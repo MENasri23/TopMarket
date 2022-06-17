@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.repository.order
 
-import ir.jatlin.topmarket.core.model.order.Order
+import ir.jatlin.core.model.order.Order
 import kotlinx.coroutines.flow.Flow
 
 interface OrderRepository {

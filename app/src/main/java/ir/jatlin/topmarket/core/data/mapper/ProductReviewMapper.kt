@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.mapper
 
-import ir.jatlin.topmarket.core.model.product.ProductReview
-import ir.jatlin.topmarket.core.model.product.fromReviewStatusName
+import ir.jatlin.core.model.product.ProductReview
+import ir.jatlin.core.model.product.fromReviewStatusName
 import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 
 fun ProductReviewNetwork.asProductPreview() = ProductReview(

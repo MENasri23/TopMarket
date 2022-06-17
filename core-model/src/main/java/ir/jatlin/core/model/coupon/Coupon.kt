@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.coupon
+package ir.jatlin.core.model.coupon
 
 data class Coupon(
     val id: Int,

@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.data.repository
 
-import ir.jatlin.topmarket.core.model.category.CategoryDetails
-import ir.jatlin.topmarket.core.model.product.Product
-import ir.jatlin.topmarket.core.model.product.ProductDetails
-import ir.jatlin.topmarket.core.model.product.ProductReview
+import ir.jatlin.core.model.category.CategoryDetails
+import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.model.product.ProductDetails
+import ir.jatlin.core.model.product.ProductReview
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {

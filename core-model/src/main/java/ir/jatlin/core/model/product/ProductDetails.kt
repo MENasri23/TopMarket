@@ -1,9 +1,9 @@
-package ir.jatlin.topmarket.core.model.product
+package ir.jatlin.core.model.product
 
-import ir.jatlin.topmarket.core.model.attirbute.DefaultAttribute
-import ir.jatlin.topmarket.core.model.attirbute.ProductAttribute
-import ir.jatlin.topmarket.core.model.category.Category
-import ir.jatlin.topmarket.core.model.common.ProductImage
+import ir.jatlin.core.model.attirbute.DefaultAttribute
+import ir.jatlin.core.model.attirbute.ProductAttribute
+import ir.jatlin.core.model.category.Category
+import ir.jatlin.core.model.common.ProductImage
 
 data class ProductDetails(
     val attributes: List<ProductAttribute>,

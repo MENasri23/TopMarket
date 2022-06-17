@@ -5,6 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.model.common.ProductImage
+import ir.jatlin.core.model.order.Order
+import ir.jatlin.core.model.order.OrderLineItem
+import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.domain.order.GetActiveOrderUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductDetailsUseCase
 import ir.jatlin.topmarket.core.domain.product.FetchProductReviewsUseCase
@@ -13,11 +18,6 @@ import ir.jatlin.topmarket.core.domain.purchase.FetchOrderLineItemUseCase
 import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.core.domain.util.GetFormattedDateUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.model.common.ProductImage
-import ir.jatlin.topmarket.core.model.order.Order
-import ir.jatlin.topmarket.core.model.order.OrderLineItem
-import ir.jatlin.topmarket.core.model.product.Product
-import ir.jatlin.topmarket.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.emptyListResource

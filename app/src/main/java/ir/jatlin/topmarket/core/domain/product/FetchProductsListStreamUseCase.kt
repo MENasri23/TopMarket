@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.domain.product
 
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.ProductRepository
 import ir.jatlin.topmarket.core.domain.FlowUseCase
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

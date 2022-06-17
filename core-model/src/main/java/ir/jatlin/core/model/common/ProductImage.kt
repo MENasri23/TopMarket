@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.common
+package ir.jatlin.core.model.common
 
 data class ProductImage(
     val id: Int,

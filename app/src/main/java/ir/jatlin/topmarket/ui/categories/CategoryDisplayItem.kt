@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.ui.categories
 
-import ir.jatlin.topmarket.core.model.category.CategoryDetails
+import ir.jatlin.core.model.category.CategoryDetails
 import java.util.*
 
 /**

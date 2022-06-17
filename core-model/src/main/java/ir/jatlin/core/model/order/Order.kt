@@ -1,6 +1,6 @@
-package ir.jatlin.topmarket.core.model.order
+package ir.jatlin.core.model.order
 
-import ir.jatlin.topmarket.core.model.user.Customer
+import ir.jatlin.core.model.user.Customer
 
 data class Order(
     val id: Int,

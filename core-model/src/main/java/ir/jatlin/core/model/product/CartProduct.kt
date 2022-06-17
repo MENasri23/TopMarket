@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.product
+package ir.jatlin.core.model.product
 
 data class CartProduct(
     val productId: Int,

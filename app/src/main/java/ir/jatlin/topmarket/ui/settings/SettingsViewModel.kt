@@ -3,10 +3,10 @@ package ir.jatlin.topmarket.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.model.Theme
 import ir.jatlin.topmarket.core.domain.service.CancelWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.settings.*
-import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.core.shared.isSuccess

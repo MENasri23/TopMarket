@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_COMPACT
 import androidx.databinding.BindingAdapter
-import ir.jatlin.topmarket.core.model.category.Category
+import ir.jatlin.core.model.category.Category
 
 
 @BindingAdapter(

@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.data.mapper
 
-import ir.jatlin.topmarket.core.model.common.ProductImage
-import ir.jatlin.topmarket.core.model.product.Product
-import ir.jatlin.topmarket.core.model.product.ProductDetails
+import ir.jatlin.core.model.common.ProductImage
+import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.model.product.ProductDetails
 import ir.jatlin.topmarket.core.network.model.common.NetworkImage
 import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkDefaultAttribute
 import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkProductAttribute

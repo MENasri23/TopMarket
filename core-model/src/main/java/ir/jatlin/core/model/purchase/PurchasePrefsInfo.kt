@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.purchase
+package ir.jatlin.core.model.purchase
 
 data class PurchasePrefsInfo(
     val customerId: Int,

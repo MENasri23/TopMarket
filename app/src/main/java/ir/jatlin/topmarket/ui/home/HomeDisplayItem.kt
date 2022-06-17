@@ -2,7 +2,7 @@ package ir.jatlin.topmarket.ui.home
 
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import ir.jatlin.topmarket.core.model.common.ProductImage
+import ir.jatlin.core.model.common.ProductImage
 import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
 import ir.jatlin.topmarket.ui.product.ProductDisplayItem
 import java.util.*

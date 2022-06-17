@@ -3,8 +3,8 @@ package ir.jatlin.topmarket.ui.product
 import android.graphics.Paint
 import android.view.View
 import androidx.core.view.isVisible
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.ProductItemViewBinding
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder

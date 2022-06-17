@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model
+package ir.jatlin.core.model
 
 enum class Theme(val prefsKey: String) {
     LIGHT("light"),

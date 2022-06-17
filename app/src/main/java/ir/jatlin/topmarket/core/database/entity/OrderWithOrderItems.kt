@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.core.database.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import ir.jatlin.topmarket.core.model.order.Order
-import ir.jatlin.topmarket.core.model.user.Customer
+import ir.jatlin.core.model.order.Order
+import ir.jatlin.core.model.user.Customer
 
 
 data class OrderWithOrderItems(

@@ -1,10 +1,10 @@
 package ir.jatlin.topmarket.core.domain.signin
 
+import ir.jatlin.core.model.user.Customer
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.repository.customer.CustomerRepository
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.CoroutineUseCase
-import ir.jatlin.topmarket.core.model.user.Customer
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.firstOrNull

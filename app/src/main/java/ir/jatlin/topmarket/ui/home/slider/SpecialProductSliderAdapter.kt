@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ir.jatlin.topmarket.core.model.common.ProductImage
+import ir.jatlin.core.model.common.ProductImage
 import ir.jatlin.topmarket.databinding.SpecialProductSlideViewBinding
 
 class SpecialProductSliderAdapter : ListAdapter<ProductImage,

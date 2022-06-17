@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.mapper
 
+import ir.jatlin.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
-import ir.jatlin.topmarket.core.model.order.OrderLineItem
 import ir.jatlin.topmarket.core.network.model.order.OrderLineItemNetwork
 
 

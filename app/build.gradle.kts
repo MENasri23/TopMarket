@@ -1,6 +1,6 @@
 import Libs.Androidx.implementAppLibraries
 import java.io.FileInputStream
-import java.util.Properties
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -99,6 +99,7 @@ fun getProperties(file: String = "local.properties"): Properties {
 
 dependencies {
 
+    implementation(project(":core-model"))
     implementAppLibraries()
 
     // legacy

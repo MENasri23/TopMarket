@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.ui.product
 
-import ir.jatlin.topmarket.core.model.product.Product
+import ir.jatlin.core.model.product.Product
 
 
 sealed interface ProductDisplayItem {

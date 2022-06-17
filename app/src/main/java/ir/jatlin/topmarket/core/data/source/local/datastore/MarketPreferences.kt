@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.core.data.source.local.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
-import ir.jatlin.topmarket.core.model.Theme
-import ir.jatlin.topmarket.core.model.purchase.PurchasePrefsInfo
+import ir.jatlin.core.model.Theme
+import ir.jatlin.core.model.purchase.PurchasePrefsInfo
 import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import kotlinx.coroutines.flow.*
 import timber.log.Timber

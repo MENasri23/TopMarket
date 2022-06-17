@@ -10,8 +10,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.PagerSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding

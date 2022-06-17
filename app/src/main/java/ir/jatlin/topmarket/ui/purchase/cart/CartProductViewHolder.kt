@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.ui.purchase.cart
 
 import android.view.View
+import ir.jatlin.core.model.product.CartProduct
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.CartProduct
 import ir.jatlin.topmarket.databinding.LayoutCartProductItemViewBinding
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder

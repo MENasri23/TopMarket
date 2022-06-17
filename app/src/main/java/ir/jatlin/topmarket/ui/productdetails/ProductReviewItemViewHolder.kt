@@ -1,6 +1,5 @@
 package ir.jatlin.topmarket.ui.productdetails
 
-import ir.jatlin.topmarket.core.model.product.ProductReview
 import ir.jatlin.topmarket.databinding.ProductReviewItemViewBinding
 import ir.jatlin.topmarket.ui.util.setTextFromHtml
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder

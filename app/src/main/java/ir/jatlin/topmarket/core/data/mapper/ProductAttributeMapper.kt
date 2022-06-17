@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.mapper
 
-import ir.jatlin.topmarket.core.model.attirbute.DefaultAttribute
-import ir.jatlin.topmarket.core.model.attirbute.ProductAttribute
+import ir.jatlin.core.model.attirbute.DefaultAttribute
+import ir.jatlin.core.model.attirbute.ProductAttribute
 import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkDefaultAttribute
 import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkProductAttribute
 

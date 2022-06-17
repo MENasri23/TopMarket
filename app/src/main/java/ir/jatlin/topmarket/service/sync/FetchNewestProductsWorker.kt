@@ -5,9 +5,9 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.product.FetchNewestProductsUseCase
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.service.notification.sendNewestProductsNotification
 import kotlinx.coroutines.CoroutineDispatcher

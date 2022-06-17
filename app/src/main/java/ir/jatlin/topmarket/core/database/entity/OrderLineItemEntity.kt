@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.database.entity
 
 import androidx.room.*
-import ir.jatlin.topmarket.core.model.order.OrderLineItem
+import ir.jatlin.core.model.order.OrderLineItem
 
 @Entity(
     tableName = "order_items",

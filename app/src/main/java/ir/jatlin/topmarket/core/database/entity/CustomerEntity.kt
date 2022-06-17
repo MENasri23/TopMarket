@@ -3,7 +3,7 @@ package ir.jatlin.topmarket.core.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ir.jatlin.topmarket.core.model.user.Customer
+import ir.jatlin.core.model.user.Customer
 
 @Entity(
     tableName = "customers"

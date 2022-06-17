@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.product
 
+import ir.jatlin.core.model.common.ProductImage
 import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.model.common.ProductImage
 import ir.jatlin.topmarket.core.shared.Resource
 import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineDispatcher

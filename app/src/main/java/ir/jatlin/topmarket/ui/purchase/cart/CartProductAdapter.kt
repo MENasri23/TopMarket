@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ir.jatlin.topmarket.core.model.product.CartProduct
+import ir.jatlin.core.model.product.CartProduct
 import ir.jatlin.topmarket.databinding.LayoutCartProductItemViewBinding
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder
 

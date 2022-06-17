@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.model.category
+package ir.jatlin.core.model.category
 
 data class Category(
     val id: Int,

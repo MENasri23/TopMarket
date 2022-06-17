@@ -1,14 +1,13 @@
 package ir.jatlin.topmarket.core.domain.settings
 
+import ir.jatlin.core.model.Theme
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.CoroutineUseCase
-import ir.jatlin.topmarket.core.model.Theme
 import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.lastOrNull
 import javax.inject.Inject
 
 class GetThemeUseCase @Inject constructor(

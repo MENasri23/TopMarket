@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.ui.home.amazingitem
 
 import android.graphics.Paint
 import androidx.core.view.isVisible
+import ir.jatlin.core.model.product.Product
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.model.product.Product
 import ir.jatlin.topmarket.databinding.AmazingSuggestionItemViewBinding
 import ir.jatlin.topmarket.ui.util.*
 import ir.jatlin.topmarket.ui.viewholder.BaseViewHolder

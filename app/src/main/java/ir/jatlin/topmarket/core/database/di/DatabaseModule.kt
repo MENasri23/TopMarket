@@ -9,13 +9,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ir.jatlin.core.model.user.Customer
 import ir.jatlin.topmarket.core.database.MarketDatabase
 import ir.jatlin.topmarket.core.database.entity.asCustomerEntity
-import ir.jatlin.topmarket.core.model.user.Customer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import javax.inject.Singleton
 
 @Module
