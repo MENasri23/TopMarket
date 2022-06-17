@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.source.remote
 
 import com.google.common.truth.Truth
-import ir.jatlin.topmarket.core.network.di.NetworkModule
+import ir.jatlin.core.network.di.NetworkModule
 import ir.jatlin.topmarket.rule.MainCoroutineRule
 import ir.jatlin.topmarket.rule.runBlockingTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

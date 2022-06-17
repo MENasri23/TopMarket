@@ -1,6 +1,7 @@
 package ir.jatlin.topmarket.core.data.repository.customer
 
 import ir.jatlin.core.model.user.Customer
+import ir.jatlin.core.network.model.costumer.CustomerNetwork
 import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.data.mapper.asCustomerEntity
 import ir.jatlin.topmarket.core.data.mapper.asCustomerNetwork
@@ -8,7 +9,6 @@ import ir.jatlin.topmarket.core.data.source.local.customer.CustomerLocalDataSour
 import ir.jatlin.topmarket.core.data.source.remote.NetworkException
 import ir.jatlin.topmarket.core.data.source.remote.customer.CustomerRemoteDataSource
 import ir.jatlin.topmarket.core.database.entity.asCustomer
-import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex

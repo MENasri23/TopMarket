@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.data.source.remote.customer
 
+import ir.jatlin.core.network.api.MarketApi
+import ir.jatlin.core.network.model.costumer.CustomerNetwork
 import ir.jatlin.topmarket.core.data.source.remote.ResponseConverter
-import ir.jatlin.topmarket.core.network.api.MarketApi
-import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 import javax.inject.Inject
 
 class CustomerRetrofitDataSource @Inject constructor(

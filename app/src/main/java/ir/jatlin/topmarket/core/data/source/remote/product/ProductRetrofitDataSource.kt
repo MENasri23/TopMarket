@@ -1,11 +1,11 @@
 package ir.jatlin.topmarket.core.data.source.remote.product
 
+import ir.jatlin.core.network.api.MarketApi
+import ir.jatlin.core.network.model.product.NetworkProduct
+import ir.jatlin.core.network.model.product.NetworkProductDetails
+import ir.jatlin.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.core.network.model.product.review.ProductReviewNetwork
 import ir.jatlin.topmarket.core.data.source.remote.ResponseConverter
-import ir.jatlin.topmarket.core.network.api.MarketApi
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
-import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
 import javax.inject.Inject
 
 class ProductRetrofitDataSource @Inject constructor(

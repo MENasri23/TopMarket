@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.data.source.remote.product
 
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
-import ir.jatlin.topmarket.core.network.model.product.review.ProductReviewNetwork
+import ir.jatlin.core.network.model.product.NetworkProduct
+import ir.jatlin.core.network.model.product.NetworkProductDetails
+import ir.jatlin.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.core.network.model.product.review.ProductReviewNetwork
 
 interface ProductRemoteDataSource {
 

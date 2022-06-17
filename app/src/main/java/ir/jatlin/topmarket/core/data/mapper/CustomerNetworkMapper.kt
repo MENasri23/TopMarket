@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.data.mapper
 
 import ir.jatlin.core.model.user.Customer
+import ir.jatlin.core.network.model.costumer.CustomerNetwork
 import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
 
 
 fun CustomerNetwork.asCustomerEntity() = CustomerEntity(

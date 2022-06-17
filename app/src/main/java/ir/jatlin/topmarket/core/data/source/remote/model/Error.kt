@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.source.remote.model
 
-import ir.jatlin.topmarket.core.network.response.NetworkError
-import ir.jatlin.topmarket.core.network.response.NetworkStatus
+import ir.jatlin.core.network.response.NetworkError
+import ir.jatlin.core.network.response.NetworkStatus
 
 
 data class Error(

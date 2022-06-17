@@ -3,13 +3,13 @@ package ir.jatlin.topmarket.core.data.mapper
 import ir.jatlin.core.model.common.ProductImage
 import ir.jatlin.core.model.product.Product
 import ir.jatlin.core.model.product.ProductDetails
-import ir.jatlin.topmarket.core.network.model.common.NetworkImage
-import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkDefaultAttribute
-import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkProductAttribute
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategory
+import ir.jatlin.core.network.model.common.NetworkImage
+import ir.jatlin.core.network.model.product.attirbute.NetworkDefaultAttribute
+import ir.jatlin.core.network.model.product.attirbute.NetworkProductAttribute
+import ir.jatlin.core.network.model.product.category.NetworkCategory
 
 
-fun ir.jatlin.topmarket.core.network.model.product.NetworkProduct.asProduct() = Product(
+fun ir.jatlin.core.network.model.product.NetworkProduct.asProduct() = Product(
     categories = categories.map(NetworkCategory::asCategory),
     id = id,
     images = images.map(NetworkImage::asProductImage),
@@ -26,7 +26,7 @@ fun ir.jatlin.topmarket.core.network.model.product.NetworkProduct.asProduct() = 
 )
 
 
-fun ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails.asProductDetails() =
+fun ir.jatlin.core.network.model.product.NetworkProductDetails.asProductDetails() =
     ProductDetails(
         attributes = attributes.map(NetworkProductAttribute::asProductAttribute),
         averageRating = averageRating,

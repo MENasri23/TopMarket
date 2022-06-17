@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.data.source.remote
 
 import com.google.gson.Gson
+import ir.jatlin.core.network.response.NetworkError
 import ir.jatlin.topmarket.core.data.source.remote.model.Error
 import ir.jatlin.topmarket.core.data.source.remote.model.asError
-import ir.jatlin.topmarket.core.network.response.NetworkError
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject

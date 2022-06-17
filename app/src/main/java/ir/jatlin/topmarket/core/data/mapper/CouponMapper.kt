@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.mapper
 
 import ir.jatlin.core.model.coupon.Coupon
-import ir.jatlin.topmarket.core.network.model.coupon.CouponNetwork
+import ir.jatlin.core.network.model.coupon.CouponNetwork
 
 fun CouponNetwork.asCoupon() = Coupon(
     id = id,

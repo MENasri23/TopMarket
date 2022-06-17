@@ -101,6 +101,7 @@ dependencies {
 
     implementation(project(":core-model"))
     implementation(project(":core-shared"))
+    implementation(project(":core-network"))
     implementAppLibraries()
 
     // legacy
@@ -143,10 +144,6 @@ dependencies {
     implementation(Libs.Hilt.WORK_MANAGER)
     kapt(Libs.Hilt.HILT_COMPILER)
     kapt(Libs.Hilt.ANDROIDX_HILT_COMPILER)
-
-    // okHttp
-    implementation(Libs.OkHttp.OKHTTP3)
-    implementation(Libs.OkHttp.LOGGING_INTERCEPTOR)
 
     // retrofit
     implementation(Libs.Retrofit.RETROFIT2)

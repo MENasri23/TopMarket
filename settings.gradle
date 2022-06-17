@@ -16,3 +16,4 @@ rootProject.name = "TopMarket"
 include ':app'
 include ':core-model'
 include ':core-shared'
+include ':core-network'

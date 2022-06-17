@@ -2,8 +2,8 @@ package ir.jatlin.topmarket.core.data.mapper
 
 import ir.jatlin.core.model.attirbute.DefaultAttribute
 import ir.jatlin.core.model.attirbute.ProductAttribute
-import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkDefaultAttribute
-import ir.jatlin.topmarket.core.network.model.product.attirbute.NetworkProductAttribute
+import ir.jatlin.core.network.model.product.attirbute.NetworkDefaultAttribute
+import ir.jatlin.core.network.model.product.attirbute.NetworkProductAttribute
 
 fun NetworkDefaultAttribute.asDefaultAttribute() = DefaultAttribute(
     id = id,

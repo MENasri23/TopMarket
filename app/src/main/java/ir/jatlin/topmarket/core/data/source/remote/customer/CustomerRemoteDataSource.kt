@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.source.remote.customer
 
-import ir.jatlin.topmarket.core.network.model.costumer.CustomerNetwork
+import ir.jatlin.core.network.model.costumer.CustomerNetwork
 
 interface CustomerRemoteDataSource {
 

@@ -1,6 +1,6 @@
 package ir.jatlin.topmarket.core.data.source.remote.order
 
-import ir.jatlin.topmarket.core.network.model.order.OrderNetwork
+import ir.jatlin.core.network.model.order.OrderNetwork
 
 interface OrderRemoteDataSource {
 
