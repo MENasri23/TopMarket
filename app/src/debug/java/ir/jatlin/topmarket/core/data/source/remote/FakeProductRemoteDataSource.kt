@@ -2,11 +2,12 @@ package ir.jatlin.topmarket.core.data.source.remote
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import ir.jatlin.core.network.model.product.NetworkProduct
+import ir.jatlin.core.network.model.product.NetworkProductDetails
+import ir.jatlin.core.network.model.product.category.NetworkCategoryDetails
+import ir.jatlin.core.network.model.product.review.ProductReviewNetwork
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.source.remote.product.ProductRemoteDataSource
-import ir.jatlin.topmarket.core.network.model.product.NetworkProduct
-import ir.jatlin.topmarket.core.network.model.product.NetworkProductDetails
-import ir.jatlin.topmarket.core.network.model.product.category.NetworkCategoryDetails
 import ir.jatlin.topmarket.util.ResourceProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -35,7 +36,7 @@ class FakeProductRemoteDataSource @Inject constructor(
     }
 
 
-    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails? =
+    override suspend fun findProductDetailsById(id: Int): NetworkProductDetails =
         withContext(dispatcher) {
             gson.fromJson(
                 ResourceProvider.readFrom("get-product.json"),
@@ -75,6 +76,9 @@ class FakeProductRemoteDataSource @Inject constructor(
         )
     }
 
+    override suspend fun getProductReviews(filters: Map<String, String>?): List<ProductReviewNetwork> {
+        TODO("Not implemented")
+    }
 
     companion object {
         private const val ORDER = "order"
