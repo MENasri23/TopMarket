@@ -59,6 +59,8 @@ class CartProductViewHolder(
 
     fun playAnimation() {
         with(binding) {
+            ivAdd.isEnabled = false
+            ivRemove.isEnabled = false
             if (orderQuantityLoading.isAnimating) return@with
             tvQuantity.invisible()
             orderQuantityLoadingContainer.visible()
@@ -66,8 +68,10 @@ class CartProductViewHolder(
         }
     }
 
-    fun stopAnimation() {
+    private fun stopAnimation() {
         with(binding) {
+            ivAdd.isEnabled = true
+            ivRemove.isEnabled = true
             tvQuantity.visible()
             orderQuantityLoading.pauseAnimation()
             orderQuantityLoadingContainer.gone()

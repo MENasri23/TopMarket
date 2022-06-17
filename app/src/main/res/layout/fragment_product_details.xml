@@ -532,9 +532,10 @@
                     app:layout_constraintStart_toStartOf="@id/addToCart"
                     app:layout_constraintTop_toTopOf="@id/addToCart" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/iv_add"
                     android:layout_width="wrap_content"
+                    isEnabled="@{!viewModel.onLoadingQuantity}"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/space_medium"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -572,10 +573,11 @@
                     app:lottie_rawRes="@raw/loading_animation"
                     app:lottie_repeatMode="reverse" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/iv_remove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    isEnabled="@{!viewModel.onLoadingQuantity}"
                     android:layout_marginStart="@dimen/space_medium"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:onClick="@{() -> viewModel.removeFromCart()}"

@@ -47,6 +47,11 @@ fun TextView.setTextWithSeparator(price: String?, separator: String?) {
     text = price?.withSeparator(separator = separator ?: ",") ?: ""
 }
 
+@BindingAdapter("isEnabled")
+fun View.isEnabled(enabled: Boolean) {
+    isEnabled = enabled
+}
+
 fun String.withSeparator(
     separator: String = ","
 ) = buildString {

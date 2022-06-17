@@ -101,7 +101,7 @@
         app:layout_constraintStart_toStartOf="@id/glv_image"
         app:layout_constraintTop_toBottomOf="@id/bh_bottom" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/iv_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
 
     </FrameLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/iv_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -177,11 +177,6 @@
         app:layout_constraintTop_toTopOf="@id/order_item_product_name"
         tools:background="@color/black" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/cart_group_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tv_quantity,iv_add,quantity_background,order_quantity_loading,iv_remove" />
 
 
     <com.google.android.material.textview.MaterialTextView

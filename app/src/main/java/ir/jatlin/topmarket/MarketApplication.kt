@@ -35,8 +35,4 @@ class MarketApplication : Application(), Configuration.Provider {
             .setMinimumLoggingLevel(android.util.Log.DEBUG)
             .build()
     }
-
-    companion object {
-        const val INITIAL_INTERVAL = 5
-    }
 }
