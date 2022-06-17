@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.domain.util
 
+import ir.jatlin.core.data.source.remote.NetworkException
+import ir.jatlin.core.data.source.remote.NoBodyException
 import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.core.shared.fail.ErrorHandler
-import ir.jatlin.topmarket.core.data.source.remote.NetworkException
-import ir.jatlin.topmarket.core.data.source.remote.NoBodyException
 import java.io.IOException
 import java.net.SocketTimeoutException
 import javax.inject.Inject

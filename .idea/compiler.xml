@@ -6,6 +6,7 @@
       <module name="TopMarket.buildSrc" target="11" />
       <module name="TopMarket.buildSrc.main" target="11" />
       <module name="TopMarket.buildSrc.test" target="11" />
+      <module name="TopMarket.core-data" target="11" />
       <module name="TopMarket.core-database" target="11" />
       <module name="TopMarket.core-network" target="11" />
       <module name="TopMarket.core-shared" target="11" />

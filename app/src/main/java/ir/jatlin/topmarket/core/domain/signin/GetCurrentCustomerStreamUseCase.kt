@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.domain.signin
 
+import ir.jatlin.core.data.di.IODispatcher
+import ir.jatlin.core.data.repository.customer.CustomerRepository
 import ir.jatlin.core.model.user.Customer
 import ir.jatlin.core.shared.fail.ErrorHandler
-import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.data.repository.customer.CustomerRepository
 import ir.jatlin.topmarket.core.domain.FlowUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

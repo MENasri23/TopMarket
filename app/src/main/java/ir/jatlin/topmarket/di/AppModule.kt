@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ir.jatlin.topmarket.core.data.di.CpuDispatcher
+import ir.jatlin.core.data.di.CpuDispatcher
 import ir.jatlin.topmarket.ui.main.MarketNetworkManager
 import ir.jatlin.topmarket.ui.main.MarketNetworkManagerImpl
 import kotlinx.coroutines.CoroutineDispatcher

@@ -65,11 +65,7 @@ android {
             matchingFallbacks.add("debug")
             signingConfig = signingConfigs.getByName("staging")
         }
-        sourceSets {
-            getByName("staging") {
-                java.srcDir("src/release/java")
-            }
-        }
+
     }
 
     compileOptions {
@@ -99,6 +95,7 @@ fun getProperties(file: String = "local.properties"): Properties {
 
 dependencies {
 
+    implementation(project(":core-data"))
     implementation(project(":core-model"))
     implementation(project(":core-shared"))
     implementation(project(":core-database"))
@@ -141,11 +138,6 @@ dependencies {
     implementation(Libs.Hilt.WORK_MANAGER)
     kapt(Libs.Hilt.HILT_COMPILER)
     kapt(Libs.Hilt.ANDROIDX_HILT_COMPILER)
-
-    // retrofit
-    implementation(Libs.Retrofit.RETROFIT2)
-    implementation(Libs.Retrofit.GSON_CONVERTER)
-    implementation(Libs.Retrofit.GSON)
 
     // glide
     implementation(Libs.Glide.GLIDE)

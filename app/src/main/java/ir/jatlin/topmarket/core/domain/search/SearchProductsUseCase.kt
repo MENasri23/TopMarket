@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.domain.search
 
+import ir.jatlin.core.data.di.IODispatcher
 import ir.jatlin.core.model.product.Product
 import ir.jatlin.core.shared.Resource
 import ir.jatlin.core.shared.fail.ErrorCause
-import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.util.CharSequenceDistance
 import ir.jatlin.topmarket.core.domain.util.makeProductParams

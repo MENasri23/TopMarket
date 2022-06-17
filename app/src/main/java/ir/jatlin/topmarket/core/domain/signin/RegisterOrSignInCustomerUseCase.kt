@@ -1,10 +1,10 @@
 package ir.jatlin.topmarket.core.domain.signin
 
+import ir.jatlin.core.data.di.IODispatcher
+import ir.jatlin.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.core.shared.dataOnSuccessOr
 import ir.jatlin.core.shared.fail.ErrorHandler
 import ir.jatlin.core.shared.isSuccess
-import ir.jatlin.topmarket.core.data.di.IODispatcher
-import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.CoroutineUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject

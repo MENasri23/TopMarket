@@ -1,9 +1,9 @@
 package ir.jatlin.topmarket.core.domain.product
 
+import ir.jatlin.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.core.model.product.Product
 import ir.jatlin.core.shared.Resource
 import ir.jatlin.core.shared.isSuccess
-import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.firstOrNull

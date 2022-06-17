@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain.settings
 
+import ir.jatlin.core.data.di.IODispatcher
 import ir.jatlin.core.shared.fail.ErrorHandler
-import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.domain.CoroutineUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
