@@ -1,10 +1,10 @@
 package ir.jatlin.topmarket.core.domain.product
 
 import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.isSuccess
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.isSuccess
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.firstOrNull
 import timber.log.Timber

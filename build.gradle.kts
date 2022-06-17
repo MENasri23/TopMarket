@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android").version(App.KOTLIN_VERSION).apply(false)
     id("com.google.dagger.hilt.android").version(Libs.Hilt.version).apply(false)
     id("androidx.navigation.safeargs").version(Libs.Androidx.Navigation.version).apply(false)
-    id("org.jetbrains.kotlin.jvm") version "1.6.21" apply false
+    id("org.jetbrains.kotlin.jvm").version(App.KOTLIN_VERSION).apply(false)
 }
 
 tasks.register("clean").configure {

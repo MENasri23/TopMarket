@@ -2,9 +2,9 @@ package ir.jatlin.topmarket.ui.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
-import ir.jatlin.topmarket.core.shared.isSuccess
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.fail.ErrorCause
+import ir.jatlin.core.shared.isSuccess
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted

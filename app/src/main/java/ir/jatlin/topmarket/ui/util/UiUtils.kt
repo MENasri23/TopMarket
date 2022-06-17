@@ -29,9 +29,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.google.android.material.snackbar.Snackbar
 import ir.jatlin.core.model.Theme
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

@@ -1,6 +1,6 @@
-package ir.jatlin.topmarket.core.shared
+package ir.jatlin.core.shared
 
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
+import ir.jatlin.core.shared.fail.ErrorCause
 
 /**
  * A generic class that holds a value with its loading status.

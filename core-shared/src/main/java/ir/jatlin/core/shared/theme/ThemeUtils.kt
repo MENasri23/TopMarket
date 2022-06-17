@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.shared.theme
+package ir.jatlin.core.shared.theme
 
 import android.os.Build
 import ir.jatlin.core.model.Theme

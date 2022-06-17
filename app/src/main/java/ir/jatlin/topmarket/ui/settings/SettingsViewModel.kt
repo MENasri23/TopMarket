@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.core.model.Theme
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.dataOnSuccessOr
+import ir.jatlin.core.shared.isSuccess
+import ir.jatlin.core.shared.theme.ThemeUtils
 import ir.jatlin.topmarket.core.domain.service.CancelWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
 import ir.jatlin.topmarket.core.domain.settings.*
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
-import ir.jatlin.topmarket.core.shared.isSuccess
-import ir.jatlin.topmarket.core.shared.theme.ThemeUtils
 import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
 import ir.jatlin.topmarket.ui.util.cancelIfAlive
 import kotlinx.coroutines.CoroutineScope

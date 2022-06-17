@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.core.model.category.Category
 import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.domain.param.DiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.search.SearchProductsUseCase
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.search.filter.SearchProductInCategoryItem
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

@@ -100,6 +100,7 @@ fun getProperties(file: String = "local.properties"): Properties {
 dependencies {
 
     implementation(project(":core-model"))
+    implementation(project(":core-shared"))
     implementAppLibraries()
 
     // legacy

@@ -3,11 +3,11 @@ package ir.jatlin.topmarket.ui.signin
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.shared.dataOnSuccessOr
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.domain.signin.GetCurrentCustomerIdStreamUseCase
 import ir.jatlin.topmarket.core.domain.signin.IsValidEmailUseCase
 import ir.jatlin.topmarket.core.domain.signin.RegisterOrSignInCustomerUseCase
-import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest

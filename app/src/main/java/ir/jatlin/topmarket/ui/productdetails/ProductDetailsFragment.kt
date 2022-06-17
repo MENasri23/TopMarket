@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.PagerSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.isSuccess
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.isSuccess
 import ir.jatlin.topmarket.databinding.FragmentProductDetailsBinding
 import ir.jatlin.topmarket.ui.loading.LoadStateViewModel
 import ir.jatlin.topmarket.ui.product.ProductDisplayAdapter

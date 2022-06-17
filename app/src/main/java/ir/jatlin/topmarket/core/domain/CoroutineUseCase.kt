@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.domain
 
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import timber.log.Timber

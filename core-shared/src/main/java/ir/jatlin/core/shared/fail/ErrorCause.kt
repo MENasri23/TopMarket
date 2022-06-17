@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.shared.fail
+package ir.jatlin.core.shared.fail
 
 sealed class ErrorCause {
 

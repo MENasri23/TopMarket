@@ -1,10 +1,10 @@
 package ir.jatlin.topmarket.core.domain.signin
 
 import ir.jatlin.core.model.purchase.PurchasePrefsInfo
+import ir.jatlin.core.shared.fail.ErrorHandler
 import ir.jatlin.topmarket.core.data.di.IODispatcher
 import ir.jatlin.topmarket.core.data.source.local.datastore.MarketPreferences
 import ir.jatlin.topmarket.core.domain.FlowUseCase
-import ir.jatlin.topmarket.core.shared.fail.ErrorHandler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -3,14 +3,14 @@ package ir.jatlin.topmarket.ui.home
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.core.model.product.Product
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.core.domain.product.FetchProductBanners
 import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
 import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
 import ir.jatlin.topmarket.core.domain.util.makeProductParams
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
 import ir.jatlin.topmarket.ui.home.amazingitem.asAmazingItem
 import ir.jatlin.topmarket.ui.product.asProductItem

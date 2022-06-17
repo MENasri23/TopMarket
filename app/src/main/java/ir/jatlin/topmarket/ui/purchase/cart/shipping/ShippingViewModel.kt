@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.jatlin.core.model.order.Order
 import ir.jatlin.core.model.order.OrderStatus
+import ir.jatlin.core.shared.Resource
+import ir.jatlin.core.shared.dataOnSuccessOr
+import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.core.domain.order.MarkOrderCompletedUseCase
 import ir.jatlin.topmarket.core.domain.signin.GetCurrentCustomerIdStreamUseCase
-import ir.jatlin.topmarket.core.shared.Resource
-import ir.jatlin.topmarket.core.shared.dataOnSuccessOr
-import ir.jatlin.topmarket.core.shared.fail.ErrorCause
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.dropWhile
@@ -39,7 +39,7 @@ class ShippingViewModel @Inject constructor(
     }
 
     val isSignedIn = customerId
-        .dropWhile { it is Resource.Loading }
+        .dropWhile { it is Resource.Loading<*> }
         .map {
             it.dataOnSuccessOr(null) != null
         }
