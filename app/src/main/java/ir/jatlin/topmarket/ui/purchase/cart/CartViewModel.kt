@@ -3,6 +3,10 @@ package ir.jatlin.topmarket.ui.purchase.cart
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.domain.coupon.GetCouponByCodeUseCase
+import ir.jatlin.core.domain.order.GetActiveOrderStreamUseCase
+import ir.jatlin.core.domain.purchase.GetCartProductListUseCase
+import ir.jatlin.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.core.model.coupon.Coupon
 import ir.jatlin.core.model.order.Order
 import ir.jatlin.core.model.order.OrderLineItem
@@ -10,10 +14,6 @@ import ir.jatlin.core.model.product.CartProduct
 import ir.jatlin.core.shared.Resource
 import ir.jatlin.core.shared.dataOnSuccessOr
 import ir.jatlin.core.shared.fail.ErrorCause
-import ir.jatlin.topmarket.core.domain.coupon.GetCouponByCodeUseCase
-import ir.jatlin.topmarket.core.domain.order.GetActiveOrderStreamUseCase
-import ir.jatlin.topmarket.core.domain.purchase.GetCartProductListUseCase
-import ir.jatlin.topmarket.core.domain.purchase.UpdateOrderCartUseCase
 import ir.jatlin.topmarket.ui.util.cancelIfAlive
 import ir.jatlin.topmarket.ui.util.processResult
 import ir.jatlin.topmarket.ui.util.stateFlow

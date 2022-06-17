@@ -2,15 +2,14 @@ package ir.jatlin.topmarket.ui.home
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.domain.product.FetchProductBanners
+import ir.jatlin.core.domain.product.FetchProductsListStreamUseCase
+import ir.jatlin.core.domain.product.ProductDiscoverParameters
+import ir.jatlin.core.domain.util.makeProductParams
 import ir.jatlin.core.model.product.Product
 import ir.jatlin.core.shared.Resource
 import ir.jatlin.core.shared.fail.ErrorCause
 import ir.jatlin.topmarket.R
-import ir.jatlin.topmarket.core.domain.product.FetchProductBanners
-import ir.jatlin.topmarket.core.domain.product.FetchProductsListStreamUseCase
-import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters
-import ir.jatlin.topmarket.core.domain.product.ProductDiscoverParameters.OrderBY
-import ir.jatlin.topmarket.core.domain.util.makeProductParams
 import ir.jatlin.topmarket.ui.home.amazingitem.AmazingDisplayItem
 import ir.jatlin.topmarket.ui.home.amazingitem.asAmazingItem
 import ir.jatlin.topmarket.ui.product.asProductItem
@@ -44,20 +43,20 @@ class HomeViewModel @Inject constructor(
 
     private val latestProducts = stateFlow {
         fetchProducts {
-            orderBy = OrderBY.Date
+            orderBy = ProductDiscoverParameters.OrderBY.Date
         }
     }
 
     private val popularProducts = stateFlow {
         fetchProducts {
-            orderBy = OrderBY.Popularity
+            orderBy = ProductDiscoverParameters.OrderBY.Popularity
         }
     }
 
 
     private val topRatedProducts = stateFlow {
         fetchProducts {
-            orderBy = OrderBY.Rating
+            orderBy = ProductDiscoverParameters.OrderBY.Rating
         }
     }
 

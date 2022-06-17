@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Notification -->
+    <string name="sync_newest_proudcts_channel_name">Newest Products</string>
+    <string name="sync_newest_proudcts_channel_description">Background task for fetching new products</string>
+    <string name="newest_products_notification_title">تاپ مارکت</string>
+    <string name="newest_products_notification_content">%d کالای جدید اضافه شد.</string>
+
+
+</resources>

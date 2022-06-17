@@ -90,15 +90,6 @@
     <string name="error_email_is_empty">پست الکترونیک را وارد نمایید</string>
     <string name="error_invalid_email">ایمیل معتبر نیست</string>
 
-    <!-- Formatted date -->
-    <string name="years_till_due">%d سال پیش</string>
-    <string name="months_till_due">%d ماه پیش</string>
-    <string name="weeks_till_due">%d هفته پیش</string>
-    <string name="days_till_due">%d روز پیش</string>
-    <string name="hours_till_due">%d ساعت پیش</string>
-    <string name="minutes_till_due">%d دقیقه پیش</string>
-    <string name="moment_till_due">چند لحظه پیش</string>
-
     <!-- Purchase -->
     <string name="sign_in_or_register">ورود یا ثبت‌نام</string>
     <string name="sign_in_guide">برای تجربه بهتر خرید‌ و بررسی روش ارسال کالا‌ها لطفا وارد شوید.</string>

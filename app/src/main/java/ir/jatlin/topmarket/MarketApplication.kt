@@ -3,11 +3,7 @@ package ir.jatlin.topmarket
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.WorkManager
 import dagger.hilt.android.HiltAndroidApp
-import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
-import ir.jatlin.topmarket.service.sync.FetchNewestProductsWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber

@@ -3,10 +3,10 @@ package ir.jatlin.topmarket.ui.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import ir.jatlin.core.domain.settings.GetNotificationEnabledStreamUseCase
+import ir.jatlin.core.domain.settings.GetNotificationIntervalStreamUseCase
 import ir.jatlin.core.shared.dataOnSuccessOr
-import ir.jatlin.topmarket.core.domain.service.EnqueueFetchNewestProductsWorkRequestUseCase
-import ir.jatlin.topmarket.core.domain.settings.GetNotificationEnabledStreamUseCase
-import ir.jatlin.topmarket.core.domain.settings.GetNotificationIntervalStreamUseCase
+import ir.jatlin.topmarket.service.util.EnqueueFetchNewestProductsWorkRequestUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
