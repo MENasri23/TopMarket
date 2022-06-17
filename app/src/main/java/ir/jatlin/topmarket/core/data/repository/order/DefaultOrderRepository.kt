@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.core.data.repository.order
 
+import ir.jatlin.core.database.entity.asOrder
 import ir.jatlin.core.model.order.Order
 import ir.jatlin.topmarket.core.data.mapper.asOrderEntity
 import ir.jatlin.topmarket.core.data.mapper.asOrderLineItemEntity
@@ -7,7 +8,6 @@ import ir.jatlin.topmarket.core.data.mapper.asOrderNetwork
 import ir.jatlin.topmarket.core.data.repository.orderlineitem.OrderLineItemRepository
 import ir.jatlin.topmarket.core.data.source.local.order.OrderDatabaseDataSource
 import ir.jatlin.topmarket.core.data.source.remote.order.OrderRemoteDataSource
-import ir.jatlin.topmarket.core.database.entity.asOrder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map

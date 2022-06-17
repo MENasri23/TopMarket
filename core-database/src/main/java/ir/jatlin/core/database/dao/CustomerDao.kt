@@ -1,8 +1,8 @@
-package ir.jatlin.topmarket.core.database.dao
+package ir.jatlin.core.database.dao
 
 import androidx.room.*
-import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
+import ir.jatlin.core.database.entity.CustomerEntity
+import ir.jatlin.core.database.entity.CustomerWithOrders
 import kotlinx.coroutines.flow.Flow
 
 @Dao

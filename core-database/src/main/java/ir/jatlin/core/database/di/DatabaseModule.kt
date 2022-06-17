@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.database.di
+package ir.jatlin.core.database.di
 
 import android.content.Context
 import androidx.room.Room
@@ -9,9 +9,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ir.jatlin.core.database.MarketDatabase
+import ir.jatlin.core.database.entity.asCustomerEntity
 import ir.jatlin.core.model.user.Customer
-import ir.jatlin.topmarket.core.database.MarketDatabase
-import ir.jatlin.topmarket.core.database.entity.asCustomerEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

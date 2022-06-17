@@ -101,6 +101,7 @@ dependencies {
 
     implementation(project(":core-model"))
     implementation(project(":core-shared"))
+    implementation(project(":core-database"))
     implementation(project(":core-network"))
     implementAppLibraries()
 
@@ -126,10 +127,6 @@ dependencies {
     // coroutine
     implementation(Libs.Kotlinx.COROUTINES_ANDROID)
 
-    // room
-    implementation(Libs.Androidx.Room.RUNTIME)
-    implementation(Libs.Androidx.Room.KTX)
-    kapt(Libs.Androidx.Room.COMPILER)
 
     // data store
     implementation(Libs.Androidx.DataStore.DATA_STORE)

@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.database.converter
+package ir.jatlin.core.database.converter
 
 import androidx.room.TypeConverter
 import ir.jatlin.core.model.order.OrderStatus

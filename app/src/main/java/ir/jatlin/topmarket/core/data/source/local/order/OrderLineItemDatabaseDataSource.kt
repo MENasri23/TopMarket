@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.source.local.order
 
-import ir.jatlin.topmarket.core.database.dao.OrderItemDao
-import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
+import ir.jatlin.core.database.dao.OrderItemDao
+import ir.jatlin.core.database.entity.OrderLineItemEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

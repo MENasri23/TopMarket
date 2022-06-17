@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.repository.orderlineitem
 
+import ir.jatlin.core.database.entity.OrderLineItemEntity
 import ir.jatlin.core.model.order.OrderLineItem
-import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 import kotlinx.coroutines.flow.Flow
 
 interface OrderLineItemRepository {

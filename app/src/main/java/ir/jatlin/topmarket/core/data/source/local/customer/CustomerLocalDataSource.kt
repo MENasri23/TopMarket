@@ -1,7 +1,7 @@
 package ir.jatlin.topmarket.core.data.source.local.customer
 
-import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
+import ir.jatlin.core.database.entity.CustomerEntity
+import ir.jatlin.core.database.entity.CustomerWithOrders
 import kotlinx.coroutines.flow.Flow
 
 interface CustomerLocalDataSource {

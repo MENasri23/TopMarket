@@ -1,4 +1,4 @@
-package ir.jatlin.topmarket.core.database.entity
+package ir.jatlin.core.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

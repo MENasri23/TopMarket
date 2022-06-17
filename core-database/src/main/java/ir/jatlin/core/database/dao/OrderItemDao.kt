@@ -1,7 +1,7 @@
-package ir.jatlin.topmarket.core.database.dao
+package ir.jatlin.core.database.dao
 
 import androidx.room.*
-import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
+import ir.jatlin.core.database.entity.OrderLineItemEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,15 +1,15 @@
-package ir.jatlin.topmarket.core.database
+package ir.jatlin.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import ir.jatlin.topmarket.core.database.converter.OrderStatusConverter
-import ir.jatlin.topmarket.core.database.dao.CustomerDao
-import ir.jatlin.topmarket.core.database.dao.OrderDao
-import ir.jatlin.topmarket.core.database.dao.OrderItemDao
-import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.database.entity.OrderEntity
-import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
+import ir.jatlin.core.database.converter.OrderStatusConverter
+import ir.jatlin.core.database.dao.CustomerDao
+import ir.jatlin.core.database.dao.OrderDao
+import ir.jatlin.core.database.dao.OrderItemDao
+import ir.jatlin.core.database.entity.CustomerEntity
+import ir.jatlin.core.database.entity.OrderEntity
+import ir.jatlin.core.database.entity.OrderLineItemEntity
 
 @Database(
     entities = [

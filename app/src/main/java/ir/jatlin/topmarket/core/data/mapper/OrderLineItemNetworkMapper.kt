@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.data.mapper
 
+import ir.jatlin.core.database.entity.OrderLineItemEntity
 import ir.jatlin.core.model.order.OrderLineItem
 import ir.jatlin.core.network.model.order.OrderLineItemNetwork
-import ir.jatlin.topmarket.core.database.entity.OrderLineItemEntity
 
 
 fun OrderLineItemNetwork.asOrderLineItemEntity(orderId: Int) = OrderLineItemEntity(

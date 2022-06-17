@@ -1,8 +1,8 @@
 package ir.jatlin.topmarket.core.data.source.local.customer
 
-import ir.jatlin.topmarket.core.database.dao.CustomerDao
-import ir.jatlin.topmarket.core.database.entity.CustomerEntity
-import ir.jatlin.topmarket.core.database.entity.CustomerWithOrders
+import ir.jatlin.core.database.dao.CustomerDao
+import ir.jatlin.core.database.entity.CustomerEntity
+import ir.jatlin.core.database.entity.CustomerWithOrders
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
