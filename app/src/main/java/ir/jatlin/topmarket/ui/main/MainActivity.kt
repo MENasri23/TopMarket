@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
     private val topLevelDestinations = arrayOf(
         R.id.homeFragment,
         R.id.productCategoryFragment,
-        R.id.purchaseFragment
+        R.id.purchaseFragment,
+        R.id.mapFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

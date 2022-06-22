@@ -126,4 +126,8 @@
     <string name="no_network_connection">خطا در اتصال به اینترنت…</string>
 
 
+    <!-- Profile -->
+    <string name="my_profile">دیجی‌کالای من</string>
+
+
 </resources>
