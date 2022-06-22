@@ -6,6 +6,8 @@ plugins {
     id("com.google.dagger.hilt.android").version(Libs.Hilt.version).apply(false)
     id("androidx.navigation.safeargs").version(Libs.Androidx.Navigation.version).apply(false)
     id("org.jetbrains.kotlin.jvm").version(App.KOTLIN_VERSION).apply(false)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin").version("2.0.1")
+        .apply(false)
 }
 
 tasks.register("clean").configure {

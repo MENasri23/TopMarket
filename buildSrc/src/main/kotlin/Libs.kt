@@ -165,4 +165,9 @@ object Libs {
         const val INDICATOR = "com.tbuonomo:dotsindicator:${version}"
     }
 
+    object GoogleMap {
+        private const val version = "18.0.2"
+        const val SERVICES = "com.google.android.gms:play-services-maps:$version"
+    }
+
 }

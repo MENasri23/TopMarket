@@ -7,6 +7,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
     id("dagger.hilt.android.plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     kotlin("kapt")
 }
 
@@ -156,6 +157,9 @@ dependencies {
 
     // slider indicator
     implementation(Libs.Indicator.INDICATOR)
+
+    // google map
+    implementation(Libs.GoogleMap.SERVICES)
 
     testImplementation(Libs.Test.JUNIT)
     testImplementation(Libs.Kotlinx.COROUTINES_TEST)
