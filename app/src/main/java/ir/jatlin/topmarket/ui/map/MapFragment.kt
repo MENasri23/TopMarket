@@ -1,5 +1,6 @@
 package ir.jatlin.topmarket.ui.map
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -20,7 +21,39 @@ class MapFragment : Fragment(R.layout.fragment_map) {
     private val viewModel by viewModels<MapViewModel>()
     private val binding by dataBindings(FragmentMapBinding::bind)
 
+    private lateinit var locationPermissionManager: LocationPermissionManager
     private lateinit var mapView: MapView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        locationPermissionManager = LocationPermissionManager(
+            registry = requireActivity().activityResultRegistry,
+            onDenied = {
+                // TODO: Show a relational ui to explain to the user
+                //  the app needs location permission
+            }
+        ) {
+            enableMyLocation()
+        }
+
+        lifecycle.addObserver(locationPermissionManager)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun enableMyLocation(requestPermission: Boolean = false) {
+        if (locationPermissionManager.isPermissionGranted(context)) {
+            mapView.getMapAsync { map ->
+                map.isMyLocationEnabled = true
+            }
+            return
+        }
+
+        if (requestPermission) {
+            locationPermissionManager.requestLocationPermissions(context)
+        }
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,8 +74,12 @@ class MapFragment : Fragment(R.layout.fragment_map) {
 
                 setOnCameraMoveListener {
                     marker?.position = cameraPosition.target
+                    viewModel.zoomLevel = cameraPosition.zoom
                 }
+
             }
+
+            enableMyLocation(true)
         }
     }
 

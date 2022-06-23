@@ -9,5 +9,11 @@ class MapViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    var zoomLevel = DEFAULT_ZOOM_LEVEL
+
+
+    companion object {
+        private const val DEFAULT_ZOOM_LEVEL = 15f
+    }
 
 }
