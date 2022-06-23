@@ -64,9 +64,22 @@
     </style>
 
     <style name="Widget.Market.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemPaddingTop">@dimen/space_very_small</item>
+        <item name="itemPaddingBottom">@dimen/space_very_small</item>
+        <item name="materialThemeOverlay">@style/Widget.Market.BottomNavigationView.ThemeOverlay
+        </item>
+    </style>
+
+    <style name="Widget.Market.BottomNavigationView.ThemeOverlay" parent="">
         <item name="fontFamily">@font/samim_fd</item>
         <item name="android:fontFamily">@font/samim_fd</item>
-        <item name="itemTextAppearance">@style/TextAppearance.MarketApp.BodySmall</item>
+    </style>
+
+    <style name="Widget.Market.LocationFloatingActionButton" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Primary">
+        <item name="fontFamily">@font/samim_fd</item>
+        <item name="android:textColor">?attr/colorSurface</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="iconTint">?attr/colorSurface</item>
     </style>
 
     <!-- Settings -->

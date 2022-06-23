@@ -17,6 +17,7 @@
 
     <color name="digi_red_color_500">#D32F2F</color>
     <color name="digi_red_color_700">#D32F2F</color>
+    <color name="digi_red_color_100">#FFCDD2</color>
 
     <color name="digi_blue_200">#19BFD4</color>
     <color name="digi_blue_700">#0097A7</color>
