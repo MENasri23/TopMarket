@@ -35,11 +35,10 @@ class FetchNewestProductsWorker @AssistedInject constructor(
                     Timber.d("retrieved a success result with null data")
                     return@withContext Result.failure()
                 }
-                val includeIds = products.map(Product::id).joinToString(separator = ",")
-                applicationContext.sendNewestProductsNotification(includeIds, products.size)
-//                if (products.isNotEmpty()) {
-//                    applicationContext.sendNewestProductsNotification(products)
-//                }
+                if (products.isNotEmpty()) {
+                    val includeIds = products.map(Product::id).joinToString(separator = ",")
+                    applicationContext.sendNewestProductsNotification(includeIds, products.size)
+                }
             }
             Result.success()
         }
