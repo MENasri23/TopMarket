@@ -3,85 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-v24/fading_snackbar_background.xml" value="0.1985" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_add_shopping_cart_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_arrow_forward_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_category_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_close_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_like_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_more_vert_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_search_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_shop_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_star_rate_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_toman.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable-w600dp/ic_toman_red.xml" value="0.166" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/change_quantity_button_background.xml" value="0.1415" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_amazing_suggestion.xml" value="0.1" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_arrow_forward_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1415" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_close.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_comment.xml" value="0.1815" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_delete.xml" value="0.1415" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digi_smile_24.xml" value="0.1545" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digi_smile_line.xml" value="0.149" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digikala_logo.xml" value="0.1815" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_digikala_logo_white.xml" value="0.149" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_home.xml" value="0.1555" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_minus.xml" value="0.2065" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_question.xml" value="0.2525" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_search_24.xml" value="0.1605" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_sort_24.xml" value="0.1345" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_toman.xml" value="0.2265" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/drawable/ic_toman_red.xml" value="0.166" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20261713803292528" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/amazing_suggestion_item_view.xml" value="0.20261713803292528" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/category_display_group_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/collapsible_discount_card_content.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fading_snackbar_layout.xml" value="0.536" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/filter_search_appbar.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_cart.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_filter_items.xml" value="0.176" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_home.xml" value="0.1834862385321101" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_loading.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_map.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_next_cart.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_no_network.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_category.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_product_details.xml" value="0.152" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_purchase.xml" value="0.1" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_purshase.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_search_filters.xml" value="0.2" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_shipping.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_sorting.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/fragment_special_product_slide_page.xml" value="0.18671875" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/image_slider_item_view.xml" value="0.20261713803292528" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/laout_shopping_cart_counter.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_cart_product_item_view.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_free_send.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_order_item_view.xml" value="0.4" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_product_details_app_bar.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_search_app_bar.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_search_perspective.xml" value="0.2" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/layout_settings_hour_list_item.xml" value="0.16218721037998146" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_category_item_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_display_group_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_item_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_preview_item_view.xml" value="0.4" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/product_review_item_view.xml" value="0.4" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/purchase_register_item_view.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_appbar.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_body_item_view.xml" value="0.264" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_result_header_item_view.xml" value="0.4" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/search_suggest_product_item_view.xml" value="0.2" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/special_product_item_view.xml" value="0.1" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/special_product_slide_group.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/special_product_slide_view.xml" value="0.20521590423257802" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19925857275254866" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/menu/notify_interval_menu.xml" value="0.20436083796494228" />
-        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/menu/product_details_menu.xml" value="0.20521590423257802" />
+        <entry key="..\:/Education/AndroidEdu/myProjects/TopMarket/app/src/main/res/layout/activity_main.xml" value="0.20521590423257802" />
       </map>
     </option>
   </component>
@@ -90,12 +12,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.1" />
-      </ProjectState>
-    </option>
   </component>
 </project>
