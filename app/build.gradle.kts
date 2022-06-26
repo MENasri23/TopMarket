@@ -97,11 +97,11 @@ fun getProperties(file: String = "local.properties"): Properties {
 dependencies {
 
     implementation(project(":core-domain"))
-    implementation(project(":core-data"))
     implementation(project(":core-model"))
     implementation(project(":core-shared"))
-    implementation(project(":core-database"))
-    implementation(project(":core-network"))
+    implementation(project(":core-data"))
+    /*implementation(project(":core-database"))
+    implementation(project(":core-network"))*/
     implementAppLibraries()
 
     // legacy
