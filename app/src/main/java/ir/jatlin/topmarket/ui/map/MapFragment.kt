@@ -3,6 +3,7 @@ package ir.jatlin.topmarket.ui.map
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.jatlin.topmarket.R
 import ir.jatlin.topmarket.databinding.FragmentMapBinding
 import ir.jatlin.topmarket.ui.util.dataBindings
+import ir.jatlin.topmarket.ui.util.repeatOnViewLifecycleOwner
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MapFragment : Fragment(R.layout.fragment_map) {
@@ -45,6 +48,7 @@ class MapFragment : Fragment(R.layout.fragment_map) {
         if (locationPermissionManager.isPermissionGranted(context)) {
             mapView.getMapAsync { map ->
                 map.isMyLocationEnabled = true
+                map.uiSettings.isMyLocationButtonEnabled = true
             }
             return
         }
@@ -80,6 +84,31 @@ class MapFragment : Fragment(R.layout.fragment_map) {
             }
 
             enableMyLocation(true)
+        }
+
+        binding.fabAddLocation.setOnClickListener {
+            mapView.getMapAsync { map ->
+                viewModel.saveCurrentLocation(map.cameraPosition.target)
+            }
+        }
+
+        collectUiStates()
+    }
+
+
+    fun collectUiStates() {
+        repeatOnViewLifecycleOwner {
+            launch {
+                viewModel.location.collect {
+                    it?.let {
+                        Toast.makeText(
+                            context,
+                            "location:(${it.latitude}, ${it.longitude})",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
         }
     }
 
